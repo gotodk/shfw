@@ -1,0 +1,208 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Unumber1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="ANID" type="xs:string" minOccurs="0" />
+                <xs:element name="ANClass" type="xs:string" minOccurs="0" />
+                <xs:element name="ANClassName" type="xs:string" minOccurs="0" />
+                <xs:element name="ANBaseName" type="xs:string" minOccurs="0" />
+                <xs:element name="ANBaseNumber" type="xs:string" minOccurs="0" />
+                <xs:element name="ANBaseNumber_p" type="xs:int" minOccurs="0" />
+                <xs:element name="ANextendID" type="xs:string" minOccurs="0" />
+                <xs:element name="ANused" type="xs:int" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="Unumber2">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="ANID" type="xs:string" minOccurs="0" />
+                <xs:element name="ANClass" type="xs:string" minOccurs="0" />
+                <xs:element name="ANClassName" type="xs:string" minOccurs="0" />
+                <xs:element name="ANBaseName" type="xs:string" minOccurs="0" />
+                <xs:element name="ANBaseNumber" type="xs:string" minOccurs="0" />
+                <xs:element name="ANBaseNumber_p" type="xs:int" minOccurs="0" />
+                <xs:element name="ANextendID" type="xs:string" minOccurs="0" />
+                <xs:element name="ANused" type="xs:int" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="Unumber3">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="ANID" type="xs:string" minOccurs="0" />
+                <xs:element name="ANClass" type="xs:string" minOccurs="0" />
+                <xs:element name="ANClassName" type="xs:string" minOccurs="0" />
+                <xs:element name="ANBaseName" type="xs:string" minOccurs="0" />
+                <xs:element name="ANBaseNumber" type="xs:string" minOccurs="0" />
+                <xs:element name="ANBaseNumber_p" type="xs:int" minOccurs="0" />
+                <xs:element name="ANextendID" type="xs:string" minOccurs="0" />
+                <xs:element name="ANused" type="xs:int" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="Unumber4">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="ANID" type="xs:string" minOccurs="0" />
+                <xs:element name="ANClass" type="xs:string" minOccurs="0" />
+                <xs:element name="ANClassName" type="xs:string" minOccurs="0" />
+                <xs:element name="ANBaseName" type="xs:string" minOccurs="0" />
+                <xs:element name="ANBaseNumber" type="xs:string" minOccurs="0" />
+                <xs:element name="ANBaseNumber_p" type="xs:int" minOccurs="0" />
+                <xs:element name="ANextendID" type="xs:string" minOccurs="0" />
+                <xs:element name="ANused" type="xs:int" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="Unumber5">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="ANID" type="xs:string" minOccurs="0" />
+                <xs:element name="ANClass" type="xs:string" minOccurs="0" />
+                <xs:element name="ANClassName" type="xs:string" minOccurs="0" />
+                <xs:element name="ANBaseName" type="xs:string" minOccurs="0" />
+                <xs:element name="ANBaseNumber" type="xs:string" minOccurs="0" />
+                <xs:element name="ANBaseNumber_p" type="xs:int" minOccurs="0" />
+                <xs:element name="ANextendID" type="xs:string" minOccurs="0" />
+                <xs:element name="ANused" type="xs:int" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="返回值单条">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="执行结果" type="xs:string" minOccurs="0" />
+                <xs:element name="提示文本" type="xs:string" minOccurs="0" />
+                <xs:element name="附件信息1" type="xs:string" minOccurs="0" />
+                <xs:element name="附件信息2" type="xs:string" minOccurs="0" />
+                <xs:element name="附件信息3" type="xs:string" minOccurs="0" />
+                <xs:element name="附件信息4" type="xs:string" minOccurs="0" />
+                <xs:element name="附件信息5" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Unumber1>
+    <ANID>E-A4A600B1E8F5-A377415C-F52B-41EA-83CA</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>处理快成定购</ANBaseName>
+    <ANBaseNumber>16</ANBaseNumber>
+    <ANBaseNumber_p>4</ANBaseNumber_p>
+    <ANextendID>40</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E8EB-BCE26264-DF43-401F-AAE9</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>后台静态内容维护</ANBaseName>
+    <ANBaseNumber>2</ANBaseNumber>
+    <ANBaseNumber_p>1</ANBaseNumber_p>
+    <ANextendID>36</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E8E0-58D2297B-43DD-45F4-9956</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>开发专用目录下功能</ANBaseName>
+    <ANBaseNumber>1</ANBaseNumber>
+    <ANBaseNumber_p>0</ANBaseNumber_p>
+    <ANextendID>28</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E90F-C8704816-AB3C-4B08-96D8</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>快成用户管理</ANBaseName>
+    <ANBaseNumber>64</ANBaseNumber>
+    <ANBaseNumber_p>6</ANBaseNumber_p>
+    <ANextendID>30</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E919-348D53A1-A8D0-4126-A3F1</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>快成优惠维护</ANBaseName>
+    <ANBaseNumber>256</ANBaseNumber>
+    <ANBaseNumber_p>8</ANBaseNumber_p>
+    <ANextendID>33</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E907-0492D2EA-055D-4764-98C4</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>评论管理</ANBaseName>
+    <ANBaseNumber>32</ANBaseNumber>
+    <ANBaseNumber_p>5</ANBaseNumber_p>
+    <ANextendID>31</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E917-7116AB79-0F6F-479A-8B22</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>所有课程维护</ANBaseName>
+    <ANBaseNumber>128</ANBaseNumber>
+    <ANBaseNumber_p>7</ANBaseNumber_p>
+    <ANextendID>41</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E8EF-BDE4FA0A-6D20-494E-B930</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>系统权限配置下功能</ANBaseName>
+    <ANBaseNumber>4</ANBaseNumber>
+    <ANBaseNumber_p>2</ANBaseNumber_p>
+    <ANextendID>1</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E8F1-EDDA6259-44BB-4B29-B79D</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>用户预约浏览</ANBaseName>
+    <ANBaseNumber>8</ANBaseNumber>
+    <ANBaseNumber_p>3</ANBaseNumber_p>
+    <ANextendID>39</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E91D-9F8156DB-F828-4388-AA16</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>站内信相关功能</ANBaseName>
+    <ANBaseNumber>512</ANBaseNumber>
+    <ANBaseNumber_p>9</ANBaseNumber_p>
+    <ANextendID>45</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber3>
+    <ANID>E-A4A600B32B9A-F505E9DB-F44E-4898-B2BE</ANID>
+    <ANClass>Unumber3</ANClass>
+    <ANClassName>全局独立权限</ANClassName>
+    <ANBaseName>登录内部后台管理</ANBaseName>
+    <ANBaseNumber>1</ANBaseNumber>
+    <ANBaseNumber_p>0</ANBaseNumber_p>
+    <ANextendID>无</ANextendID>
+    <ANused>1</ANused>
+  </Unumber3>
+  <返回值单条>
+    <执行结果>ok</执行结果>
+    <提示文本 />
+  </返回值单条>
+</NewDataSet>

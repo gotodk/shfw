@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="jqgirdjs_for_subtable.aspx.cs" Inherits="jqgirdjs_for_subtable" %>

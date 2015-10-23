@@ -1,0 +1,253 @@
+﻿            //关键配置
+             jQuery(grid_selector).jqGrid({
+                //direction: "rtl",
+
+                //subgrid options
+                subGrid: false,
+                //data: grid_data,
+                url: "/ajaxpagedemo.aspx?jkname=" + jkname_page1,
+                datatype: "local",
+                mtype: "POST",
+                xmlReader: {
+                    root: "NewDataSet",
+                    row: "主要数据",
+                    page: "invoices>currentpage",
+                    total: "invoices>totalpages",
+                    records: "invoices>totalrecords",
+                    repeatitems: false,
+                    id: "jqgird_spid"
+                },
+                prmNames: {
+                    page: 'R_PageNumber',
+                    rows: 'R_PageSize',
+                    sort: 'R_OrderBy',
+                    order: 'R_Sort'
+                },
+                height: 400,
+
+                autowidth: false,
+                shrinkToFit: [*[FS_D_shrinkToFit]*], //是否自动缩放列宽
+                //loadui:'block',
+                //colNames是自定义列明，这里可以不定义，直接在colModel默认使用name作为列名比较方便
+                //colNames: ['隐藏编号','唯一编号', '账号', '省份', '性别', '地区', '整数', '两位小数', '一个日期', '创建日期','图片绑定', '自定义操作'],
+                colModel: [
+                    [*[SubDialog]*]
+                ],
+
+                gridview: true, //这个选项必须开
+                viewrecords: true,
+                rowNum: [*[Default_FD_D_pagesize]*],
+                rowList: [[*[FD_D_pagesize]*]],
+                pager: pager_selector,
+                altRows: true,
+                //toppager: true,
+                sortable: true,
+
+                multiselect: true,
+                //multikey: "ctrlKey",
+                multiboxonly: true,
+                loadError: function (xhr, status, error) {
+                    bootbox.alert(status + "--" + error);
+
+                },
+                loadComplete: function (data) {
+
+			
+
+                    if ($(data).text() == "") {
+                        //bootbox.alert("无法获取数据！");
+                    }
+                    if ($(data).find('错误>错误提示').text() != "") {
+                        bootbox.alert($(data).find('错误>错误提示').text());
+                    }
+
+					    //加载图表
+						init_chart_gogo($(data));
+
+                    var table = this;
+                    setTimeout(function () {
+                        updatePagerIcons(table);
+                        enableTooltips(table);
+                    }, 0);
+                },
+                ondblClickRow: function (rowid) {
+                    $(".querenyinruanniu").trigger("click");
+
+
+                },
+                editurl: url1 + "?ajaxrun=del&jkname=" + jkname_del1 + "&zheshiyige_FID=[*[FSID]*]",
+                caption: ""
+
+
+
+
+            });
+
+
+
+
+
+            //navButtons
+            jQuery(grid_selector).jqGrid('navGrid', pager_selector,
+                { 	//navbar options
+                    edit: false,
+                    editicon: 'ace-icon fa fa-pencil blue',
+                    add: false,
+                    addicon: 'ace-icon fa fa-plus-circle purple',
+                    del: [*[FS_del_show]*],
+                    delicon: 'ace-icon fa fa-trash-o red',
+                    search: true,
+                    searchicon: 'ace-icon fa fa-search orange',
+                    refresh: true,
+                    refreshicon: 'ace-icon fa fa-refresh green',
+                    view: true,
+                    viewicon: 'ace-icon fa fa-search-plus grey' 
+			 
+                },
+                {
+                    recreateForm: true,
+                },
+                {
+                    recreateForm: true,
+                },
+                {
+                    //delete record form
+                    recreateForm: true,
+                    beforeShowForm: function (e) {
+                        var form = $(e[0]);
+                        if (form.data('styled')) return false;
+
+                        form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+                        style_delete_form(form);
+
+                        form.data('styled', true);
+                    },
+                    onClick: function (e) {
+                        //alert(1);
+                    }
+                },
+                {
+                    //search form
+                    recreateForm: true,
+                    afterShowSearch: function (e) {
+                        var form = $(e[0]);
+                        form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+                        style_search_form(form);
+                        //form.find('.searchFilter').css('overflow', 'hidden');
+                    },
+                    afterRedraw: function () {
+                        style_search_filters($(this));
+                    }
+                    ,
+                    multipleSearch: true,
+                    multipleGroup: true,
+                    showQuery: true,
+                    jqModal: false
+
+                },
+                {
+                    //view record form
+                    recreateForm: true,
+                    width: 600,
+                    beforeShowForm: function (e) {
+                        var form = $(e[0]);
+                        form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+                    }
+                }
+            );
+
+
+
+
+
+			[*[FS_D_setGroupHeaders]*]
+
+            //    //复合表头
+            //    jQuery(grid_selector).jqGrid('setGroupHeaders', {
+            //        useColSpanStyle : true, //没有表头的列是否与表头列位置的空单元格合并
+            //        groupHeaders : [                        
+            //        {
+            //            startColumnName: '唯一编号',
+            //            numberOfColumns : 2,
+            //            titleText : '一级累计1'
+            //        },{
+            //            startColumnName: '省份',
+            //            numberOfColumns : 2,
+            //            titleText: '一级累计2'
+            //    }]
+            //});
+
+						jQuery(grid_selector).navButtonAdd(pager_selector,{
+   caption:"", 
+   title : "新增",
+   buttonicon:"ace-icon fa fa-plus-circle purple  bz-zheshixinzeng", 
+   onClickButton: function(){ 
+   var form=$("<form>"); 
+form.attr("style","display:none");
+form.attr("target","_blank");
+form.attr("method","post");
+form.attr("action","[*[FS_add_show_link]*]");
+$("body").append(form); 
+form.submit(); 
+   }, 
+   position:"first"
+});
+
+
+			jQuery(grid_selector).navButtonAdd(pager_selector,{
+   caption:"", 
+   title : "导出",
+   buttonicon:"ace-icon fa  fa-cloud-download blue bz-zheshidaochu", 
+   onClickButton: function(){ 
+   var postData = $(grid_selector).jqGrid("getGridParam", "postData");
+ //alert(JSON.stringify(postData));
+ //alert(postData["_search"]);
+ bootbox.alert("<div id='dl_dl_dl_load' class='red'><i class='ace-icon fa fa-spinner fa-spin orange bigger-300'></i><br/>正在为导出准备数据，请稍后……</div>");
+  var aj_ex = $.ajax({
+                    url: '/pucu/dl.aspx',
+                    type: 'post',
+					data: postData,
+                    cache: false,
+                    dataType: 'html',
+                    success: function (data) {
+					if(data.indexOf("ok|") >= 0)
+					{
+					    if ($("#dl_dl_dl_load").length > 0) { 
+						$t = $("<a href='"+data.replace("ok|", "")+"' target='_blank'><i class='ace-icon fa fa-cloud-download orange bigger-300'></i><br/>数据准备完成，点这里导出电子表格</a>");
+         $("#dl_dl_dl_load").empty().html($t); 
+    } 
+    else 
+    { 
+         bootbox.alert("<div id='dl_dl_dl_load' class='red'><a href='"+data.replace("ok|", "")+"' target='_blank'><i class='ace-icon fa fa-cloud-download orange bigger-300'></i><br/>数据已准备完成，点这里导出电子表格</a></div>");
+    } 
+					       
+					}
+					else
+					{
+					bootbox.alert('导出失败：' + data);
+					}
+                        
+ 
+
+                    },
+                    error: function () {
+                        bootbox.alert('准备数据失败！');
+                    }
+                });
+
+
+
+
+
+
+   }, 
+   position:"last"
+});
+
+[*[FS_add_show]*]
+
+[*[FS_can_download]*]
+
+            //其他界面相关辅助代码
+            $(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
+

@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="jqgirdjs_for_grid.aspx.cs" Inherits="pucu_jqgirdjs_for_grid" %>

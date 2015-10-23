@@ -1,0 +1,47 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="菜单表" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="菜单表">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="ID" type="xs:int" minOccurs="0" />
+                <xs:element name="SortID" type="xs:int" minOccurs="0" />
+                <xs:element name="SortName" type="xs:string" minOccurs="0" />
+                <xs:element name="SortParentID" type="xs:int" minOccurs="0" />
+                <xs:element name="SortParentPath" type="xs:string" minOccurs="0" />
+                <xs:element name="SortOrder" type="xs:int" minOccurs="0" />
+                <xs:element name="m_url" type="xs:string" minOccurs="0" />
+                <xs:element name="m_tip" type="xs:string" minOccurs="0" />
+                <xs:element name="m_tag" type="xs:string" minOccurs="0" />
+                <xs:element name="m_ico" type="xs:string" minOccurs="0" />
+                <xs:element name="m_show" type="xs:string" minOccurs="0" />
+                <xs:element name="SortNameTree" type="xs:string" minOccurs="0" />
+                <xs:element name="SortMoveUp" type="xs:int" minOccurs="0" />
+                <xs:element name="SortMoveDown" type="xs:int" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <菜单表>
+    <ID>26</ID>
+    <SortID>26</SortID>
+    <SortName>欢迎页</SortName>
+    <SortParentID>0</SortParentID>
+    <SortParentPath>,</SortParentPath>
+    <SortOrder>1</SortOrder>
+    <m_url>demo_home.aspx</m_url>
+    <m_tip />
+    <m_tag />
+    <m_ico>fa-home</m_ico>
+    <m_show>不隐藏</m_show>
+    <SortNameTree>└欢迎页</SortNameTree>
+    <SortMoveUp>0</SortMoveUp>
+    <SortMoveDown>0</SortMoveDown>
+  </菜单表>
+</NewDataSet>

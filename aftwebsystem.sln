@@ -1,0 +1,160 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "异步处理测试和管理", "异步处理测试和管理\异步处理测试和管理.csproj", "{B4C2FFF5-1154-4D1D-A517-E4F3EAB9C44A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPC配置更新工具", "IPC配置更新工具\IPC配置更新工具.csproj", "{9B14976B-70DC-447C-85CC-F56A48B9A295}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "公共类库", "公共类库", "{D7945C4C-FD65-4ED7-83A2-708BB797DEA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FMPublicClass", "公共类库\辅助类库\FMPublicClass.csproj", "{CF9BF75C-AD15-4C5D-82FB-D1EB98C9F10D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FMipcClass", "公共类库\接口聚合类库\FMipcClass.csproj", "{329DC493-9959-4539-8248-48A68733BB5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FMDBHelperClass", "公共类库\数据层类库\FMDBHelperClass.csproj", "{B32A0B2C-526A-4F50-809A-A284DCC4CA14}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RedisReLoad", "RedisReLoad", "{495448DB-2D36-4ECA-8386-4B5CF5E0E78D}"
+	ProjectSection(SolutionItems) = preProject
+		RedisReLoad\ServiceStack.Common.dll = RedisReLoad\ServiceStack.Common.dll
+		RedisReLoad\ServiceStack.Interfaces.dll = RedisReLoad\ServiceStack.Interfaces.dll
+		RedisReLoad\ServiceStack.Redis.dll = RedisReLoad\ServiceStack.Redis.dll
+		RedisReLoad\ServiceStack.Text.dll = RedisReLoad\ServiceStack.Text.dll
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisFormTest", "RedisReLoad\RedisFormTest\RedisFormTest.csproj", "{E9E9D489-038B-47EA-9C7E-D282B12760ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShareDBcache", "RedisReLoad\ShareDBcache\ShareDBcache.csproj", "{3C37A8FE-5C85-435F-BF5F-00797BD360B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlRedisForFMDBHelper_AAA_DLZHXXB", "RedisReLoad\SqlRedisForFMDBHelper_AAA_DLZHXXB\SqlRedisForFMDBHelper_AAA_DLZHXXB.csproj", "{234A7BC7-7067-4B1D-80D5-11E5307CDE03}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ws界面中心", "http://localhost:45779", "{BAEF4AB1-5F76-4622-9719-9C22B8BE1353}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		ProjectReferences = "{b32a0b2c-526a-4f50-809a-a284dcc4ca14}|FMDBHelperClass.dll;{329dc493-9959-4539-8248-48a68733bb5c}|FMipcClass.dll;{cf9bf75c-ad15-4c5d-82fb-d1eb98c9f10d}|FMPublicClass.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_45779"
+		Debug.AspNetCompiler.PhysicalPath = "ws界面中心\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_45779\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_45779"
+		Release.AspNetCompiler.PhysicalPath = "ws界面中心\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_45779\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "ws界面中心\"
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "IPC服务接口聚合", "http://localhost:1744", "{08E9E810-9567-452D-8A3E-A9C9B1C3AC0B}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		ProjectReferences = "{b32a0b2c-526a-4f50-809a-a284dcc4ca14}|FMDBHelperClass.dll;{CF9BF75C-AD15-4C5D-82FB-D1EB98C9F10D}|FMPublicClass.dll;{329dc493-9959-4539-8248-48a68733bb5c}|FMipcClass.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_1744"
+		Debug.AspNetCompiler.PhysicalPath = "IPC服务接口聚合\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_1744\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_1744"
+		Release.AspNetCompiler.PhysicalPath = "IPC服务接口聚合\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_1744\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "IPC服务接口聚合\"
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ws核心业务中心", "http://localhost:47234", "{9F899F01-B966-4356-B7AF-E852833B6A19}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		ProjectReferences = "{cf9bf75c-ad15-4c5d-82fb-d1eb98c9f10d}|FMPublicClass.dll;{329dc493-9959-4539-8248-48a68733bb5c}|FMipcClass.dll;{B32A0B2C-526A-4F50-809A-A284DCC4CA14}|FMDBHelperClass.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_47234"
+		Debug.AspNetCompiler.PhysicalPath = "ws核心业务中心\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_47234\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_47234"
+		Release.AspNetCompiler.PhysicalPath = "ws核心业务中心\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_47234\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "ws核心业务中心\"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B4C2FFF5-1154-4D1D-A517-E4F3EAB9C44A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4C2FFF5-1154-4D1D-A517-E4F3EAB9C44A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4C2FFF5-1154-4D1D-A517-E4F3EAB9C44A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4C2FFF5-1154-4D1D-A517-E4F3EAB9C44A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B14976B-70DC-447C-85CC-F56A48B9A295}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B14976B-70DC-447C-85CC-F56A48B9A295}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B14976B-70DC-447C-85CC-F56A48B9A295}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B14976B-70DC-447C-85CC-F56A48B9A295}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF9BF75C-AD15-4C5D-82FB-D1EB98C9F10D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF9BF75C-AD15-4C5D-82FB-D1EB98C9F10D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF9BF75C-AD15-4C5D-82FB-D1EB98C9F10D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF9BF75C-AD15-4C5D-82FB-D1EB98C9F10D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{329DC493-9959-4539-8248-48A68733BB5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{329DC493-9959-4539-8248-48A68733BB5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{329DC493-9959-4539-8248-48A68733BB5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{329DC493-9959-4539-8248-48A68733BB5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B32A0B2C-526A-4F50-809A-A284DCC4CA14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B32A0B2C-526A-4F50-809A-A284DCC4CA14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B32A0B2C-526A-4F50-809A-A284DCC4CA14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B32A0B2C-526A-4F50-809A-A284DCC4CA14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9E9D489-038B-47EA-9C7E-D282B12760ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9E9D489-038B-47EA-9C7E-D282B12760ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9E9D489-038B-47EA-9C7E-D282B12760ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9E9D489-038B-47EA-9C7E-D282B12760ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C37A8FE-5C85-435F-BF5F-00797BD360B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C37A8FE-5C85-435F-BF5F-00797BD360B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C37A8FE-5C85-435F-BF5F-00797BD360B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C37A8FE-5C85-435F-BF5F-00797BD360B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{234A7BC7-7067-4B1D-80D5-11E5307CDE03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{234A7BC7-7067-4B1D-80D5-11E5307CDE03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{234A7BC7-7067-4B1D-80D5-11E5307CDE03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{234A7BC7-7067-4B1D-80D5-11E5307CDE03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAEF4AB1-5F76-4622-9719-9C22B8BE1353}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAEF4AB1-5F76-4622-9719-9C22B8BE1353}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAEF4AB1-5F76-4622-9719-9C22B8BE1353}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAEF4AB1-5F76-4622-9719-9C22B8BE1353}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{08E9E810-9567-452D-8A3E-A9C9B1C3AC0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08E9E810-9567-452D-8A3E-A9C9B1C3AC0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08E9E810-9567-452D-8A3E-A9C9B1C3AC0B}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{08E9E810-9567-452D-8A3E-A9C9B1C3AC0B}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{9F899F01-B966-4356-B7AF-E852833B6A19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F899F01-B966-4356-B7AF-E852833B6A19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F899F01-B966-4356-B7AF-E852833B6A19}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F899F01-B966-4356-B7AF-E852833B6A19}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CF9BF75C-AD15-4C5D-82FB-D1EB98C9F10D} = {D7945C4C-FD65-4ED7-83A2-708BB797DEA2}
+		{329DC493-9959-4539-8248-48A68733BB5C} = {D7945C4C-FD65-4ED7-83A2-708BB797DEA2}
+		{B32A0B2C-526A-4F50-809A-A284DCC4CA14} = {D7945C4C-FD65-4ED7-83A2-708BB797DEA2}
+		{E9E9D489-038B-47EA-9C7E-D282B12760ED} = {495448DB-2D36-4ECA-8386-4B5CF5E0E78D}
+		{3C37A8FE-5C85-435F-BF5F-00797BD360B5} = {495448DB-2D36-4ECA-8386-4B5CF5E0E78D}
+		{234A7BC7-7067-4B1D-80D5-11E5307CDE03} = {495448DB-2D36-4ECA-8386-4B5CF5E0E78D}
+	EndGlobalSection
+EndGlobal
