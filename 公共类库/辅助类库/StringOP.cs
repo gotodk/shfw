@@ -875,12 +875,13 @@ function uncMe(s, k){
         /// <summary>
         /// 写入运行日志
         /// </summary>
+        /// <param name="rootpath">日志根目录</param>
         /// <param name="strLog"></param>
-        public static void WriteLog(string strLog)
+        public static void WriteLog(string rootpath, string strLog)
         {
             try
             {
-                string sFilePath = "logs\\" + DateTime.Now.ToString("yyyyMM");
+                string sFilePath = rootpath + "logs\\" + DateTime.Now.ToString("yyyyMM");
                 string sFileName = DateTime.Now.ToString("dd") + ".log";
                 sFileName = sFilePath + "\\" + sFileName; //文件的绝对路径
                 if (!Directory.Exists(sFilePath))//验证路径是否存在

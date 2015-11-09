@@ -637,10 +637,11 @@
             <param name="r">正则表达式</param>
             <returns>截取结果</returns>
         </member>
-        <member name="M:FMPublicClass.StringOP.WriteLog(System.String)">
+        <member name="M:FMPublicClass.StringOP.WriteLog(System.String,System.String)">
             <summary>
             写入运行日志
             </summary>
+            <param name="rootpath">日志根目录</param>
             <param name="strLog"></param>
         </member>
         <member name="M:FMPublicClass.StringOP.OpenUrl(System.String)">
