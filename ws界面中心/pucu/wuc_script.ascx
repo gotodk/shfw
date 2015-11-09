@@ -331,13 +331,16 @@
             break;
         case "日期框":
                                                         %>
-                $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>").val($(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>').text());
-                <%
+            <%--$("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>").val($(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>').text());--%>
+            $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>").datepicker('setDate', $(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>').text());            <%
             break;
         case "日期区间框":
                                                         %>
-                $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>1").val($(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>1').text());
-                $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>2").val($(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>2').text());
+
+            $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>1").datepicker('setDate', $(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>1').text());
+            $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>2").datepicker('setDate', $(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>2').text());
+  <%--              $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>1").val($(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>1').text());
+                $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>2").val($(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>2').text());--%>
 
                 <%
             break;
