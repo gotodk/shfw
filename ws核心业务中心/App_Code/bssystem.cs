@@ -571,7 +571,7 @@ public class bssystem : System.Web.Services.WebService
 
         Hashtable param = new Hashtable();
         param.Add("@UAid", ht_forUI["idforedit"].ToString());
-        //对密码进行加密(用UAid当key值)
+        //对密码进行加密
         string mima_old_enc = StringOP.encMe(ht_forUI["mima_old"].ToString().Trim(), "mima");
         param.Add("@mima_old", mima_old_enc);
         string mima_new_enc = StringOP.encMe(ht_forUI["mima_new"].ToString().Trim(), "mima");
@@ -670,10 +670,8 @@ public class bssystem : System.Web.Services.WebService
             BigInteger groupNum4 = 0;
             BigInteger groupNum5 = 0;
             string tiaojian = redb.Rows[0]["Uingroups"].ToString();
-            if (tiaojian.IndexOf(",") <= 0)
-            {
-                tiaojian = "0";
-            }
+            if (tiaojian.Trim() == "")
+            { tiaojian = "0"; }
             Hashtable htyiju = I_DBL.RunProc("select Unumber1,Unumber2,Unumber3,Unumber4,Unumber5 from auth_group where SortID in (" + tiaojian + ")", "计算依据");
             if ((bool)(htyiju["return_float"]))
             {
