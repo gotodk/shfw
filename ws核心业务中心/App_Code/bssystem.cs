@@ -1087,8 +1087,12 @@ public class bssystem : System.Web.Services.WebService
         I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
 
         Hashtable return_ht = new Hashtable();
-
-        return_ht = I_DBL.RunProc("select * from auth_enum_number where ANClass='Unumber1' and ANused=1 order by ANBaseName  ; select * from auth_enum_number where ANClass='Unumber2' and ANused=1 order by ANBaseName  ; select * from auth_enum_number where ANClass='Unumber3' and ANused=1 order by ANBaseName  ; select * from auth_enum_number where ANClass='Unumber4' and ANused=1 order by ANBaseName  ; select * from auth_enum_number where ANClass='Unumber5' and ANused=1 order by ANBaseName  ;", "临时名");
+        string yc_sql = " ";
+        if (temp == "隐藏开发专用")
+        {
+            yc_sql = " and ANBaseName <> '开发专用' ";
+        }
+        return_ht = I_DBL.RunProc("select * from auth_enum_number where ANClass='Unumber1' and ANused=1 "+ yc_sql + "  order by ANBaseName  ; select * from auth_enum_number where ANClass='Unumber2' and ANused=1 order by ANBaseName  ; select * from auth_enum_number where ANClass='Unumber3' and ANused=1 order by ANBaseName  ; select * from auth_enum_number where ANClass='Unumber4' and ANused=1 order by ANBaseName  ; select * from auth_enum_number where ANClass='Unumber5' and ANused=1 order by ANBaseName  ;", "临时名");
 
         if ((bool)(return_ht["return_float"]))
         {

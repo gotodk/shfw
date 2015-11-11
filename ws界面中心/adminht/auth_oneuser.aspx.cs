@@ -79,7 +79,7 @@ public partial class auth_oneuser : System.Web.UI.Page
                         UfinalUnumber.Text =  ds.Tables["数据记录"].Rows[0]["UfinalUnumber1"].ToString() + "," + ds.Tables["数据记录"].Rows[0]["UfinalUnumber2"].ToString() + "," + ds.Tables["数据记录"].Rows[0]["UfinalUnumber3"].ToString() + "," + ds.Tables["数据记录"].Rows[0]["UfinalUnumber4"].ToString() + "," + ds.Tables["数据记录"].Rows[0]["UfinalUnumber5"].ToString();
                         //调用执行方法获取数据
                         DataSet dsQ = new DataSet();
-                        object[] re_dsiQ = IPC.Call("获取所有已启用的权限枚举", new object[] { "" });
+                        object[] re_dsiQ = IPC.Call("获取所有已启用的权限枚举", new object[] { "隐藏开发专用" });
                         if (re_dsiQ[0].ToString() == "ok" && re_dsiQ[1] != null)
                         {
 
