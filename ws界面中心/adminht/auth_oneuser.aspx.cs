@@ -34,6 +34,15 @@ public partial class auth_oneuser : System.Web.UI.Page
                     ds = (DataSet)re_dsi[1];
                     if (ds.Tables["返回值单条"].Rows[0]["执行结果"].ToString() == "ok")
                     {
+
+                        //超管账号不允许编辑
+                        if (ds.Tables["数据记录"].Rows[0]["SuperUser"].ToString() == "1")
+                        {
+                            addbutton1.Enabled = false;
+                            addbutton1.Text = "超管账号不能进行编辑";
+                        }
+
+
                         quyu_zhao.Visible = false;
                         quyu_peizhi.Visible = true;
 
@@ -63,6 +72,10 @@ public partial class auth_oneuser : System.Web.UI.Page
                         //把下拉菜单默认值弄上
                         ee_UAid.Text = ds.Tables["数据记录"].Rows[0]["UAid"].ToString();
                         ee_Uloginname.Text = ds.Tables["数据记录"].Rows[0]["Uloginname"].ToString();
+
+              
+
+
                         UfinalUnumber.Text =  ds.Tables["数据记录"].Rows[0]["UfinalUnumber1"].ToString() + "," + ds.Tables["数据记录"].Rows[0]["UfinalUnumber2"].ToString() + "," + ds.Tables["数据记录"].Rows[0]["UfinalUnumber3"].ToString() + "," + ds.Tables["数据记录"].Rows[0]["UfinalUnumber4"].ToString() + "," + ds.Tables["数据记录"].Rows[0]["UfinalUnumber5"].ToString();
                         //调用执行方法获取数据
                         DataSet dsQ = new DataSet();
