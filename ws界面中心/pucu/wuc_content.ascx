@@ -582,11 +582,17 @@
                                                             保存
                                                         </button>
 
+
+
+                                                           <button class="btn pull-right hidden" type="<%=htPP["reloaddb_type"].ToString() %>"  id="fanhuishangyiye">
+                                                            <i class="ace-icon fa fa-undo bigger-110"></i>
+                                                            返回
+                                                        </button>
                                                         <button class="btn pull-right" type="<%=htPP["reloaddb_type"].ToString() %>"  id="reloaddb">
                                                             <i class="ace-icon fa fa-undo bigger-110"></i>
                                                             重填
                                                         </button>
-
+                                                     
                                                     </div>
 
                                                 </div>

@@ -201,10 +201,24 @@
 
 
         jQuery(function ($) {
+            var isedit = getUrlParam("fff");
+            if (isedit == "1") {
+           
+                $("#fanhuishangyiye").removeClass("hidden");
+            }
+            else {
+                $("#fanhuishangyiye").addClass("hidden");
+
+            }
+            //添加返回代码
+            $(document).on('click', "#fanhuishangyiye", function () {
+                history.back(-1)
+
+            });
             //添加提交事件
             $(document).on('click', buttonid1, function () {
 
-                var isedit = getUrlParam("fff");
+           
                 if (isedit == "1") {
                     gogoajax1(formid1, buttonid1, url1, jkname_save2);
                 }
@@ -332,7 +346,9 @@
         case "日期框":
                                                         %>
             <%--$("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>").val($(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>').text());--%>
-            $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>").datepicker('setDate', $(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>').text());            <%
+            $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>").datepicker('setDate', $(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>').text());
+
+            <%
             break;
         case "日期区间框":
                                                         %>
