@@ -146,6 +146,22 @@
     <script type="text/javascript">
 
         function gogoajax1(t_formid, t_buttonid, t_url, t_jkname) {
+        
+            var JSON_sub_str = "";
+            $("table[id^='grid-table-subtable-']").each(function()
+            {
+                var objDB = $(this).jqGrid("getRowData");
+                //alert(objDB.length);
+                //JSON_sub_str = JSON_sub_str = "&" + $(this).attr('id') + "=" + encMe(JSON.stringify($(objDB)), "mima");
+                JSON_sub_str = JSON_sub_str = "&" + $(this).attr('id') + "=" +  JSON.stringify(objDB) ;
+  
+                
+            });
+ 
+            if (JSON_sub_str.indexOf("<") >= 0) {
+                bootbox.alert("错误：有子表正在编辑尚未保存，无法提交！");
+                return false;
+            }
 
             //防重复提交
             if (!gogoajax1_CanRun) {
@@ -196,7 +212,7 @@
                 type: "POST",
                 url: t_url + "?guid=" + randomnumber(),
                 dataType: "html",
-                data: "ajaxrun=save&jkname=" + t_jkname + "&" + $(t_formid).serialize(),
+                data: "ajaxrun=save&jkname=" + t_jkname + "&" + $(t_formid).serialize() + JSON_sub_str,
                 success: callback, //请求成功
                 error: errorForAjax//请求出错 
 

@@ -1,5 +1,5 @@
 ﻿            //关键配置
-			var lastsel_yhb;
+		 
 			var dialog_tanchuang_forsubtable = null;
              jQuery("[*[grid_selector_ID]*]").jqGrid({
                 //direction: "rtl",
@@ -45,7 +45,18 @@
                 //toppager: true,
                 sortable: true,
 				onCellSelect: function(rowid,iCol,cellcontent,e) {
-     
+     	      
+			  	var savejieguo =$('[*[grid_selector_ID]*]').jqGrid('saveRow', $('[*[grid_selector_ID]*]').attr('lastsel_yhb'));
+				if($('[*[grid_selector_ID]*]').attr('lastsel_yhb') == "-999999" || savejieguo)
+				{
+				     $('[*[grid_selector_ID]*]').jqGrid('restoreRow', $('[*[grid_selector_ID]*]').attr('lastsel_yhb'));
+		
+                     $('[*[grid_selector_ID]*]').jqGrid('editRow', rowid, true);
+                     $('[*[grid_selector_ID]*]').attr('lastsel_yhb',rowid);
+              
+				}
+                 
+          
         },
 		   
                 multiselect: true,
@@ -73,12 +84,7 @@
 				/*
                 ondblClickRow: function (rowid,iRow,iCol,e) {
                      
-					      if (rowid && rowid !== lastsel_yhb) {
-            $('[*[grid_selector_ID]*]').jqGrid('restoreRow', lastsel_yhb);
-            $('[*[grid_selector_ID]*]').jqGrid('editRow', rowid, true);
-	 
-            lastsel_yhb = rowid;
-          }
+				
 
                 },
 				*/
@@ -101,13 +107,13 @@
                     editicon: 'ace-icon fa fa-pencil blue',
                     add: false,
                     addicon: 'ace-icon fa fa-plus-circle purple',
-                    del: true,
+                    del: false,
                     delicon: 'ace-icon fa fa-trash-o red',
-                    search: true,
+                    search: false,
                     searchicon: 'ace-icon fa fa-search orange',
-                    refresh: true,
+                    refresh: false,
                     refreshicon: 'ace-icon fa fa-refresh green',
-                    view: true,
+                    view: false,
                     viewicon: 'ace-icon fa fa-search-plus grey',
                 },
                 {
@@ -187,37 +193,53 @@
 			[*[FS_D_setGroupHeaders]*]
 
  
-
-
- jQuery("[*[grid_selector_ID]*]").navButtonAdd("[*[pager_selector_ID]*]",{
+  jQuery("[*[grid_selector_ID]*]").navButtonAdd("[*[pager_selector_ID]*]",{
    caption:"", 
-   title : "编辑",
-   buttonicon:"ace-icon fa fa-pencil blue sub-bz-zheshibianji ", 
+   title : "保存",
+   buttonicon:"ace-icon fa fa-floppy-o blue", 
    onClickButton: function(e){ 
  
 
-                         var dialog_title = "编辑--[*[FS_title]*]";
-                        e.preventDefault();
-						$("#iframforsubtab").attr("src","about:blank");
-						$("#iframforsubtab").attr("src","[*[FS_bianjilianjie]*]");
-                        dialog_tanchuang_forsubtable = $("#dialog-message-forsubtable-addedit").removeClass('hide').dialog({
-                            modal: true,
-                            title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='ace-icon fa fa-bars'></i>  "  + dialog_title + "</h4></div>",
-                            width: '80%' 
-                          
-                        });
-
+			var savejieguo =$('[*[grid_selector_ID]*]').jqGrid('saveRow', $('[*[grid_selector_ID]*]').attr('lastsel_yhb'));		 
+			
+			 	 if($('[*[grid_selector_ID]*]').attr('lastsel_yhb') == "-999999" || savejieguo)
+				{
+$('[*[grid_selector_ID]*]').attr('lastsel_yhb',"-999999");
+}
+					  
    }, 
    position:"first"
 });
+
+
+ jQuery("[*[grid_selector_ID]*]").navButtonAdd("[*[pager_selector_ID]*]",{
+   caption:"", 
+   title : "删除",
+   buttonicon:"ace-icon fa fa-trash-o red", 
+   onClickButton: function(e){ 
+ 
+ 
+						  var selectedRowIds = $("[*[grid_selector_ID]*]").jqGrid("getGridParam","selarrrow"); 
+						  var len = selectedRowIds.length;
+for(var i = 0;i < len ;i ++) {
+ $("[*[grid_selector_ID]*]").jqGrid("delRowData", selectedRowIds[0]);
+						  
+}
+		 $('[*[grid_selector_ID]*]').attr('lastsel_yhb',"-999999");				  
+   }, 
+   position:"first"
+});
+
+
+
  jQuery("[*[grid_selector_ID]*]").navButtonAdd("[*[pager_selector_ID]*]",{
    caption:"", 
    title : "新增",
-   buttonicon:"ace-icon fa fa-plus-circle purple  sub-bz-zheshixinzeng ", 
+   buttonicon:"ace-icon fa fa-plus-circle purple", 
    onClickButton: function(e){ 
            
 
-
+		   /*
                         var dialog_title = "新增--[*[FS_title]*]";
                         e.preventDefault();
 						$("#iframforsubtab").attr("src","[*[FS_xinzenglianjie]*]");
@@ -227,9 +249,37 @@
                             width: '80%' 
                           
                         });
+         */
+
+	 
+	 
+
+            var savejieguo = $('[*[grid_selector_ID]*]').jqGrid('saveRow', $('[*[grid_selector_ID]*]').attr('lastsel_yhb'));
+		
+			if($('[*[grid_selector_ID]*]').attr('lastsel_yhb') == "-999999" || savejieguo)
+				{
+
+				    var colModel = $("[*[grid_selector_ID]*]").jqGrid().getGridParam("colModel") ;  
+    var cellLenth = colModel.length ;  
+ 
+    var newRow = JSON.stringify(colModel);  
+  
+    var newrowid = randomnumber();
+ 
+    //将新行追加到表格头部  
+    $("[*[grid_selector_ID]*]").jqGrid("addRowData", newrowid,newRow , "first");  
 
 
 
+            $('[*[grid_selector_ID]*]').jqGrid('restoreRow', $('[*[grid_selector_ID]*]').attr('lastsel_yhb'));
+			$('[*[grid_selector_ID]*]').jqGrid('setSelection',newrowid,false);
+            $('[*[grid_selector_ID]*]').jqGrid('editRow', newrowid, true);
+	        $('[*[grid_selector_ID]*]').attr('lastsel_yhb',newrowid);
+        
+			}
+			     
+
+ 
    }, 
    position:"first"
 });
@@ -238,3 +288,28 @@
             //其他界面相关辅助代码
             $(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
 
+
+ 
+function subtab_datepicker_elem(value, options) {
+ //alert(value);
+	var el = document.createElement("input");
+    el.type="text";
+    el.value = value;
+	el.class = 'date-picker';
+    $(el).datepicker({ autoclose: true });
+	$(el).mask('9999-99-99');
+  return el;
+   
+};
+function subtab_datepicker_value(elem, operation, value) {
+
+ if (operation === 'get') {
+  return $(elem).val();
+ } else if (operation === 'set') {
+  $(elem).val(value);
+ 
+ }
+};
+
+ 
+ 

@@ -569,7 +569,7 @@
 
                                                 <div class="col-sm-10">
                                                     <div>
-                                                        <table id="grid-table-subtable-<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FSID"] %>"></table>
+                                                        <table lastsel_yhb="-999999" id="grid-table-subtable-<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FSID"] %>"></table>
 
                                                         <div id="grid-pager-subtable-<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FSID"] %>"></div>
                                                     </div>

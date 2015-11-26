@@ -7,11 +7,12 @@ using System.Collections;
 using System.Data;
 using FMPublicClass;
 using System.Numerics;
-
-
+using System.Web.Script.Serialization;
 
 public class NoReSet_sys_demo_0001
 {
+ 
+
     /// <summary>
     /// 初始化返回值数据集,执行结果只有两种ok和err(大多数情况是这个标准)
     /// </summary>
@@ -62,7 +63,18 @@ public class NoReSet_sys_demo_0001
         param.Add("@id", guid);
         param.Add("@fieldtest", ht_forUI["fieldtest"].ToString());
 
+
+
         alsql.Add("INSERT INTO FUP_FormsDemoDB(id ,fieldtest) VALUES(@id ,@fieldtest )");
+
+        DataTable dttemp_sys_ddmo_0002 = jsontodatatable.ToDataTable(ht_forUI["grid-table-subtable-sys_ddmo_0002"].ToString());
+        if (dttemp_sys_ddmo_0002.Rows.Count > 0)
+        {
+            //要插入的数据进行校验
+            //删除原来的子表数据，再插入子表
+            //alsql.Add("删原来的");
+            //alsql.Add("插入新的");
+        }
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
 
