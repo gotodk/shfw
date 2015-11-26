@@ -267,7 +267,7 @@ for(var i = 0;i < len ;i ++) {
     var newrowid = randomnumber();
  
     //将新行追加到表格头部  
-    $("[*[grid_selector_ID]*]").jqGrid("addRowData", newrowid,newRow , "first");  
+    $("[*[grid_selector_ID]*]").jqGrid("addRowData", newrowid,newRow , "last");  
 
 
 
