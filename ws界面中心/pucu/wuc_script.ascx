@@ -163,6 +163,8 @@
                 gogoajax1_CanRun = false;
                 $(t_buttonid).addClass("disabled");
                 $(t_buttonid).html("<i class='ace-icon fa fa-spinner fa-spin orange bigger-110'></i>正在处理");
+                $(t_buttonid+"_top").addClass("disabled");
+                $(t_buttonid + "_top").html("<i class='ace-icon fa fa-floppy-o bigger-120 blue'></i>正在处理");
             }
 
 
@@ -184,6 +186,8 @@
                     gogoajax1_CanRun = true;
                     $(t_buttonid).removeClass("disabled");
                     $(t_buttonid).html("<i class='ace-icon fa fa-check bigger-110'></i>保存");
+                    $(t_buttonid+"_top").removeClass("disabled");
+                    $(t_buttonid + "_top").html("<i class='ace-icon fa fa-floppy-o bigger-120 blue'></i>保存");
                 }, 1500)
 
 
@@ -211,11 +215,24 @@
 
             }
             //添加返回代码
+            $(document).on('click', "#fanhuishangyiye_top", function () {
+                history.back(-1);
+
+            });
             $(document).on('click', "#fanhuishangyiye", function () {
-                history.back(-1)
+                history.back(-1);
 
             });
             //添加提交事件
+            $(document).on('click', buttonid1+"_top", function () {
+                if (isedit == "1") {
+                    gogoajax1(formid1, buttonid1, url1, jkname_save2);
+                }
+                else {
+                    gogoajax1(formid1, buttonid1, url1, jkname_save1);
+                }
+
+            });
             $(document).on('click', buttonid1, function () {
 
            

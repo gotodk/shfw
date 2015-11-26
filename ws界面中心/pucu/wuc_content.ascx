@@ -49,10 +49,39 @@
                                     <i class="green ace-icon fa fa-pencil-square-o bigger-120"></i>
                                     <% =htPP["title_f"].ToString()%>
                                 </a>
+                                 
                             </li>
-
-
+                            <li class="">&nbsp;&nbsp;</li>
+                            <li class=""><button class="btn btn-white btn-info btn-bold" id="addbutton1_top">
+												<i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
+												保存
+											</button></li>
+                            <li class="">&nbsp;&nbsp;</li>
+					<li class=""><button class="btn btn-white btn-info btn-bold" id="fanhuishangyiye_top">
+												<i class="ace-icon fa fa-undo red2"></i>
+												返回
+											</button></li>
+                            <li class="">&nbsp;&nbsp;</li>
+ <%--                <li class=""><button class="btn btn-white btn-info btn-bold">
+												<i class="ace-icon fa fa-trash-o bigger-120 "></i>
+												删除
+											</button></li> --%>
+                             <%--                <li class=""><button class="btn btn-white btn-info btn-bold">
+												<i class="ace-icon fa fa-recycle bigger-120 "></i>
+												作废
+											</button></li> --%>
+                                    <%--           <li class=""><button class="btn btn-white btn-info btn-bold">
+												<i class="ace-icon fa fa-check-circle bigger-120 "></i>
+												审核
+											</button></li>  --%>
+                        <%--     <li class=""><button class="btn btn-white btn-info btn-bold">
+												<i class="ace-icon fa fa-tasks bigger-120 "></i>
+												自定义
+											</button></li>  --%>
                         </ul>
+
+
+               
 
                         <div class="tab-content">
                             <div id="addadd" class="tab-pane fade in active">
