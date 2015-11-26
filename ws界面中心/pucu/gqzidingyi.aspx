@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="gqzidingyi.aspx.cs" Inherits="pucu_gqzidingyi" %>

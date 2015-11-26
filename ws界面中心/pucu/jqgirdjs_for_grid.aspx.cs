@@ -69,6 +69,27 @@ public partial class pucu_jqgirdjs_for_grid : System.Web.UI.Page
             }
 
 
+            //处理自定义按钮
+            string zdy_tihuan_str = "";
+            string jsmod_zdy_op = File.ReadAllText(Server.MapPath("/pucu/jqgirdjs_for_grid_mod_zdy_op.txt").ToString());
+            string zdy_op = ds_DD.Tables["报表配置主表"].Rows[0]["FS_zdy_op"].ToString();
+            string[] zdy_op_arr = zdy_op.Split(',');
+            for (int op = 0; op < zdy_op_arr.Length; op++)
+            {
+                string tempanniu = zdy_op_arr[op];
+                if (tempanniu.Trim() != "")
+                {
+                    string[] tp = tempanniu.Split('|');
+                    string anniustr = jsmod_zdy_op.Replace("[*[zdyop_title]*]", tp[0]);
+                    anniustr = anniustr.Replace("[*[zdyop_buttonicon]*]", tp[1]);
+                    anniustr = anniustr.Replace("[*[zdyop_zdyname]*]", tp[2]);
+                    anniustr = anniustr.Replace("[*[FSID]*]", ds_DD.Tables["报表配置主表"].Rows[0]["FSID"].ToString());
+            
+                    zdy_tihuan_str = zdy_tihuan_str + anniustr;
+                }
+            }
+            rehtml = rehtml.Replace("[*[FS_zxy_op_tihuan]*]", zdy_tihuan_str);
+
             //列配置
             string c_str = "";
             //特殊处理第一列

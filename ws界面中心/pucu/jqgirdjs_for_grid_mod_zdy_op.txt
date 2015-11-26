@@ -1,0 +1,43 @@
+﻿
+			jQuery(grid_selector).navButtonAdd(pager_selector,{
+   caption:"", 
+   title : "[*[zdyop_title]*]",
+   buttonicon:"[*[zdyop_buttonicon]*]", 
+   onClickButton: function(){ 
+   var postData = $(grid_selector).jqGrid("getGridParam", "postData");
+   var ids=$(grid_selector).jqGrid("getGridParam","selarrrow");
+   if(ids == "")
+   {
+   return;
+   }
+  var aj_ex = $.ajax({
+                    url: '/pucu/gqzidingyi.aspx?zdyname=[*[zdyop_zdyname]*]&xuanzhongzhi='+ids+'&zheshiyige_FID=[*[FSID]*]',
+                    type: 'post',
+					data: postData,
+                    cache: false,
+                    dataType: 'html',
+                    success: function (data) {
+					bootbox.alert(data);
+ 
+					var zdy = $('#mysearchtop').serialize();
+                var postData = $(grid_selector).jqGrid("getGridParam", "postData");
+                $.extend(postData, { mysearchtop: zdy });
+                $(grid_selector).jqGrid("setGridParam", { search: true }).trigger("reloadGrid", [{ page: 1 }]);  //重载JQGrid       
+               
+
+                    },
+                    error: function () {
+                        bootbox.alert('调用失败！');
+                    }
+                });
+
+
+
+
+
+
+   }, 
+   position:"last"
+});
+
+

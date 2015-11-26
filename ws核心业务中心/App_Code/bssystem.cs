@@ -2975,7 +2975,7 @@ public class bssystem : System.Web.Services.WebService
         //偷懒，一个接口一起处理了。
         if (ht_forUI["zheshiyige_FID"].ToString() == "sys_editadd_FUP_FormsList")
         {
-            string toulanziduan = "FSID, FS_ok, FS_type, FS_name, FS_getJK, FS_delJK, FS_del_show, FS_can_download,FS_add_show,FS_add_show_link, FS_D_shrinkToFit, FS_D_setGroupHeaders, FS_D_field, FS_D_datatable, FS_D_where, FS_D_order, FD_D_key, FD_D_pagesize, SRE_open, SRE_showname_1, SRE_idname_1, SRE_type_1, SRE_showname_2,SRE_idname_2, SRE_type_2, SRE_showname_3, SRE_idname_3, SRE_type_3";
+            string toulanziduan = "FSID, FS_ok, FS_type, FS_name, FS_getJK, FS_delJK, FS_del_show, FS_can_download,FS_add_show,FS_add_show_link,FS_zdy_op, FS_D_shrinkToFit, FS_D_setGroupHeaders, FS_D_field, FS_D_datatable, FS_D_where, FS_D_order, FD_D_key, FD_D_pagesize, SRE_open, SRE_showname_1, SRE_idname_1, SRE_type_1, SRE_showname_2,SRE_idname_2, SRE_type_2, SRE_showname_3, SRE_idname_3, SRE_type_3";
             string sqlupdate = "UPDATE FUP_FormsList SET  ";
             string[] tlzd_arr = toulanziduan.Split(',');
             param.Add("@"+ tlzd_arr[0].Trim(), ht_forUI["idforedit"].ToString());
@@ -3167,19 +3167,37 @@ public class bssystem : System.Web.Services.WebService
     [WebMethod(MessageName = "框架免代理通用接口删", Description = "框架免代理通用接口删")]
     public string PUB_NO_RESET_DEL(DataTable parameter_forUI)
     {
+
         //接收转换参数
         Hashtable ht_forUI = new Hashtable();
         for (int i = 0; i < parameter_forUI.Rows.Count; i++)
         {
             ht_forUI[parameter_forUI.Rows[i]["参数名"].ToString()] = parameter_forUI.Rows[i]["参数值"].ToString();
         }
+        object rtnObj = null;
+        if (ht_forUI.Contains("zdyname"))
+        {
+            //开始调用处理,发现是自定按钮的处理请求
+            Assembly serviceAsm = Assembly.GetExecutingAssembly();
+            Type typeName = serviceAsm.GetType("NoReSetDEL_" + ht_forUI["zheshiyige_FID"].ToString());
+            object instance = serviceAsm.CreateInstance("NoReSetDEL_" + ht_forUI["zheshiyige_FID"].ToString());
+            rtnObj = typeName.GetMethod("NRS_ZDY_" + ht_forUI["zdyname"].ToString()).Invoke(instance, new object[] { parameter_forUI });
+            //若发生错误，写入日志，省略
+        }
+        else
+        {
+            //开始调用处理
+            Assembly serviceAsm = Assembly.GetExecutingAssembly();
+            Type typeName = serviceAsm.GetType("NoReSetDEL_" + ht_forUI["zheshiyige_FID"].ToString());
+            object instance = serviceAsm.CreateInstance("NoReSetDEL_" + ht_forUI["zheshiyige_FID"].ToString());
+            rtnObj = typeName.GetMethod("NRS_DEL").Invoke(instance, new object[] { parameter_forUI });
+            //若发生错误，写入日志，省略
+        }
+        if (rtnObj == null)
+        {
+            return "系统错误，处理失败";
+        }
 
-        //开始调用处理
-        Assembly serviceAsm = Assembly.GetExecutingAssembly();
-        Type typeName = serviceAsm.GetType("NoReSetDEL_" + ht_forUI["zheshiyige_FID"].ToString());
-        object instance = serviceAsm.CreateInstance("NoReSetDEL_" + ht_forUI["zheshiyige_FID"].ToString());
-        object rtnObj = typeName.GetMethod("NRS_DEL").Invoke(instance, new object[] { parameter_forUI });
-        //若发生错误，写入日志，省略
 
         return rtnObj.ToString();
     }
