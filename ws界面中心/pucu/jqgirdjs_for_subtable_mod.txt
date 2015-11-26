@@ -1,4 +1,6 @@
 ﻿            //关键配置
+			var lastsel_yhb;
+			var dialog_tanchuang_forsubtable = null;
              jQuery("[*[grid_selector_ID]*]").jqGrid({
                 //direction: "rtl",
 
@@ -42,7 +44,10 @@
                 altRows: true,
                 //toppager: true,
                 sortable: true,
-
+				onCellSelect: function(rowid,iCol,cellcontent,e) {
+     
+        },
+		   
                 multiselect: true,
                 //multikey: "ctrlKey",
                 multiboxonly: true,
@@ -65,11 +70,18 @@
                         enableTooltips(table);
                     }, 0);
                 },
-                ondblClickRow: function (rowid) {
-                    $(".querenyinruanniu").trigger("click");
-
+				/*
+                ondblClickRow: function (rowid,iRow,iCol,e) {
+                     
+					      if (rowid && rowid !== lastsel_yhb) {
+            $('[*[grid_selector_ID]*]').jqGrid('restoreRow', lastsel_yhb);
+            $('[*[grid_selector_ID]*]').jqGrid('editRow', rowid, true);
+	 
+            lastsel_yhb = rowid;
+          }
 
                 },
+				*/
                 editurl: url1 + "?ajaxrun=del&jkname=" + jkname_del1 + "&zheshiyige_FID=[*[FSID]*]",
                 caption: ""
 
@@ -182,13 +194,19 @@
    title : "编辑",
    buttonicon:"ace-icon fa fa-pencil blue sub-bz-zheshibianji ", 
    onClickButton: function(e){ 
-            var form=$("<form>"); 
-form.attr("style","display:none");
-form.attr("target","_blank");
-form.attr("method","post");
-form.attr("action","xxxxxedit.aspx");
-$("body").append(form); 
-form.submit(); 
+ 
+
+                         var dialog_title = "编辑--[*[FS_title]*]";
+                        e.preventDefault();
+						$("#iframforsubtab").attr("src","about:blank");
+						$("#iframforsubtab").attr("src","[*[FS_bianjilianjie]*]");
+                        dialog_tanchuang_forsubtable = $("#dialog-message-forsubtable-addedit").removeClass('hide').dialog({
+                            modal: true,
+                            title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='ace-icon fa fa-bars'></i>  "  + dialog_title + "</h4></div>",
+                            width: '80%' 
+                          
+                        });
+
    }, 
    position:"first"
 });
@@ -197,13 +215,21 @@ form.submit();
    title : "新增",
    buttonicon:"ace-icon fa fa-plus-circle purple  sub-bz-zheshixinzeng ", 
    onClickButton: function(e){ 
-            var form=$("<form>"); 
-form.attr("style","display:none");
-form.attr("target","_blank");
-form.attr("method","post");
-form.attr("action","xxxxxadd.aspx");
-$("body").append(form); 
-form.submit(); 
+           
+
+
+                        var dialog_title = "新增--[*[FS_title]*]";
+                        e.preventDefault();
+						$("#iframforsubtab").attr("src","[*[FS_xinzenglianjie]*]");
+                        dialog_tanchuang_forsubtable = $("#dialog-message-forsubtable-addedit").removeClass('hide').dialog({
+                            modal: true,
+                            title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='ace-icon fa fa-bars'></i>  "  + dialog_title + "</h4></div>",
+                            width: '80%' 
+                          
+                        });
+
+
+
    }, 
    position:"first"
 });

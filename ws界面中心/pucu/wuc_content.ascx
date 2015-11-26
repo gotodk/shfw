@@ -1,7 +1,18 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="wuc_content.ascx.cs" Inherits="pucu_wuc_content" %>
 
  
+    <div id="dialog-message-forsubtable-addedit" class="hide">
 
+        <div class="row">
+   
+            <div class="col-sm-12">
+<iframe src="about:blank"  style="width:100%; height:500px; border:0px;overflow-x:hidden;" id="iframforsubtab"></iframe>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- #dialog-message-forsubtable-addedit -->
 
     <div id="dialog-message" class="hide">
 
@@ -603,7 +614,7 @@
                                                 <label class="col-sm-2 control-label"></label>
 
                                                 <div class="col-sm-10">
-                                                    <div class="col-xs-12 col-sm-5">
+                                                    <div class="col-xs-12 col-sm-6">
 
 
                                                         <button class="btn btn-info pull-left" type="button" id="addbutton1">

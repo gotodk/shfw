@@ -10,6 +10,9 @@ using System.Web.UI.WebControls;
 
 public partial class jqgirdjs_for_subtable : System.Web.UI.Page
 {
+
+ 
+
     protected void Page_Load(object sender, EventArgs e)
     {
         string rehtml = "";
@@ -45,11 +48,32 @@ public partial class jqgirdjs_for_subtable : System.Web.UI.Page
             //本列表的配置主键（用于删除标记传递）
             rehtml = rehtml.Replace("[*[FSID]*]", ds_DD.Tables["字段配置主表"].Rows[0]["FSID"].ToString());
 
+
+            //替换新增和删除按钮的相关处理(数组0索引是新增，1是编辑，2是删除)
+            rehtml = rehtml.Replace("[*[FS_title]*]", ds_DD.Tables["字段配置主表"].Rows[0]["FS_title"].ToString());
+            string[] FS_D_yinruzhi_arr = ds_DD.Tables["字段配置主表"].Rows[0]["FS_D_yinruzhi"].ToString().Split('|');
+            rehtml = rehtml.Replace("[*[FS_bianjilianjie]*]", FS_D_yinruzhi_arr[1]);
+            rehtml = rehtml.Replace("[*[FS_xinzenglianjie]*]", FS_D_yinruzhi_arr[0]);
+
+
             //列配置
             string c_str = "";
             //特殊处理第一列
             //因为第一列在自带查看里不显示，所以要显示编号需要额外弄一列(这一列在sql取数据时一定要有)
             c_str = c_str + " { name: '隐藏编号', xmlmap: 'jqgird_spid', hidden: true }, " + Environment.NewLine;
+       //     c_str = c_str + @"{
+       //     name: 'myac',index: '', width: 80, fixed:true, sortable: false, resize: false,
+							//formatter: 'actions', 
+							//formatoptions:
+       //         {
+       //         keys: true,
+							//	//delbutton: false,//disable delete button
+								
+							//	delOptions: { recreateForm: true, beforeShowForm: beforeDeleteCallback},
+							//	//editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
+							//}
+       //     },";
+
             for (int i = 0; i < ds_DD.Tables["弹窗配置子表"].Rows.Count; i++)
             {
                 DataRow dr = ds_DD.Tables["弹窗配置子表"].Rows[i];
