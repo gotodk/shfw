@@ -7,7 +7,7 @@
                 //subgrid options
                 subGrid: false,
                 //data: grid_data,
-                url: "/ajaxpagedemo.aspx?jkname=" + jkname_page1,
+                url: "/ajaxpagedemo.aspx?jkname=" + jkname_page1 + "&idforedit=" + getUrlParam('idforedit') + "&fff=" + getUrlParam('fff')+ "&pzid=" + getUrlParam('pzid'),
                 datatype: "local",
                 mtype: "POST",
                 xmlReader: {
@@ -45,14 +45,16 @@
                 //toppager: true,
                 sortable: true,
 				onCellSelect: function(rowid,iCol,cellcontent,e) {
-     	      
+     	 
 			  	var savejieguo =$('[*[grid_selector_ID]*]').jqGrid('saveRow', $('[*[grid_selector_ID]*]').attr('lastsel_yhb'));
 				if($('[*[grid_selector_ID]*]').attr('lastsel_yhb') == "-999999" || savejieguo)
 				{
 				     $('[*[grid_selector_ID]*]').jqGrid('restoreRow', $('[*[grid_selector_ID]*]').attr('lastsel_yhb'));
-		
+
                      $('[*[grid_selector_ID]*]').jqGrid('editRow', rowid, true);
+	 		 
                      $('[*[grid_selector_ID]*]').attr('lastsel_yhb',rowid);
+			 
               
 				}
                  
@@ -263,8 +265,8 @@ for(var i = 0;i < len ;i ++) {
     var cellLenth = colModel.length ;  
  
     var newRow = JSON.stringify(colModel);  
-  
-    var newrowid = randomnumber();
+ 
+    var newrowid = '自动生成'+randomnumber();
  
     //将新行追加到表格头部  
     $("[*[grid_selector_ID]*]").jqGrid("addRowData", newrowid,newRow , "last");  
@@ -310,6 +312,6 @@ function subtab_datepicker_value(elem, operation, value) {
  
  }
 };
-
+ 
  
  

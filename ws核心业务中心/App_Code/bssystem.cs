@@ -1848,7 +1848,7 @@ public class bssystem : System.Web.Services.WebService
             }
             else
             {
-                default_where = " and " + ds_DD.Tables["字段配置主表"].Rows[0]["FS_D_where"].ToString() + " ";
+                default_where = " and " + ds_DD.Tables["字段配置主表"].Rows[0]["FS_D_where"].ToString().Replace("{idforedit}", "'"+ ht_forUI["idforedit"].ToString() + "'") + " ";
             }
 
             //处理发过来的表头搜索条件
@@ -2281,7 +2281,15 @@ public class bssystem : System.Web.Services.WebService
             }
             else
             {
-                default_where = " and " + ds_DD.Tables["报表配置主表"].Rows[0]["FS_D_where"].ToString() + " ";
+                if (ht_forUI.Contains("idforedit"))
+                {
+                    default_where = " and " + ds_DD.Tables["报表配置主表"].Rows[0]["FS_D_where"].ToString().Replace("{idforedit}", "'" + ht_forUI["idforedit"].ToString() + "'") + " ";
+                }
+                else
+                {
+                    default_where = " and " + ds_DD.Tables["报表配置主表"].Rows[0]["FS_D_where"].ToString() + " ";
+                }
+           
             }
             
 

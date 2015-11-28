@@ -5,7 +5,7 @@
                 //subgrid options
                 subGrid: false,
                 //data: grid_data,
-                url: "/ajaxpagedemo.aspx?jkname=" + jkname_page1,
+                url: "/ajaxpagedemo.aspx?jkname=" + jkname_page1 + "&idforedit=" + getUrlParam('idforedit') + "&fff=" + getUrlParam('fff')+ "&pzid=" + getUrlParam('pzid'),
                 datatype: "local",
                 mtype: "POST",
                 xmlReader: {
