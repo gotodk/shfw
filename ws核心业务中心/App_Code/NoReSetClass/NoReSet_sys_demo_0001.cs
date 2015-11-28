@@ -67,13 +67,24 @@ public class NoReSet_sys_demo_0001
 
         alsql.Add("INSERT INTO FUP_FormsDemoDB(id ,fieldtest) VALUES(@id ,@fieldtest )");
 
-        DataTable dttemp_sys_ddmo_0002 = jsontodatatable.ToDataTable(ht_forUI["grid-table-subtable-sys_ddmo_0002"].ToString());
-        if (dttemp_sys_ddmo_0002.Rows.Count > 0)
+ 
+        //遍历子表， 插入 
+        DataTable subdt = jsontodatatable.ToDataTable(ht_forUI["grid-table-subtable-sys_ddmo_0002"].ToString());
+        param.Add("@sub_" + "MainID", guid); //隶属主表id
+ 
+        for (int i = 0; i < subdt.Rows.Count; i++)
         {
-            //要插入的数据进行校验
-            //删除原来的子表数据，再插入子表
-            //alsql.Add("删原来的");
-            //alsql.Add("插入新的");
+            param.Add("@sub_" + "id" + "_" + i, CombGuid.GetMewIdFormSequence("demouser_sub_test"));
+
+            param.Add("@sub_" + "Sname" + "_" + i, subdt.Rows[i]["姓名"].ToString());
+            param.Add("@sub_" + "Scity" + "_" + i, subdt.Rows[i]["城市"].ToString());
+            param.Add("@sub_" + "Sint" + "_" + i, subdt.Rows[i]["整数"].ToString());
+            param.Add("@sub_" + "Sdecimal" + "_" + i, subdt.Rows[i]["小数"].ToString());
+            param.Add("@sub_" + "CreateTime" + "_" + i, subdt.Rows[i]["添加日期"].ToString());
+
+
+            string INSERTsql = "INSERT INTO demouser_sub_test ( id, SID, Sname,   Scity,  Sint, Sdecimal,CreateTime ) VALUES(@sub_" + "id" + "_" + i + ", @sub_MainID, @sub_Sname_" + i + ", @sub_Scity_" + i + ", @sub_Sint_" + i + ", @sub_Sdecimal_" + i + ", @sub_CreateTime_" + i + "  )";
+            alsql.Add(INSERTsql);
         }
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
@@ -127,6 +138,35 @@ public class NoReSet_sys_demo_0001
         param.Add("@fieldtest", ht_forUI["fieldtest"].ToString());
 
         alsql.Add("UPDATE FUP_FormsDemoDB SET fieldtest = @fieldtest where id=@id ");
+
+
+        //遍历子表，先删除，再插入，已有主键的不重新生成。
+        DataTable subdt = jsontodatatable.ToDataTable(ht_forUI["grid-table-subtable-sys_ddmo_0002"].ToString());
+        param.Add("@sub_" + "MainID", ht_forUI["idforedit"].ToString()); //隶属主表id
+        alsql.Add("delete demouser_sub_test where  SID = @sub_" + "MainID");
+        for (int i = 0; i < subdt.Rows.Count; i++)
+        {
+            if (subdt.Rows[i]["隐藏编号"].ToString().Trim() == "")
+            {
+                param.Add("@sub_" + "id" + "_" + i,   CombGuid.GetMewIdFormSequence("demouser_sub_test"));
+            }
+            else
+            {
+                param.Add("@sub_" + "id" + "_" + i, subdt.Rows[i]["隐藏编号"].ToString());
+            }
+
+
+            param.Add("@sub_" + "Sname" + "_" + i, subdt.Rows[i]["姓名"].ToString());
+            param.Add("@sub_" + "Scity" + "_" + i, subdt.Rows[i]["城市"].ToString());
+            param.Add("@sub_" + "Sint" + "_" + i, subdt.Rows[i]["整数"].ToString());
+            param.Add("@sub_" + "Sdecimal" + "_" + i, subdt.Rows[i]["小数"].ToString());
+            param.Add("@sub_" + "CreateTime" + "_" + i, subdt.Rows[i]["添加日期"].ToString());
+
+
+            string INSERTsql = "INSERT INTO demouser_sub_test ( id, SID, Sname,   Scity,  Sint, Sdecimal,CreateTime ) VALUES(@sub_" + "id" + "_" + i + ", @sub_MainID, @sub_Sname_" + i + ", @sub_Scity_" + i + ", @sub_Sint_" + i + ", @sub_Sdecimal_" + i + ", @sub_CreateTime_" + i + "  )";
+            alsql.Add(INSERTsql);
+        }
+
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
 

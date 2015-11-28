@@ -3020,6 +3020,45 @@ public class bssystem : System.Web.Services.WebService
             sqlupdate = sqlupdate.TrimEnd(',');
             sqlupdate = sqlupdate + "  where " + tlzd_arr[0].Trim() + "=@"+ tlzd_arr[0].Trim() + "  ";
             alsql.Add(sqlupdate);
+
+
+
+            //遍历子表，先删除，再插入，已有主键的不重新生成。
+            DataTable subdt = jsontodatatable.ToDataTable(ht_forUI["grid-table-subtable-sys_editadd_FUP_FormsList_sub_029"].ToString());
+            param.Add("@sub_" + "MainID", ht_forUI["idforedit"].ToString()); //隶属主表id
+            alsql.Add("delete FUP_FormsList_field where  DID_FSID = @sub_" + "MainID");
+            for (int i = 0; i < subdt.Rows.Count; i++)
+            {
+                if (subdt.Rows[i]["隐藏编号"].ToString().Trim() == "")
+                {
+                    param.Add("@sub_" + "DID" + "_" + i, "sys_" + CombGuid.GetMewIdFormSequence("FUP_FormsList_field"));
+                }
+                else
+                {
+                    param.Add("@sub_" + "DID" + "_" + i, subdt.Rows[i]["隐藏编号"].ToString());
+                }
+
+
+                param.Add("@sub_" + "DID_ok" + "_" + i, subdt.Rows[i]["是否启用"].ToString());
+                param.Add("@sub_" + "DID_px" + "_" + i, subdt.Rows[i]["排序权重"].ToString());
+                param.Add("@sub_" + "DID_hide" + "_" + i, subdt.Rows[i]["是否隐藏"].ToString());
+                param.Add("@sub_" + "DID_showname" + "_" + i, subdt.Rows[i]["列显示名"].ToString());
+                param.Add("@sub_" + "DID_name" + "_" + i, subdt.Rows[i]["字段名"].ToString());
+                param.Add("@sub_" + "DID_width" + "_" + i, subdt.Rows[i]["默认宽度"].ToString());
+                param.Add("@sub_" + "DID_sortable" + "_" + i, subdt.Rows[i]["点击排序"].ToString());
+                param.Add("@sub_" + "DID_fixed" + "_" + i, subdt.Rows[i]["拖动列宽"].ToString());
+                param.Add("@sub_" + "DID_frozen" + "_" + i, subdt.Rows[i]["冻结列"].ToString());
+                param.Add("@sub_" + "DID_formatter" + "_" + i, subdt.Rows[i]["显示格式"].ToString());
+                param.Add("@sub_" + "DID_formatter_CS" + "_" + i, subdt.Rows[i]["显示格式参数"].ToString());
+ 
+
+
+                string INSERTsql = "INSERT INTO FUP_FormsList_field ( DID, DID_FSID, DID_ok, DID_px, DID_hide, DID_showname, DID_name, DID_width, DID_sortable, DID_fixed,  DID_frozen, DID_formatter, DID_formatter_CS ) VALUES(@sub_" + "DID" + "_" + i + ", @sub_MainID, @sub_DID_ok_" + i + ", @sub_DID_px_" + i + ", @sub_DID_hide_" + i + ", @sub_DID_showname_" + i + ", @sub_DID_name_" + i + ", @sub_DID_width_" + i + ", @sub_DID_sortable_" + i + ", @sub_DID_fixed_" + i + ",  @sub_DID_frozen_" + i + ", @sub_DID_formatter_" + i + ", @sub_DID_formatter_CS_" + i + "  )";
+                alsql.Add(INSERTsql);
+            }
+
+
+
         }
         if (ht_forUI["zheshiyige_FID"].ToString() == "sys_editadd_FUP_FormsList_field")
         {
@@ -3050,6 +3089,51 @@ public class bssystem : System.Web.Services.WebService
             sqlupdate = sqlupdate.TrimEnd(',');
             sqlupdate = sqlupdate + "  where " + tlzd_arr[0].Trim() + "=@" + tlzd_arr[0].Trim() + "  ";
             alsql.Add(sqlupdate);
+
+            //遍历子表，先删除，再插入，已有主键的不重新生成。
+            DataTable subdt = jsontodatatable.ToDataTable(ht_forUI["grid-table-subtable-sys_editadd_FUP_FormsMainInfo_sub_007"].ToString());
+            param.Add("@sub_" + "MainID", ht_forUI["idforedit"].ToString()); //隶属主表id
+            alsql.Add("delete FUP_FormsSubInfo where  FS_FID = @sub_" + "MainID");
+            for (int i = 0; i < subdt.Rows.Count; i++)
+            {
+                if (subdt.Rows[i]["隐藏编号"].ToString().Trim() == "")
+                {
+                    param.Add("@sub_" + "FSID" + "_" + i, "sys_" + CombGuid.GetMewIdFormSequence("FUP_FormsSubInfo"));
+                }
+                else
+                {
+                    param.Add("@sub_" + "FSID" + "_" + i, subdt.Rows[i]["隐藏编号"].ToString());
+                }
+ 
+                param.Add("@sub_" + "FS_ok" + "_" + i, subdt.Rows[i]["是否启用"].ToString());
+                param.Add("@sub_" + "FS_type" + "_" + i, subdt.Rows[i]["控件类型"].ToString());
+                param.Add("@sub_" + "FS_name" + "_" + i, subdt.Rows[i]["控件名"].ToString());
+                param.Add("@sub_" + "FS_title" + "_" + i, subdt.Rows[i]["控件标题"].ToString());
+                param.Add("@sub_" + "FS_minlength" + "_" + i, subdt.Rows[i]["最小值"].ToString());
+                param.Add("@sub_" + "FS_maxlength" + "_" + i, subdt.Rows[i]["最大值"].ToString());
+                param.Add("@sub_" + "FS_defaultvalue" + "_" + i, subdt.Rows[i]["默认值"].ToString());
+                param.Add("@sub_" + "FS_tip_n" + "_" + i, subdt.Rows[i]["内部提示"].ToString());
+                param.Add("@sub_" + "FS_tip_w" + "_" + i, subdt.Rows[i]["悬浮提示"].ToString());
+                param.Add("@sub_" + "FS_passnull" + "_" + i, subdt.Rows[i]["必填项"].ToString());
+                param.Add("@sub_" + "FS_nulltip" + "_" + i, subdt.Rows[i]["必填项提示"].ToString());
+                param.Add("@sub_" + "FS_index" + "_" + i, subdt.Rows[i]["排序权重"].ToString());
+                param.Add("@sub_" + "FS_SPPZ_list_static" + "_" + i, subdt.Rows[i]["静态内容"].ToString());
+                param.Add("@sub_" + "FS_SPPZ_mask" + "_" + i, subdt.Rows[i]["输入掩码"].ToString());
+                param.Add("@sub_" + "FS_SPPZ_readonly" + "_" + i, subdt.Rows[i]["是否只读"].ToString());
+                param.Add("@sub_" + "FS_D_haveD" + "_" + i, subdt.Rows[i]["启用弹窗"].ToString());
+                param.Add("@sub_" + "FS_D_yinruzhi" + "_" + i, subdt.Rows[i]["弹窗引入值设置"].ToString());
+                param.Add("@sub_" + "FS_D_shrinkToFit" + "_" + i, subdt.Rows[i]["弹窗自适应列宽"].ToString());
+                param.Add("@sub_" + "FS_D_setGroupHeaders" + "_" + i, subdt.Rows[i]["弹窗复合表头"].ToString());
+                param.Add("@sub_" + "FS_D_field" + "_" + i, subdt.Rows[i]["弹窗取值字段"].ToString());
+                param.Add("@sub_" + "FS_D_datatable" + "_" + i, subdt.Rows[i]["弹窗取值表"].ToString());
+                param.Add("@sub_" + "FS_D_where" + "_" + i, subdt.Rows[i]["弹窗取值条件"].ToString());
+                param.Add("@sub_" + "FS_D_order" + "_" + i, subdt.Rows[i]["弹窗取值排序"].ToString());
+                param.Add("@sub_" + "FD_D_key" + "_" + i, subdt.Rows[i]["弹窗取值主键"].ToString());
+                param.Add("@sub_" + "FD_D_pagesize" + "_" + i, subdt.Rows[i]["弹窗分页数量"].ToString());
+           
+                string INSERTsql = "INSERT INTO FUP_FormsSubInfo ( FSID, FS_FID, FS_ok, FS_type, FS_name, FS_title, FS_minlength, FS_maxlength, FS_defaultvalue, FS_tip_n,  FS_tip_w, FS_passnull, FS_nulltip, FS_index, FS_SPPZ_list_static, FS_SPPZ_mask, FS_SPPZ_readonly, FS_D_haveD,   FS_D_yinruzhi, FS_D_shrinkToFit, FS_D_setGroupHeaders, FS_D_field, FS_D_datatable, FS_D_where, FS_D_order,   FD_D_key, FD_D_pagesize) VALUES(@sub_" + "FSID" + "_" + i + ", @sub_MainID, @sub_FS_ok_" + i + ", @sub_FS_type_" + i + ", @sub_FS_name_" + i + ", @sub_FS_title_" + i + ", @sub_FS_minlength_" + i + ", @sub_FS_maxlength_" + i + ", @sub_FS_defaultvalue_" + i + ", @sub_FS_tip_n_" + i + ",  @sub_FS_tip_w_" + i + ", @sub_FS_passnull_" + i + ", @sub_FS_nulltip_" + i + ", @sub_FS_index_" + i + ", @sub_FS_SPPZ_list_static_" + i + ", @sub_FS_SPPZ_mask_" + i + ", @sub_FS_SPPZ_readonly_" + i + ", @sub_FS_D_haveD_" + i + ", @sub_FS_D_yinruzhi_" + i + ", @sub_FS_D_shrinkToFit_" + i + ", @sub_FS_D_setGroupHeaders_" + i + ", @sub_FS_D_field_" + i + ", @sub_FS_D_datatable_" + i + ", @sub_FS_D_where_" + i + ", @sub_FS_D_order_" + i + ", @sub_FD_D_key_" + i + ", @sub_FD_D_pagesize_" + i + ")";
+                alsql.Add(INSERTsql);
+            }
         }
         if (ht_forUI["zheshiyige_FID"].ToString() == "sys_editadd_FUP_FormsSubInfo")
         {
@@ -3065,10 +3149,54 @@ public class bssystem : System.Web.Services.WebService
             sqlupdate = sqlupdate.TrimEnd(',');
             sqlupdate = sqlupdate + "  where " + tlzd_arr[0].Trim() + "=@" + tlzd_arr[0].Trim() + "  ";
             alsql.Add(sqlupdate);
+
+
+
+
+            //遍历子表，先删除，再插入，已有主键的不重新生成。
+            DataTable subdt = jsontodatatable.ToDataTable(ht_forUI["grid-table-subtable-sys_editadd_FUP_FormsSubInfo_sub_027"].ToString());
+            param.Add("@sub_" + "MainID", ht_forUI["idforedit"].ToString()); //隶属主表id
+            alsql.Add("delete FUP_FormsSubDialog where  DID_FSID = @sub_" + "MainID");
+            for (int i = 0; i < subdt.Rows.Count; i++)
+            {
+                if (subdt.Rows[i]["隐藏编号"].ToString().Trim() == "")
+                {
+                    param.Add("@sub_" + "DID" + "_" + i, "sys_" + CombGuid.GetMewIdFormSequence("FUP_FormsSubDialog"));
+                }
+                else
+                {
+                    param.Add("@sub_" + "DID" + "_" + i, subdt.Rows[i]["隐藏编号"].ToString());
+                }
+
+     
+                param.Add("@sub_" + "DID_ok" + "_" + i, subdt.Rows[i]["是否启用"].ToString());
+                param.Add("@sub_" + "DID_px" + "_" + i, subdt.Rows[i]["排序权重"].ToString());
+                param.Add("@sub_" + "DID_hide" + "_" + i, subdt.Rows[i]["是否隐藏"].ToString());
+                param.Add("@sub_" + "DID_showname" + "_" + i, subdt.Rows[i]["列显示名"].ToString());
+                param.Add("@sub_" + "DID_name" + "_" + i, subdt.Rows[i]["字段名"].ToString());
+                param.Add("@sub_" + "DID_width" + "_" + i, subdt.Rows[i]["默认宽度"].ToString());
+                param.Add("@sub_" + "DID_sortable" + "_" + i, subdt.Rows[i]["点击排序"].ToString());
+                param.Add("@sub_" + "DID_fixed" + "_" + i, subdt.Rows[i]["拖动列宽"].ToString());
+                param.Add("@sub_" + "DID_frozen" + "_" + i, subdt.Rows[i]["冻结列"].ToString());
+                param.Add("@sub_" + "DID_formatter" + "_" + i, subdt.Rows[i]["显示格式"].ToString());
+                param.Add("@sub_" + "DID_formatter_CS" + "_" + i, subdt.Rows[i]["显示格式参数"].ToString());
+                param.Add("@sub_" + "DID_edit_editable" + "_" + i, subdt.Rows[i]["是否允许编辑"].ToString());
+                param.Add("@sub_" + "DID_edit_required" + "_" + i, subdt.Rows[i]["编辑是否必填"].ToString());
+                param.Add("@sub_" + "DID_edit_ftype" + "_" + i, subdt.Rows[i]["编辑控件类型"].ToString());
+                param.Add("@sub_" + "DID_edit_spset" + "_" + i, subdt.Rows[i]["编辑特殊参数"].ToString());
+   
+
+                string INSERTsql = "INSERT INTO FUP_FormsSubDialog ( DID, DID_FSID, DID_ok, DID_px, DID_hide, DID_showname, DID_name, DID_width, DID_sortable, DID_fixed,  DID_frozen, DID_formatter, DID_formatter_CS, DID_edit_editable, DID_edit_required, DID_edit_ftype,   DID_edit_spset) VALUES(@sub_" + "DID" + "_" + i + ", @sub_MainID, @sub_DID_ok_" + i + ", @sub_DID_px_" + i + ", @sub_DID_hide_" + i + ", @sub_DID_showname_" + i + ", @sub_DID_name_" + i + ", @sub_DID_width_" + i + ", @sub_DID_sortable_" + i + ", @sub_DID_fixed_" + i + ",  @sub_DID_frozen_" + i + ", @sub_DID_formatter_" + i + ", @sub_DID_formatter_CS_" + i + ", @sub_DID_edit_editable_" + i + ", @sub_DID_edit_required_" + i + ", @sub_DID_edit_ftype_" + i + ", @sub_DID_edit_spset_" + i + " )";
+                alsql.Add(INSERTsql);
+            }
+
+
+
+
         }
         if (ht_forUI["zheshiyige_FID"].ToString() == "sys_editadd_FUP_FormsSubDialog")
         {
-            string toulanziduan = " DID, DID_FSID, DID_ok, DID_px, DID_hide, DID_showname, DID_name, DID_width, DID_sortable, DID_fixed,    DID_frozen, DID_formatter, DID_formatter_CS";
+            string toulanziduan = " DID, DID_FSID, DID_ok, DID_px, DID_hide, DID_showname, DID_name, DID_width, DID_sortable, DID_fixed,    DID_frozen, DID_formatter, DID_formatter_CS, DID_edit_editable, DID_edit_required, DID_edit_ftype,    DID_edit_spset";
             string sqlupdate = "UPDATE FUP_FormsSubDialog SET  ";
             string[] tlzd_arr = toulanziduan.Split(',');
             param.Add("@" + tlzd_arr[0].Trim(), ht_forUI["idforedit"].ToString());

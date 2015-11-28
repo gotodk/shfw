@@ -149,20 +149,26 @@
         function gogoajax1(t_formid, t_buttonid, t_url, t_jkname) {
         
             var JSON_sub_str = "";
+            var canbesavesub = 0;
             $("table[id^='grid-table-subtable-']").each(function()
             {
                 var objDB = $(this).jqGrid("getRowData");
                 //alert(objDB.length);
                 //JSON_sub_str = JSON_sub_str = "&" + $(this).attr('id') + "=" + encMe(JSON.stringify($(objDB)), "mima");
                 JSON_sub_str = JSON_sub_str = "&" + $(this).attr('id') + "=" +  JSON.stringify(objDB) ;
-  
+                if ($(this).attr('lastsel_yhb') != "-999999")
+                {
+                    canbesavesub++;
+                }
                 
             });
  
-            if (JSON_sub_str.indexOf("<") >= 0) {
-                bootbox.alert("错误：有子表正在编辑尚未保存，无法提交！");
+            if (canbesavesub > 0)
+            {
+                bootbox.alert("错误：某些子表尚未保存，无法提交!");
                 return false;
             }
+   
 
             //防重复提交
             if (!gogoajax1_CanRun) {
@@ -402,13 +408,20 @@
         case "富文本框":
                                                         %>
                 $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>").html($(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>').text());
-                <%
+            <%
             break;
         case "上传组件":
 
             break;
         case "子表数据":
                                                         %>
+            $("table[id^='grid-table-subtable-']").each(function () {
+
+                var postData = $(this).jqGrid("getGridParam", "postData");
+                $.extend(postData, { this_extforinfoFSID: $(this).attr('sub_this_extforinfoFSID') });
+                $(this).jqGrid("setGridParam", { search: true, datatype: 'xml' }).trigger("reloadGrid", [{ page: 1 }]);  //重载JQGrid数据
+                $(this).attr("lastsel_yhb", "-999999");
+            });
                 <%
                 break;
             case "xx2":
@@ -779,6 +792,7 @@
                     eval(data);
                     var postData = $("#" + grid_selector_001).jqGrid("getGridParam", "postData");
                     $.extend(postData, { this_extforinfoFSID: FSID });
+                    $("#" + grid_selector_001).attr("sub_this_extforinfoFSID", FSID);
                     $("#" + grid_selector_001).jqGrid("setGridParam", { search: true, datatype: 'xml' }).trigger("reloadGrid", [{ page: 1 }]);  //重载JQGrid数据
 
 

@@ -51,9 +51,7 @@ public partial class jqgirdjs_for_subtable : System.Web.UI.Page
 
             //替换新增和删除按钮的相关处理(数组0索引是新增，1是编辑，2是删除)
             rehtml = rehtml.Replace("[*[FS_title]*]", ds_DD.Tables["字段配置主表"].Rows[0]["FS_title"].ToString());
-            string[] FS_D_yinruzhi_arr = ds_DD.Tables["字段配置主表"].Rows[0]["FS_D_yinruzhi"].ToString().Split('|');
-            rehtml = rehtml.Replace("[*[FS_bianjilianjie]*]", FS_D_yinruzhi_arr[1]);
-            rehtml = rehtml.Replace("[*[FS_xinzenglianjie]*]", FS_D_yinruzhi_arr[0]);
+       
 
 
             //列配置
@@ -96,17 +94,16 @@ public partial class jqgirdjs_for_subtable : System.Web.UI.Page
                             string epzhi_str = "";
                             for (int p = 0; p < epzhi.Length; p++)
                             {
-                                if (epzhi[p].Trim() != "")
-                                {
+                                 
                                     if (epzhi[p].IndexOf('|') >= 0)
                                     {
                                         epzhi_str = epzhi_str + epzhi[p].Split('|')[1].Trim() + ":" + epzhi[p].Split('|')[0].Trim() + ";";
                                     }
                                     else
                                     {
-                                        epzhi_str = epzhi_str + p + ":" + epzhi[p].Split('|')[0].Trim() + ";";
+                                        epzhi_str = epzhi_str + epzhi[p].Split('|')[0].Trim() + ":" + epzhi[p].Split('|')[0].Trim() + ";";
                                     }
-                                }
+                               
 
 
                             }

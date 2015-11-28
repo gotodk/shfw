@@ -224,13 +224,14 @@ $('[*[grid_selector_ID]*]').attr('lastsel_yhb',"-999999");
    buttonicon:"ace-icon fa fa-trash-o red", 
    onClickButton: function(e){ 
  
- 
+	
 						  var selectedRowIds = $("[*[grid_selector_ID]*]").jqGrid("getGridParam","selarrrow"); 
 						  var len = selectedRowIds.length;
 for(var i = 0;i < len ;i ++) {
  $("[*[grid_selector_ID]*]").jqGrid("delRowData", selectedRowIds[0]);
 						  
 }
+ var savejieguo =$('[*[grid_selector_ID]*]').jqGrid('saveRow', $('[*[grid_selector_ID]*]').attr('lastsel_yhb'));
 		 $('[*[grid_selector_ID]*]').attr('lastsel_yhb',"-999999");				  
    }, 
    position:"first"
