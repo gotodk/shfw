@@ -89,7 +89,36 @@ public partial class jqgirdjs_for_subtable : System.Web.UI.Page
                         {
                             DID_edit_editable = "false";
                         }
-                            c_str = c_str + " { name: '" + dr["DID_showname"].ToString() + "', xmlmap: '" + dr["DID_name"].ToString() + "', index: '" + dr["DID_name"].ToString() + "', width: " + dr["DID_width"].ToString() + ", fixed: " + dr["DID_fixed"].ToString() + ", sortable: " + dr["DID_sortable"].ToString() + ",hidden: " + dr["DID_hide"].ToString() + ",frozen:" + dr["DID_frozen"].ToString() + " ,editable:"+ DID_edit_editable + " ,editrules: {required: " + DID_edit_required + "} }, " + Environment.NewLine;
+                        string edittype_custom = " ";
+                        if (dr["DID_edit_ftype"].ToString() == "下拉框")
+                        {
+                            string[] epzhi = dr["DID_edit_spset"].ToString().Split(',');
+                            string epzhi_str = "";
+                            for (int p = 0; p < epzhi.Length; p++)
+                            {
+                                if (epzhi[p].Trim() != "")
+                                {
+                                    if (epzhi[p].IndexOf('|') >= 0)
+                                    {
+                                        epzhi_str = epzhi_str + epzhi[p].Split('|')[1].Trim() + ":" + epzhi[p].Split('|')[0].Trim() + ";";
+                                    }
+                                    else
+                                    {
+                                        epzhi_str = epzhi_str + p + ":" + epzhi[p].Split('|')[0].Trim() + ";";
+                                    }
+                                }
+
+
+                            }
+                            epzhi_str = epzhi_str.TrimEnd(';');
+                            edittype_custom = ",edittype: 'select', editoptions: { value: '"+ epzhi_str + "' }";
+                        }
+      
+                        if (dr["DID_edit_ftype"].ToString() == "弹窗选择")
+                        {; }
+
+                  
+                            c_str = c_str + " { name: '" + dr["DID_showname"].ToString() + "', xmlmap: '" + dr["DID_name"].ToString() + "', index: '" + dr["DID_name"].ToString() + "', width: " + dr["DID_width"].ToString() + ", fixed: " + dr["DID_fixed"].ToString() + ", sortable: false,hidden: " + dr["DID_hide"].ToString() + ",frozen:" + dr["DID_frozen"].ToString() + " ,editable:"+ DID_edit_editable + " "+ edittype_custom + " ,editrules: {required: " + DID_edit_required + "} }, " + Environment.NewLine;
                             break;
                         case "链接":
                  
@@ -97,30 +126,30 @@ public partial class jqgirdjs_for_subtable : System.Web.UI.Page
                         {
                             DID_edit_editable = "false";
                         }
-                        c_str = c_str + " { name: '" + dr["DID_showname"].ToString() + "', xmlmap: '" + dr["DID_name"].ToString() + "', index: '" + dr["DID_name"].ToString() + "', width: " + dr["DID_width"].ToString() + ", fixed: " + dr["DID_fixed"].ToString() + ", sortable: " + dr["DID_sortable"].ToString() + ",hidden: " + dr["DID_hide"].ToString() + ",frozen:" + dr["DID_frozen"].ToString() + " , formatter: 'showlink', formatoptions: { baseLinkUrl: '" + dr["DID_formatter_CS"].ToString().Split('|')[0] + "', target: '_blank', showAction: '', addParam: '" + dr["DID_formatter_CS"].ToString().Split('|')[1] + "', idName: '" + dr["DID_formatter_CS"].ToString().Split('|')[2] + "' } ,editable:" + DID_edit_editable + ",editrules: {required: " + DID_edit_required + "} }, " + Environment.NewLine;
+                        c_str = c_str + " { name: '" + dr["DID_showname"].ToString() + "', xmlmap: '" + dr["DID_name"].ToString() + "', index: '" + dr["DID_name"].ToString() + "', width: " + dr["DID_width"].ToString() + ", fixed: " + dr["DID_fixed"].ToString() + ", sortable: false,hidden: " + dr["DID_hide"].ToString() + ",frozen:" + dr["DID_frozen"].ToString() + " , formatter: 'showlink', formatoptions: { baseLinkUrl: '" + dr["DID_formatter_CS"].ToString().Split('|')[0] + "', target: '_blank', showAction: '', addParam: '" + dr["DID_formatter_CS"].ToString().Split('|')[1] + "', idName: '" + dr["DID_formatter_CS"].ToString().Split('|')[2] + "' } ,editable:" + DID_edit_editable + ",editrules: {required: " + DID_edit_required + "} }, " + Environment.NewLine;
                             break;
                         case "整数":
                     
-                        c_str = c_str + " { name: '" + dr["DID_showname"].ToString() + "', xmlmap: '" + dr["DID_name"].ToString() + "', index: '" + dr["DID_name"].ToString() + "', width: " + dr["DID_width"].ToString() + ", fixed: " + dr["DID_fixed"].ToString() + ", sortable: " + dr["DID_sortable"].ToString() + ",hidden: " + dr["DID_hide"].ToString() + ",frozen:" + dr["DID_frozen"].ToString() + " , formatter: 'integer' ,editable:"+ DID_edit_editable + ",editrules: {required: " + DID_edit_required + "} }, " + Environment.NewLine;
+                        c_str = c_str + " { name: '" + dr["DID_showname"].ToString() + "', xmlmap: '" + dr["DID_name"].ToString() + "', index: '" + dr["DID_name"].ToString() + "', width: " + dr["DID_width"].ToString() + ", fixed: " + dr["DID_fixed"].ToString() + ", sortable: false,hidden: " + dr["DID_hide"].ToString() + ",frozen:" + dr["DID_frozen"].ToString() + " , formatter: 'integer' ,editable:"+ DID_edit_editable + ",edittype: 'custom', editoptions: { custom_element: subtab_spinner_elem, custom_value: subtab_spinner_value},editrules: {required: " + DID_edit_required + ",integer:true } }, " + Environment.NewLine;
                             break;
                         case "小数":
           
-                        c_str = c_str + " { name: '" + dr["DID_showname"].ToString() + "', xmlmap: '" + dr["DID_name"].ToString() + "', index: '" + dr["DID_name"].ToString() + "', width: " + dr["DID_width"].ToString() + ", fixed: " + dr["DID_fixed"].ToString() + ", sortable: " + dr["DID_sortable"].ToString() + ",hidden: " + dr["DID_hide"].ToString() + ",frozen:" + dr["DID_frozen"].ToString() + " , formatter: 'number' ,editable:" + DID_edit_editable + " ,editrules: {required: " + DID_edit_required + "} }, " + Environment.NewLine;
+                        c_str = c_str + " { name: '" + dr["DID_showname"].ToString() + "', xmlmap: '" + dr["DID_name"].ToString() + "', index: '" + dr["DID_name"].ToString() + "', width: " + dr["DID_width"].ToString() + ", fixed: " + dr["DID_fixed"].ToString() + ", sortable: false,hidden: " + dr["DID_hide"].ToString() + ",frozen:" + dr["DID_frozen"].ToString() + " , formatter: 'number' ,editable:" + DID_edit_editable + " ,editrules: {required: " + DID_edit_required + ",custom:true, custom_func:ck_erweixiaoshu } }, " + Environment.NewLine;
                             break;
                         case "日期时间":
              
-                        c_str = c_str + " { name: '" + dr["DID_showname"].ToString() + "', xmlmap: '" + dr["DID_name"].ToString() + "', index: '" + dr["DID_name"].ToString() + "', width: " + dr["DID_width"].ToString() + ", fixed: " + dr["DID_fixed"].ToString() + ", sortable: " + dr["DID_sortable"].ToString() + ",hidden: " + dr["DID_hide"].ToString() + ",frozen:" + dr["DID_frozen"].ToString() + " , formatter: 'date', formatoptions: { srcformat: 'Y-m-d H:i:s', newformat: 'Y-m-d H:i:s' },editable:" + DID_edit_editable + ",editrules: {required: " + DID_edit_required + "}  }, " + Environment.NewLine;
+                        c_str = c_str + " { name: '" + dr["DID_showname"].ToString() + "', xmlmap: '" + dr["DID_name"].ToString() + "', index: '" + dr["DID_name"].ToString() + "', width: " + dr["DID_width"].ToString() + ", fixed: " + dr["DID_fixed"].ToString() + ", sortable: false,hidden: " + dr["DID_hide"].ToString() + ",frozen:" + dr["DID_frozen"].ToString() + " , formatter: 'date', formatoptions: { srcformat: 'Y-m-d H:i:s', newformat: 'Y-m-d H:i:s' },editable:" + DID_edit_editable + ",editrules: {required: " + DID_edit_required + "}  }, " + Environment.NewLine;
                             break;
                         case "仅日期":
                 
-                        c_str = c_str + " { name: '" + dr["DID_showname"].ToString() + "', xmlmap: '" + dr["DID_name"].ToString() + "', index: '" + dr["DID_name"].ToString() + "', width: " + dr["DID_width"].ToString() + ", fixed: " + dr["DID_fixed"].ToString() + ", sortable: " + dr["DID_sortable"].ToString() + ",hidden: " + dr["DID_hide"].ToString() + ",frozen:" + dr["DID_frozen"].ToString() + " , formatter: 'date', formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' } ,editable:"+ DID_edit_editable + ",edittype: 'custom', editoptions: { custom_element: subtab_datepicker_elem, custom_value: subtab_datepicker_value},editrules: {required: " + DID_edit_required + "}   }, " + Environment.NewLine;
+                        c_str = c_str + " { name: '" + dr["DID_showname"].ToString() + "', xmlmap: '" + dr["DID_name"].ToString() + "', index: '" + dr["DID_name"].ToString() + "', width: " + dr["DID_width"].ToString() + ", fixed: " + dr["DID_fixed"].ToString() + ", sortable: false,hidden: " + dr["DID_hide"].ToString() + ",frozen:" + dr["DID_frozen"].ToString() + " , formatter: 'date', formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' } ,editable:"+ DID_edit_editable + ",edittype: 'custom', editoptions: { custom_element: subtab_datepicker_elem, custom_value: subtab_datepicker_value},editrules: {required: " + DID_edit_required + "}   }, " + Environment.NewLine;
                             break;
                         case "图片":
                              
                             break;
                         case "自定义":
                    
-                        c_str = c_str + " { name: '" + dr["DID_showname"].ToString() + "', xmlmap: '" + dr["DID_name"].ToString() + "', index: '" + dr["DID_name"].ToString() + "', width: " + dr["DID_width"].ToString() + ", fixed: " + dr["DID_fixed"].ToString() + ", sortable: " + dr["DID_sortable"].ToString() + ",hidden: " + dr["DID_hide"].ToString() + ",frozen:" + dr["DID_frozen"].ToString() + ","+ dr["DID_formatter_CS"].ToString() + "  ,editable:" + DID_edit_editable + " }, " + Environment.NewLine;
+                        c_str = c_str + " { name: '" + dr["DID_showname"].ToString() + "', xmlmap: '" + dr["DID_name"].ToString() + "', index: '" + dr["DID_name"].ToString() + "', width: " + dr["DID_width"].ToString() + ", fixed: " + dr["DID_fixed"].ToString() + ", sortable: false,hidden: " + dr["DID_hide"].ToString() + ",frozen:" + dr["DID_frozen"].ToString() + ","+ dr["DID_formatter_CS"].ToString() + "  ,editable:" + DID_edit_editable + " }, " + Environment.NewLine;
                         break;
 
                         default:

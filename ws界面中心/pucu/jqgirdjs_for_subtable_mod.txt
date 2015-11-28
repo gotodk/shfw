@@ -39,13 +39,17 @@
                 gridview: true, //这个选项必须开
                 viewrecords: true,
                 rowNum: [*[Default_FD_D_pagesize]*],
-                rowList: [[*[FD_D_pagesize]*]],
+                //rowList: [[*[FD_D_pagesize]*]],
+			 
                 pager: "[*[pager_selector_ID]*]" ,
+				pgbuttons:false,
+				pginput:false,
                 altRows: true,
                 //toppager: true,
                 sortable: true,
 				onCellSelect: function(rowid,iCol,cellcontent,e) {
-     	 
+     	          if(rowid == $('[*[grid_selector_ID]*]').attr('lastsel_yhb'))
+				  {return false;}
 			  	var savejieguo =$('[*[grid_selector_ID]*]').jqGrid('saveRow', $('[*[grid_selector_ID]*]').attr('lastsel_yhb'));
 				if($('[*[grid_selector_ID]*]').attr('lastsel_yhb') == "-999999" || savejieguo)
 				{
@@ -313,5 +317,45 @@ function subtab_datepicker_value(elem, operation, value) {
  }
 };
  
+ function subtab_spinner_elem(value, options) {
+ //alert(value);
+	var el = document.createElement("input");
+    el.type="text";
+    el.value = value;
  
+ 
+  return el;
+   
+};
+function subtab_spinner_value(elem, operation, value) {
+
+ if (operation === 'get') {
+ 
+  return $(elem).val();
+ } else if (operation === 'set') {
+  $(elem).val(value);
+ 
+ }
+};
+
+ function subtab_xiala_elem(value, options) {
+ //alert(value);
+	var el = document.createElement("select");
+    alert(value);
+ 
+ 
+  return el;
+   
+};
+
+
+ function ck_erweixiaoshu(value, colname) {
+
+ var ckck = /^\d+(\.\d{1,2})?$/.test(value);
+    if (ckck) 
+     {  return [true,""];}
+        else { return [false,colname+":只能使用两位小数"];}
+          
+     
+};
  

@@ -1755,6 +1755,31 @@ public class bssystem : System.Web.Services.WebService
             redb.Tables[0].TableName = "字段配置主表";
             redb.Tables[1].TableName = "弹窗配置子表";
 
+            for (int i = 0; i < redb.Tables["弹窗配置子表"].Rows.Count; i++)
+            {
+                string FS_SPPZ_list_static = redb.Tables["弹窗配置子表"].Rows[i]["DID_edit_spset"].ToString();
+                if (FS_SPPZ_list_static.Trim().IndexOf("[sql]") == 0)
+                {
+                    //多行值和显示不相同的情况
+                    DataTable dtdz = ((DataSet)(I_DBL.RunProc(FS_SPPZ_list_static.Trim().Remove(0, 5), "待转表")["return_ds"])).Tables["待转表"];
+                    string dzstr = "";
+                    for (int z = 0; z < dtdz.Rows.Count; z++)
+                    {
+                        dzstr = dzstr + "" + dtdz.Rows[z][1].ToString() + "|" + dtdz.Rows[z][0].ToString() + ",";
+                    }
+                    dzstr = dzstr.TrimEnd(',');
+                    redb.Tables["弹窗配置子表"].Rows[i]["DID_edit_spset"] = dzstr;
+                }
+                if (FS_SPPZ_list_static.Trim().IndexOf("[sqlone]") == 0)
+                {
+                    //一行数据用逗号隔开的，一般是枚举表
+                    DataTable dtdz = ((DataSet)(I_DBL.RunProc(FS_SPPZ_list_static.Trim().Remove(0, 8), "待转表")["return_ds"])).Tables["待转表"];
+                    string dzstr = dtdz.Rows[0][0].ToString();
+                    dzstr = dzstr.TrimEnd(',');
+                    redb.Tables["弹窗配置子表"].Rows[i]["DID_edit_spset"] = dzstr;
+                }
+            }
+
 
             dsreturn.Tables.Add(redb.Tables["字段配置主表"].Copy());
             dsreturn.Tables.Add(redb.Tables["弹窗配置子表"].Copy());
