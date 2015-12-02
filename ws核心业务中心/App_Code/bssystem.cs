@@ -3024,7 +3024,15 @@ public class bssystem : System.Web.Services.WebService
 
 
             //遍历子表，先删除，再插入，已有主键的不重新生成。
-            DataTable subdt = jsontodatatable.ToDataTable(ht_forUI["grid-table-subtable-sys_editadd_FUP_FormsList_sub_029"].ToString());
+            string zibiao_gts_id = "grid-table-subtable-sys_editadd_FUP_FormsList_sub_029";
+            DataTable subdt = jsontodatatable.ToDataTable(ht_forUI[zibiao_gts_id].ToString());
+            //必须验证js脚本获取的数量和c#反序列化获取的数量一致才能继续。防止出错
+            if (ht_forUI[zibiao_gts_id+"_fcjsq"].ToString() != subdt.Rows.Count.ToString())
+            {
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "子表数据量与获取量不相符，系统出现问题。";
+                return dsreturn;
+            }
             param.Add("@sub_" + "MainID", ht_forUI["idforedit"].ToString()); //隶属主表id
             alsql.Add("delete FUP_FormsList_field where  DID_FSID = @sub_" + "MainID");
             for (int i = 0; i < subdt.Rows.Count; i++)
@@ -3091,7 +3099,16 @@ public class bssystem : System.Web.Services.WebService
             alsql.Add(sqlupdate);
 
             //遍历子表，先删除，再插入，已有主键的不重新生成。
-            DataTable subdt = jsontodatatable.ToDataTable(ht_forUI["grid-table-subtable-sys_editadd_FUP_FormsMainInfo_sub_007"].ToString());
+            string zibiao_gts_id = "grid-table-subtable-sys_editadd_FUP_FormsMainInfo_sub_007";
+            DataTable subdt = jsontodatatable.ToDataTable(ht_forUI[zibiao_gts_id].ToString());
+            //必须验证js脚本获取的数量和c#反序列化获取的数量一致才能继续。防止出错
+            if (ht_forUI[zibiao_gts_id + "_fcjsq"].ToString() != subdt.Rows.Count.ToString())
+            {
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "子表数据量与获取量不相符，系统出现问题。";
+                return dsreturn;
+            }
+
             param.Add("@sub_" + "MainID", ht_forUI["idforedit"].ToString()); //隶属主表id
             alsql.Add("delete FUP_FormsSubInfo where  FS_FID = @sub_" + "MainID");
             for (int i = 0; i < subdt.Rows.Count; i++)
@@ -3154,7 +3171,15 @@ public class bssystem : System.Web.Services.WebService
 
 
             //遍历子表，先删除，再插入，已有主键的不重新生成。
-            DataTable subdt = jsontodatatable.ToDataTable(ht_forUI["grid-table-subtable-sys_editadd_FUP_FormsSubInfo_sub_027"].ToString());
+            string zibiao_gts_id = "grid-table-subtable-sys_editadd_FUP_FormsSubInfo_sub_027";
+            DataTable subdt = jsontodatatable.ToDataTable(ht_forUI[zibiao_gts_id].ToString());
+            //必须验证js脚本获取的数量和c#反序列化获取的数量一致才能继续。防止出错
+            if (ht_forUI[zibiao_gts_id + "_fcjsq"].ToString() != subdt.Rows.Count.ToString())
+            {
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "子表数据量与获取量不相符，系统出现问题。";
+                return dsreturn;
+            }
             param.Add("@sub_" + "MainID", ht_forUI["idforedit"].ToString()); //隶属主表id
             alsql.Add("delete FUP_FormsSubDialog where  DID_FSID = @sub_" + "MainID");
             for (int i = 0; i < subdt.Rows.Count; i++)

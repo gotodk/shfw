@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FMPublicClass;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -13,10 +14,10 @@ public static class jsontodatatable
 {
     public static DataTable ToDataTable(this string json)
     {
+        json = StringOP.uncMe(json,"mima");
         DataTable dataTable = new DataTable("接收的子表数据");  //实例化
         DataTable result;
-        try
-        {
+   
             JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
             javaScriptSerializer.MaxJsonLength = Int32.MaxValue; //取得最大数值
             ArrayList arrayList = javaScriptSerializer.Deserialize<ArrayList>(json);
@@ -45,11 +46,7 @@ public static class jsontodatatable
                     dataTable.Rows.Add(dataRow); //循环添加行到DataTable中
                 }
             }
-        }
-        catch(Exception ex)
-        {
-            ;
-        }
+  
         result = dataTable;
         return result;
     }

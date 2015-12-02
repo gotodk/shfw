@@ -69,7 +69,16 @@ public class NoReSet_sys_demo_0001
 
  
         //遍历子表， 插入 
-        DataTable subdt = jsontodatatable.ToDataTable(ht_forUI["grid-table-subtable-sys_ddmo_0002"].ToString());
+        string zibiao_gts_id = "grid-table-subtable-sys_ddmo_0002";
+        DataTable subdt = jsontodatatable.ToDataTable(ht_forUI[zibiao_gts_id].ToString());
+        //必须验证js脚本获取的数量和c#反序列化获取的数量一致才能继续。防止出错
+        if (ht_forUI[zibiao_gts_id + "_fcjsq"].ToString() != subdt.Rows.Count.ToString())
+        {
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "子表数据量与获取量不相符，系统出现问题。";
+            return dsreturn;
+        }
+
         param.Add("@sub_" + "MainID", guid); //隶属主表id
  
         for (int i = 0; i < subdt.Rows.Count; i++)
@@ -141,7 +150,15 @@ public class NoReSet_sys_demo_0001
 
 
         //遍历子表，先删除，再插入，已有主键的不重新生成。
-        DataTable subdt = jsontodatatable.ToDataTable(ht_forUI["grid-table-subtable-sys_ddmo_0002"].ToString());
+        string zibiao_gts_id = "grid-table-subtable-sys_ddmo_0002";
+        DataTable subdt = jsontodatatable.ToDataTable(ht_forUI[zibiao_gts_id].ToString());
+        //必须验证js脚本获取的数量和c#反序列化获取的数量一致才能继续。防止出错
+        if (ht_forUI[zibiao_gts_id + "_fcjsq"].ToString() != subdt.Rows.Count.ToString())
+        {
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "子表数据量与获取量不相符，系统出现问题。";
+            return dsreturn;
+        }
         param.Add("@sub_" + "MainID", ht_forUI["idforedit"].ToString()); //隶属主表id
         alsql.Add("delete demouser_sub_test where  SID = @sub_" + "MainID");
         for (int i = 0; i < subdt.Rows.Count; i++)

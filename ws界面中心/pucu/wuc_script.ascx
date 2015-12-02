@@ -153,9 +153,9 @@
             $("table[id^='grid-table-subtable-']").each(function()
             {
                 var objDB = $(this).jqGrid("getRowData");
-                //alert(objDB.length);
-                //JSON_sub_str = JSON_sub_str = "&" + $(this).attr('id') + "=" + encMe(JSON.stringify($(objDB)), "mima");
-                JSON_sub_str = JSON_sub_str = "&" + $(this).attr('id') + "=" +  JSON.stringify(objDB) ;
+         
+                JSON_sub_str = JSON_sub_str = "&" + $(this).attr('id') + "_fcjsq=" + objDB.length + "&" + $(this).attr('id') + "=" + encMe(JSON.stringify(objDB), "mima");
+             
                 if ($(this).attr('lastsel_yhb') != "-999999")
                 {
                     canbesavesub++;
