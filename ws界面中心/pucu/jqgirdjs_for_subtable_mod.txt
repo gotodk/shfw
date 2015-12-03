@@ -53,9 +53,8 @@
 			  	var savejieguo =$('[*[grid_selector_ID]*]').jqGrid('saveRow', $('[*[grid_selector_ID]*]').attr('lastsel_yhb'));
 				if($('[*[grid_selector_ID]*]').attr('lastsel_yhb') == "-999999" || savejieguo)
 				{
-				     $('[*[grid_selector_ID]*]').jqGrid('restoreRow', $('[*[grid_selector_ID]*]').attr('lastsel_yhb'));
-
-                     $('[*[grid_selector_ID]*]').jqGrid('editRow', rowid, true);
+                     $('[*[grid_selector_ID]*]').jqGrid('editRow', rowid,  {    keys : false });  
+		 
 	 		 
                      $('[*[grid_selector_ID]*]').attr('lastsel_yhb',rowid);
 			 
@@ -280,7 +279,7 @@ for(var i = 0;i < len ;i ++) {
 
             $('[*[grid_selector_ID]*]').jqGrid('restoreRow', $('[*[grid_selector_ID]*]').attr('lastsel_yhb'));
 			$('[*[grid_selector_ID]*]').jqGrid('setSelection',newrowid,false);
-            $('[*[grid_selector_ID]*]').jqGrid('editRow', newrowid, true);
+            $('[*[grid_selector_ID]*]').jqGrid('editRow', newrowid,    {    keys : false });
 	        $('[*[grid_selector_ID]*]').attr('lastsel_yhb',newrowid);
         
 			}

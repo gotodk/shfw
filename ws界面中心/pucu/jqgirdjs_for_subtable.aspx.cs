@@ -115,7 +115,7 @@ public partial class jqgirdjs_for_subtable : System.Web.UI.Page
                         {; }
 
                   
-                            c_str = c_str + " { name: '" + dr["DID_showname"].ToString() + "', xmlmap: '" + dr["DID_name"].ToString() + "', index: '" + dr["DID_name"].ToString() + "', width: " + dr["DID_width"].ToString() + ", fixed: " + dr["DID_fixed"].ToString() + ", sortable: false,hidden: " + dr["DID_hide"].ToString() + ",frozen:" + dr["DID_frozen"].ToString() + " ,editable:"+ DID_edit_editable + " "+ edittype_custom + " ,editrules: {required: " + DID_edit_required + "} }, " + Environment.NewLine;
+                            c_str = c_str + " { name: '" + dr["DID_showname"].ToString() + "', xmlmap: '" + dr["DID_name"].ToString() + "', index: '" + dr["DID_name"].ToString() + "', width: " + dr["DID_width"].ToString() + ", fixed: " + dr["DID_fixed"].ToString() + ", sortable: false,hidden: " + dr["DID_hide"].ToString() + ",frozen:" + dr["DID_frozen"].ToString() + " ,editable:"+ DID_edit_editable + " "+ edittype_custom + ",editrules: {required: " + DID_edit_required + "} }, " + Environment.NewLine;
                             break;
                         case "链接":
                  

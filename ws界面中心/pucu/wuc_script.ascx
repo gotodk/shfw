@@ -795,7 +795,7 @@
                     $("#" + grid_selector_001).attr("sub_this_extforinfoFSID", FSID);
                     $("#" + grid_selector_001).jqGrid("setGridParam", { search: true, datatype: 'xml' }).trigger("reloadGrid", [{ page: 1 }]);  //重载JQGrid数据
 
-
+ 
 
                 },
                 error: function () {
@@ -825,7 +825,8 @@
         }
         %>
 
- 
+   
+
         });
 
 
