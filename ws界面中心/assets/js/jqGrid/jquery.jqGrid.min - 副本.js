@@ -899,7 +899,7 @@ n=a.jgrid.createEl.call(i,g[e].edittype,k,d,!0,a.extend({},a.jgrid.ajaxOptions,i
 0!==g[e].editoptions&&g[e].editoptions.multiple===!0&&void
 0===g[e].editoptions.dataUrl&&a.jgrid.msie&&a(n).width(a(n).width()),j++}}),j>0&&(m.id=b,i.p.savedRow.push(m),a(f).attr("editable","1"),k.focusField&&("number"==typeof
 k.focusField && parseInt(k.focusField, 10) <= g.length && (l = k.focusField), setTimeout(function () {
-    //var b = a("td:eq(" + l + ") :input:visible", f).not(":disabled"); b.length > 0 && b.focus()
+    var b = a("td:eq(" + l + ") :input:visible", f).not(":disabled"); b.length > 0 && b.focus()
 },0)),k.keys===!0&&a(f).bind("keydown",function(c){if(27===c.keyCode){if(a(i).jqGrid("restoreRow",b,k.afterrestorefunc),i.p.inlineNav)try{a(i).jqGrid("showAddEditButtons")}catch(d){}return!1}if(13===c.keyCode){var
 e=c.target;if("TEXTAREA"===e.tagName)return!0;if(a(i).jqGrid("saveRow",b,k)&&i.p.inlineNav)try{a(i).jqGrid("showAddEditButtons")}catch(f){}return!1}}),a(i).triggerHandler("jqGridInlineEditRow",[b,k]),a.isFunction(k.oneditfunc)&&k.oneditfunc.call(i,b))))))})},saveRow:function(b,c,d,e,f,g,h){var
 i=a.makeArray(arguments).slice(1),j={},k=this[0];"object"===a.type(i[0])?j=i[0]:(a.isFunction(c)&&(j.successfunc=c),void
