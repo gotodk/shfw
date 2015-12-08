@@ -780,8 +780,13 @@
             var grid_selector_001 = "grid-table-subtable-" + FSID;
             var pager_selector_001 = "grid-pager-subtable-" + FSID;
 
-       
- 
+            //resize to fit page size
+            $(window).on('resize.jqGrid', function () {
+
+                $("#" + grid_selector_001).setGridWidth($("#" + grid_selector_001).parent().width() * 0.97);
+               
+            });
+  
             var aj = $.ajax({
                 url: '/pucu/jqgirdjs_for_subtable.aspx?guid=' + FSID + "&grid_selector_ID=" + grid_selector_001 + "&pager_selector_ID=" + pager_selector_001,
                 type: 'get',
@@ -803,7 +808,7 @@
                 }
             });
 
-
+ 
 
 
         }
@@ -812,7 +817,7 @@
  
 
         jQuery(function ($) {
-
+       
 
             <%
         for (int i = 0; i < dsFPZ.Tables["表单配置子表"].Rows.Count; i++)

@@ -16338,7 +16338,8 @@ img.editable-click:hover {
   height: 40px;
   line-height: 24px;
   color: #FFF;
-  background: #307ecc;
+  background: #7db1e5;
+  font-weight:bold;
   padding: 0;
   font-size: 15px;
 }

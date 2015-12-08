@@ -45,11 +45,11 @@ public partial class jqgirdjs_for_subtable : System.Web.UI.Page
                 rehtml = rehtml.Replace("[*[Default_FD_D_pagesize]*]", ds_DD.Tables["字段配置主表"].Rows[0]["FD_D_pagesize"].ToString().Split(',')[0]);
             }
 
-            //本列表的配置主键（用于删除标记传递）
+        
             rehtml = rehtml.Replace("[*[FSID]*]", ds_DD.Tables["字段配置主表"].Rows[0]["FSID"].ToString());
 
-
-            //替换新增和删除按钮的相关处理(数组0索引是新增，1是编辑，2是删除)
+ 
+ 
             rehtml = rehtml.Replace("[*[FS_title]*]", ds_DD.Tables["字段配置主表"].Rows[0]["FS_title"].ToString());
        
 

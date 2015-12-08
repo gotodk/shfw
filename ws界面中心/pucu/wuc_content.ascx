@@ -556,7 +556,7 @@
                                             %>
 
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label no-padding-right" for="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>">
+                                                <label class="col-sm-12 hidden" for="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>">
                                                     <%
                                                         if (dsFPZ.Tables["表单配置子表"].Rows[i]["FS_passnull"].ToString() == "1")
                                                         {
@@ -567,7 +567,7 @@
                                                     %>
                                                     <%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_title"] %>：</label>
 
-                                                <div class="col-sm-10">
+                                                <div class="col-sm-12">
                                                     <div>
                                                         <table lastsel_yhb="-999999" id="grid-table-subtable-<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FSID"] %>"></table>
 

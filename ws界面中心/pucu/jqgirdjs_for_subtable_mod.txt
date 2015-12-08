@@ -94,7 +94,7 @@
                 },
 				*/
                 editurl: url1 + "?ajaxrun=del&jkname=" + jkname_del1 + "&zheshiyige_FID=[*[FSID]*]",
-                caption: ""
+                caption: "[*[FS_title]*]："
 
 
 
