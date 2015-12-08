@@ -755,8 +755,7 @@
             $(window).on('resize.jqGrid', function () {
 
                 $(grid_selector).setGridWidth($(window).width() * 0.78);
-
-                //$("#grid-table-subtable-sys_ddmo_0002").setGridWidth($(window).width() * 0.78);
+ 
             });
 
 
@@ -787,9 +786,11 @@
             //resize to fit page size
             $(window).on('resize.jqGrid', function () {
 
-                $("#" + grid_selector_001).setGridWidth($("#" + grid_selector_001).parent().width() * 0.97);
+                $("#" + grid_selector_001).setGridWidth($("#" + grid_selector_001).parent().width() -30);
                
             });
+
+         
   
             var aj = $.ajax({
                 url: '/pucu/jqgirdjs_for_subtable.aspx?guid=' + FSID + "&grid_selector_ID=" + grid_selector_001 + "&pager_selector_ID=" + pager_selector_001,

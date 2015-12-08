@@ -88,7 +88,7 @@
 
             //resize to fit page size
             $(window).on('resize.jqGrid', function () {
-                
+            
                 $(grid_selector).setGridWidth($("#zheshiliebiaoquyu").width() + 15);
 
                 var ss = getPageSize();
@@ -276,7 +276,6 @@
 		        var data = [];
 		        var data_sales = [];
 		        if (griddb.find("chartYHB>NewDataSet>饼图数据").text() == "" && griddb.find("chartYHB>NewDataSet>曲线图数据").text() == "") {
-
 		            return false;
 		        }
 		        else {
