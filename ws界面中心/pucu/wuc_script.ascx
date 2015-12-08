@@ -609,6 +609,128 @@
         var grid_selector = "#grid-table";
         var pager_selector = "#grid-pager";
 
+        function openeditdialog(e, kczd) {
+
+            //重新生成一个新的弹窗
+            $t = $("<table id=\"grid-table\"></table><div id=\"grid-pager\"></div>");
+
+            $("#zheshiliebiaoquyu").empty().html($t);
+
+
+            kczd.attr('disabled', "true");
+            var aj = $.ajax({
+                url: '/pucu/jqgirdjs_for_dialog.aspx?guid=' + kczd.attr('guid'),
+                type: 'get',
+                cache: false,
+                dataType: 'html',
+                success: function (data) {
+                    //alert(data);
+
+                    eval(data);
+
+                    var open_now_ziduan = kczd.attr('id').replace("searchopenyhbspgogo_", "");
+                    var dialog_title = $("[for=" + open_now_ziduan + "]").text().replace("*", "").replace("：", "");
+                    //e.preventDefault();
+
+                    dialog_tanchuang = $("#dialog-message").removeClass('hide').dialog({
+                        modal: true,
+                        title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='ace-icon fa fa-check'></i> 选择并引入--" + dialog_title + "</h4></div>",
+                        width: '80%',
+                        buttons: [
+                            {
+                                text: "  取消选择  ",
+                                "class": "btn btn-xs",
+                                click: function () {
+                                    $(this).dialog("close");
+                                }
+                            },
+                            {
+                                text: "  确认引入  ",
+                                "class": "btn btn-primary btn-xs querenyinruanniu",
+                                click: function () {
+                                    c_dialog_yinru(kczd);
+                                }
+                            }
+                        ]
+                    });
+
+                    kczd.removeAttr("disabled");
+
+
+                    var postData = $(grid_selector).jqGrid("getGridParam", "postData");
+                    $.extend(postData, { this_extforinfoFSID: kczd.attr('guid') });
+                    $(grid_selector).jqGrid("setGridParam", { search: true, datatype: 'xml' }).trigger("reloadGrid", [{ page: 1 }]);  //重载JQGrid数据
+
+
+
+                },
+                error: function () {
+                    kczd.removeAttr("disabled");
+                    alert("加载列表配置失败！");
+                }
+            });
+
+
+
+
+        };
+
+
+        function c_dialog_yinru(kczd) {
+            var open_now_ziduan = kczd.attr('id').replace("searchopenyhbspgogo_", "");
+
+            var open_now_ziduan_byy = kczd.attr('title');
+
+            var ids = $(grid_selector).jqGrid('getGridParam', 'selarrrow');
+            if (ids.length <= 1) {
+                if (ids.length == 1) {
+                    var rowId = $(grid_selector).jqGrid("getGridParam", "selrow");
+                    var rowData = $(grid_selector).jqGrid("getRowData", rowId);
+
+
+                    if (open_now_ziduan_byy.indexOf(':') > 0) {
+                        //有显示值
+                        var open_now_ziduan_byy_arr = new Array();
+                        open_now_ziduan_byy_arr = open_now_ziduan_byy.split(":");
+                        var g00 = new Array();
+                        g00 = open_now_ziduan_byy_arr[0].split(",");
+                        var str_00 = "";
+                        for (var i = 0; i < g00.length; i++) {
+                            str_00 = str_00 + rowData[g00[i]] + ",";
+                        }
+                        var g11 = new Array();
+                        g11 = open_now_ziduan_byy_arr[1].split(",");
+                        var str_11 = "";
+                        for (var i = 0; i < g11.length; i++) {
+                            str_11 = str_11 + "[" + g11[i] + ":" + rowData[g11[i]] + "]  ";
+                        }
+                        $("#" + open_now_ziduan).val(str_00.substring(0, str_00.length - 1));
+                        $("#show_searchopenyhbspgogo_" + open_now_ziduan).html(str_11.substring(0, str_11.length - 1));
+
+                    }
+                    else {
+                        //无显示值
+                        var g00 = new Array();
+                        g00 = open_now_ziduan_byy.split(",");
+                        var str_00 = "";
+                        for (var i = 0; i < g00.length; i++) {
+                            str_00 = str_00 + rowData[g00[i]] + ",";
+                        }
+                        $("#" + open_now_ziduan).val(str_00.substring(0, str_00.length - 1));
+                        $("#show_searchopenyhbspgogo_" + open_now_ziduan).html("");
+                    }
+
+
+
+                }
+
+            } else {
+                alert("此版本不支持多选，多选用于特殊情况需要特殊处理");
+            }
+
+            dialog_tanchuang.dialog("close");
+
+        };
 
         jQuery(function ($) {
 
@@ -638,127 +760,9 @@
             });
 
 
-            function c_dialog_yinru(kczd) {
-                var open_now_ziduan = kczd.attr('id').replace("searchopenyhbspgogo_", "");
-
-                var open_now_ziduan_byy = kczd.attr('title');
-
-                var ids = $(grid_selector).jqGrid('getGridParam', 'selarrrow');
-                if (ids.length <= 1) {
-                    if (ids.length == 1) {
-                        var rowId = $(grid_selector).jqGrid("getGridParam", "selrow");
-                        var rowData = $(grid_selector).jqGrid("getRowData", rowId);
-
-
-                        if (open_now_ziduan_byy.indexOf(':') > 0) {
-                            //有显示值
-                            var open_now_ziduan_byy_arr = new Array();
-                            open_now_ziduan_byy_arr = open_now_ziduan_byy.split(":");
-                            var g00 = new Array();
-                            g00 = open_now_ziduan_byy_arr[0].split(",");
-                            var str_00 = "";
-                            for (var i = 0; i < g00.length; i++) {
-                                str_00 = str_00 + rowData[g00[i]] + ",";
-                            }
-                            var g11 = new Array();
-                            g11 = open_now_ziduan_byy_arr[1].split(",");
-                            var str_11 = "";
-                            for (var i = 0; i < g11.length; i++) {
-                                str_11 = str_11 + "[" + g11[i] + ":" + rowData[g11[i]] + "]  ";
-                            }
-                            $("#" + open_now_ziduan).val(str_00.substring(0, str_00.length - 1));
-                            $("#show_searchopenyhbspgogo_" + open_now_ziduan).html(str_11.substring(0, str_11.length - 1));
-
-                        }
-                        else {
-                            //无显示值
-                            var g00 = new Array();
-                            g00 = open_now_ziduan_byy.split(",");
-                            var str_00 = "";
-                            for (var i = 0; i < g00.length; i++) {
-                                str_00 = str_00 + rowData[g00[i]] + ",";
-                            }
-                            $("#" + open_now_ziduan).val(str_00.substring(0, str_00.length - 1));
-                            $("#show_searchopenyhbspgogo_" + open_now_ziduan).html("");
-                        }
 
 
 
-                    }
-
-                } else {
-                    alert("此版本不支持多选，多选用于特殊情况需要特殊处理");
-                }
-
-                dialog_tanchuang.dialog("close");
-
-            }
-
-            function openeditdialog(e, kczd) {
-
-                //重新生成一个新的弹窗
-                $t = $("<table id=\"grid-table\"></table><div id=\"grid-pager\"></div>");
-
-                $("#zheshiliebiaoquyu").empty().html($t);
-
-               
-                kczd.attr('disabled', "true");
-                var aj = $.ajax({
-                    url: '/pucu/jqgirdjs_for_dialog.aspx?guid=' + kczd.attr('guid'),
-                    type: 'get',
-                    cache: false,
-                    dataType: 'html',
-                    success: function (data) {
-                        //alert(data);
-
-                        eval(data);
-
-                        var open_now_ziduan = kczd.attr('id').replace("searchopenyhbspgogo_", "");
-                        var dialog_title = $("[for=" + open_now_ziduan + "]").text().replace("*", "").replace("：", "");
-                        e.preventDefault();
-
-                        dialog_tanchuang = $("#dialog-message").removeClass('hide').dialog({
-                            modal: true,
-                            title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='ace-icon fa fa-check'></i> 选择并引入--" + dialog_title + "</h4></div>",
-                            width: '80%',
-                            buttons: [
-                                {
-                                    text: "  取消选择  ",
-                                    "class": "btn btn-xs",
-                                    click: function () {
-                                        $(this).dialog("close");
-                                    }
-                                },
-                                {
-                                    text: "  确认引入  ",
-                                    "class": "btn btn-primary btn-xs querenyinruanniu",
-                                    click: function () {
-                                        c_dialog_yinru(kczd);
-                                    }
-                                }
-                            ]
-                        });
-
-                        kczd.removeAttr("disabled");
-
-
-                        var postData = $(grid_selector).jqGrid("getGridParam", "postData");
-                        $.extend(postData, { this_extforinfoFSID: kczd.attr('guid') });
-                        $(grid_selector).jqGrid("setGridParam", { search: true, datatype: 'xml' }).trigger("reloadGrid", [{ page: 1 }]);  //重载JQGrid数据
-
-
-
-                    },
-                    error: function () {
-                        kczd.removeAttr("disabled");
-                        alert("加载列表配置失败！");
-                    }
-                });
-
-
-
-
-            }
 
 
         });
@@ -800,7 +804,7 @@
                     $("#" + grid_selector_001).attr("sub_this_extforinfoFSID", FSID);
                     $("#" + grid_selector_001).jqGrid("setGridParam", { search: true, datatype: 'xml' }).trigger("reloadGrid", [{ page: 1 }]);  //重载JQGrid数据
 
- 
+                
 
                 },
                 error: function () {

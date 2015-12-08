@@ -79,6 +79,11 @@ public partial class jqgirdjs_for_subtable : System.Web.UI.Page
                 string DID_edit_required = dr["DID_edit_required"].ToString();
                 string DID_edit_ftype = dr["DID_edit_ftype"].ToString();
                 string DID_edit_spset = dr["DID_edit_spset"].ToString();
+
+                string DID_name = dr["DID_name"].ToString();
+                string DID_showname = dr["DID_showname"].ToString();
+         
+
                 switch (dr["DID_formatter"].ToString())
                     {
                         case "字符串":
@@ -90,7 +95,7 @@ public partial class jqgirdjs_for_subtable : System.Web.UI.Page
                         string edittype_custom = " ";
                         if (dr["DID_edit_ftype"].ToString() == "下拉框")
                         {
-                            string[] epzhi = dr["DID_edit_spset"].ToString().Split(',');
+                            string[] epzhi = DID_edit_spset.Split(',');
                             string epzhi_str = "";
                             for (int p = 0; p < epzhi.Length; p++)
                             {
@@ -110,12 +115,28 @@ public partial class jqgirdjs_for_subtable : System.Web.UI.Page
                             epzhi_str = epzhi_str.TrimEnd(';');
                             edittype_custom = ",edittype: 'select', editoptions: { value: '"+ epzhi_str + "' }";
                         }
-      
-                        if (dr["DID_edit_ftype"].ToString() == "弹窗选择")
-                        {; }
 
-                  
-                            c_str = c_str + " { name: '" + dr["DID_showname"].ToString() + "', xmlmap: '" + dr["DID_name"].ToString() + "', index: '" + dr["DID_name"].ToString() + "', width: " + dr["DID_width"].ToString() + ", fixed: " + dr["DID_fixed"].ToString() + ", sortable: false,hidden: " + dr["DID_hide"].ToString() + ",frozen:" + dr["DID_frozen"].ToString() + " ,editable:"+ DID_edit_editable + " "+ edittype_custom + ",editrules: {required: " + DID_edit_required + "} }, " + Environment.NewLine;
+                        if (dr["DID_edit_ftype"].ToString() == "弹窗选择")
+                        {
+                            //根据DID_edit_spset，读取隐藏的字段表数据。
+                            object[] re_dsi_yctc = IPC.Call("获取弹窗中列表配置", new object[] { DID_edit_spset });
+                            if (re_dsi_yctc[0].ToString() == "ok")
+                            {
+                                //这个就是得到远程方法真正的返回值，不同类型的，自行进行强制转换即可。
+                                DataSet ds_DD_yctc = (DataSet)(re_dsi_yctc[1]);
+                                string s_FS_D_yinruzhi = ds_DD_yctc.Tables["字段配置主表"].Rows[0]["FS_D_yinruzhi"].ToString();
+                                string FS_SPPZ_readonly = ds_DD_yctc.Tables["字段配置主表"].Rows[0]["FS_SPPZ_readonly"].ToString();
+                              
+
+                                edittype_custom = ",edittype: 'custom', editoptions: { custom_element: subtab_tanchuang_elem, custom_value: subtab_tanchuang_value, DIDname:'" + DID_name + "', DIDshowname:'" + DID_showname + "',DIDeditspset:'" + DID_edit_spset + "',s_FS_D_yinruzhi:'" + s_FS_D_yinruzhi + "',FS_SPPZ_readonly:'" + FS_SPPZ_readonly + "'}";
+                            }
+                            
+
+                         
+                        }
+
+
+                        c_str = c_str + " { name: '" + dr["DID_showname"].ToString() + "', xmlmap: '" + dr["DID_name"].ToString() + "', index: '" + dr["DID_name"].ToString() + "', width: " + dr["DID_width"].ToString() + ", fixed: " + dr["DID_fixed"].ToString() + ", sortable: false,hidden: " + dr["DID_hide"].ToString() + ",frozen:" + dr["DID_frozen"].ToString() + " ,editable:"+ DID_edit_editable + " "+ edittype_custom + ",editrules: {required: " + DID_edit_required + "} }, " + Environment.NewLine;
                             break;
                         case "链接":
                  

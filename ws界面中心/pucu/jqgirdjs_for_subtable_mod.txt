@@ -316,6 +316,30 @@ function subtab_datepicker_value(elem, operation, value) {
  
  }
 };
+
+
+
+ function subtab_tanchuang_elem(value, options) {
+ 
+     var el = document.createElement("div"); 
+     el.innerHTML = "<div class='form-group' style='margin:0px;line-height:0.5;'>  <label class='hidden' for='subtcid_"+options.DIDname+"'>"+options.DIDshowname+"</label>  <div class='input-group '><input class='form-control search-query' id='subtcid_"+options.DIDname+"'  type='text' title=''  value='"+value+"' "+options.FS_SPPZ_readonly+"  /><span class='input-group-btn'><button class='btn  btn-sm  searchopenyhbspgogo' type='button' id='searchopenyhbspgogo_subtcid_"+options.DIDname+"' title='"+options.s_FS_D_yinruzhi+"' guid='"+options.DIDeditspset+"' onclick='openeditdialog(null, $(this));'></span><span class='ace-icon fa fa-search icon-on-right bigger-110'></span> </button></div>  <div class='col-sm-12 no-padding-left' id='show_searchopenyhbspgogo_subtcid_"+options.DIDname+"'></div>  </div>"; 
+  
+  return el;
+   
+};
+function subtab_tanchuang_value(elem, operation, value) {
+
+ if (operation === 'get') {
+ 
+  return $(elem).find('input').val();
+ } else if (operation === 'set') {
+  $(elem).find('input').val(value);
+ 
+ }
+};
+
+
+
  
  function subtab_spinner_elem(value, options) {
  //alert(value);
