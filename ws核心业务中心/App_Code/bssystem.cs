@@ -3039,7 +3039,7 @@ public class bssystem : System.Web.Services.WebService
             {
                 if (subdt.Rows[i]["隐藏编号"].ToString().Trim() == "")
                 {
-                    param.Add("@sub_" + "DID" + "_" + i, "sys_" + CombGuid.GetMewIdFormSequence("FUP_FormsList_field"));
+                    param.Add("@sub_" + "DID" + "_" + i,   CombGuid.GetMewIdFormSequence("FUP_FormsList_field"));
                 }
                 else
                 {
@@ -3115,7 +3115,7 @@ public class bssystem : System.Web.Services.WebService
             {
                 if (subdt.Rows[i]["隐藏编号"].ToString().Trim() == "")
                 {
-                    param.Add("@sub_" + "FSID" + "_" + i, "sys_" + CombGuid.GetMewIdFormSequence("FUP_FormsSubInfo"));
+                    param.Add("@sub_" + "FSID" + "_" + i,   CombGuid.GetMewIdFormSequence("FUP_FormsSubInfo"));
                 }
                 else
                 {
@@ -3186,7 +3186,7 @@ public class bssystem : System.Web.Services.WebService
             {
                 if (subdt.Rows[i]["隐藏编号"].ToString().Trim() == "")
                 {
-                    param.Add("@sub_" + "DID" + "_" + i, "sys_" + CombGuid.GetMewIdFormSequence("FUP_FormsSubDialog"));
+                    param.Add("@sub_" + "DID" + "_" + i,   CombGuid.GetMewIdFormSequence("FUP_FormsSubDialog"));
                 }
                 else
                 {
