@@ -5,3 +5,5 @@
     <link rel="stylesheet" href="/assets/css/select2.css" />
 
     <link rel="stylesheet" href="/assets/css/ui.jqgrid.css" />
+
+    <link rel="stylesheet" href="/assets/css/dropzone.css" />

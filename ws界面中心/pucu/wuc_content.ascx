@@ -550,7 +550,24 @@
                                             <%
                                                     break;
                                                 case "上传组件":
+                                                    %>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label no-padding-right" for="beizhu"><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_title"] %>：</label>
 
+                                                <div class="col-sm-10">
+                                                    <div class="dropzone col-xs-12 col-sm-12" id="dropzone">
+
+                                                        <div class="fallback">
+                                                            <input type="file" />
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <%--隐藏这个图片集合原始guid--%>
+                                                <input class="hide" id="Stupian_old" name="Stupian_old" />
+                                                <div class="ValidErrInfo col-sm-12 no-padding-left"></div>
+                                            </div>
+                                            <%
                                                     break;
                                                 case "子表数据":
                                             %>

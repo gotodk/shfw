@@ -6,7 +6,7 @@
     <script src="/assets/js/jquery.inputlimiter.1.3.1.js"></script>
     <script src="/assets/js/jquery.maskedinput.js"></script>
 
-
+    <script src="/assets/js/dropzone.js"></script>
 
     <!-- page specific plugin scripts -->
     <script src="/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
@@ -23,6 +23,8 @@
 
 
     <script src="/assets/js/yhb_city.js"></script>
+
+
 
     <%
         string[] strfin = FormsValidateMod.GetJS_fin(dsFPZ, (Hashtable)(htPP["othercheck"]));
@@ -411,7 +413,26 @@
             <%
             break;
         case "上传组件":
+            %>
+            //上传控件处理
+            $("#Stupian_old").val($(xml).find('数据记录>Stupian').text());
+            myDropzone.removeAllFiles();
+            $(xml).find("图片记录>Ttupianpath").each(function (i) {
+                var wenjian = $(this).text();
+                if (wenjian != "") {
+                    var mockFile = { name: wenjian, size: 0, file: wenjian };
+                    myDropzone.emit("addedfile", mockFile);
+                    myDropzone.emit("thumbnail", mockFile, wenjian);
+                    myDropzone.emit("complete", mockFile);
+                    myDropzone.emit("success", mockFile, wenjian);
+                    myDropzone.files.push(mockFile);
+                }
 
+            });
+
+
+
+            <%
             break;
         case "子表数据":
                                                         %>
@@ -591,6 +612,50 @@
 
             //select2
             $('.select2').css('width', '220px').select2();
+
+
+
+            if ($(".dropzone").length > 0) {
+                //上传控件Dropzone
+                try {
+                    Dropzone.autoDiscover = false;
+                    myDropzone = new Dropzone("#dropzone", {
+                        paramName: "file1", // The name that will be used to transfer the file
+                        maxFilesize: 3, // MB
+                        maxFiles: 20,
+                        url: '/ajaxdropzoneupload.aspx',
+                        addRemoveLinks: true,
+                        dictDefaultMessage:
+                        '<i class="upload-icon ace-icon fa fa-cloud-upload blue"></i>点击或拖拽文件上传'
+                  ,
+                        dictResponseError: 'Error while uploading file!',
+
+                        //change the previewTemplate to use Bootstrap progress bars
+                        previewTemplate: "<div class=\"dz-preview dz-file-preview\">\n  <div class=\"dz-details\">\n    <div class=\"dz-filename\"><span data-dz-name></span></div>\n    <div class=\"dz-size\" data-dz-size></div>\n    <img data-dz-thumbnail />\n  </div>\n  <div class=\"progress progress-small progress-striped active\"><div class=\"progress-bar progress-bar-success\" data-dz-uploadprogress></div></div>\n  <div class=\"dz-success-mark\"><span></span></div>\n  <div class=\"dz-error-mark\"><span></span></div>\n  <div class=\"dz-error-message\"><span data-dz-errormessage></span></div>\n</div>",
+                        init: function () {
+                            this.on("success", function (file, servermsg) {
+                                //把服务器返回的数据放入自定义表单
+                                var hide_server_path = document.createElement("input");
+                                hide_server_path.name = "allpath_" + this.options.paramName;
+                                hide_server_path.type = "checkbox";
+                                hide_server_path.value = servermsg;
+                                hide_server_path.checked = "checked";
+                                $(hide_server_path).hide();
+                                file.previewTemplate.appendChild(hide_server_path);
+                                $(file.previewTemplate).find("img").attr('src', servermsg);
+                                //调试用，显示服务返回的数据
+                                //file.previewTemplate.appendChild(document.createTextNode(servermsg));
+                            });
+
+                        }
+                    });
+
+                } catch (e) {
+                    alert(e);
+                }
+            }
+          
+         
 
 
 
