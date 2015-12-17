@@ -597,8 +597,10 @@
 
                                             <%
                                                         break;
-                                                    case "xx2":
-
+                                                    case "特殊代码":
+                                                        %>
+                                            <%=RenderUserControlToString(dsFPZ.Tables["表单配置子表"].Rows[i]["FS_SPPZ_list_static"].ToString())%>
+                                                        <%
                                                         break;
 
                                                     default:
