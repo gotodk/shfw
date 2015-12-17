@@ -61,30 +61,69 @@
 
               <%
                   for(int i = 1; i <= 3;i++)
-                  { 
+                  {
                    %>
               <%
-                  if(dsFPZ.Tables["报表配置主表"].Rows[0]["SRE_type_"+i].ToString() == "输入框")
-                  { 
+                  string SRE_type_x = dsFPZ.Tables["报表配置主表"].Rows[0]["SRE_type_" + i].ToString();
+                  string sn_arr = dsFPZ.Tables["报表配置主表"].Rows[0]["SRE_showname_" + i].ToString();
+                  string SRE_showname_x = sn_arr.Split('*')[0];
+                  string SRE_idname_x = dsFPZ.Tables["报表配置主表"].Rows[0]["SRE_idname_" + i].ToString();
+                  
+
+                  if(SRE_type_x == "输入框")
+                  {
                    %>
-                              <label><%=dsFPZ.Tables["报表配置主表"].Rows[0]["SRE_showname_"+i].ToString() %>：</label>
-                <input class="form-control search-query" type="text" id="<%=dsFPZ.Tables["报表配置主表"].Rows[0]["SRE_idname_"+i].ToString() %>" name="<%=dsFPZ.Tables["报表配置主表"].Rows[0]["SRE_idname_"+i].ToString() %>" />
+                              <label><%=SRE_showname_x %>：</label>
+                <input class="form-control search-query" type="text" id="<%=SRE_idname_x %>" name="<%=SRE_idname_x %>" />
                 <%   } %>
 
  <%
-                  if(dsFPZ.Tables["报表配置主表"].Rows[0]["SRE_type_"+i].ToString() == "时间段")
+                  if(SRE_type_x == "时间段")
                   { 
                    %>
-                      <label><%=dsFPZ.Tables["报表配置主表"].Rows[0]["SRE_showname_"+i].ToString() %>：</label>
+                      <label><%=SRE_showname_x %>：</label>
 
                 <div class="input-daterange input-group">
-                    <input class="form-control date-picker" id="<%=dsFPZ.Tables["报表配置主表"].Rows[0]["SRE_idname_"+i].ToString() %>1" name="<%=dsFPZ.Tables["报表配置主表"].Rows[0]["SRE_idname_"+i].ToString() %>1" type="text" />
+                    <input class="form-control date-picker" id="<%=SRE_idname_x %>1" name="<%=SRE_idname_x %>1" type="text" />
                     <span class="input-group-addon">
                         <i class="fa fa-exchange"></i>
                     </span>
-                    <input class="form-control date-picker" id="<%=dsFPZ.Tables["报表配置主表"].Rows[0]["SRE_idname_"+i].ToString() %>2" name="<%=dsFPZ.Tables["报表配置主表"].Rows[0]["SRE_idname_"+i].ToString() %>2" type="text" />
+                    <input class="form-control date-picker" id="<%=SRE_idname_x %>2" name="<%=SRE_idname_x %>2" type="text" />
                 </div>
                 <%   } %>
+
+
+
+                <%
+                if(SRE_type_x == "下拉框")
+                  { 
+                   %>
+                      <label><%=SRE_showname_x %>：</label>
+
+                <select  id="<%=SRE_idname_x %>" name="<%=SRE_idname_x %>">
+                                                        <option value="" selected>请选择</option>
+                                                        <%
+                                                               string[] ARR_list_static = sn_arr.Split('*')[1].Split(','); 
+                                                            for (int p = 0; p < ARR_list_static.Length; p++)
+                                                            {
+                                                                if (ARR_list_static[p].Trim() != "")
+                                                                {
+                                                                    if (ARR_list_static[p].IndexOf('|') >= 0)
+                                                                    {
+                                                                        Response.Write(" <option value='" + ARR_list_static[p].Split('|')[1].Trim() + "'>" + ARR_list_static[p].Split('|')[0].Trim() + "</option>");
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        Response.Write(" <option value='" + ARR_list_static[p] + "'>" + ARR_list_static[p].Trim() + "</option>");
+                                                                    }
+                                                                }
+
+
+                                                            }
+                                                        %>
+                                                    </select>
+                <%   } %>
+
                 
                  <%   } %>
       

@@ -2216,6 +2216,44 @@ public class bssystem : System.Web.Services.WebService
             redb.Tables[1].TableName = "字段配置子表";
 
 
+
+            if(redb.Tables["报表配置主表"].Rows.Count > 0)
+            {
+                for(int i = 1;i < 4;i++)
+                {
+                    string SRE_showname = redb.Tables["报表配置主表"].Rows[0]["SRE_showname_" + i].ToString();
+                    if (SRE_showname.IndexOf('*') > 0)
+                    {
+                        string SRE_showname_nnn = SRE_showname.Split('*')[0];
+                        string SRE_showname_ppp = SRE_showname.Split('*')[1];
+                        if (SRE_showname_ppp.Trim().IndexOf("[sql]") == 0)
+                        {
+                            //多行值和显示不相同的情况
+                            DataTable dtdz = ((DataSet)(I_DBL.RunProc(SRE_showname_ppp.Trim().Remove(0, 5), "待转表")["return_ds"])).Tables["待转表"];
+                            string dzstr = "";
+                            for (int z = 0; z < dtdz.Rows.Count; z++)
+                            {
+                                dzstr = dzstr + "" + dtdz.Rows[z][1].ToString() + "|" + dtdz.Rows[z][0].ToString() + ",";
+                            }
+                            dzstr = dzstr.TrimEnd(',');
+                            redb.Tables["报表配置主表"].Rows[0]["SRE_showname_" + i] = SRE_showname_nnn + "*" + dzstr;
+                        }
+                        if (SRE_showname_ppp.Trim().IndexOf("[sqlone]") == 0)
+                        {
+                            //一行数据用逗号隔开的，一般是枚举表
+                            DataTable dtdz = ((DataSet)(I_DBL.RunProc(SRE_showname_ppp.Trim().Remove(0, 8), "待转表")["return_ds"])).Tables["待转表"];
+                            string dzstr = dtdz.Rows[0][0].ToString();
+                            dzstr = dzstr.TrimEnd(',');
+                            redb.Tables["报表配置主表"].Rows[0]["SRE_showname_" + i] = SRE_showname_nnn + "*" + dzstr;
+                        }
+                    }
+               
+
+                }
+               
+            }
+
+
             dsreturn.Tables.Add(redb.Tables["报表配置主表"].Copy());
             dsreturn.Tables.Add(redb.Tables["字段配置子表"].Copy());
 
@@ -2348,6 +2386,14 @@ public class bssystem : System.Web.Services.WebService
                             {
                                 extseearchstr = extseearchstr + " and "+ ds_DD.Tables["报表配置主表"].Rows[0]["SRE_idname_" + i].ToString() + " <= '" + dic_mysearchtop[ds_DD.Tables["报表配置主表"].Rows[0]["SRE_idname_" + i].ToString()+"2"] + " 23:59:59.999'";
                             }
+                        }
+                        if (ds_DD.Tables["报表配置主表"].Rows[0]["SRE_type_" + i].ToString() == "下拉框")
+                        {
+                            if (dic_mysearchtop.ContainsKey(ds_DD.Tables["报表配置主表"].Rows[0]["SRE_idname_" + i].ToString() ))
+                            {
+                                extseearchstr = extseearchstr + " and " + ds_DD.Tables["报表配置主表"].Rows[0]["SRE_idname_" + i].ToString() + " = '" + dic_mysearchtop[ds_DD.Tables["报表配置主表"].Rows[0]["SRE_idname_" + i].ToString()] + "'";
+                            }
+                             
                         }
                     }
                 
