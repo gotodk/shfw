@@ -194,15 +194,25 @@
 
 
             function callback(msg) {
-
+                try { $(formid1).find("input[type='text'][readonly!='readonly']").eq(0).focus().tooltip('hide'); } catch (e) { }
                 //显示提交结果
-                bootbox.alert(msg);
+                bootbox.alert({
+                    message: msg,
+                    callback: function () {
+                        setTimeout(function () {
+                            try { $(formid1).find("input[type='text'][readonly!='readonly']").eq(0).focus().select().tooltip('hide'); } catch (e) { }
+                        }, 1);
+                    
+                }  });
 
                 var isedit = getUrlParam("fff");
                 if (isedit == "1") {
                     //加载表单数据
                     loadinfoajax1($("#idforedit").val());
                 }
+               
+                
+                
            
 
                 //最后跑这个
@@ -290,7 +300,7 @@
             };
 
 
-
+            
 
 
 
@@ -468,6 +478,11 @@
                 //隐藏等待提示，显示必要区域
                 $("#editloadinfo").addClass("hide");
                 $(formid1).removeClass("hide");
+            try {
+                $(formid1).find("input[type='text'][readonly!='readonly']").eq(0).focus().tooltip('hide');
+            }
+            catch (e) {
+            }
 
             }
         //获取数据填充表单
@@ -610,6 +625,15 @@
             $('[data-rel=popover]').popover({ container: 'body' });
 
 
+            //第一个输入框获得焦点
+ 
+            try {
+                $(formid1).find("input[type='text'][readonly!='readonly']").eq(0).focus().tooltip('hide');
+            }
+            catch (e) {
+            }
+
+            //$(formid1).find("input[type='text'][readonly!='readonly']").eq(0).attr('title', temp_title_zz);
             //select2
             $('.select2').css('width', '220px').select2();
 
