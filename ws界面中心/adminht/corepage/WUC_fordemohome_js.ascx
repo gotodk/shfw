@@ -138,9 +138,9 @@
 			
 				var sales_charts = $('#sales-charts').css({'width':'100%' , 'height':'220px'});
 				$.plot("#sales-charts", [
-					{ label: "Domains", data: d1 },
-					{ label: "Hosting", data: d2 },
-					{ label: "Services", data: d3 }
+					{ label: "2015年", data: d1 },
+					{ label: "2016年", data: d2 },
+					{ label: "2017年", data: d3 }
 				], {
 					hoverable: true,
 					shadowSize: 0,
