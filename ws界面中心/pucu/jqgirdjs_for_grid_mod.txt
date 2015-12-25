@@ -194,6 +194,16 @@ form.submit();
 });
 
 
+						jQuery(grid_selector).navButtonAdd(pager_selector,{
+   caption:"", 
+   title : "打印",
+   buttonicon:"ace-icon fa fa-print blue  bz-zheshidayin", 
+   onClickButton: function(){ 
+      beginPrint_go();
+   }, 
+   position:"last"
+});
+
 			jQuery(grid_selector).navButtonAdd(pager_selector,{
    caption:"", 
    title : "导出",

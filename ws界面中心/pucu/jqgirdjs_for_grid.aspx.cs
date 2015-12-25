@@ -47,14 +47,14 @@ public partial class pucu_jqgirdjs_for_grid : System.Web.UI.Page
             //本列表的配置主键（用于删除标记传递）
             rehtml = rehtml.Replace("[*[FSID]*]", ds_DD.Tables["报表配置主表"].Rows[0]["FSID"].ToString());
 
-            //是否显示导出按钮
+            //是否显示导出按钮(连带打印)
             if (ds_DD.Tables["报表配置主表"].Rows[0]["FS_can_download"].ToString() == "1")
             {
-                rehtml = rehtml.Replace("[*[FS_can_download]*]", "$('.bz-zheshidaochu').show();");
+                rehtml = rehtml.Replace("[*[FS_can_download]*]", "$('.bz-zheshidaochu').show();$('.bz-zheshidaochu').show();");
             }
             else
             {
-                rehtml = rehtml.Replace("[*[FS_can_download]*]", "$('.bz-zheshidaochu').hide();");
+                rehtml = rehtml.Replace("[*[FS_can_download]*]", "$('.bz-zheshidaochu').hide();$('.bz-zheshidaochu').hide();");
             }
 
             //是否显示新增按钮

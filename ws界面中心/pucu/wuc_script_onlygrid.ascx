@@ -13,7 +13,7 @@
 		<script src="/assets/js/flot/jquery.flot.pie.js"></script>
 		<script src="/assets/js/flot/jquery.flot.resize.js"></script>
 
-
+<script src="/assets/js/jquery.PrintArea.js"></script>
 
     <!-- inline scripts related to this page -->
 
@@ -43,6 +43,14 @@
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
             var r = window.location.search.substr(1).match(reg);  //匹配目标参数
             if (r != null) return unescape(r[2]); return null; //返回参数值
+        }
+        function GetPageName() {
+            var url = window.location.href;//获取完整URL 
+            var tmp = new Array();//临时变量，保存分割字符串 
+            tmp = url.split("/");//按照"/"分割 
+            var pp = tmp[tmp.length - 1];//获取最后一部分，即文件名和参数 
+            tmp = pp.split("?");//把参数和文件名分割开 
+            return tmp[0];
         }
     </script>
 
@@ -102,7 +110,7 @@
             function initjqgrid() {
                 var t_guid = "<%=dsFPZ.Tables["报表配置主表"].Rows[0]["FSID"].ToString()%>";
                 //重新生成一个新的弹窗
-                $t = $("<table id=\"grid-table\"></table><div id=\"grid-pager\"></div>");
+                $t = $("<table id=\"grid-table\" ></table><div id=\"grid-pager\"></div>");
                 $("#zheshiliebiaoquyu").empty().html($t);
                 var aj = $.ajax({
                     url: '/pucu/jqgirdjs_for_grid.aspx?guid=' + t_guid,
@@ -447,3 +455,62 @@
                 
 		 
 		</script>
+
+
+	<!-- 打印处理 -->
+  <script>
+
+      function beginPrint_go()
+      {
+          //判定对应格式的打印页面是否存在，如果存在就使用指定页面打开。不存在调用默认打印。
+          if (getUrlParam("printp") != "")
+          {
+              //window.location.search
+              //window.location.pathname
+              var newurl = '' + window.location.pathname.replace(GetPageName(), 'printp_' + getUrlParam('printp') + '.aspx') + window.location.search;
+ 
+              var form = $("<form></form>")
+              form.attr('target', '_blank')
+              form.attr('action', newurl)
+              form.attr('method', 'post')
+              form.appendTo("body")
+              form.css('display', 'none')
+              form.submit()
+              return false;
+          }
+
+          var mode = "popup";   //"popup"或者"iframe"
+         
+
+          var close = mode == "popup" && false; //是否自动弹窗关闭
+          var extraCss = "";//扩展样式
+
+          //打印区域
+          var print = "";
+          print += (print.length > 0 ? "," : "") + ".PrintArea_F";
+
+          //携带属性
+          var keepAttr = [];
+          keepAttr.push("class");
+          keepAttr.push("id");
+          keepAttr.push("style");
+
+          //加入头标记
+          var headElements = true ? '<meta charset="utf-8" />,<meta http-equiv="X-UA-Compatible" content="IE=edge"/>' : '';
+
+          var options = { mode: mode, popClose: close, extraCss: extraCss, retainAttr: keepAttr, extraHead: headElements };
+
+          $(print).printArea(options);
+      }
+      jQuery(function ($) {
+   
+        //让带有printarea_go_dayinanniu样式的对象，能触发打印带有PrintArea_F样式的区域
+          $(".printarea_go_dayinanniu").on('click', function (e) {
+              beginPrint_go();
+          
+        });
+
+        
+    });
+
+  </script>

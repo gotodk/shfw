@@ -68,6 +68,11 @@
 												保存
 											</button></li>
                             <li class="">&nbsp;&nbsp;</li>
+                            <li class=""><button class="btn btn-white btn-info btn-bold printarea_go_dayinanniu" id="dayinzheyiye_top">
+												<i class="ace-icon fa fa-print grey"></i>
+												打印
+											</button></li>
+                            <li class="">&nbsp;&nbsp;</li>
 					<li class=""><button class="btn btn-white btn-info btn-bold" id="fanhuishangyiye_top">
 												<i class="ace-icon fa fa-undo red2"></i>
 												返回
@@ -108,7 +113,7 @@
                                             }
                                         %>
 
-                                        <form class="form-horizontal <%=htPP["form_hide"].ToString() %>" role="form" id="myform1">
+                                        <form class="PrintArea_F  form-horizontal <%=htPP["form_hide"].ToString() %>" role="form" id="myform1">
                                             <!-- #section:elements.form -->
                                             <input type="hidden" name="zheshiyige_FID" id="zheshiyige_FID" value="<%=dsFPZ.Tables["表单配置主表"].Rows[0]["FID"] %>">
                                             <input type="hidden" name="idforedit" id="idforedit" value="">

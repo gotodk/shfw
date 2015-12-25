@@ -2,7 +2,7 @@
      <div class="row">
         <div class="col-xs-12">
 
-            <div id="zheshichart" class="hidden">
+            <div id="zheshichart" class="hidden  PrintArea_F">
 
 
                 <div class="widget-box">
@@ -138,7 +138,7 @@
 
 
 
-            <div id="zheshiliebiaoquyu"></div>
+            <div id="zheshiliebiaoquyu" class="PrintArea_F"></div>
 
 
 
