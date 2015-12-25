@@ -193,16 +193,28 @@ form.submit();
    position:"first"
 });
 
+						jQuery(grid_selector).navButtonAdd(pager_selector,{
+   caption:"", 
+   title : "隐藏/显示列",
+   buttonicon:"ace-icon fa fa-filter grey", 
+   onClickButton: function(){ 
+       jQuery(grid_selector).setColumns({width:400,updateAfterCheck:true,top:50,colnameview:false,afterSubmitForm: function(formid) { }});
+   }, 
+   position:"last"
+});
+
 
 						jQuery(grid_selector).navButtonAdd(pager_selector,{
    caption:"", 
    title : "打印",
    buttonicon:"ace-icon fa fa-print blue  bz-zheshidayin", 
    onClickButton: function(){ 
-      beginPrint_go();
+      beginPrint_go('PrintArea_F');
    }, 
    position:"last"
 });
+
+
 
 			jQuery(grid_selector).navButtonAdd(pager_selector,{
    caption:"", 

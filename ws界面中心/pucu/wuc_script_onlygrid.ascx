@@ -3,6 +3,7 @@
  
     <script src="/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
     <script src="/assets/js/jqGrid/i18n/grid.locale-cn.js"></script>
+    <script src="/assets/js/jqGrid/grid.setcolumns.js"></script>
  
     <script src="/assets/js/date-time/bootstrap-datepicker.js"></script>
     <script src="/assets/js/jquery.inputlimiter.1.3.1.js"></script>
@@ -463,10 +464,10 @@
 	<!-- 打印处理 -->
   <script>
 
-      function beginPrint_go()
+      function beginPrint_go(dayinquyu)
       {
           //判定对应格式的打印页面是否存在，如果存在就使用指定页面打开。不存在调用默认打印。
-          if (getUrlParam("printp") != "")
+          if (getUrlParam("printp") != null && getUrlParam("printp") != "")
           {
               //window.location.search
               //window.location.pathname
@@ -490,7 +491,7 @@
 
           //打印区域
           var print = "";
-          print += (print.length > 0 ? "," : "") + ".PrintArea_F";
+          print += (print.length > 0 ? "," : "") + "." + dayinquyu;
 
           //携带属性
           var keepAttr = [];
@@ -509,7 +510,7 @@
    
         //让带有printarea_go_dayinanniu样式的对象，能触发打印带有PrintArea_F样式的区域
           $(".printarea_go_dayinanniu").on('click', function (e) {
-              beginPrint_go();
+              beginPrint_go("PrintArea_F");
           
         });
 

@@ -175,3 +175,22 @@
             //其他界面相关辅助代码
             $(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
 
+									jQuery(grid_selector).navButtonAdd(pager_selector,{
+   caption:"", 
+   title : "隐藏/显示列",
+   buttonicon:"ace-icon fa fa-filter grey", 
+   onClickButton: function(){ 
+       jQuery(grid_selector).setColumns({width:400,updateAfterCheck:true,top:50,colnameview:false,afterSubmitForm: function(formid) { }});
+   }, 
+   position:"last"
+});
+
+						jQuery(grid_selector).navButtonAdd(pager_selector,{
+   caption:"", 
+   title : "打印",
+   buttonicon:"ace-icon fa fa-print blue", 
+   onClickButton: function(){ 
+      beginPrint_go('PrintArea_D');
+   }, 
+   position:"last"
+});
