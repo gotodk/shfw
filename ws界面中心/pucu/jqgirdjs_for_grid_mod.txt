@@ -41,7 +41,7 @@
                 pager: pager_selector,
                 altRows: true,
                 //toppager: true,
-                sortable: true,
+                //sortable: false,
 
                 multiselect: true,
                 //multikey: "ctrlKey",
@@ -277,3 +277,7 @@ form.submit();
 				 
                     jQuery(elem).mask('9999-99-99');
                 }
+
+
+
+

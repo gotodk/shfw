@@ -46,7 +46,7 @@
 				pginput:false,
                 altRows: true,
                 //toppager: true,
-                sortable: true,
+                sortable: false,
 				onCellSelect: function(rowid,iCol,cellcontent,e) {
      	          if(rowid == $('[*[grid_selector_ID]*]').attr('lastsel_yhb'))
 				  {return false;}

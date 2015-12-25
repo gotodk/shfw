@@ -16365,6 +16365,7 @@ img.editable-click:hover {
 .ui-jqgrid .ui-jqgrid-htable th div {
   padding-top: 12px;
   padding-bottom: 12px;
+
 }
 .ui-jqgrid-hdiv .ui-jqgrid-htable {
   border-top: none;
@@ -16381,6 +16382,7 @@ img.editable-click:hover {
 .ui-jqgrid tr.ui-row-ltr,
 .ui-jqgrid tr.ui-row-rtl {
   border: none;
+  background-color: #FFFFFF;
 }
 .ui-jqgrid tr.ui-row-ltr td,
 .ui-jqgrid tr.ui-row-rtl td {
@@ -16439,6 +16441,7 @@ img.editable-click:hover {
 .ui-jqgrid .ui-jqgrid-htable th div {
   overflow: visible;
 }
+ 
 .ui-jqgrid .ui-pager-control {
   height: 50px;
   position: relative;

@@ -41,7 +41,7 @@
                 pager: pager_selector,
                 altRows: true,
                 //toppager: true,
-                sortable: true,
+                //sortable: true,
 
                 multiselect: true,
                 //multikey: "ctrlKey",

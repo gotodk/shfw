@@ -97,7 +97,7 @@
             //resize to fit page size
             $(window).on('resize.jqGrid', function () {
             
-                $(grid_selector).setGridWidth($("#zheshiliebiaoquyu").width() + 15);
+                $(grid_selector).setGridWidth($("#zheshiliebiaoquyu").width() );
 
                 var ss = getPageSize();
  
@@ -108,8 +108,10 @@
       
 
             function initjqgrid() {
+             
+
                 var t_guid = "<%=dsFPZ.Tables["报表配置主表"].Rows[0]["FSID"].ToString()%>";
-                //重新生成一个新的弹窗
+                //重新生成一个新的列表
                 $t = $("<table id=\"grid-table\" ></table><div id=\"grid-pager\"></div>");
                 $("#zheshiliebiaoquyu").empty().html($t);
                 var aj = $.ajax({
@@ -127,8 +129,9 @@
                         $.extend(postData, { mysearchtop: zdy });
                         $.extend(postData, { this_extforinfoFSID: t_guid });
                         $(grid_selector).jqGrid("setGridParam", { search: true, datatype: 'xml' }).trigger("reloadGrid", [{ page: 1 }]);  //重载JQGrid数据
-
-
+                        //设置冻结列
+                        $(grid_selector).jqGrid('setFrozenColumns');
+                       
 
                     },
                     error: function () {

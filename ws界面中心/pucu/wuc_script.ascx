@@ -756,7 +756,8 @@
                     var postData = $(grid_selector).jqGrid("getGridParam", "postData");
                     $.extend(postData, { this_extforinfoFSID: kczd.attr('guid') });
                     $(grid_selector).jqGrid("setGridParam", { search: true, datatype: 'xml' }).trigger("reloadGrid", [{ page: 1 }]);  //重载JQGrid数据
-
+                    //设置冻结列
+                    $(grid_selector).jqGrid('setFrozenColumns');
 
 
                 },
