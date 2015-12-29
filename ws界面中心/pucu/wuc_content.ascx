@@ -189,7 +189,7 @@
                                                     <%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_title"] %>：</label>
 
                                                 <div class="col-sm-10">
-                                                    <input data-rel="tooltip" type="password" id="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" name="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" placeholder="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_tip_n"] %>" title="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_tip_w"] %>" data-placement="bottom" class="col-xs-12 col-sm-5" />
+                                                    <input data-rel="tooltip" type="password" id="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" name="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" placeholder="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_tip_n"] %>" title="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_tip_w"] %>" data-placement="bottom" class="col-xs-12 col-sm-5" value="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_defaultvalue"] %>" />
                                                     <div class="ValidErrInfo col-sm-12 no-padding-left"></div>
                                                 </div>
                                             </div>
@@ -221,11 +221,17 @@
                                                                 {
                                                                     if (ARR_list_static[p].IndexOf('|') >= 0)
                                                                     {
-                                                                        Response.Write(" <option value='" + ARR_list_static[p].Split('|')[1].Trim() + "'>" + ARR_list_static[p].Split('|')[0].Trim() + "</option>");
+                                                                        string mrz = "";
+                                                                        if (dsFPZ.Tables["表单配置子表"].Rows[i]["FS_defaultvalue"].ToString() == ARR_list_static[p].Split('|')[1].Trim())
+                                                                        { mrz = " selected "; }
+                                                                        Response.Write(" <option value='" + ARR_list_static[p].Split('|')[1].Trim() + "' "+mrz+">" + ARR_list_static[p].Split('|')[0].Trim() + "</option>");
                                                                     }
                                                                     else
                                                                     {
-                                                                        Response.Write(" <option value='" + ARR_list_static[p] + "'>" + ARR_list_static[p].Trim() + "</option>");
+                                                                        string mrz = "";
+                                                                        if (dsFPZ.Tables["表单配置子表"].Rows[i]["FS_defaultvalue"].ToString() == ARR_list_static[p].Trim())
+                                                                        { mrz = " selected "; }
+                                                                        Response.Write(" <option value='" + ARR_list_static[p].Trim() + "' "+mrz+">" + ARR_list_static[p].Trim() + "</option>");
                                                                     }
                                                                 }
 
@@ -266,11 +272,17 @@
                                                                 {
                                                                     if (ARR_list_static[p].IndexOf('|') >= 0)
                                                                     {
-                                                                        Response.Write("<label><input name='" + dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString() + "' type='radio' value='" + ARR_list_static[p].Split('|')[1].Trim() + "' class='ace'/><span class='lbl'>" + ARR_list_static[p].Split('|')[0].Trim() + "</span></label>");
+                                                                         string mrz = "";
+                                                                        if (dsFPZ.Tables["表单配置子表"].Rows[i]["FS_defaultvalue"].ToString() == ARR_list_static[p].Split('|')[1].Trim())
+                                                                        { mrz = "  checked  "; }
+                                                                        Response.Write("<label><input name='" + dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString() + "' type='radio' value='" + ARR_list_static[p].Split('|')[1].Trim() + "' "+mrz+" class='ace'/><span class='lbl'>" + ARR_list_static[p].Split('|')[0].Trim() + "</span></label>");
                                                                     }
                                                                     else
                                                                     {
-                                                                        Response.Write("<label><input name='" + dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString() + "' type='radio' value='" + ARR_list_static[p].Trim() + "' class='ace'/><span class='lbl'>" + ARR_list_static[p].Trim() + "</span></label>");
+                                                                             string mrz = "";
+                                                                        if (dsFPZ.Tables["表单配置子表"].Rows[i]["FS_defaultvalue"].ToString() == ARR_list_static[p].Trim())
+                                                                        { mrz = " checked "; }
+                                                                        Response.Write("<label><input name='" + dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString() + "' type='radio' value='" + ARR_list_static[p].Trim() + "' "+mrz+" class='ace'/><span class='lbl'>" + ARR_list_static[p].Trim() + "</span></label>");
                                                                     }
                                                                 }
 
@@ -424,7 +436,7 @@
                                                     <%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_title"] %>：</label>
 
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="input-mini" id="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" name="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" />
+                                                    <input type="text" class="input-mini" id="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" name="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" value="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_defaultvalue"] %>" />
                                                     <div class="ValidErrInfo col-sm-12 no-padding-left"></div>
                                                 </div>
                                             </div>
@@ -445,7 +457,7 @@
                                                     <%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_title"] %>：</label>
 
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="input-mini" id="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" name="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" />
+                                                    <input type="text" class="input-mini" id="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" name="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" value="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_defaultvalue"] %>" />
                                                     <div class="ValidErrInfo col-sm-12 no-padding-left"></div>
                                                 </div>
                                             </div>
