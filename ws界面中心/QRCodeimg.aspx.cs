@@ -21,34 +21,55 @@ public partial class QRCodeimg : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Request["rqstr"] == null)
+        if (Request["rqstr"] == null || Request["tmlx"] == null)
         {
             return;
         }
-        QRCodeEncoder qrCodeEncoder = new QRCodeEncoder();
 
-        qrCodeEncoder.QRCodeEncodeMode = QRCodeEncoder.ENCODE_MODE.BYTE;
+        //二维码
+        if (Request["tmlx"].ToString() == "2")
+        {
+            QRCodeEncoder qrCodeEncoder = new QRCodeEncoder();
 
-        qrCodeEncoder.QRCodeScale = 4;
+            qrCodeEncoder.QRCodeEncodeMode = QRCodeEncoder.ENCODE_MODE.BYTE;
 
-        qrCodeEncoder.QRCodeVersion = 8;
+            qrCodeEncoder.QRCodeScale = 4;
 
-        qrCodeEncoder.QRCodeErrorCorrect = QRCodeEncoder.ERROR_CORRECTION.M;
+            qrCodeEncoder.QRCodeVersion = 8;
 
-        //String data = "Hello 二维码！";
-        String data = Request["rqstr"].ToString();
-        //Response.Write(data);
+            qrCodeEncoder.QRCodeErrorCorrect = QRCodeEncoder.ERROR_CORRECTION.M;
 
-        System.Drawing.Bitmap image = qrCodeEncoder.Encode(data);
+            //String data = "Hello 二维码！";
+            String data = Request["rqstr"].ToString();
+            //Response.Write(data);
 
-        System.IO.MemoryStream MStream = new System.IO.MemoryStream();
+            System.Drawing.Bitmap image = qrCodeEncoder.Encode(data);
 
-        image.Save(MStream, System.Drawing.Imaging.ImageFormat.Png);
+            System.IO.MemoryStream MStream = new System.IO.MemoryStream();
 
-        Response.ClearContent();
+            image.Save(MStream, System.Drawing.Imaging.ImageFormat.Png);
 
-        Response.ContentType = "image/Png";
+            Response.ClearContent();
 
-        Response.BinaryWrite(MStream.ToArray());
+            Response.ContentType = "image/Png";
+
+            Response.BinaryWrite(MStream.ToArray());
+        }
+        //一维码条码 128码
+        if (Request["tmlx"].ToString() == "1")
+        { 
+            string num = Request["rqstr"].ToString();
+            //string num = "KM20110715002";
+            System.IO.MemoryStream ms = new System.IO.MemoryStream();
+            System.Drawing.Image myimg = BarCodeHelper.MakeBarcodeImage(num, 1, true);
+            myimg.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+            Response.ClearContent();
+            Response.ContentType = "image/Gif";
+            Response.BinaryWrite(ms.ToArray());
+            Response.End();
+
+        }
+
+
     }
 }
