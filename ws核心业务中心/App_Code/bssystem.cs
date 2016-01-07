@@ -82,6 +82,13 @@ public class bssystem : System.Web.Services.WebService
 
 
     #region 演示demo代码
+
+
+
+
+
+
+
     /// <summary>
     /// 处理提交上来的demo添加表单
     /// </summary>

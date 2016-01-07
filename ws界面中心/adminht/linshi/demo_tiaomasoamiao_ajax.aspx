@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="demo_tiaomasoamiao_ajax.aspx.cs" Inherits="adminht_linshi_demo_tiaomasoamiao_ajax" %>

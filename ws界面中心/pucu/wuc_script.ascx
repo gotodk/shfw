@@ -780,51 +780,71 @@
             var open_now_ziduan_byy = kczd.attr('title');
 
             var ids = $(grid_selector).jqGrid('getGridParam', 'selarrrow');
-            if (ids.length <= 1) {
-                if (ids.length == 1) {
-                    var rowId = $(grid_selector).jqGrid("getGridParam", "selrow");
-                    var rowData = $(grid_selector).jqGrid("getRowData", rowId);
+
+            //发现多选处理函数
+            try
+            {
+                if (ids.length > 0) {
+                    var str_00 = "";
+                    for (var i = 0; i < ids.length; i++) {
+                        var rowData = $(grid_selector).jqGrid("getRowData", ids[i]);
+                        str_00 = str_00 + rowData[open_now_ziduan_byy] + ",";
+                    }
+                    eval("getsubandadd_DD_PL_" + open_now_ziduan + "('" + str_00.substring(0, str_00.length - 1) + "')");
+                }
+            }
+            catch(e){
+                //其他正常情况
+                if (ids.length <= 1) {
+                    if (ids.length == 1) {
+                        var rowId = $(grid_selector).jqGrid("getGridParam", "selrow");
+                        var rowData = $(grid_selector).jqGrid("getRowData", rowId);
 
 
-                    if (open_now_ziduan_byy.indexOf(':') > 0) {
-                        //有显示值
-                        var open_now_ziduan_byy_arr = new Array();
-                        open_now_ziduan_byy_arr = open_now_ziduan_byy.split(":");
-                        var g00 = new Array();
-                        g00 = open_now_ziduan_byy_arr[0].split(",");
-                        var str_00 = "";
-                        for (var i = 0; i < g00.length; i++) {
-                            str_00 = str_00 + rowData[g00[i]] + ",";
+                        if (open_now_ziduan_byy.indexOf(':') > 0) {
+                            //有显示值
+                            var open_now_ziduan_byy_arr = new Array();
+                            open_now_ziduan_byy_arr = open_now_ziduan_byy.split(":");
+                            var g00 = new Array();
+                            g00 = open_now_ziduan_byy_arr[0].split(",");
+                            var str_00 = "";
+                            for (var i = 0; i < g00.length; i++) {
+                                str_00 = str_00 + rowData[g00[i]] + ",";
+                            }
+                            var g11 = new Array();
+                            g11 = open_now_ziduan_byy_arr[1].split(",");
+                            var str_11 = "";
+                            for (var i = 0; i < g11.length; i++) {
+                                str_11 = str_11 + "[" + g11[i] + ":" + rowData[g11[i]] + "]  ";
+                            }
+                            $("#" + open_now_ziduan).val(str_00.substring(0, str_00.length - 1));
+                            $("#show_searchopenyhbspgogo_" + open_now_ziduan).html(str_11.substring(0, str_11.length - 1));
+
                         }
-                        var g11 = new Array();
-                        g11 = open_now_ziduan_byy_arr[1].split(",");
-                        var str_11 = "";
-                        for (var i = 0; i < g11.length; i++) {
-                            str_11 = str_11 + "[" + g11[i] + ":" + rowData[g11[i]] + "]  ";
+                        else {
+                            //无显示值
+                            var g00 = new Array();
+                            g00 = open_now_ziduan_byy.split(",");
+                            var str_00 = "";
+                            for (var i = 0; i < g00.length; i++) {
+                                str_00 = str_00 + rowData[g00[i]] + ",";
+                            }
+                            $("#" + open_now_ziduan).val(str_00.substring(0, str_00.length - 1));
+                            $("#show_searchopenyhbspgogo_" + open_now_ziduan).html("");
                         }
-                        $("#" + open_now_ziduan).val(str_00.substring(0, str_00.length - 1));
-                        $("#show_searchopenyhbspgogo_" + open_now_ziduan).html(str_11.substring(0, str_11.length - 1));
+
+
 
                     }
-                    else {
-                        //无显示值
-                        var g00 = new Array();
-                        g00 = open_now_ziduan_byy.split(",");
-                        var str_00 = "";
-                        for (var i = 0; i < g00.length; i++) {
-                            str_00 = str_00 + rowData[g00[i]] + ",";
-                        }
-                        $("#" + open_now_ziduan).val(str_00.substring(0, str_00.length - 1));
-                        $("#show_searchopenyhbspgogo_" + open_now_ziduan).html("");
-                    }
 
-
+                } else {
+                    alert("此版本不支持多选，多选用于特殊情况需要特殊处理");
 
                 }
-
-            } else {
-                alert("此版本不支持多选，多选用于特殊情况需要特殊处理");
             }
+        
+             
+           
 
             dialog_tanchuang.dialog("close");
 

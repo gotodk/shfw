@@ -71,6 +71,53 @@ public class bsmain : System.Web.Services.WebService
     }
 
 
+
+    /// <summary>
+    /// 获取扫码演示结果并处理
+    /// </summary>
+    /// <param name="tiaoma">条码</param>
+    /// <returns>返回ok就是接口正常</returns>
+    [WebMethod(MessageName = "获取扫码演示结果并处理", Description = "获取扫码演示结果并处理")]
+    public string getsaomajieguo_demo(DataTable parameter_forUI)
+    {
+        //接收转换参数
+        Hashtable ht_forUI = new Hashtable();
+        for (int i = 0; i < parameter_forUI.Rows.Count; i++)
+        {
+            ht_forUI[parameter_forUI.Rows[i]["参数名"].ToString()] = parameter_forUI.Rows[i]["参数值"].ToString();
+        }
+
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+        Hashtable return_ht = new Hashtable();
+        Hashtable param = new Hashtable();
+        param.Add("@SID", ht_forUI["tiaoma"].ToString());
+
+        return_ht = I_DBL.RunParam_SQL("select top 1 SID,Sname from demouser where SID=@SID", "数据记录", param);
+
+        if ((bool)(return_ht["return_float"]))
+        {
+            DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+
+            if (redb.Rows.Count < 1)
+            {
+                return "错误err，条码不存在！";
+            }
+            else
+            {
+                DataRow dr = redb.Rows[0];
+                return "[{ \"条码\": \"" + dr["SID"].ToString() + "\", \"姓名\": \"" + dr["Sname"].ToString() + "\"  }]";
+            }
+
+        }
+        else
+        {
+            return "错误err，系统异常！";
+        }
+
+
+    }
+
+
     # endregion
 
 }
