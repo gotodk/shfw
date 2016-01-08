@@ -261,7 +261,7 @@
 
                                                 <div class="col-sm-10">
 
-                                                    <div class="no-padding-left radio col-xs-12 col-sm-5">
+                                                    <div class="no-padding-left radio col-xs-12 col-sm-10">
 
 
                                                         <%
@@ -312,7 +312,7 @@
 
                                                 <div class="col-sm-10">
 
-                                                    <div class="no-padding-left checkbox col-xs-12 col-sm-5">
+                                                    <div class="no-padding-left checkbox col-xs-12 col-sm-10">
 
 
 

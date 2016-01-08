@@ -35,6 +35,14 @@
         var _ajaxpage = "/adminht/linshi/demo_tiaomasoamiao_ajax.aspx";
         var tmlen = 12;
 
+        //新增提交后强制调用的函数
+        function addok_after_msgshow(msg) {
+            if (msg.indexOf("ok") == 0) {
+                $("#reloaddb").click();
+            }
+
+        }
+
         //弹窗多选处理
         function getsubandadd_DD_PL_tiaoma(s_zhi)
         {
@@ -81,9 +89,11 @@
                     //判定newrowid是否已存在
                     var obj_RD = $(grid_selector_ID).jqGrid("getRowData");
                    
-                    for(var i=1;i <= obj_RD.length;i++)
-                    {
-                        var ret_this_r = $(grid_selector_ID).jqGrid("getRowData",'jqg'+i);
+                    //判定newrowid是否已存在
+                    var obj_RD = $(grid_selector_ID).getDataIDs();
+
+                    for (var i = 0; i < obj_RD.length; i++) {
+                        var ret_this_r = $(grid_selector_ID).jqGrid("getRowData", obj_RD[i]);
                         if (ret_this_r.条码 == newrowid)
                         {
                             $("#onlyshowmsgTT").val("跳过，条码已在列表中存在！");

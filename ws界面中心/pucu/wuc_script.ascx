@@ -218,6 +218,15 @@
                     //加载表单数据
                     loadinfoajax1($("#idforedit").val());
                 }
+                else {
+                    //不是更新，强制调用一个函数，不一定存在
+                    try
+                    {
+                        eval("addok_after_msgshow('" + msg + "')");
+                    }catch(e){}
+                   
+
+                }
                
                 
                 
@@ -529,11 +538,23 @@
 
             if (isedit == "1") {
                 $("#idforedit").val(idforedit);
- 
+
                 $(document).on('click', "#reloaddb", function () { loadinfoajax1($("#idforedit").val()); });
 
                 //加载表单数据
                 loadinfoajax1($("#idforedit").val());
+            }
+            else {
+                $(document).on('click', "#reloaddb", function () {
+                    //重新加载子表
+                    $("table[id^='grid-table-subtable-']").each(function () {
+
+                        var postData = $(this).jqGrid("getGridParam", "postData");
+                        $.extend(postData, { this_extforinfoFSID: $(this).attr('sub_this_extforinfoFSID') });
+                        $(this).jqGrid("setGridParam", { search: true, datatype: 'xml' }).trigger("reloadGrid", [{ page: 1 }]);  //重载JQGrid数据
+                        $(this).attr("lastsel_yhb", "-999999");
+                    });
+                });
             }
 
 
