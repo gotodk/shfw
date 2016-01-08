@@ -75,7 +75,7 @@ public class bsmain : System.Web.Services.WebService
     /// <summary>
     /// 获取扫码演示结果并处理
     /// </summary>
-    /// <param name="tiaoma">条码</param>
+    /// <param name="parameter_forUI">参数</param>
     /// <returns>返回ok就是接口正常</returns>
     [WebMethod(MessageName = "获取扫码演示结果并处理", Description = "获取扫码演示结果并处理")]
     public string getsaomajieguo_demo(DataTable parameter_forUI)
