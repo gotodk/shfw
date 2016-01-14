@@ -85,6 +85,11 @@
  
             initjqgrid();
 
+            //快速回车搜索
+            $("#mysearchtop").submit(function () {
+                $("#MybtnSearch").click();
+                return false;
+            });
             //自定义搜索事件
             $(document).on('click', "#MybtnSearch", function () {
                 var zdy = $('#mysearchtop').serialize();
