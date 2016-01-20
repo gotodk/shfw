@@ -251,6 +251,10 @@
     <SortParentID>57</SortParentID>
     <SortParentPath>,57,</SortParentPath>
     <SortOrder>17</SortOrder>
+    <m_url>/adminht/corepage/bas/list_products.aspx</m_url>
+    <m_tip />
+    <m_tag />
+    <m_ico />
     <m_show>不隐藏</m_show>
     <SortNameTree>│├产品模型库</SortNameTree>
     <SortMoveUp>0</SortMoveUp>
