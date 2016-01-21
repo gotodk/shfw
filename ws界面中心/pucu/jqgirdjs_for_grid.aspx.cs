@@ -94,7 +94,7 @@ public partial class pucu_jqgirdjs_for_grid : System.Web.UI.Page
             string c_str = "";
             //特殊处理第一列
             //因为第一列在自带查看里不显示，所以要显示编号需要额外弄一列(这一列在sql取数据时一定要有)
-            c_str = c_str + " { name: '隐藏编号', xmlmap: 'jqgird_spid', hidden: true,frozen:true,hidedlg:true } ," + Environment.NewLine;
+            c_str = c_str + " { name: '隐藏编号', xmlmap: 'jqgird_spid', hidden: true,frozen:false,hidedlg:true } ," + Environment.NewLine;
             for (int i = 0; i < ds_DD.Tables["字段配置子表"].Rows.Count; i++)
             {
                 DataRow dr = ds_DD.Tables["字段配置子表"].Rows[i];

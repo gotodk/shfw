@@ -279,6 +279,10 @@
     <SortParentID>57</SortParentID>
     <SortParentPath>,57,</SortParentPath>
     <SortOrder>19</SortOrder>
+    <m_url>/adminht/corepage/bas/list_wp.aspx</m_url>
+    <m_tip />
+    <m_tag />
+    <m_ico />
     <m_show>不隐藏</m_show>
     <SortNameTree>│├工艺路线</SortNameTree>
     <SortMoveUp>2</SortMoveUp>
