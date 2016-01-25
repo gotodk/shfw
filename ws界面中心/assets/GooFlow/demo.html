@@ -1,24 +1,802 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+﻿
+
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="zh"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="zh"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="zh"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html class="not-ie" lang="zh">
+<!--<![endif]-->
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>流程图DEMO</title>
-<!--[if lt IE 9]>
-<?import namespace="v" implementation="#default#VML" ?>
-<![endif]-->
-<!--<link rel="stylesheet" type="text/css" href="codebase/GooFlow2.css"/>-->
-<link rel="stylesheet" type="text/css" href="codebase/GooFlow2.css"/>
-<script type="text/javascript" src="data1.js"></script>
-<script type="text/javascript" src="../jquery.min.js"></script>
-<script type="text/javascript" src="../GooFunc.js"></script>
-<script type="text/javascript" src="../json2.js"></script>
-<link rel="stylesheet" type="text/css" href="../default.css"/>
-<script type="text/javascript" src="codebase/GooFlow.js"></script>
-<script type="text/javascript">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <meta charset="utf-8" />
+    <title>
+        阿凡提框架演示 --- 系统管理
+    </title>
+    <meta name="description" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="/assets/css/font-awesome.css" />
+    <link rel="stylesheet" href="/assets/css/jquery-ui.custom.css" />
+    <link rel="stylesheet" href="/assets/css/chosen.css" />
+    <!-- 往模板页附加的head内容 -->
+    <!-- 往模板页附加的head内容 -->
+    <link rel="stylesheet" href="/assets/css/datepicker.css" />
+
+    <link rel="stylesheet" href="/assets/css/select2.css" />
+
+    <link rel="stylesheet" href="/assets/css/ui.jqgrid.css" />
+
+    <link rel="stylesheet" href="/assets/css/dropzone.css" />
+
+
+    <link rel="stylesheet" type="text/css" href="/assets/GooFlow/codebase/GooFlow2.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/GooFlow/default.css" />
+
+
+
+
+
+
+    <!-- text fonts -->
+    <link rel="stylesheet" href="/assets/css/ace-fonts.css" />
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="/assets/css/ace.css" class="ace-main-stylesheet" />
+
+    <!--[if lte IE 9]>
+            <link rel="stylesheet" href="/assets/css/ace-part2.css" class="ace-main-stylesheet" />
+        <![endif]-->
+    <!--[if lte IE 9]>
+          <link rel="stylesheet" href="/assets/css/ace-ie.css" />
+        <![endif]-->
+    <!-- inline styles related to this page -->
+    <!-- ace settings handler -->
+    <script src="/assets/js/ace-extra.js"></script>
+
+    <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+    <!--[if lte IE 8]>
+        <script src="/assets/js/html5shiv.js"></script>
+        <script src="/assets/js/respond.js"></script>
+        <![endif]-->
+
+
+</head>
+<body class="no-skin">
+    <!-- #section:basics/navbar.layout -->
+    <div id="navbar" class="navbar navbar-default">
+        <script type="text/javascript">
+            try { ace.settings.check('navbar', 'fixed') } catch (e) { }
+        </script>
+
+        <div class="navbar-container" id="navbar-container">
+            <!-- #section:basics/sidebar.mobile.toggle -->
+            <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+                <span class="sr-only">Toggle sidebar</span>
+
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- /section:basics/sidebar.mobile.toggle -->
+            <div class="navbar-header pull-left">
+                <!-- #section:basics/navbar.layout.brand -->
+                <a href="javascript:void(0)" class="navbar-brand">
+                    <small>
+                        <i><img id="mysmlogo" border="0" /></i>
+                        <span id="titleshowname">阿凡提框架演示 --- 系统管理</span>
+                    </small>
+                </a>
+
+                <!-- /section:basics/navbar.layout.brand -->
+                <!-- #section:basics/navbar.toggle -->
+                <!-- /section:basics/navbar.toggle -->
+            </div>
+
+            <!-- #section:basics/navbar.dropdown -->
+            <div class="navbar-buttons navbar-header pull-right" role="navigation">
+                <ul class="nav ace-nav">
+
+
+
+                    <li class="green">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="ace-icon fa fa-envelope icon-animated-vertical"></i>
+                            <span class="badge badge-success">7</span>
+                        </a>
+
+                        <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                            <li class="dropdown-header">
+                                <i class="ace-icon fa fa-envelope-o"></i>
+                                有7条新站内信
+                            </li>
+
+                            <li class="dropdown-content">
+                                <ul class="dropdown-menu dropdown-navbar">
+                                    <!--头-->
+                                    <!--中间循环部分-->
+                                    <li>
+                                        <a class="clearfix">
+                                            <img src="/mytutu/defaulttouxiang.jpg" class="msg-photo" alt="" />
+                                            <span class="msg-body">
+                                                <span class="msg-title">
+                                                    <span class="blue">测试:</span>
+                                                    <br />
+                                                    测试专用消息所有
+                                                    </br/>
+
+                                                    <span class="msg-time">
+                                                        <i class="ace-icon fa fa-clock-o"></i>
+                                                        <span>2015/7/17 16:46:21</span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <!--中间循环部分-->
+                                    <li>
+                                        <a class="clearfix">
+                                            <img src="/mytutu/defaulttouxiang.jpg" class="msg-photo" alt="" />
+                                            <span class="msg-body">
+                                                <span class="msg-title">
+                                                    <span class="blue">测试:</span>
+                                                    <br />
+                                                    测试标题
+                                                    </br/>
+
+                                                    <span class="msg-time">
+                                                        <i class="ace-icon fa fa-clock-o"></i>
+                                                        <span>2015/7/15 18:14:51</span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <!--中间循环部分-->
+                                    <li>
+                                        <a class="clearfix">
+                                            <img src="/mytutu/defaulttouxiang.jpg" class="msg-photo" alt="" />
+                                            <span class="msg-body">
+                                                <span class="msg-title">
+                                                    <span class="blue">测试:</span>
+                                                    <br />
+                                                    测试标题
+                                                    </br/>
+
+                                                    <span class="msg-time">
+                                                        <i class="ace-icon fa fa-clock-o"></i>
+                                                        <span>2015/7/15 18:14:51</span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <!--中间循环部分-->
+                                    <li>
+                                        <a class="clearfix">
+                                            <img src="/mytutu/defaulttouxiang.jpg" class="msg-photo" alt="" />
+                                            <span class="msg-body">
+                                                <span class="msg-title">
+                                                    <span class="blue">测试:</span>
+                                                    <br />
+                                                    测试专用消息所有
+                                                    </br/>
+
+                                                    <span class="msg-time">
+                                                        <i class="ace-icon fa fa-clock-o"></i>
+                                                        <span>2015/7/17 16:46:21</span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <!--中间循环部分-->
+                                    <li>
+                                        <a class="clearfix">
+                                            <img src="/mytutu/defaulttouxiang.jpg" class="msg-photo" alt="" />
+                                            <span class="msg-body">
+                                                <span class="msg-title">
+                                                    <span class="blue">测试:</span>
+                                                    <br />
+                                                    测试专用消息所有
+                                                    </br/>
+
+                                                    <span class="msg-time">
+                                                        <i class="ace-icon fa fa-clock-o"></i>
+                                                        <span>2015/7/17 16:46:21</span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <!--中间循环部分-->
+                                    <li>
+                                        <a class="clearfix">
+                                            <img src="/mytutu/defaulttouxiang.jpg" class="msg-photo" alt="" />
+                                            <span class="msg-body">
+                                                <span class="msg-title">
+                                                    <span class="blue">测试:</span>
+                                                    <br />
+                                                    测试专用消息所有
+                                                    </br/>
+
+                                                    <span class="msg-time">
+                                                        <i class="ace-icon fa fa-clock-o"></i>
+                                                        <span>2015/7/17 16:46:21</span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <!--中间循环部分-->
+                                    <li>
+                                        <a class="clearfix">
+                                            <img src="/mytutu/defaulttouxiang.jpg" class="msg-photo" alt="" />
+                                            <span class="msg-body">
+                                                <span class="msg-title">
+                                                    <span class="blue">测试:</span>
+                                                    <br />
+                                                    测试标题
+                                                    </br/>
+
+                                                    <span class="msg-time">
+                                                        <i class="ace-icon fa fa-clock-o"></i>
+                                                        <span>2015/7/15 18:14:51</span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <!--尾-->
+
+
+
+
+
+
+
+
+
+                                </ul>
+                            </li>
+
+                            <li class="dropdown-footer">
+                                <a href="/adminht/myznx_shoudao_system.aspx">
+                                    查看所有站内信
+                                    <i class="ace-icon fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- #section:basics/navbar.user_menu -->
+                    <li class="light-blue">
+                        <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                            <img class="nav-user-photo" src="/mytutu/defaulttouxiang_err.jpg" />
+                            <small id="showusername">admin</small>
+
+                            <i class="ace-icon fa fa-caret-down"></i>
+                        </a>
+
+                        <ul class="dropdown-menu-right  dropdown-menu dropdown-caret dropdown-close">
+                            <li>
+                                <a href="/adminht/auth_editpassword.aspx">
+                                    <i class="ace-icon fa fa-lock"></i>
+                                    修改密码
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li class=" transparent">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#" id="forexit">
+                            <i class="ace-icon fa fa-power-off"></i>
+
+                        </a>
+
+
+                    </li>
+                    <!-- /section:basics/navbar.user_menu -->
+                </ul>
+            </div>
+
+            <!-- /section:basics/navbar.dropdown -->
+        </div>
+        <!-- /.navbar-container -->
+    </div>
+
+    <!-- /section:basics/navbar.layout -->
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+            try { ace.settings.check('main-container', 'fixed') } catch (e) { }
+        </script>
+
+
+        <!-- #section:basics/sidebar -->
+        <div id="sidebar" class="sidebar                  responsive">
+            <script type="text/javascript">
+        try { ace.settings.check('sidebar', 'fixed') } catch (e) { }
+            </script>
+
+            <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+                <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+                    <button class="btn btn-success" onclick="window.top.location.href='demo_home.aspx'">
+                        <i class="ace-icon fa fa-home"></i>
+                    </button>
+
+                    <button class="btn btn-info">
+                        <i class="ace-icon fa fa-pencil"></i>
+                    </button>
+
+                    <!-- #section:basics/sidebar.layout.shortcuts -->
+                    <button class="btn btn-warning">
+                        <i class="ace-icon fa fa-users"></i>
+                    </button>
+
+                    <button class="btn btn-grey">
+                        <i class="ace-icon fa fa-cogs"></i>
+                    </button>
+
+                    <!-- /section:basics/sidebar.layout.shortcuts -->
+                </div>
+
+                <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+                    <span class="btn btn-success"></span>
+
+                    <span class="btn btn-info"></span>
+
+                    <span class="btn btn-warning"></span>
+
+                    <span class="btn btn-grey"></span>
+                </div>
+            </div>
+            <!-- /.sidebar-shortcuts -->
+
+            <ul id="masterpageleftmenu1_menuUL" class="nav nav-list"><li class=''><a href='/adminht/demo_home.aspx'><i class='menu-icon fa fa-tachometer'></i><span class='menu-text'> 仪表盘 </span></a><b class='arrow'></b></li><li class=''><a href=''><i class='menu-icon fa fa-briefcase'></i><span class='menu-text'> 快速报工 </span></a><b class='arrow'></b></li><li class=''><a href='' class='dropdown-toggle'><i class='menu-icon fa fa fa-tasks'></i><span class='menu-text'> 生产计划管理 </span><b class='arrow fa fa-angle-down'></b></a><b class='arrow'></b><ul class='submenu'><li class=''><a href=''><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 计划分解 </span></a><b class='arrow'></b></li><li class=''><a href=''><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 下达计划 </span></a><b class='arrow'></b></li><li class=''><a href=''><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 浏览计划明细 </span></a><b class='arrow'></b></li></ul></li><li class=''><a href='' class='dropdown-toggle'><i class='menu-icon fa fa-briefcase'></i><span class='menu-text'> 报工与质检 </span><b class='arrow fa fa-angle-down'></b></a><b class='arrow'></b><ul class='submenu'><li class=''><a href=''><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 录入发料单 </span></a><b class='arrow'></b></li><li class=''><a href=''><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 录入上料单 </span></a><b class='arrow'></b></li><li class=''><a href=''><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 录入质检单 </span></a><b class='arrow'></b></li><li class=''><a href=''><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 录入报工单 </span></a><b class='arrow'></b></li></ul></li><li class=''><a href='' class='dropdown-toggle'><i class='menu-icon fa fa-cubes'></i><span class='menu-text'> 车间仓库管理 </span><b class='arrow fa fa-angle-down'></b></a><b class='arrow'></b><ul class='submenu'><li class=''><a href=''><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 调拨单 </span></a><b class='arrow'></b></li><li class=''><a href=''><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 盘点管理 </span></a><b class='arrow'></b></li><li class=''><a href=''><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 库存明细 </span></a><b class='arrow'></b></li></ul></li><li class=''><a href='' class='dropdown-toggle'><i class='menu-icon fa fa-sitemap'></i><span class='menu-text'> 工艺与BOM </span><b class='arrow fa fa-angle-down'></b></a><b class='arrow'></b><ul class='submenu'><li class=''><a href='/adminht/corepage/bas/list_products.aspx'><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 产品模型库 </span></a><b class='arrow'></b></li><li class=''><a href=''><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> BOM拓展 </span></a><b class='arrow'></b></li><li class=''><a href='/adminht/corepage/bas/list_wp.aspx'><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 工艺路线 </span></a><b class='arrow'></b></li><li class=''><a href='/adminht/corepage/zfcmjwh_edit.aspx?fff=1&idforedit=cpdw'><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 产品单位 </span></a><b class='arrow'></b></li><li class=''><a href='/adminht/corepage/zfcmjwh_edit.aspx?fff=1&idforedit=zhupinlei'><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 产品主品类 </span></a><b class='arrow'></b></li></ul></li><li class=''><a href='' class='dropdown-toggle'><i class='menu-icon fa fa fa-bell-o'></i><span class='menu-text'> 预警配置 </span><b class='arrow fa fa-angle-down'></b></a><b class='arrow'></b><ul class='submenu'><li class=''><a href=''><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 设备预警 </span></a><b class='arrow'></b></li><li class=''><a href=''><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 计划预警 </span></a><b class='arrow'></b></li><li class=''><a href=''><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 耗材预警 </span></a><b class='arrow'></b></li></ul></li><li class=''><a href='/adminht/fff.aspx'><i class='menu-icon fa fa-bar-chart-o'></i><span class='menu-text'> 数据分析 </span></a><b class='arrow'></b></li><li class=''><a href=''><i class='menu-icon fa fa fa-calendar'></i><span class='menu-text'> 工厂日历管理 </span></a><b class='arrow'></b></li><li class=''><a href='' class='dropdown-toggle'><i class='menu-icon fa fa-info-circle'></i><span class='menu-text'> 基础数据 </span><b class='arrow fa fa-angle-down'></b></a><b class='arrow'></b><ul class='submenu'><li class=''><a href='/adminht/corepage/bas/list_device.aspx'><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 设备管理 </span></a><b class='arrow'></b></li><li class=''><a href='/adminht/corepage/bas/list_device_mod.aspx'><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 设备组件管理 </span></a><b class='arrow'></b></li><li class=''><a href='/adminht/corepage/bas/list_userinfo.aspx'><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 员工管理 </span></a><b class='arrow'></b></li></ul></li><li class=''><a href='' class='dropdown-toggle'><i class='menu-icon fa fa-cogs'></i><span class='menu-text'> 系统设置 </span><b class='arrow fa fa-angle-down'></b></a><b class='arrow'></b><ul class='submenu'><li class=''><a href=''><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 系统日志浏览 </span></a><b class='arrow'></b></li></ul></li><li class=''><a href='' class='dropdown-toggle'><i class='menu-icon fa fa-cogs'></i><span class='menu-text'> 开发专用 </span><b class='arrow fa fa-angle-down'></b></a><b class='arrow'></b><ul class='submenu'><li class=''><a href='' class='dropdown-toggle'><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 权限数据维护 </span><b class='arrow fa fa-angle-down'></b></a><b class='arrow'></b><ul class='submenu'><li class=''><a href='/adminht/auth_menu_edit.aspx'><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 系统菜单调整 </span></a><b class='arrow'></b></li><li class=''><a href='/adminht/auth_enum_list.aspx'><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 权限枚举维护 </span></a><b class='arrow'></b></li><li class=''><a href='/adminht/auth_group_edit.aspx'><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 权限组维护 </span></a><b class='arrow'></b></li></ul></li><li class=''><a href='' class='dropdown-toggle'><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 基本表单demo </span><b class='arrow fa fa-angle-down'></b></a><b class='arrow'></b><ul class='submenu'><li class=''><a href='/adminht/linshi/demo_dblist.aspx'><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 数据列表demo </span></a><b class='arrow'></b></li><li class=''><a href='/adminht/linshi/demo_pz_edit.aspx?fff=1&idforedit=150915000006'><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 编辑保存demo </span></a><b class='arrow'></b></li><li class=''><a href='/adminht/linshi/demo_pz_add.aspx'><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 提交表单demo </span></a><b class='arrow'></b></li><li class=''><a href='/adminht/linshi/demo_tiaomasoamiao.aspx'><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 扫描条码例子 </span></a><b class='arrow'></b></li><li class=''><a href='/adminht/demo_uploadface.aspx'><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 上传头像demo </span></a><b class='arrow'></b></li></ul></li><li class=''><a href='' class='dropdown-toggle'><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 通用配置维护 </span><b class='arrow fa fa-angle-down'></b></a><b class='arrow'></b><ul class='submenu'><li class=''><a href='/adminht/baseset/bs_showformmain.aspx'><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 浏览表单 </span></a><b class='arrow'></b></li><li class=''><a href='/adminht/baseset/bs_showformSubInfo.aspx'><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 浏览表单字段 </span></a><b class='arrow'></b></li><li class=''><a href='/adminht/baseset/bs_showformSubDialog.aspx'><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 浏览表单弹窗 </span></a><b class='arrow'></b></li><li class=''><a href='/adminht/baseset/bs_showalllist.aspx'><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 浏览通用列表 </span></a><b class='arrow'></b></li><li class=''><a href='/adminht/baseset/bs_showalllist_field.aspx'><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 浏览通用列表字段 </span></a><b class='arrow'></b></li></ul></li></ul></li><li class=''><a href='' class='dropdown-toggle'><i class='menu-icon fa fa-key'></i><span class='menu-text'> 系统权限配置 </span><b class='arrow fa fa-angle-down'></b></a><b class='arrow'></b><ul class='submenu'><li class=''><a href='/adminht/auth_oneuser.aspx'><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 用户权限分配 </span></a><b class='arrow'></b></li><li class=''><a href='/adminht/auth_userlist.aspx'><i class='menu-icon fa fa-caret-right'></i><span class='menu-text'> 用户权限浏览 </span></a><b class='arrow'></b></li></ul></li></ul>
+            <!-- /.nav-list -->
+            <!-- #section:basics/sidebar.layout.minimize -->
+            <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+                <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+            </div>
+
+            <!-- /section:basics/sidebar.layout.minimize -->
+            <script type="text/javascript">
+        try { ace.settings.check('sidebar', 'collapsed') } catch (e) { }
+            </script>
+        </div>
+
+
+        <!-- /section:basics/sidebar -->
+        <div class="main-content">
+            <div class="main-content-inner">
+                <!-- #section:basics/content.breadcrumbs -->
+                <div class="breadcrumbs" id="breadcrumbs">
+                    <script type="text/javascript">
+                        try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+                    </script>
+                    <ul id="dongtaidaohang" class="breadcrumb"><li><i class='ace-icon fa fa-home home-icon'></i><a href='demo_home.aspx'>首页</a></li></ul>
+                    <!-- /.breadcrumb -->
+                    <!-- 附加的本页导航栏内容 -->
+
+
+
+                </div>
+           
+                <!-- /section:basics/content.breadcrumbs -->
+                <div class="page-content">
+               
+             
+                    <div id="ceshiceshi">dd</div>
+                    <div id="workprocess_area" style="margin:10px;"></div> 
+             
+
+
+
+
+
+                    <!-- 附加的右侧主要功能切换区内容,不含导航 -->
+
+
+
+                    <div id="dialog-message-forsubtable-addedit" class="hide">
+
+                        <div class="row">
+
+                            <div class="col-sm-12">
+                                <iframe src="about:blank" style="width:100%; height:500px; border:0px;overflow-x:hidden;" id="iframforsubtab"></iframe>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <!-- #dialog-message-forsubtable-addedit -->
+
+                    <div id="dialog-message" class="hide">
+
+                        <div class="row">
+
+                            <div class="col-sm-12 PrintArea_D" id="zheshiliebiaoquyu">
+
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <!-- #dialog-message -->
+
+
+
+           
+
+                    <div class="row">
+                        <div class="col-xs-12"  >
+                            
+                        
+                            <!-- PAGE CONTENT BEGINS -->
+                            <div class="row">
+                                <div class="col-xs-12" >
+                                
+                                    <!-- #section:elements.tab -->
+                                    <div class="tabbable">
+                                        <ul class="nav nav-tabs" id="myTab">
+                                            <li class="active">
+                                                <a data-toggle="tab" href="#addadd">
+                                                    <i class="green ace-icon fa fa-pencil-square-o bigger-120"></i>
+                                                    新增--工艺流程维护
+                                                </a>
+
+                                            </li>
+                                            <li class="">&nbsp;&nbsp;</li>
+                                            <li class="">
+                                                <button class="btn btn-white btn-info btn-bold" id="addbutton1_top">
+                                                    <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
+                                                    保存
+                                                </button>
+                                            </li>
+                                            <li class="">&nbsp;&nbsp;</li>
+                                            <li class="">
+                                                <button class="btn btn-white btn-info btn-bold printarea_go_dayinanniu" id="dayinzheyiye_top">
+                                                    <i class="ace-icon fa fa-print grey"></i>
+                                                    打印
+                                                </button>
+                                            </li>
+                                            <li class="">&nbsp;&nbsp;</li>
+                                            <li class="">
+                                                <button class="btn btn-white btn-info btn-bold" id="fanhuishangyiye_top">
+                                                    <i class="ace-icon fa fa-undo red2"></i>
+                                                    返回
+                                                </button>
+                                            </li>
+                                            <li class="">&nbsp;&nbsp;</li>
+
+
+
+
+                                        </ul>
+
+
+                                
+
+                                        <div class="tab-content">
+                                       
+                                            <div id="addadd" class="tab-pane fade in active">
+
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+
+                                              
+
+
+                                                        <form class="PrintArea_F  form-horizontal " role="form" id="myform1">
+                                                            <!-- #section:elements.form -->
+                                                            <input type="hidden" name="zheshiyige_FID" id="zheshiyige_FID" value="160121000019" />
+                                                            <input type="hidden" name="idforedit" id="idforedit" value="" />
+
+                                                            <div class="form-group">
+                                                                <label class="col-sm-2 control-label no-padding-right" for="wmname">
+
+                                                                    <i class="light-red">*  </i>
+                                                                    流程名称：
+                                                                </label>
+
+                                                                <div class="col-sm-10">
+
+
+                                                                    <input data-rel="tooltip" type="text" id="wmname" name="wmname" placeholder="请输入" title="默认说明" data-placement="bottom" class="col-xs-12 col-sm-5" value="" />
+
+
+
+                                                                    <div class="ValidErrInfo col-sm-12 no-padding-left"></div>
+                                                                </div>
+
+                                                            </div>
+                                                   
+
+                                                            <div class="form-group">
+
+                                                                <label class="col-sm-2 control-label no-padding-right" for="wmbeizhu">
+
+                                                                    <i class="light-red">*  </i>
+                                                                    流程备注：
+                                                                </label>
+
+                                                                <div class="col-sm-10">
+                                                                    <textarea placeholder="请输入" class="limited col-xs-12 col-sm-5" id="wmbeizhu" name="wmbeizhu" maxlength="500" rows="5"></textarea>
+                                                                    <span class="help-button" data-rel="popover" data-trigger="hover" data-placement="left" data-content="默认说明" title="录入要求">?</span>
+                                                                    <div class="ValidErrInfo col-sm-12 no-padding-left"></div>
+                                                                </div>
+                                                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                            <div class="clearfix form-actions col-xs-12 col-sm-12">
+
+
+
+
+                                                                <label class="col-sm-2 control-label"></label>
+
+                                                                <div class="col-sm-10">
+                                                                    <div class="col-xs-12 col-sm-6">
+
+
+                                                                        <button class="btn btn-info pull-left" type="button" id="addbutton1">
+                                                                            <i class="ace-icon fa fa-check bigger-110"></i>
+                                                                            保存
+                                                                        </button>
+
+
+
+                                                                        <button class="btn pull-right hidden" type="reset" id="fanhuishangyiye">
+                                                                            <i class="ace-icon fa fa-undo bigger-110"></i>
+                                                                            返回
+                                                                        </button>
+                                                                        <button class="btn pull-right" type="reset" id="reloaddb">
+                                                                            <i class="ace-icon fa fa-undo bigger-110"></i>
+                                                                            重填
+                                                                        </button>
+
+                                                                    </div>
+
+                                                                </div>
+
+
+                                                            </div>
+
+
+
+
+                                                        </form> </div>
+                                                    </div>
+                                                    <!-- /.col -->
+                                                </div>
+                                                <!-- /.row -->
+
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                    <!-- /section:elements.tab -->
+                                </div>
+                                <!-- /.col -->
+
+
+                            </div>
+                            <!-- /.row -->
+
+
+
+
+
+
+
+
+                            <script type="text/javascript">
+                var $path_assets = "/assets";//以备某段js动态调用了这个变量
+                            </script>
+
+                            <!-- PAGE CONTENT ENDS -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+                <!-- /.page-content -->
+            </div>
+        </div>
+        <!-- /.main-content -->
+
+        <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+            <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+        </a>
+    </div>
+    <!-- /.main-container -->
+    <!-- basic scripts -->
+    <!--[if !IE]> -->
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='/assets/js/jquery-2.1.1.min.js'>" + "<" + "/script>");
+    </script>
+
+    <!-- <![endif]-->
+    <!--[if IE]>
+    <script type="text/javascript">
+     window.jQuery || document.write("<script src='/assets/js/jquery-1.11.1.min.js'>"+"<"+"/script>");
+    </script>
+    <![endif]-->
+    <script type="text/javascript">
+        if ('ontouchstart' in document.documentElement) document.write("<script src='/assets/js/jquery.mobile.custom.js'>" + "<" + "/script>");
+    </script>
+    <script src="/assets/js/bootstrap.js"></script>
+
+    <!-- page specific plugin scripts -->
+    <!--[if lte IE 8]>
+          <script src="/assets/js/excanvas.js"></script>
+        <![endif]-->
+    <script src="/assets/js/jquery-ui.custom.js"></script>
+    <script src="/assets/js/jquery.ui.touch-punch.js"></script>
+    <script src="/assets/js/bootbox.js"></script>
+    <script src="/assets/js/fuelux/fuelux.spinner.js"></script>
+    <script src="/assets/js/jquery.autosize.js"></script>
+
+
+    <script src="/assets/js/bootstrap-tag.js"></script>
+
+
+
+    <!-- ace scripts -->
+    <script src="/assets/js/ace/elements.scroller.js"></script>
+    <script src="/assets/js/ace/elements.typeahead.js"></script>
+    <script src="/assets/js/ace/elements.spinner.js"></script>
+    <script src="/assets/js/ace/elements.aside.js"></script>
+    <script src="/assets/js/ace/ace.js"></script>
+    <script src="/assets/js/ace/ace.ajax-content.js"></script>
+    <script src="/assets/js/ace/ace.touch-drag.js"></script>
+    <script src="/assets/js/ace/ace.sidebar.js"></script>
+    <script src="/assets/js/ace/ace.sidebar-scroll-1.js"></script>
+    <script src="/assets/js/ace/ace.submenu-hover.js"></script>
+    <script src="/assets/js/ace/ace.widget-box.js"></script>
+    <script src="/assets/js/ace/ace.widget-on-reload.js"></script>
+    <script src="/assets/js/ace/ace.searchbox-autocomplete.js"></script>
+
+
+    <script type="text/javascript">
+
+
+        jQuery(function ($) {
+
+            //$(document).off('click.bs.dropdown.data-api');
+            $(document).on('click', "#forexit", function () {
+
+                bootbox.confirm({
+                    buttons: {
+                        confirm: {
+                            label: '确定',
+                            className: 'btn-sm btn-danger'
+                        },
+                        cancel: {
+                            label: '取消',
+                            className: 'btn-sm'
+                        }
+                    },
+                    message: '您确定要退出登录吗？',
+                    callback: function(result) {
+                        if (result) {
+                            window.top.location.href = "/adminht/login.aspx?f=exit";
+
+                        } else {
+                            //alert('点击取消按钮了');
+                        }
+                    },
+                    //title: "退出登录",
+                });
+            });
+
+        });
+
+
+
+    </script>
+
+
+    <!-- 附加的body底部本页专属的自定义js脚本 -->
+    <!-- 附加的body底部本页专属的自定义js脚本 -->
+    <script src="/assets/js/jquery.validate.js"></script>
+    <script src="/assets/js/date-time/bootstrap-datepicker.js"></script>
+    <script src="/assets/js/jquery.inputlimiter.1.3.1.js"></script>
+    <script src="/assets/js/jquery.maskedinput.js"></script>
+
+    <script src="/assets/js/dropzone.js"></script>
+
+    <!-- page specific plugin scripts -->
+    <script src="/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
+    <script src="/assets/js/jqGrid/i18n/grid.locale-cn.js"></script>
+    <script src="/assets/js/jqGrid/grid.setcolumns.js"></script>
+
+    <script src="/assets/js/jquery.hotkeys.js"></script>
+    <script src="/assets/js/bootstrap-wysiwyg.js"></script>
+    <script src="/assets/js/ace/elements.colorpicker.js"></script>
+    <script src="/assets/js/ace/elements.wysiwyg.js"></script>
+
+    <script type="text/javascript" src="/assets/js/desforcsharp.js"></script>
+
+    <script src="/assets/js/select2.js"></script>
+
+
+    <script src="/assets/js/yhb_city.js"></script>
+
+    <script src="/assets/js/jquery.PrintArea.js"></script>
+
+
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+ 
+
+    <script type="text/javascript" src="/assets/GooFlow/data1.js"></script>
+
+    <script type="text/javascript" src="/assets/GooFlow/GooFunc.js"></script>
+    <script type="text/javascript" src="/assets/GooFlow/json2.js"></script>
+
+    <script type="text/javascript" src="/assets/GooFlow/codebase/GooFlow.js"></script>
+    <script type="text/javascript">
 var property={
-	width:1200,
+	width:500,
 	height: 600,
-	toolBtns: ["start round", "end round", "task round", "node", "chat", "state", "plug", "join", "fork", "complex mix"],
+	toolBtns: ["start mix", "end round", "task round", "node", "chat", "state", "plug", "join", "fork", "complex"],
 	//toolBtns:["start round","end round","task round","node","chat","state","plug","join","fork","complex mix"],
 	haveHead: true,
     //headBtns:["new","open","save","undo","redo","reload"],
@@ -39,27 +817,34 @@ var remark={
 	plug:"附加插件",
 	fork:"分支结点",
 	"join":"联合结点",
-	"complex mix":"复合结点",
 	group:"组织划分框编辑开关"
 };
-var demo;
+var workprocess_area;
 $(document).ready(function(){
-	demo=$.createGooFlow($("#demo"),property);
-	demo.setNodeRemarks(remark);
+    workprocess_area = $.createGooFlow($("#workprocess_area"), property);
+    workprocess_area.setNodeRemarks(remark);
 	//demo.onItemDel=function(id,type){
 	//	return confirm("确定要删除该单元吗?");
 	//}
-	demo.loadData(jsondata);
+    workprocess_area.loadData(jsondata);
+
+    workprocess_area.reinitSize($("#workprocess_area").parent().width() - 30, 600);
+	$(window).on('resize.jqGrid', function () {
+
+	    workprocess_area.reinitSize($("#workprocess_area").parent().width() - 30, 600);
+
+	});
+
+	//$("#workprocess_area").parent().parent().parent().parent().parent().parent().css('position', 'unset');
+
 });
-var out;
+
 function Export(){
-    document.getElementById("result").value=JSON.stringify(demo.exportData());
+    //JSON.stringify(demo.exportData())
 }
-</script>
-</head>
-<body>
-<div id="demo" style="margin:10px"></div>
-<input id="submit" type="button" value='导出结果' onclick="Export()"/>
-<textarea id="result" row="6"></textarea>
+    </script>
+
+
+
 </body>
 </html>

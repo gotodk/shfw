@@ -41,8 +41,8 @@
 <script type="text/javascript" src="/assets/GooFlow/codebase/GooFlow.js"></script>
 <script type="text/javascript">
 var property={
-	width:500,
-	height: 600,
+    width: 500,
+	height: 350,
 	toolBtns: ["start mix", "end round", "task round", "node", "chat", "state", "plug", "join", "fork", "complex"],
 	//toolBtns:["start round","end round","task round","node","chat","state","plug","join","fork","complex mix"],
 	haveHead: true,
@@ -75,12 +75,14 @@ $(document).ready(function(){
 	//}
     workprocess_area.loadData(jsondata);
 
-    workprocess_area.reinitSize($("#workprocess_area").parent().width() - 30, 600);
-	$(window).on('resize.jqGrid', function () {
+ 
+	$(window).on('resize.', function () {
 
-	    workprocess_area.reinitSize($("#workprocess_area").parent().width() - 30, 600);
+	    workprocess_area.reinitSize($("#workprocess_area").parent().width(), 350);
 
-	});
+	});	var idInt = setInterval(function () {
+	    workprocess_area.reinitSize($("#workprocess_area").parent().width(), 350);
+	    $("#workprocess_area_json").val(JSON.stringify(workprocess_area.exportData()));	}, 500); 
 });
  
 function Export(){

@@ -838,15 +838,19 @@ GooFlow.prototype={
 			}
 		});
 		//绑定双击编辑事件
-		this.$workArea.delegate(".GooFlow_item > .span","dblclick",{inthis:this},function(e){
+		this.$workArea.delegate(".GooFlow_item > .span", "dblclick", { inthis: this }, function (e) {
+
+		  
 			var oldTxt=this.innerHTML;
 			var This=e.data.inthis;
 			var id=this.parentNode.id;
 			var t=getElCoordinate(This.$workArea[0]);
-			This.$textArea.val(oldTxt).css({display:"block",height:$(this).height(),width:100,
+		    This.$textArea.val(oldTxt).css({
+		        display: "block", height: $(this).height(), width: 100, position: "fixed",
 				left:t.left+This.$nodeData[id].left-This.$workArea[0].parentNode.scrollLeft-24,
 				top:t.top+This.$nodeData[id].top-This.$workArea[0].parentNode.scrollTop+26})
-				.data("id",This.$focus).focus();
+				.data("id", This.$focus).focus();
+			$("#ceshiceshi").html(t.left + This.$nodeData[id].left - This.$workArea[0].parentNode.scrollLeft - 24);
 			This.$workArea.parent().one("mousedown",function(e){
 				if(e.button==2)return false;
 				This.setName(This.$textArea.data("id"),This.$textArea.val(),"node");
