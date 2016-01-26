@@ -73,16 +73,20 @@ $(document).ready(function(){
 	//demo.onItemDel=function(id,type){
 	//	return confirm("确定要删除该单元吗?");
 	//}
-    workprocess_area.loadData(jsondata);
-
+  
  
 	$(window).on('resize.', function () {
 
 	    workprocess_area.reinitSize($("#workprocess_area").parent().width(), 350);
 
-	});	var idInt = setInterval(function () {
+	});		$("#workprocess_area_json_foredit").parent().parent().hide();	var only_run_one_yyh = true;	var isedit = getUrlParam("fff");	var idInt = setInterval(function () {
 	    workprocess_area.reinitSize($("#workprocess_area").parent().width(), 350);
-	    $("#workprocess_area_json").val(JSON.stringify(workprocess_area.exportData()));	}, 500); 
+	    $("#workprocess_area_json").val(JSON.stringify(workprocess_area.exportData()));	    if (only_run_one_yyh)	    {
+	    	        if ($("#editloadinfo").is('.hide') && isedit == "1" && only_run_one_yyh) {
+	            only_run_one_yyh = false;
+	            workprocess_area.loadData(jQuery.parseJSON($("#workprocess_area_json_foredit").val()));
+	        }
+	    }	  	}, 500);
 });
  
 function Export(){
