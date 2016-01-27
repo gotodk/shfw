@@ -925,7 +925,7 @@
             //resize to fit page size
             $(window).on('resize.jqGrid', function () {
 
-                $("#" + grid_selector_001).setGridWidth($("#" + grid_selector_001).parent().width() -30);
+                $("#" + grid_selector_001).setGridWidth($("#" + grid_selector_001).parent().width());
                
             });
 
