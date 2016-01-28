@@ -73,11 +73,18 @@
 												打印
 											</button></li>
                             <li class="">&nbsp;&nbsp;</li>
-					<li class=""><button class="btn btn-white btn-info btn-bold" id="fanhuishangyiye_top">
+					<li class="c_fanhuishangyiye_top hidden"><button class="btn btn-white btn-info btn-bold" id="fanhuishangyiye_top">
 												<i class="ace-icon fa fa-undo red2"></i>
 												返回
 											</button></li>
-                            <li class="">&nbsp;&nbsp;</li>
+                            <li class="c_fanhuishangyiye_top hidden">&nbsp;&nbsp;</li>
+
+                            <li class="c_xinzeng_top hidden"><button class="btn btn-white btn-info btn-bold" id="xinzeng_top">
+												<i class="ace-icon fa fa-plus-circle purple"></i>
+												新增
+											</button></li>
+                            <li class="c_xinzeng_top hidden">&nbsp;&nbsp;</li>
+
  <%--                <li class=""><button class="btn btn-white btn-info btn-bold">
 												<i class="ace-icon fa fa-trash-o bigger-120 "></i>
 												删除
@@ -660,10 +667,10 @@
 
 
 
-                                                           <button class="btn pull-right hidden" type="<%=htPP["reloaddb_type"].ToString() %>"  id="fanhuishangyiye">
+                                                     <%--      <button class="btn pull-right hidden" type="<%=htPP["reloaddb_type"].ToString() %>"  id="fanhuishangyiye">
                                                             <i class="ace-icon fa fa-undo bigger-110"></i>
                                                             返回
-                                                        </button>
+                                                        </button>--%>
                                                         <button class="btn pull-right" type="<%=htPP["reloaddb_type"].ToString() %>"  id="reloaddb">
                                                             <i class="ace-icon fa fa-undo bigger-110"></i>
                                                             重填

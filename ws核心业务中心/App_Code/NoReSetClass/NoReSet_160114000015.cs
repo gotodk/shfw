@@ -76,7 +76,7 @@ public class NoReSet_160114000015
         if ((bool)(return_ht["return_float"]))
         {
             dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
-            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "新增成功！";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "{"+ ht_forUI["did"].ToString() + "}新增成功！";
         }
         else
         {

@@ -72,6 +72,69 @@
             return tmp[0];
         }
 
+
+        function delQueStr(url, ref) //删除参数值
+        {
+            var str = "";
+
+            if (url.indexOf('?') != -1)
+                str = url.substr(url.indexOf('?') + 1);
+            else
+                return url;
+            var arr = "";
+            var returnurl = "";
+            var setparam = "";
+            if (str.indexOf('&') != -1) {
+                arr = str.split('&');
+                for (i in arr) {
+                    if (arr[i].split('=')[0] != ref) {
+                        returnurl = returnurl + arr[i].split('=')[0] + "=" + arr[i].split('=')[1] + "&";
+                    }
+                }
+                return url.substr(0, url.indexOf('?')) + "?" + returnurl.substr(0, returnurl.length - 1);
+            }
+            else {
+                arr = str.split('=');
+                if (arr[0] == ref)
+                    return url.substr(0, url.indexOf('?'));
+                else
+                    return url;
+            }
+        }
+
+
+        (function ($) {
+            $.extend({
+                Request: function (m) {
+                    var sValue = location.search.match(new RegExp("[\?\&]" + m + "=([^\&]*)(\&?)", "i"));
+                    return sValue ? sValue[1] : sValue;
+                },
+                UrlUpdateParams: function (url, name, value) {
+                    var r = url;
+                    if (r != null && r != 'undefined' && r != "") {
+                        value = encodeURIComponent(value);
+                        var reg = new RegExp("(^|)" + name + "=([^&]*)(|$)");
+                        var tmp = name + "=" + value;
+                        if (url.match(reg) != null) {
+                            r = url.replace(eval(reg), tmp);
+                        }
+                        else {
+                            if (url.match("[\?]")) {
+                                r = url + "&" + tmp;
+                            } else {
+                                r = url + "?" + tmp;
+                            }
+                        }
+                    }
+                    return r;
+                }
+
+
+
+
+            });
+        })(jQuery);
+
     </script>
 
 
@@ -202,6 +265,13 @@
 
 
             function callback(msg) {
+
+           
+                var isedit = getUrlParam("fff");
+                var tiaozhuan = getUrlParam("tiaozhuan");                var ppp_pp = msg.match(/{(\S*)}/);                var newguid_re = "";                if (ppp_pp && ppp_pp.length > 0)                {
+                    msg = msg.replace(ppp_pp[0],"");                    newguid_re=ppp_pp[1];
+                }             
+
                 try { $(formid1).find("input[type='text'][readonly!='readonly']").eq(0).focus().tooltip('hide'); } catch (e) { }
                 //显示提交结果
                 bootbox.alert({
@@ -209,11 +279,20 @@
                     callback: function () {
                         setTimeout(function () {
                             try { $(formid1).find("input[type='text'][readonly!='readonly']").eq(0).focus().select().tooltip('hide'); } catch (e) { }
+                            if (newguid_re != "" && tiaozhuan == "1") {
+                               
+                                //跳转到编辑
+                                var newurl = $.UrlUpdateParams(window.location.href, "idforedit", newguid_re);
+                                newurl = $.UrlUpdateParams(newurl, "fff", "1");
+                                location.href = newurl;
+                                
+                            }
+                            
                         }, 1);
                     
                 }  });
 
-                var isedit = getUrlParam("fff");
+           
                 if (isedit == "1") {
                     //加载表单数据
                     loadinfoajax1($("#idforedit").val());
@@ -258,12 +337,20 @@
 
         jQuery(function ($) {
             var isedit = getUrlParam("fff");
+            var tiaozhuan = getUrlParam("tiaozhuan");
             if (isedit == "1") {
-           
-                $("#fanhuishangyiye").removeClass("hidden");
+                $(".c_fanhuishangyiye_top").removeClass("hidden");
             }
             else {
-                $("#fanhuishangyiye").addClass("hidden");
+                $(".c_fanhuishangyiye_top").addClass("hidden");
+
+            }
+            if (tiaozhuan == "1") {
+                $(".c_fanhuishangyiye_top").addClass("hidden");
+                $(".c_xinzeng_top").removeClass("hidden");
+            }
+            else {
+                $(".c_xinzeng_top").addClass("hidden");
 
             }
             //添加返回代码
@@ -271,8 +358,11 @@
                 history.back(-1);
 
             });
-            $(document).on('click', "#fanhuishangyiye", function () {
-                history.back(-1);
+            $(document).on('click', "#xinzeng_top", function () {
+                var newurl = delQueStr(window.location.href, "fff");
+                newurl = delQueStr(newurl, "idforedit");
+                 
+                location.href = newurl;
 
             });
             //添加提交事件
