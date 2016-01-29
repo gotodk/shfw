@@ -14,6 +14,8 @@
 		<script src="/assets/js/flot/jquery.flot.pie.js"></script>
 		<script src="/assets/js/flot/jquery.flot.resize.js"></script>
 
+<script type="text/javascript" src="/assets/js/desforcsharp.js"></script>
+
 <script src="/assets/js/jquery.PrintArea.js"></script>
 
     <!-- inline scripts related to this page -->
@@ -98,6 +100,61 @@
                 $(grid_selector).jqGrid("setGridParam", { search: true }).trigger("reloadGrid", [{ page: 1 }]);  //重载JQGrid
             });
 
+
+            //重置布局
+            $(document).on('click', "#colhdgrid-table-reset-bj", function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/pucu/savebuju.aspx",
+                    data: "caozuo=chongzhi&lx=onlygrid&id=<%=dsFPZ.Tables["报表配置主表"].Rows[0]["FSID"].ToString()%>&jsonstr=" + encMe("[]", "mima"),
+                    dataType: "html",
+                    success: function (data) {
+                        bootbox.alert(data);
+                    }
+                });
+            });
+            //保存布局
+            $(document).on('click', "#colhdgrid-table-save-bj", function () {
+                var columnArray = $(grid_selector).jqGrid('getGridParam', 'colModel');
+                var bj_json = "[";
+                var bj_ttt = "";
+                for(var i =0; i < columnArray.length;i++)
+                {
+                    if (columnArray[i].xmlmap == null || columnArray[i].xmlmap == "jqgird_spid") {
+
+                    }
+                    else {
+                        bj_ttt = bj_ttt + "{\"name\":\"" + columnArray[i].name + "\",\"xmlmap\":\"" + columnArray[i].xmlmap + "\",\"width\":\"" + columnArray[i].width + "\",\"hidden\":\"" + columnArray[i].width + "\"},";
+                    }
+                 
+                  
+                }
+                
+                if (bj_ttt != "")
+                {
+                    bj_ttt = bj_ttt.substring(0, bj_ttt.length - 1);
+                   
+                }
+                bj_json = bj_json + bj_ttt + "]";
+                //alert(encMe(bj_json, "mima"));
+
+                $.ajax({
+                    type: "POST",
+                    url: "/pucu/savebuju.aspx",
+                    data: "caozuo=baocun&lx=onlygrid&id=<%=dsFPZ.Tables["报表配置主表"].Rows[0]["FSID"].ToString()%>&jsonstr=" + encMe(bj_json, "mima"),
+                    dataType: "html",
+                    success: function (data) {
+                        bootbox.alert(data);
+                    }
+                });
+       
+         
+
+                
+                //[{"xmlmap":"cb","width":25,"hidden":false},{"xmlmap":"cb","width":25,"hidden":false}]
+                //alert(JSON.stringify(columnArray));
+                 
+            });
 
 
             //resize to fit page size

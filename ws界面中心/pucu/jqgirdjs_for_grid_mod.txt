@@ -198,7 +198,14 @@ form.submit();
    title : "隐藏/显示列",
    buttonicon:"ace-icon fa fa-filter grey", 
    onClickButton: function(){ 
-       jQuery(grid_selector).setColumns({width:400,updateAfterCheck:true,top:50,colnameview:false,afterSubmitForm: function(formid) { }});
+       jQuery(grid_selector).setColumns({width:400,updateAfterCheck:true,top:50,colnameview:false,afterSubmitForm: function(formid) { }  });
+	   if($("#colhdgrid-table-save-bj").length<1)
+	   {
+	     $("#colhdgrid-table").append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type='button' class='btn btn-xs  btn-white  btn-info ' data-toggle='button' id='colhdgrid-table-save-bj'>保存布局</button>&nbsp;&nbsp;<button type='button' class='btn btn-xs  btn-white  btn-info ' data-toggle='button' id='colhdgrid-table-reset-bj'>重置布局</button>"); 
+		  
+	   }
+	
+	 
    }, 
    position:"last"
 });

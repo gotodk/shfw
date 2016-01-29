@@ -2185,6 +2185,83 @@ public class bssystem : System.Web.Services.WebService
 
     #region 界面生成相关接口(列表)
 
+
+
+
+    /// <summary>
+    /// 保存或者获取用户布局
+    /// </summary>
+    /// <param name="uaid">用户编号</param>
+    /// <param name="lx">操作对象类型</param>
+    /// <param name="id">操作对象编号</param>
+    /// <param name="jsonstr">json字符串配置</param>
+    /// <param name="sp">保存,重置,获取</param>
+    /// <returns></returns>
+    [WebMethod(MessageName = "保存或者获取用户布局", Description = "保存或者获取用户布局")]
+    public DataSet yonghubuju(string uaid, string lx, string id, string jsonstr, string sp)
+    {
+
+
+        if (sp == "保存" || sp == "重置")
+        {
+            //初始化返回值
+            DataSet dsreturn = initReturnDataSet().Clone();
+            dsreturn.Tables["返回值单条"].Rows.Add(new string[] { "err", "初始化" });
+
+            //开始真正的处理，这里只是演示，所以直接在这里写业务逻辑代码了
+
+            I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+
+            Hashtable param = new Hashtable();
+            param.Add("@uaid", uaid);
+            param.Add("@fsid", id);
+            param.Add("@jsonstr", StringOP.uncMe(jsonstr, "mima"));
+
+            Hashtable return_ht = new Hashtable();
+            ArrayList alsql = new ArrayList();
+            alsql.Add("delete FUP_FormsList_user_buju where uaid=@uaid and fsid=@fsid ");
+            if (sp == "保存")
+            { alsql.Add("INSERT INTO  FUP_FormsList_user_buju( uaid ,fsid,jsonstr) VALUES(@uaid ,@fsid,@jsonstr) "); }
+           
+
+
+
+
+            return_ht = I_DBL.RunParam_SQL(alsql, param);
+
+
+
+
+            if ((bool)(return_ht["return_float"]))
+            {
+
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = sp + "用户布局成功！";
+            }
+            else
+            {
+                //其实要记录日志，而不是输出，这里只是演示
+                //dsreturn.Tables.Add(parameter_forUI.Copy());
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "系统故障，失败：" + return_ht["return_errmsg"].ToString();
+            }
+
+
+
+
+
+            return dsreturn;
+        }
+        if (sp == "获取")
+        {
+        }
+
+        return null;
+
+    }
+
+
+
     /// <summary>
     /// 获取通用数据列表配置
     /// </summary>
