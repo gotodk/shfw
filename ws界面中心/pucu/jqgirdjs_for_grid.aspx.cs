@@ -7,9 +7,50 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+using System.Web.Script.Serialization;
+using System.Collections;
+using System.Collections.Generic;
 public partial class pucu_jqgirdjs_for_grid : System.Web.UI.Page
 {
+    private  DataTable ToDataTable( string json)
+    {
+  
+        DataTable dataTable = new DataTable("自定义布局");  //实例化
+        DataTable result;
+
+        JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
+        javaScriptSerializer.MaxJsonLength = Int32.MaxValue; //取得最大数值
+        ArrayList arrayList = javaScriptSerializer.Deserialize<ArrayList>(json);
+        if (arrayList.Count > 0)
+        {
+            foreach (Dictionary<string, object> dictionary in arrayList)
+            {
+                if (dictionary.Keys.Count<string>() == 0)
+                {
+                    result = dataTable;
+                    return result;
+                }
+                if (dataTable.Columns.Count == 0)
+                {
+                    foreach (string current in dictionary.Keys)
+                    {
+                        dataTable.Columns.Add(current, dictionary[current].GetType());
+                    }
+                }
+                DataRow dataRow = dataTable.NewRow();
+                foreach (string current in dictionary.Keys)
+                {
+                    dataRow[current] = dictionary[current];
+                }
+
+                dataTable.Rows.Add(dataRow); //循环添加行到DataTable中
+            }
+        }
+
+        result = dataTable;
+        return result;
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
         string rehtml = "";
@@ -18,6 +59,34 @@ public partial class pucu_jqgirdjs_for_grid : System.Web.UI.Page
         {
             //这个就是得到远程方法真正的返回值，不同类型的，自行进行强制转换即可。
             DataSet ds_DD = (DataSet)(re_dsi[1]);
+            //二次处理用户布局
+            try
+            {
+                object[] re_dsi_bj = IPC.Call("保存或者获取用户布局", new object[] { UserSession.唯一键, "onlygrid", ds_DD.Tables["报表配置主表"].Rows[0]["FSID"].ToString(), "[]", "获取" });
+                if (re_dsi_bj[0].ToString() == "ok")
+                {
+                    DataSet ds_bj = (DataSet)(re_dsi_bj[1]);
+                    string jsonstr = ds_bj.Tables["自定义布局"].Rows[0]["jsonstr"].ToString();
+                    DataTable dtbj = ToDataTable(jsonstr);
+                    for (int z = 0; z < ds_DD.Tables["字段配置子表"].Rows.Count; z++)
+                    {
+                 
+                        for (int b = 0; b < dtbj.Rows.Count; b++)
+                        {
+                            if (ds_DD.Tables["字段配置子表"].Rows[z]["DID_name"].ToString() == dtbj.Rows[b]["xmlmap"].ToString())
+                            {
+                                ds_DD.Tables["字段配置子表"].Rows[z]["DID_width"] = dtbj.Rows[b]["width"].ToString();
+                                ds_DD.Tables["字段配置子表"].Rows[z]["DID_hide"] = dtbj.Rows[b]["hidden"].ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            catch { }
+
+
+
+
             string jsmod = File.ReadAllText(Server.MapPath("/pucu/jqgirdjs_for_grid_mod.txt").ToString());
 
             //根据模板和配置数据，生成js代码

@@ -124,7 +124,7 @@
 
                     }
                     else {
-                        bj_ttt = bj_ttt + "{\"name\":\"" + columnArray[i].name + "\",\"xmlmap\":\"" + columnArray[i].xmlmap + "\",\"width\":\"" + columnArray[i].width + "\",\"hidden\":\"" + columnArray[i].width + "\"},";
+                        bj_ttt = bj_ttt + "{\"name\":\"" + columnArray[i].name + "\",\"xmlmap\":\"" + columnArray[i].xmlmap + "\",\"width\":\"" + columnArray[i].width + "\",\"hidden\":\"" + columnArray[i].hidden + "\"},";
                     }
                  
                   

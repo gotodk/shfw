@@ -2254,6 +2254,46 @@ public class bssystem : System.Web.Services.WebService
         }
         if (sp == "获取")
         {
+            //初始化返回值
+            DataSet dsreturn = initReturnDataSet().Clone();
+            dsreturn.Tables["返回值单条"].Rows.Add(new string[] { "err", "初始化" });
+
+            //参数合法性各种验证，这里省略
+
+            //开始真正的处理，这里只是演示，所以直接在这里写业务逻辑代码了
+
+            I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+            Hashtable return_ht = new Hashtable();
+            Hashtable param = new Hashtable();
+            param.Add("@uaid", uaid);
+            param.Add("@fsid", id);
+            return_ht = I_DBL.RunParam_SQL("select  top 1 * from FUP_FormsList_user_buju where uaid=@uaid and fsid=@fsid", "自定义布局", param);
+
+            if ((bool)(return_ht["return_float"]))
+            {
+                DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["自定义布局"].Copy();
+
+                if (redb.Rows.Count < 1)
+                {
+                    dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                    dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "没有找到指定数据!";
+                    return dsreturn;
+                }
+
+                dsreturn.Tables.Add(redb);
+
+
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "";
+            }
+            else
+            {
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "意外错误，获取失败：" + return_ht["return_errmsg"].ToString();
+            }
+
+
+            return dsreturn;
         }
 
         return null;

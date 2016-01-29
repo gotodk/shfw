@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class demo_pz_edit : System.Web.UI.Page
+public partial class editjihua : System.Web.UI.Page
 {
 
     #region 必备的公共变量
