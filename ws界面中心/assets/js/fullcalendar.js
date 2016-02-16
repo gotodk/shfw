@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  * FullCalendar v2.1.1
  * Docs & License: http://arshaw.com/fullcalendar/
  * (c) 2013 Adam Shaw
@@ -78,10 +78,10 @@ var defaults = {
 		next: "next",
 		prevYear: "prev year",
 		nextYear: "next year",
-		today: 'today',
-		month: 'month',
-		week: 'week',
-		day: 'day'
+		today: '定位今天',
+		month: '月视图',
+		week: '周视图',
+		day: '日视图'
 	},
 
 	buttonIcons: {
@@ -7882,7 +7882,7 @@ $.extend(BasicDayView.prototype, {
 
 setDefaults({
 	allDaySlot: true,
-	allDayText: 'all-day',
+	allDayText: '全天',
 
 	scrollTime: '06:00:00',
 
