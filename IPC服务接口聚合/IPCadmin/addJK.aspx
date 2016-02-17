@@ -6,6 +6,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>IPC管理中心--添加接口和方法</title>
     <link href="css.css" type="text/css" rel="stylesheet" />
@@ -24,7 +25,7 @@
                         <%--<asp:TextBox ID="TextBox1" runat="server" Width="500px"></asp:TextBox>--%>
                         <div style="position: relative;" id="JK_host">
                             <span style="margin-left: 100px; width: 18px; overflow: hidden;">
-                                <asp:DropDownList runat="server" Style="width: 194px; margin-left: -100px" onchange="this.parentNode.nextSibling.value=this.value" ID="JK_host_selt" name="JK_host_selt" OnSelectedIndexChanged="JK_host_selt_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                                <asp:DropDownList runat="server" Style="width: 194px; margin-left: -100px" onchange="document.getElementById('TextBox1').value=this.value" ID="JK_host_selt" name="JK_host_selt" OnSelectedIndexChanged="JK_host_selt_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                             </span>
                             <asp:TextBox ID="TextBox1" runat="server" Style="width: 170px; position: absolute; left: 0px;"></asp:TextBox>
                         </div>
@@ -39,7 +40,7 @@
                                 <td>
                                     <div style="position: relative;" id="JK_path">
                                         <span style="margin-left: 100px; width: 18px; overflow: hidden;">
-                                            <asp:DropDownList runat="server" Style="width: 194px; margin-left: -100px" onchange="this.parentNode.nextSibling.value=this.value" ID="JK_path_selt" name="JK_path_selt"></asp:DropDownList>
+                                            <asp:DropDownList runat="server" Style="width: 194px; margin-left: -100px" onchange="document.getElementById('TextBox2').value=this.value" ID="JK_path_selt" name="JK_path_selt"></asp:DropDownList>
                                         </span>
                                         <asp:TextBox ID="TextBox2" runat="server" Style="width: 170px; position: absolute; left: 0px;"></asp:TextBox>
                                     </div>
