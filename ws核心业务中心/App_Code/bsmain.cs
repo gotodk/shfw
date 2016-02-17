@@ -118,6 +118,86 @@ public class bsmain : System.Web.Services.WebService
     }
 
 
+
+
+
+    /// <summary>
+    /// 工厂日历管理处理
+    /// </summary>
+    /// <param name="parameter_forUI">参数</param>
+    /// <returns>返回ok就是接口正常</returns>
+    [WebMethod(MessageName = "工厂日历管理处理", Description = "工厂日历管理处理")]
+    public string gongchangrili_demo(DataTable parameter_forUI)
+    {
+        //接收转换参数
+        Hashtable ht_forUI = new Hashtable();
+        for (int i = 0; i < parameter_forUI.Rows.Count; i++)
+        {
+            ht_forUI[parameter_forUI.Rows[i]["参数名"].ToString()] = parameter_forUI.Rows[i]["参数值"].ToString();
+        }
+
+
+        if (ht_forUI["zhiling"].ToString() == "all")
+        {
+
+
+            I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+            Hashtable return_ht = new Hashtable();
+            Hashtable param = new Hashtable();
+            param.Add("@start", ht_forUI["start"].ToString());
+            param.Add("@end", ht_forUI["end"].ToString());
+            return_ht = I_DBL.RunParam_SQL("select *  from ZZZ_calendar_pub where dayrq >= @start and dayrq <= @end  ", "数据记录", param);
+
+            if ((bool)(return_ht["return_float"]))
+            {
+                DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+
+                if (redb.Rows.Count < 1)
+                {
+                    return "错误err，日期不存在！";
+                }
+                else
+                {
+                    string restr = "[";
+                    for (int i = 0; i < redb.Rows.Count; i++)
+                    {
+                        string dayrq = redb.Rows[i]["dayrq"].ToString();
+                        string daytype = redb.Rows[i]["daytype"].ToString();
+                        string classname = "label-danger";
+
+                        string[] daytype_arr = daytype.Split(',');
+                        for (int a = 0; a < daytype_arr.Length; a++)
+                        {
+                            if (daytype_arr[a] == "工作日")
+                            { classname = "label-danger"; }
+                            else if (daytype_arr[a] == "周末")
+                            { classname = "label-success"; }
+                            else
+                            { classname = "label-yellow"; }
+                            restr = restr + "{\"title\":\"" + daytype_arr[a] + "\",\"start\":\"" + dayrq + "\",\"end\":\"" + dayrq + "\",\"url\":null,\"allDay\":true,\"className\":\"" + classname + "\"},";
+                        }
+
+                     
+                     
+                    }
+                    restr = restr.TrimEnd(',');
+                    restr = restr + "]";
+                    return restr;
+                }
+
+            }
+            else
+            {
+                return "错误err，系统异常！";
+            }
+        }
+
+        return "无效指令";
+
+    }
+
+
+
     # endregion
 
 }

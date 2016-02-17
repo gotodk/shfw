@@ -65,10 +65,10 @@
 
 												 
 
-														<label>
+													<%--	<label>
 															<input type="checkbox" class="ace ace-checkbox" id="drop-remove" />
 															<span class="lbl"> 拖拽后移除标签</span>
-														</label>
+														</label>--%>
 													</div>
 												</div>
 											</div>
