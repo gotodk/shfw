@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FMPublicClass;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -151,7 +152,7 @@ public static class AuthComm
         //检查唯一编号是否存在
         if (UserSession.唯一键 == "")
         {
-            HttpContext.Current.Response.Redirect("/adminht/login.aspx?u=" + HttpContext.Current.Request.Url.PathAndQuery);
+            HttpContext.Current.Response.Redirect("/adminht/login.aspx?u=" + StringOP.encMe(HttpContext.Current.Request.Url.PathAndQuery,"mima"));
             return false;
         }
         //检查是否具备权限
@@ -185,7 +186,7 @@ public static class AuthComm
         //检查唯一编号是否存在
         if (UserSession.唯一键 == "")
         {
-            HttpContext.Current.Response.Redirect("/userht/login.aspx?u=" + HttpContext.Current.Request.Url.PathAndQuery);
+            HttpContext.Current.Response.Redirect("/userht/login.aspx?u=" + StringOP.encMe(HttpContext.Current.Request.Url.PathAndQuery, "mima"));
             return false;
         }
         //检查是否具备权限

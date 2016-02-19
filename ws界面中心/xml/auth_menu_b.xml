@@ -83,6 +83,10 @@
     <SortParentID>48</SortParentID>
     <SortParentPath>,48,</SortParentPath>
     <SortOrder>4</SortOrder>
+    <m_url>/adminht/corepage/bas/edit_plan.aspx</m_url>
+    <m_tip />
+    <m_tag />
+    <m_ico />
     <m_show>不隐藏</m_show>
     <SortNameTree>│├计划分解</SortNameTree>
     <SortMoveUp>0</SortMoveUp>
