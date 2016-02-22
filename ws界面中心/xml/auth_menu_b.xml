@@ -111,6 +111,10 @@
     <SortParentID>48</SortParentID>
     <SortParentPath>,48,</SortParentPath>
     <SortOrder>6</SortOrder>
+    <m_url>/adminht/corepage/bas/list_plan.aspx</m_url>
+    <m_tip />
+    <m_tag />
+    <m_ico />
     <m_show>不隐藏</m_show>
     <SortNameTree>│└浏览计划明细</SortNameTree>
     <SortMoveUp>2</SortMoveUp>
