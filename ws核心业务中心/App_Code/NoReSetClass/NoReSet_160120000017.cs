@@ -60,6 +60,7 @@ public class NoReSet_160120000017
 
         param.Add("@pid", ht_forUI["pid"].ToString());
         param.Add("@pname", ht_forUI["pname"].ToString());
+        param.Add("@pguige", ht_forUI["pguige"].ToString());
         param.Add("@pmclass", ht_forUI["pmclass"].ToString());
         param.Add("@pmclass_a", ht_forUI["pmclass_a"].ToString());
         param.Add("@pmclass_b", ht_forUI["pmclass_b"].ToString());
@@ -72,7 +73,7 @@ public class NoReSet_160120000017
         param.Add("@pyx", ht_forUI["pyx"].ToString());
 
 
-        alsql.Add("INSERT INTO  ZZZ_products(pid, pname, pmclass, pmclass_a, pmclass_b, pbeizhu, piskzph, plaiyua, pdanwei_a, pdanwei_b, pdanwei_gongshi, pyx) VALUES(@pid, @pname, @pmclass, @pmclass_a, @pmclass_b, @pbeizhu, @piskzph, @plaiyua, @pdanwei_a, @pdanwei_b, @pdanwei_gongshi, @pyx)");
+        alsql.Add("INSERT INTO  ZZZ_products(pid, pname,pguige, pmclass, pmclass_a, pmclass_b, pbeizhu, piskzph, plaiyua, pdanwei_a, pdanwei_b, pdanwei_gongshi, pyx) VALUES(@pid, @pname,@pguige, @pmclass, @pmclass_a, @pmclass_b, @pbeizhu, @piskzph, @plaiyua, @pdanwei_a, @pdanwei_b, @pdanwei_gongshi, @pyx)");
  
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
@@ -125,6 +126,7 @@ public class NoReSet_160120000017
         //pid, pname, pmclass, pmclass_a, pmclass_b, pbeizhu, piskzph, plaiyua, pdanwei_a, pdanwei_b, pdanwei_gongshi, pyx
         param.Add("@pid", ht_forUI["idforedit"].ToString());
         param.Add("@pname", ht_forUI["pname"].ToString());
+        param.Add("@pguige", ht_forUI["pguige"].ToString());
         param.Add("@pmclass", ht_forUI["pmclass"].ToString());
         param.Add("@pmclass_a", ht_forUI["pmclass_a"].ToString());
         param.Add("@pmclass_b", ht_forUI["pmclass_b"].ToString());
@@ -136,7 +138,7 @@ public class NoReSet_160120000017
         param.Add("@pdanwei_gongshi", ht_forUI["pdanwei_gongshi"].ToString());
         param.Add("@pyx", ht_forUI["pyx"].ToString());
 
-        alsql.Add("UPDATE ZZZ_products SET  pname=@pname, pmclass=@pmclass, pmclass_a=@pmclass_a, pmclass_b=@pmclass_b, pbeizhu=@pbeizhu, piskzph=@piskzph, plaiyua=@plaiyua, pdanwei_a=@pdanwei_a, pdanwei_b=@pdanwei_b, pdanwei_gongshi=@pdanwei_gongshi, pyx=@pyx,plast_up=getdate()   where pid=@pid ");
+        alsql.Add("UPDATE ZZZ_products SET  pname=@pname,pguige=@pguige, pmclass=@pmclass, pmclass_a=@pmclass_a, pmclass_b=@pmclass_b, pbeizhu=@pbeizhu, piskzph=@piskzph, plaiyua=@plaiyua, pdanwei_a=@pdanwei_a, pdanwei_b=@pdanwei_b, pdanwei_gongshi=@pdanwei_gongshi, pyx=@pyx,plast_up=getdate()   where pid=@pid ");
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
 

@@ -42,7 +42,9 @@
                              for (var i = 0; i < arr.length; i++) {
                                  var arr_z = arr[i].split(':');
                                  if (arr_z[0] == "[产品名称")
-                                 { $("#cpmc").val($.trim(arr_z[1]).replace("]","")); }
+                                 { $("#cpmc").val($.trim(arr_z[1]).replace("]", "")); }
+                                 if (arr_z[0] == "[产品规格")
+                                 { $("#cpgg").val($.trim(arr_z[1]).replace("]", "")); }
                                  if (arr_z[0] == "[产品单位A")
                                  { $("#jhzldw").val($.trim(arr_z[1]).replace("]", "")); }
                                  if (arr_z[0] == "[产品单位B")
