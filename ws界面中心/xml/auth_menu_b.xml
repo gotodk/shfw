@@ -219,36 +219,44 @@
   <菜单表>
     <ID>83</ID>
     <SortID>62</SortID>
-    <SortName>调拨单</SortName>
+    <SortName>库存调整单</SortName>
     <SortParentID>60</SortParentID>
     <SortParentPath>,60,</SortParentPath>
     <SortOrder>14</SortOrder>
+    <m_url>/adminht/corepage/bas/edit_record.aspx</m_url>
+    <m_tip />
+    <m_tag />
+    <m_ico />
     <m_show>不隐藏</m_show>
-    <SortNameTree>│├调拨单</SortNameTree>
+    <SortNameTree>│├库存调整单</SortNameTree>
     <SortMoveUp>1</SortMoveUp>
     <SortMoveDown>-2</SortMoveDown>
   </菜单表>
   <菜单表>
-    <ID>84</ID>
-    <SortID>63</SortID>
-    <SortName>盘点管理</SortName>
+    <ID>82</ID>
+    <SortID>61</SortID>
+    <SortName>库存调整明细</SortName>
     <SortParentID>60</SortParentID>
     <SortParentPath>,60,</SortParentPath>
     <SortOrder>15</SortOrder>
+    <m_url />
+    <m_tip />
+    <m_tag />
+    <m_ico />
     <m_show>不隐藏</m_show>
-    <SortNameTree>│├盘点管理</SortNameTree>
+    <SortNameTree>│├库存调整明细</SortNameTree>
     <SortMoveUp>2</SortMoveUp>
     <SortMoveDown>-1</SortMoveDown>
   </菜单表>
   <菜单表>
-    <ID>82</ID>
-    <SortID>61</SortID>
-    <SortName>库存明细</SortName>
+    <ID>99</ID>
+    <SortID>78</SortID>
+    <SortName>当前库存</SortName>
     <SortParentID>60</SortParentID>
     <SortParentPath>,60,</SortParentPath>
     <SortOrder>16</SortOrder>
     <m_show>不隐藏</m_show>
-    <SortNameTree>│└库存明细</SortNameTree>
+    <SortNameTree>│└当前库存</SortNameTree>
     <SortMoveUp>3</SortMoveUp>
     <SortMoveDown>0</SortMoveDown>
   </菜单表>
