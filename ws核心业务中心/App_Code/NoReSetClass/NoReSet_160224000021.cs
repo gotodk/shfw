@@ -9,7 +9,7 @@ using FMPublicClass;
 using System.Numerics;
 using System.Web.Script.Serialization;
 
-public class NoReSet_160114000014
+public class NoReSet_160224000021
 {
  
 
@@ -56,33 +56,71 @@ public class NoReSet_160114000014
         Hashtable return_ht = new Hashtable();
         ArrayList alsql = new ArrayList();
         Hashtable param = new Hashtable();
-        //以可排序guid方式生成
-        //string guid = CombGuid.GetNewCombGuid("D"); 
-        //以两位年+两位月+两位日+6位序列顺序号方式生成
-        string guid = CombGuid.GetNewCombGuid("U");
-        param.Add("@UAid", guid);
-        param.Add("@Uloginname", ht_forUI["Uloginname"].ToString());
+        //rid, rdb,  rbzr,   rzhuangtai, rbeizhu
+        string guid = CombGuid.GetMewIdFormSequence("ZZZ_C_record");
+        param.Add("@rid", guid);
+        param.Add("@rdb", ht_forUI["rdb"].ToString());
+        param.Add("@rbzr", ht_forUI["yhbsp_session_uer_UAid"].ToString());
+        param.Add("@rzhuangtai", "未审核");
+        param.Add("@rbeizhu", ht_forUI["rbeizhu"].ToString());
+        
 
-        //对密码进行加密
-        string mima_enc = StringOP.encMe(ht_forUI["Uloginpassword"].ToString().Trim(), "mima");
-        param.Add("@Uloginpassword", mima_enc);
+        alsql.Add("INSERT INTO  ZZZ_C_record(rid, rdb,  rbzr,   rzhuangtai, rbeizhu) VALUES(@rid, @rdb,  @rbzr,   @rzhuangtai, @rbeizhu)");
 
-        param.Add("@xingming", ht_forUI["xingming"].ToString());
-        param.Add("@xingbie", ht_forUI["xingbie"].ToString());
-        param.Add("@nianling", ht_forUI["nianling"].ToString());
-        param.Add("@zhuangtai", ht_forUI["zhuangtai"].ToString());
-        param.Add("@beizhu", ht_forUI["beizhu"].ToString());
+        //遍历子表， 插入 
+        string zibiao_gts_id = "grid-table-subtable-160224000354";
+        DataTable subdt = jsontodatatable.ToDataTable(ht_forUI[zibiao_gts_id].ToString());
+        //必须验证js脚本获取的数量和c#反序列化获取的数量一致才能继续。防止出错
+        if (ht_forUI[zibiao_gts_id + "_fcjsq"].ToString() != subdt.Rows.Count.ToString())
+        {
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "子表数据量与获取量不相符，系统出现问题。";
+            return dsreturn;
+        }
 
-        alsql.Add("INSERT INTO  auth_users_auths(UAid ,Uloginname,Uloginpassword) VALUES(@UAid ,@Uloginname,@Uloginpassword )");
+        param.Add("@sub_" + "MainID", guid); //隶属主表id
 
-        alsql.Add("INSERT INTO  ZZZ_userinfo(UAid ,xingming,xingbie,nianling,zhuangtai,beizhu) VALUES(@UAid ,@xingming,@xingbie,@nianling,@zhuangtai,@beizhu)");
+        for (int i = 0; i < subdt.Rows.Count; i++)
+        {
+            param.Add("@sub_" + "subid" + "_" + i, CombGuid.GetMewIdFormSequence("ZZZ_C_record_sub"));
+
+            string chuku_kw = "";
+            string ruku_kw = "";
+            if (ht_forUI["rdb"].ToString() == "调拨单" || ht_forUI["rdb"].ToString() == "调整单")
+            {
+                chuku_kw = subdt.Rows[i]["出库库位"].ToString();
+                ruku_kw = subdt.Rows[i]["入库库位"].ToString();
+            }
+            if (ht_forUI["rdb"].ToString() == "出库单")
+            {
+                chuku_kw = subdt.Rows[i]["出库库位"].ToString();
+                ruku_kw = "";
+            }
+            if (ht_forUI["rdb"].ToString() == "入库单")
+            {
+                chuku_kw = "";
+                ruku_kw = subdt.Rows[i]["入库库位"].ToString();
+            }
+
+            param.Add("@sub_" + "r_chu" + "_" + i, chuku_kw);
+            param.Add("@sub_" + "r_ru" + "_" + i, ruku_kw);
+            param.Add("@sub_" + "r_cpbh" + "_" + i, subdt.Rows[i]["调整品号"].ToString());
+            param.Add("@sub_" + "r_shuliang" + "_" + i, subdt.Rows[i]["调整数量"].ToString());
+            param.Add("@sub_" + "r_danwei" + "_" + i, subdt.Rows[i]["单位"].ToString());
+
+            string INSERTsql = "INSERT INTO ZZZ_C_record_sub (subid, rid, r_chu, r_ru, r_cpbh, r_shuliang, r_danwei ) VALUES(@sub_" + "subid" + "_" + i + ", @sub_MainID, @sub_" + "r_chu" + "_" + i + ", @sub_" + "r_ru" + "_" + i + ", @sub_" + "r_cpbh" + "_" + i + ", @sub_" + "r_shuliang" + "_" + i + ", @sub_" + "r_danwei" + "_" + i + ")";
+            alsql.Add(INSERTsql);
+        }
+
+        //更新库存
+
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
 
         if ((bool)(return_ht["return_float"]))
         {
             dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
-            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "新增成功！";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "新增成功！{"+ guid + "}";
         }
         else
         {
@@ -99,67 +137,11 @@ public class NoReSet_160114000014
     /// <returns></returns>
     public DataSet NRS_EDIT(DataTable parameter_forUI)
     {
-        //接收转换参数
-        Hashtable ht_forUI = new Hashtable();
-        for (int i = 0; i < parameter_forUI.Rows.Count; i++)
-        {
-            ht_forUI[parameter_forUI.Rows[i]["参数名"].ToString()] = parameter_forUI.Rows[i]["参数值"].ToString();
-        }
-
-
-        //初始化返回值
-        DataSet dsreturn = initReturnDataSet().Clone();
-        dsreturn.Tables["返回值单条"].Rows.Add(new string[] { "err", "初始化" });
-
-        //参数合法性各种验证，这里省略
-        if (ht_forUI["idforedit"].ToString().Trim() == "")
-        {
-            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
-            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "没有明确的修改目标！";
-            return dsreturn;
-        }
-        //开始真正的处理，这里只是演示，所以直接在这里写业务逻辑代码了
-
-        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
-        Hashtable return_ht = new Hashtable();
-        ArrayList alsql = new ArrayList();
-        Hashtable param = new Hashtable();
-        param.Add("@UAid", ht_forUI["idforedit"].ToString());
-        param.Add("@Uloginname", ht_forUI["Uloginname"].ToString());
-        param.Add("@Uloginpassword", StringOP.encMe(ht_forUI["Uloginpassword"].ToString(), "mima"));
-        param.Add("@xingming", ht_forUI["xingming"].ToString());
-        param.Add("@xingbie", ht_forUI["xingbie"].ToString());
-        param.Add("@nianling", ht_forUI["nianling"].ToString());
-        param.Add("@zhuangtai", ht_forUI["zhuangtai"].ToString());
-        param.Add("@beizhu", ht_forUI["beizhu"].ToString());
-
-        alsql.Add("UPDATE ZZZ_userinfo SET xingming=@xingming,xingbie=@xingbie,nianling=@nianling,zhuangtai=@zhuangtai,beizhu=@beizhu where UAid=@UAid ");
-        alsql.Add("UPDATE auth_users_auths SET Uloginname=@Uloginname,Uloginpassword=@Uloginpassword  where UAid=@UAid ");
-
-        return_ht = I_DBL.RunParam_SQL(alsql, param);
+         
 
 
 
-
-        if ((bool)(return_ht["return_float"]))
-        {
-
-            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
-            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "修改成功！";
-        }
-        else
-        {
-            //其实要记录日志，而不是输出，这里只是演示
-            //dsreturn.Tables.Add(parameter_forUI.Copy());
-            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
-            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "系统故障，修改失败：" + return_ht["return_errmsg"].ToString();
-        }
-
-
-
-
-
-        return dsreturn;
+        return null;
     }
 
     /// <summary>
@@ -188,9 +170,9 @@ public class NoReSet_160114000014
         I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
         Hashtable return_ht = new Hashtable();
         Hashtable param = new Hashtable();
-        param.Add("@UAid", ht_forUI["idforedit"].ToString());
+        param.Add("@rid", ht_forUI["idforedit"].ToString());
 
-        return_ht = I_DBL.RunParam_SQL("select  top 1 * from view_ZZZ_userinfo_ex where UAid=@UAid", "数据记录", param);
+        return_ht = I_DBL.RunParam_SQL("select  top 1 *  from ZZZ_C_record where rid=@rid", "数据记录", param);
 
         if ((bool)(return_ht["return_float"]))
         {
@@ -202,7 +184,6 @@ public class NoReSet_160114000014
                 dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "没有找到指定数据!";
                 return dsreturn;
             }
-            redb.Rows[0]["Uloginpassword"] = StringOP.uncMe(redb.Rows[0]["Uloginpassword"].ToString(),"mima");
             dsreturn.Tables.Add(redb);
 
 
