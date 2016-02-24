@@ -1,4 +1,5 @@
 ﻿using FMipcClass;
+using FMPublicClass;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ public partial class MasterPageMain_frm_subtab : System.Web.UI.MasterPage
         //登录状态判定
         if (UserSession.唯一键 == "")
         {
-            Response.Redirect("/adminht/login.aspx?u=" + Request.Url.PathAndQuery);
+            Response.Redirect("/adminht/login.aspx?u=" + StringOP.encMe(Request.Url.PathAndQuery, "mima"));
             return;
         }
         if (!AuthComm.chekcAuth_fromsession("1", UserSession.最终权值_全局独立权限, false))

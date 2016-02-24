@@ -92,7 +92,7 @@ public class NoReSet_sys_demo_0001
             param.Add("@sub_" + "CreateTime" + "_" + i, subdt.Rows[i]["添加日期"].ToString());
 
 
-            string INSERTsql = "INSERT INTO demouser_sub_test ( id, SID, Sname,   Scity,  Sint, Sdecimal,CreateTime ) VALUES(@sub_" + "id" + "_" + i + ", @sub_MainID, @sub_Sname_" + i + ", @sub_Scity_" + i + ", @sub_Sint_" + i + ", @sub_Sdecimal_" + i + ", @sub_CreateTime_" + i + "  )";
+            string INSERTsql = "INSERT INTO demouser_sub_test ( id, SID, Sname,   Scity,  Sint, Sdecimal,CreateTime ) VALUES(@sub_" + "id" + "_" + i + ", @sub_MainID, @sub_"+ "Sname" + "_" + i + ", @sub_" + "Scity" + "_" + i + ", @sub_" + "Sint" + "_" + i + ", @sub_" + "Sdecimal" + "_" + i + ", @sub_" + "CreateTime" + "_" + i + "  )";
             alsql.Add(INSERTsql);
         }
 
@@ -180,7 +180,7 @@ public class NoReSet_sys_demo_0001
             param.Add("@sub_" + "CreateTime" + "_" + i, subdt.Rows[i]["添加日期"].ToString());
 
 
-            string INSERTsql = "INSERT INTO demouser_sub_test ( id, SID, Sname,   Scity,  Sint, Sdecimal,CreateTime ) VALUES(@sub_" + "id" + "_" + i + ", @sub_MainID, @sub_Sname_" + i + ", @sub_Scity_" + i + ", @sub_Sint_" + i + ", @sub_Sdecimal_" + i + ", @sub_CreateTime_" + i + "  )";
+            string INSERTsql = "INSERT INTO demouser_sub_test ( id, SID, Sname,   Scity,  Sint, Sdecimal,CreateTime ) VALUES(@sub_" + "id" + "_" + i + ", @sub_MainID, @sub_" + "Sname" + "_" + i + ", @sub_" + "Scity" + "_" + i + ", @sub_" + "Sint" + "_" + i + ", @sub_" + "Sdecimal" + "_" + i + ", @sub_" + "CreateTime" + "_" + i + "  )";
             alsql.Add(INSERTsql);
         }
 
@@ -261,7 +261,7 @@ public class NoReSet_sys_demo_0001
         else
         {
             dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
-            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "意外错误，修改失败：" + return_ht["return_errmsg"].ToString();
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "意外错误，获取失败：" + return_ht["return_errmsg"].ToString();
         }
 
 

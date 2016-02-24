@@ -8,10 +8,38 @@ using System.Data;
 using FMPublicClass;
 using System.Numerics;
 using System.Web.Script.Serialization;
+using ServiceStack.Text;
+using Newtonsoft.Json;
+using System.Xml.Linq;
+using System.IO;
+using System.Xml;
 
 public class NoReSet_160121000019
 {
- 
+
+    public  DataSet ConvertXMLToDataSet(string xmlData)
+    {
+        StringReader stream = null;
+        XmlTextReader reader = null;
+        try
+        {
+            DataSet xmlDS = new DataSet();
+            stream = new StringReader(xmlData);
+            //从stream装载到XmlTextReader
+            reader = new XmlTextReader(stream);
+            xmlDS.ReadXml(reader);
+            return xmlDS;
+        }
+        catch (System.Exception ex)
+        {
+            throw ex;
+        }
+        finally
+        {
+            if (reader != null) reader.Close();
+        }
+    }
+
 
     /// <summary>
     /// 初始化返回值数据集,执行结果只有两种ok和err(大多数情况是这个标准)
@@ -67,7 +95,11 @@ public class NoReSet_160121000019
 
 
         alsql.Add("INSERT INTO  ZZZ_workprocess_main(wmid, wmname, wmbeizhu, wmjsonstr) VALUES(@wmid, @wmname, @wmbeizhu, @wmjsonstr)");
- 
+
+
+        //解析流程图的json
+    
+        DataSet dataSet = JsonConvert.DeserializeObject<DataSet>(ht_forUI["workprocess_area_json"].ToString());
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
 
@@ -123,6 +155,36 @@ public class NoReSet_160121000019
         param.Add("@wmjsonstr", ht_forUI["workprocess_area_json"].ToString());
 
         alsql.Add("UPDATE ZZZ_workprocess_main SET  wmname=@wmname, wmbeizhu=@wmbeizhu, wmjsonstr=@wmjsonstr   where wmid=@wmid ");
+
+       
+        //解析流程图的json
+        XNode node = JsonConvert.DeserializeXNode(ht_forUI["workprocess_area_json"].ToString(), "Root");
+        DataSet ds =  ConvertXMLToDataSet(node.ToString());
+        alsql.Add("delete ZZZ_workprocess_sub    where wswmid=@wmid ");
+        for (int w = 0; w < ds.Tables.Count; w++)
+        {
+            if (ds.Tables[w].TableName.IndexOf("workprocess_area_node_") >= 0)
+            {
+                string wsbiaoji = "普通";
+                if (ds.Tables[w].Rows[0]["type"].ToString().IndexOf("start") == 0)
+                {
+                    wsbiaoji = "起点";
+                }
+                if (ds.Tables[w].Rows[0]["type"].ToString().IndexOf("end") == 0)
+                {
+                    wsbiaoji = "终点";
+                }
+                alsql.Add("INSERT INTO  ZZZ_workprocess_sub(wsid, wswmid, wsname, wsbiaoji, ws_gx_nodeid, ws_gx_ru, ws_gx_chu, ws_gx_xia,  ws_gx_shang, ws_gx_mod, wsbeizhu) VALUES('"+ ht_forUI["idforedit"].ToString() + "_" + ds.Tables[w].TableName + "', @wmid, '" + ds.Tables[w].TableName + "', '" + wsbiaoji + "', '" + ds.Tables[w].TableName + "', '', '', '',  '', '', '"+ ds.Tables[w].Rows[0]["name"].ToString() + "') ");
+            }
+            if (ds.Tables[w].TableName.IndexOf("workprocess_area_line_") >= 0)
+            {
+                string from = ds.Tables[w].Rows[0]["from"].ToString();
+                string to = ds.Tables[w].Rows[0]["to"].ToString();
+                alsql.Add("UPDATE  ZZZ_workprocess_sub set ws_gx_xia=ws_gx_xia + '" + ht_forUI["idforedit"].ToString() + "_" + to + "' + ',' where wsid= '" + ht_forUI["idforedit"].ToString() + "_" + from + "'");
+                alsql.Add("UPDATE  ZZZ_workprocess_sub set ws_gx_shang=ws_gx_shang + '" + ht_forUI["idforedit"].ToString() + "_" + from + "' + ',' where wsid= '" + ht_forUI["idforedit"].ToString() + "_" + to + "'");
+            }
+        }
+
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
 
@@ -199,7 +261,7 @@ public class NoReSet_160121000019
         else
         {
             dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
-            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "意外错误，修改失败：" + return_ht["return_errmsg"].ToString();
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "意外错误，获取失败：" + return_ht["return_errmsg"].ToString();
         }
 
 

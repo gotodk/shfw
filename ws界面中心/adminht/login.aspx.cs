@@ -1,4 +1,5 @@
 ﻿
+using FMPublicClass;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -20,7 +21,7 @@ public partial class login : System.Web.UI.Page
 
         if (Request["u"] != null && Request["u"].ToString() != "")
         {
-            homeurl = Request["u"].ToString();
+            homeurl = StringOP.uncMe(Request["u"].ToString(),"mima");
         }
 
 

@@ -212,7 +212,7 @@ public class NoReSet_160114000014
         else
         {
             dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
-            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "意外错误，修改失败：" + return_ht["return_errmsg"].ToString();
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "意外错误，获取失败：" + return_ht["return_errmsg"].ToString();
         }
 
 

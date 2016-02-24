@@ -52,27 +52,29 @@
 			left: 'prev,next today',
 			center: 'title',
 			right: 'month,agendaWeek,agendaDay'
-		},
-		events: [
-		  {
-			title: '全天事件',
-			start: new Date(y, m, 1),
-			className: 'label-important'
-		  },
-		  {
-			title: '长期事件',
-			start: moment().subtract(5, 'days').format('YYYY-MM-DD'),
-			end: moment().subtract(1, 'days').format('YYYY-MM-DD'),
-			className: 'label-success'
-		  },
-		  {
-			title: '一些事件',
-			start: new Date(y, m, d-3, 16, 0),
-			allDay: false,
-			className: 'label-info'
-		  }
-		]
-		,
+		}
+        ,
+		//events: [
+		//  {
+		//	title: '全天事件',
+		//	start: new Date(y, m, 1),
+		//	className: 'label-important'
+		//  },
+		//  {
+		//	title: '长期事件',
+		//	start: moment().subtract(5, 'days').format('YYYY-MM-DD'),
+		//	end: moment().subtract(1, 'days').format('YYYY-MM-DD'),
+		//	className: 'label-success'
+		//  },
+		//  {
+		//	title: '一些事件',
+		//	start: new Date(y, m, 1),
+		//	allDay: true,
+		//	className: 'label-info'
+		//  }
+		//]
+	    //,
+		events: "/adminht/demo_rili_ajax.aspx?zhiling=all",
 		editable: true,
 		droppable: true, // this allows things to be dropped onto the calendar !!!
 		drop: function(date, allDay) { // this function is called when something is dropped
@@ -104,27 +106,27 @@
 		,
 		selectable: true,
 		selectHelper: true,
-		select: function(start, end, allDay) {
+		//select: function(start, end, allDay) {
 			
-			bootbox.prompt("新的属性:", function(title) {
-				if (title !== null) {
-					calendar.fullCalendar('renderEvent',
-						{
-							title: title,
-							start: start,
-							end: end,
-							allDay: allDay,
-							className: 'label-info'
-						},
-						true // make the event "stick"
-					);
-				}
-			});
+		//	bootbox.prompt("新的属性:", function(title) {
+		//		if (title !== null) {
+		//			calendar.fullCalendar('renderEvent',
+		//				{
+		//					title: title,
+		//					start: start,
+		//					end: end,
+		//					allDay: allDay,
+		//					className: 'label-info'
+		//				},
+		//				true // make the event "stick"
+		//			);
+		//		}
+		//	});
 			
 
-			calendar.fullCalendar('unselect');
-		}
-		,
+		//	calendar.fullCalendar('unselect');
+		//}
+		//,
 		eventClick: function(calEvent, jsEvent, view) {
 
 			//display a modal

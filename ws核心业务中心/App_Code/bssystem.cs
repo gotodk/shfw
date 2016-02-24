@@ -1749,8 +1749,8 @@ public class bssystem : System.Web.Services.WebService
 
         Hashtable return_ht = new Hashtable();
 
-        string sql1 = " select top 1 * from FUP_FormsSubInfo where FSID = '" + FSID + "' and FS_ok=1 ;";
-        string sql2 = " select * from FUP_FormsSubDialog where DID_FSID = '" + FSID + "' and DID_ok=1 order by DID_px asc,DID desc ;";
+        string sql1 = " select top 1 * from FUP_FormsSubInfo where FSID = '" + FSID + "'   ;";
+        string sql2 = " select * from FUP_FormsSubDialog where DID_FSID = '" + FSID + "'  order by DID_px asc,DID desc ;";
 
         return_ht = I_DBL.RunParam_SQL(sql1 + sql2, "xx", param);
 
