@@ -3006,7 +3006,7 @@ public class bssystem : System.Web.Services.WebService
 
         for (int i = 0; i < ziduanliebiao.Length; i++)
         {
-            string guid_sub = CombGuid.GetMewIdFormSequence("FUP_FormsSubInfo");
+            string guid_sub = CombGuid.GetMewIdFormSequence("FUP_FormsList_field");
             param.Add("@DID_" + i, guid_sub);
             param.Add("@DID_FSID_" + i, guid);
             param.Add("@DID_px_" + i, (i + 1).ToString());
