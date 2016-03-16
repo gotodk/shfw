@@ -10,7 +10,7 @@ using System.Numerics;
 
 
 
-public class NoReSetDEL_sys_FL_0001
+public class NoReSetDEL_sys_FL_0003
 {
  
     /// <summary>
@@ -49,11 +49,12 @@ public class NoReSetDEL_sys_FL_0001
                 //sys开头的，不允许删除。为了防止意外导致系统出错。
                 if(delids[d].IndexOf("sys_") < 0)
                 {
-                    param.Add("@FSID_" + d, delids[d]);
+                    param.Add("@FID_" + d, delids[d]);
 
-                    alsql.Add("delete FUP_FormsList  where FSID=@FSID_" + d);
-                    alsql.Add("delete FUP_FormsList_field  where DID_FSID=@FSID_" + d);
-                    alsql.Add("delete FUP_FormsList_user_buju  where fsid=@FSID_" + d);
+                    alsql.Add("delete FUP_FormsMainInfo  where FID=@FID_" + d);
+                    alsql.Add("delete FUP_FormsSubDialog  where DID_FSID in (select FSID from FUP_FormsSubInfo where FS_FID=@FID_" + d + ")");
+                    alsql.Add("delete FUP_FormsSubInfo  where FS_FID=@FID_" + d);
+              
                 }
               
             }
@@ -120,15 +121,26 @@ public class NoReSetDEL_sys_FL_0001
                 {
                     //克隆主表
                     string oldid = ids[d];
-                    string guid = CombGuid.GetMewIdFormSequence("FUP_FormsList");
-                    alsql.Add("insert into FUP_FormsList select '"+ guid + "' as FSID, FS_ok, FS_type, '复制自_'+FS_name+'_'+ CONVERT(nvarchar(20), datepart(ms,getdate()) ) as FS_name, FS_getJK, FS_delJK, FS_del_show, FS_can_download, FS_add_show,   FS_add_show_link, FS_zdy_op, FS_D_shrinkToFit, FS_D_setGroupHeaders, FS_D_field, FS_D_datatable, FS_D_where,  FS_D_order, FD_D_key, FD_D_pagesize, SRE_open, SRE_showname_1, SRE_idname_1, SRE_type_1,  SRE_showname_2, SRE_idname_2, SRE_type_2, SRE_showname_3, SRE_idname_3, SRE_type_3 from FUP_FormsList where FSID='" + oldid + "'");
+                    string guid = CombGuid.GetMewIdFormSequence("FUP_FormsMainInfo");
+                    alsql.Add("insert into FUP_FormsMainInfo select '" + guid + "' as FID, F_ok , '复制自_'+Fname+'_'+ CONVERT(nvarchar(20), datepart(ms,getdate()) ) as Fname, Ftype, Frun_add, Frun_edit, Frun_showinfo_foredit from FUP_FormsMainInfo where FID='" + oldid + "'");
                     //取出子表并重新插入
-                    Hashtable HTsub = I_DBL.RunParam_SQL("select DID from FUP_FormsList_field where DID_FSID='" + oldid + "' ", "数据记录", param);
+                    Hashtable HTsub = I_DBL.RunParam_SQL("select FSID from FUP_FormsSubInfo where FS_FID='" + oldid + "' ", "数据记录", param);
                     DataTable DTsub = ((DataSet)HTsub["return_ds"]).Tables["数据记录"].Copy();
                     for (int i = 0; i < DTsub.Rows.Count; i++)
                     {
-                        string guid_sub = CombGuid.GetMewIdFormSequence("FUP_FormsList_field");
-                        alsql.Add("insert into FUP_FormsList_field select '"+ guid_sub + "' as DID, '"+ guid + "' as DID_FSID, DID_ok, DID_px, DID_hide, DID_showname, DID_name, DID_width, DID_sortable, DID_fixed,    DID_frozen, DID_formatter, DID_formatter_CS  from FUP_FormsList_field where DID='" + DTsub.Rows[i]["DID"].ToString() + "'");
+                        string guid_sub = CombGuid.GetMewIdFormSequence("FUP_FormsSubInfo");
+                        alsql.Add("insert into FUP_FormsSubInfo select '" + guid_sub + "' as FSID, '" + guid + "' as FS_FID, FS_ok, FS_type, FS_name, FS_title, FS_minlength, FS_maxlength, FS_defaultvalue, FS_tip_n,    FS_tip_w, FS_passnull, FS_nulltip, FS_index, FS_SPPZ_list_static, FS_SPPZ_mask, FS_SPPZ_readonly, FS_D_haveD,  FS_D_yinruzhi, FS_D_shrinkToFit, FS_D_setGroupHeaders, FS_D_field,  FS_D_datatable, FS_D_where, FS_D_order,    FD_D_key, FD_D_pagesize  from FUP_FormsSubInfo where  FSID='" + DTsub.Rows[i]["FSID"].ToString() + "'");
+
+
+                        //取出弹窗并重新插入
+                        Hashtable HTsub_dlg = I_DBL.RunParam_SQL("select DID from FUP_FormsSubDialog where DID_FSID='" + DTsub.Rows[i]["FSID"].ToString() + "' ", "数据记录", param);
+                        DataTable DTsub_dlg = ((DataSet)HTsub_dlg["return_ds"]).Tables["数据记录"].Copy();
+                        for (int dlg = 0; dlg < DTsub_dlg.Rows.Count; dlg++)
+                        {
+                            string guid_sub_dlg = CombGuid.GetMewIdFormSequence("FUP_FormsSubDialog");
+                            alsql.Add("insert into FUP_FormsSubDialog select '" + guid_sub_dlg + "' as DID, '" + guid_sub + "' as DID_FSID, DID_ok, DID_px, DID_hide, DID_showname, DID_name, DID_width, DID_sortable, DID_fixed,    DID_frozen, DID_formatter, DID_formatter_CS, DID_edit_editable, DID_edit_required, DID_edit_ftype,  DID_edit_spset from FUP_FormsSubDialog  where DID ='" + DTsub_dlg.Rows[dlg]["DID"].ToString() + "'");
+                        }
+
                     }
                 }
 

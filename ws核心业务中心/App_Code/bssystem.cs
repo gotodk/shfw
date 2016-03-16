@@ -2919,17 +2919,43 @@ public class bssystem : System.Web.Services.WebService
         Hashtable return_ht = new Hashtable();
         ArrayList alsql = new ArrayList();
 
-        for (int i = 0; i < tanchuangziduan.Length; i++)
-        {
-            string guid_sub = CombGuid.GetMewIdFormSequence("FUP_FormsSubDialog");
-            param.Add("@DID_" + i, guid_sub);
-            param.Add("@DID_FSID_" + i, ht_forUI["ziduanzhujian"]);
-            param.Add("@DID_showname_" + i, tanchuangziduan[i].Trim());
-            param.Add("@DID_name_" + i, tanchuangziduan[i].Trim());
-            param.Add("@DID_px_" + i, (i + 1).ToString());
 
-            alsql.Add("INSERT INTO FUP_FormsSubDialog(DID,DID_FSID, DID_showname,DID_name,DID_px) VALUES(@DID_" + i + ", @DID_FSID_" + i + ",@DID_showname_" + i + ",@DID_name_" + i + ",@DID_px_" + i + ")");
+
+
+        if (!ht_forUI.ContainsKey("kelongzi") || ht_forUI["kelongzi"].ToString().Trim() == "")
+        {
+            for (int i = 0; i < tanchuangziduan.Length; i++)
+            {
+                string guid_sub = CombGuid.GetMewIdFormSequence("FUP_FormsSubDialog");
+                param.Add("@DID_" + i, guid_sub);
+                param.Add("@DID_FSID_" + i, ht_forUI["ziduanzhujian"].ToString());
+                param.Add("@DID_showname_" + i, tanchuangziduan[i].Trim());
+                param.Add("@DID_name_" + i, tanchuangziduan[i].Trim());
+                param.Add("@DID_px_" + i, (i + 1).ToString());
+
+            
+                alsql.Add("INSERT INTO FUP_FormsSubDialog(DID,DID_FSID, DID_showname,DID_name,DID_px) VALUES(@DID_" + i + ", @DID_FSID_" + i + ",@DID_showname_" + i + ",@DID_name_" + i + ",@DID_px_" + i + ")");
+            }
         }
+        else
+        {
+            //克隆字段主表跟弹窗有关的关键信息
+            string oldid = ht_forUI["ziduanzhujian"].ToString();
+            string kelongziid = ht_forUI["kelongzi"].ToString();
+            alsql.Add("delete FUP_FormsSubDialog where DID_FSID='" + oldid + "'");
+
+            alsql.Add("update old set old.FS_type = ly.FS_type,old.FS_D_haveD=ly.FS_D_haveD,old.FS_D_yinruzhi=ly.FS_D_yinruzhi, old.FS_D_shrinkToFit=ly.FS_D_shrinkToFit, old.FS_D_setGroupHeaders=ly.FS_D_setGroupHeaders, old.FS_D_field=ly.FS_D_field, old.FS_D_datatable=ly.FS_D_datatable, old.FS_D_where=ly.FS_D_where, old.FS_D_order=ly.FS_D_order,   old.FD_D_key=ly.FD_D_key, old.FD_D_pagesize=ly.FD_D_pagesize  from FUP_FormsSubInfo as  ly,FUP_FormsSubInfo as old where old.fsid='" + oldid + "' and ly.FSID='"+ kelongziid + "'");
+            //取出子表并重新插入
+            Hashtable HTsub = I_DBL.RunParam_SQL("select DID from FUP_FormsSubDialog where DID_FSID='" + oldid + "' ", "数据记录", param);
+            DataTable DTsub = ((DataSet)HTsub["return_ds"]).Tables["数据记录"].Copy();
+            for (int i = 0; i < DTsub.Rows.Count; i++)
+            {
+                string guid_sub = CombGuid.GetMewIdFormSequence("FUP_FormsSubDialog");
+                alsql.Add("insert into FUP_FormsSubDialog select '" + guid_sub + "' as DID, '" + oldid + "' as DID_FSID, DID_ok, DID_px, DID_hide, DID_showname, DID_name, DID_width, DID_sortable, DID_fixed,    DID_frozen, DID_formatter, DID_formatter_CS, DID_edit_editable, DID_edit_required, DID_edit_ftype,  DID_edit_spset from  FUP_FormsSubDialog where DID='" + DTsub.Rows[i]["DID"].ToString() + "'");
+            }
+        }
+
+
 
 
 
