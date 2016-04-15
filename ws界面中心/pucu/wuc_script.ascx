@@ -844,6 +844,7 @@
                         modal: true,
                         title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='ace-icon fa fa-check'></i> 选择并引入--" + dialog_title + "</h4></div>",
                         width: '80%',
+                  
                         buttons: [
                             {
                                 text: "  取消选择  ",
@@ -867,6 +868,7 @@
 
                     var postData = $(grid_selector).jqGrid("getGridParam", "postData");
                     $.extend(postData, { this_extforinfoFSID: kczd.attr('guid') });
+                    $.extend(postData, { this_extfor_teshuwhere: kczd.attr('teshuwhere') });
                     $(grid_selector).jqGrid("setGridParam", { search: true, datatype: 'xml' }).trigger("reloadGrid", [{ page: 1 }]);  //重载JQGrid数据
                     //设置冻结列
                     $(grid_selector).jqGrid('setFrozenColumns');

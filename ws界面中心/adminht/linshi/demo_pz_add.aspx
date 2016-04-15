@@ -28,5 +28,15 @@
     <uc1:wuc_script runat="server" ID="wuc_script" />
 
 
+                <!-- 强制添加弹窗特殊条件 -->
+    <script type="text/javascript">
+             jQuery(function ($) {
+                 //
+                 $("#searchopenyhbspgogo_zhanghao").attr("teshuwhere", "1=1");
+                
+ 
+        });
+        </script>
+
 </asp:Content>
 

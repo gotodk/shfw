@@ -70,6 +70,18 @@
     <uc1:wuc_script_onlygrid runat="server" ID="wuc_script_onlygrid" />
 
 
+
+    <!-- 强制添加列表特殊条件 -->
+    <script type="text/javascript">
+             jQuery(function ($) {
+                 //
+                 $("#zheshiliebiaoquyu").attr('teshuwhere','1=1');
+                
+ 
+        });
+        </script>
+
+
      <!-- **********自定义新增脚本******** -->
      <script type="text/javascript">
          var dialog_tanchuang_zdy = null;

@@ -97,6 +97,8 @@
                 var zdy = $('#mysearchtop').serialize();
                 var postData = $(grid_selector).jqGrid("getGridParam", "postData");
                 $.extend(postData, { mysearchtop: zdy });
+                $.extend(postData, { this_extfor_teshuwhere: $("#zheshiliebiaoquyu").attr('teshuwhere') });
+             
                 $(grid_selector).jqGrid("setGridParam", { search: true }).trigger("reloadGrid", [{ page: 1 }]);  //重载JQGrid
             });
 
@@ -191,6 +193,7 @@
                         var zdy = $('#mysearchtop').serialize();
                         $.extend(postData, { mysearchtop: zdy });
                         $.extend(postData, { this_extforinfoFSID: t_guid });
+                        $.extend(postData, { this_extfor_teshuwhere: $("#zheshiliebiaoquyu").attr('teshuwhere') });
                         $(grid_selector).jqGrid("setGridParam", { search: true, datatype: 'xml' }).trigger("reloadGrid", [{ page: 1 }]);  //重载JQGrid数据
                         //设置冻结列
                         $(grid_selector).jqGrid('setFrozenColumns');

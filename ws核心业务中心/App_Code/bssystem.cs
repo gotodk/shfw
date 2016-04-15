@@ -1883,8 +1883,10 @@ public class bssystem : System.Web.Services.WebService
                 default_where = " and " + ds_DD.Tables["字段配置主表"].Rows[0]["FS_D_where"].ToString().Replace("{idforedit}", "'"+ ht_forUI["idforedit"].ToString() + "'") + " ";
             }
 
-            //处理发过来的表头搜索条件
-            string extseearchstr = " ";
+
+
+                //处理发过来的表头搜索条件
+                string extseearchstr = " ";
             Dictionary<string, string> dic_mysearchtop = new Dictionary<string, string>();
             if (ht_forUI.Contains("mysearchtop"))
             {
@@ -1922,9 +1924,19 @@ public class bssystem : System.Web.Services.WebService
 
             }
 
+            //处理前台脚本强制定义的特殊条件
+            string teshuwhere = "";
+            if (ht_forUI.Contains("this_extfor_teshuwhere"))
+            {
+                if(ht_forUI["this_extfor_teshuwhere"].ToString().Trim() != "")
+                {
+                    teshuwhere = " and " + ht_forUI["this_extfor_teshuwhere"].ToString();
+                }
+        
+            }
 
             //给条件赋值
-            ds_page.Tables[0].Rows[0]["search_str_where"] = " 1=1 " + default_where + extseearchstr;  //检索条件(必须设置)
+            ds_page.Tables[0].Rows[0]["search_str_where"] = " 1=1 " + default_where + extseearchstr + teshuwhere;  //检索条件(必须设置)
 
             //处理发过来的排序参数
             if (!ht_forUI.Contains("R_OrderBy") || (ht_forUI.Contains("R_OrderBy") && ht_forUI["R_OrderBy"].ToString().Trim() == ""))
@@ -2554,9 +2566,19 @@ public class bssystem : System.Web.Services.WebService
 
             }
 
+            //处理前台脚本强制定义的特殊条件
+            string teshuwhere = "";
+            if (ht_forUI.Contains("this_extfor_teshuwhere"))
+            {
+                if (ht_forUI["this_extfor_teshuwhere"].ToString().Trim() != "")
+                {
+                    teshuwhere = " and " + ht_forUI["this_extfor_teshuwhere"].ToString();
+                }
+
+            }
 
             //给条件赋值
-            ds_page.Tables[0].Rows[0]["search_str_where"] = " 1=1 " + default_where + extseearchstr;  //检索条件(必须设置)
+            ds_page.Tables[0].Rows[0]["search_str_where"] = " 1=1 " + default_where + extseearchstr + teshuwhere;  //检索条件(必须设置)
 
             //处理发过来的排序参数
             if (!ht_forUI.Contains("R_OrderBy") || (ht_forUI.Contains("R_OrderBy") && ht_forUI["R_OrderBy"].ToString().Trim() == ""))
@@ -2736,7 +2758,20 @@ public class bssystem : System.Web.Services.WebService
 
 
         }
-        string where_str = default_where + extseearchstr;
+
+        //处理前台脚本强制定义的特殊条件
+        string teshuwhere = "";
+        if (ht_forUI.Contains("this_extfor_teshuwhere"))
+        {
+            if (ht_forUI["this_extfor_teshuwhere"].ToString().Trim() != "")
+            {
+                teshuwhere = " and " + ht_forUI["this_extfor_teshuwhere"].ToString();
+            }
+
+        }
+
+
+        string where_str = default_where + extseearchstr + teshuwhere;
 
 
         //生成语句中的排序

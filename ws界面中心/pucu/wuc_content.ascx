@@ -167,7 +167,7 @@
 
 
                                                         <span class="input-group-btn">
-                                                            <button class=" btn  btn-sm  searchopenyhbspgogo" type="button" id="searchopenyhbspgogo_<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" title="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_D_yinruzhi"] %>" guid="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FSID"] %>">
+                                                            <button class=" btn  btn-sm  searchopenyhbspgogo" type="button" id="searchopenyhbspgogo_<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" title="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_D_yinruzhi"] %>" guid="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FSID"] %>" teshuwhere="">
                                                                 <span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
                                                             </button>
                                                         </span>
