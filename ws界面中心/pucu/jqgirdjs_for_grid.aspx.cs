@@ -159,14 +159,25 @@ public partial class pucu_jqgirdjs_for_grid : System.Web.UI.Page
             }
             rehtml = rehtml.Replace("[*[FS_zxy_op_tihuan]*]", zdy_tihuan_str);
 
+            //定义合计需要的变量，准备替换
+            bool needsum = false;//是否需要合计
+            bool beshowhejistr = false; //是否已找到适合显示合计两个字的列
+            List<String> alop = new List<String>();//存储配置
             //列配置
             string c_str = "";
             //特殊处理第一列
             //因为第一列在自带查看里不显示，所以要显示编号需要额外弄一列(这一列在sql取数据时一定要有)
             c_str = c_str + " { name: '隐藏编号', xmlmap: 'jqgird_spid', hidden: true,frozen:false,hidedlg:true } ," + Environment.NewLine;
+
+            
             for (int i = 0; i < ds_DD.Tables["字段配置子表"].Rows.Count; i++)
             {
                 DataRow dr = ds_DD.Tables["字段配置子表"].Rows[i];
+                if (dr["DID_hide"].ToString() == "false" && !beshowhejistr)
+                {
+                    alop.Add("'"+ dr["DID_showname"].ToString() + "':'合计：'");
+                    beshowhejistr = true;
+                }
  
                     switch (dr["DID_formatter"].ToString())
                     {
@@ -188,10 +199,15 @@ public partial class pucu_jqgirdjs_for_grid : System.Web.UI.Page
                             break;
                         case "整数":
                             c_str = c_str + " { name: '" + dr["DID_showname"].ToString() + "', xmlmap: '" + dr["DID_name"].ToString() + "', index: '" + dr["DID_name"].ToString() + "', width: " + dr["DID_width"].ToString() + ", fixed: " + dr["DID_fixed"].ToString() + ", sortable: " + dr["DID_sortable"].ToString() + ",hidden: " + dr["DID_hide"].ToString() + ",frozen:" + dr["DID_frozen"].ToString() + " , formatter: 'integer' }, " + Environment.NewLine;
-                            break;
+
+                        alop.Add("'" + dr["DID_showname"].ToString() + "':$(this).getCol('" + dr["DID_showname"].ToString() + "',false,'sum')");
+                        needsum = true;
+                        break;
                         case "小数":
                             c_str = c_str + " { name: '" + dr["DID_showname"].ToString() + "', xmlmap: '" + dr["DID_name"].ToString() + "', index: '" + dr["DID_name"].ToString() + "', width: " + dr["DID_width"].ToString() + ", fixed: " + dr["DID_fixed"].ToString() + ", sortable: " + dr["DID_sortable"].ToString() + ",hidden: " + dr["DID_hide"].ToString() + ",frozen:" + dr["DID_frozen"].ToString() + " , formatter: 'number' }, " + Environment.NewLine;
-                            break;
+                        alop.Add("'" + dr["DID_showname"].ToString() + "':$(this).getCol('" + dr["DID_showname"].ToString() + "',false,'sum')");
+                        needsum = true;
+                        break;
                         case "日期时间":
                             c_str = c_str + " { name: '" + dr["DID_showname"].ToString() + "', xmlmap: '" + dr["DID_name"].ToString() + "', index: '" + dr["DID_name"].ToString() + "', width: " + dr["DID_width"].ToString() + ", fixed: " + dr["DID_fixed"].ToString() + ", sortable: " + dr["DID_sortable"].ToString() + ",hidden: " + dr["DID_hide"].ToString() + ",frozen:" + dr["DID_frozen"].ToString() + " , formatter: 'date', formatoptions: { srcformat: 'Y-m-d H:i:s', newformat: 'Y-m-d H:i:s' } }, " + Environment.NewLine;
                             break;
@@ -210,7 +226,19 @@ public partial class pucu_jqgirdjs_for_grid : System.Web.UI.Page
                
             }
             rehtml = rehtml.Replace("[*[SubDialog]*]", c_str.TrimEnd(','));
-            
+
+
+            if (needsum)
+            {
+             
+                string js = "$(this).footerData('set',{ " + string.Join(",", alop.ToArray()) + " });";
+                rehtml = rehtml.Replace("[*[needsum]*]", "true").Replace("[*[footerData_js]*]", js);
+             
+            }
+            else
+            {
+                rehtml = rehtml.Replace("[*[needsum]*]", "false").Replace("[*[footerData_js]*]", " ");
+            }
 
 
         }
