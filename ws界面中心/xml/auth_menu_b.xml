@@ -491,6 +491,10 @@
     <SortParentID>43</SortParentID>
     <SortParentPath>,43,</SortParentPath>
     <SortOrder>33</SortOrder>
+    <m_url>/adminht/corepage/bas/list_khda.aspx</m_url>
+    <m_tip />
+    <m_tag />
+    <m_ico />
     <m_show>不隐藏</m_show>
     <SortNameTree>│├客户管理</SortNameTree>
     <SortMoveUp>0</SortMoveUp>
