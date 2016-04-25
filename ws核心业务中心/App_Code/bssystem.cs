@@ -2981,7 +2981,7 @@ public class bssystem : System.Web.Services.WebService
 
             alsql.Add("update old set old.FS_type = ly.FS_type,old.FS_D_haveD=ly.FS_D_haveD,old.FS_D_yinruzhi=ly.FS_D_yinruzhi, old.FS_D_shrinkToFit=ly.FS_D_shrinkToFit, old.FS_D_setGroupHeaders=ly.FS_D_setGroupHeaders, old.FS_D_field=ly.FS_D_field, old.FS_D_datatable=ly.FS_D_datatable, old.FS_D_where=ly.FS_D_where, old.FS_D_order=ly.FS_D_order,   old.FD_D_key=ly.FD_D_key, old.FD_D_pagesize=ly.FD_D_pagesize  from FUP_FormsSubInfo as  ly,FUP_FormsSubInfo as old where old.fsid='" + oldid + "' and ly.FSID='"+ kelongziid + "'");
             //取出子表并重新插入
-            Hashtable HTsub = I_DBL.RunParam_SQL("select DID from FUP_FormsSubDialog where DID_FSID='" + oldid + "' ", "数据记录", param);
+            Hashtable HTsub = I_DBL.RunParam_SQL("select DID from FUP_FormsSubDialog where DID_FSID='" + kelongziid + "' ", "数据记录", param);
             DataTable DTsub = ((DataSet)HTsub["return_ds"]).Tables["数据记录"].Copy();
             for (int i = 0; i < DTsub.Rows.Count; i++)
             {

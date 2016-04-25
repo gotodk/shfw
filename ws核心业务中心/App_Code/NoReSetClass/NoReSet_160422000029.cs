@@ -80,6 +80,35 @@ public class NoReSet_160422000029
 
         alsql.Add("INSERT INTO  ZZZ_KHDA(YYID, YYname, yhb_city_Promary_diquxian, yhb_city_City_diquxian, yhb_city_Qu_diquxian, YYdizhi,     YYdianhua, YYchuanzhen, YYkaipiao, YYerp, YYquyudaima, YYzuobiao, YYcaixueliang, YYbeizhu) VALUES(@YYID, @YYname, @yhb_city_Promary_diquxian, @yhb_city_City_diquxian, @yhb_city_Qu_diquxian, @YYdizhi,     @YYdianhua, @YYchuanzhen, @YYkaipiao, @YYerp, @YYquyudaima, @YYzuobiao, @YYcaixueliang, @YYbeizhu)");
 
+
+        //遍历子表， 插入 
+        string zibiao_lxr_id = "grid-table-subtable-160425000589";
+        DataTable subdt = jsontodatatable.ToDataTable(ht_forUI[zibiao_lxr_id].ToString());
+        //必须验证js脚本获取的数量和c#反序列化获取的数量一致才能继续。防止出错
+        if (ht_forUI[zibiao_lxr_id + "_fcjsq"].ToString() != subdt.Rows.Count.ToString())
+        {
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "子表数据量与获取量不相符，系统出现问题。";
+            return dsreturn;
+        }
+        param.Add("@sub_" + "MainID", guid); //隶属主表id
+        for (int i = 0; i < subdt.Rows.Count; i++)
+        {
+            param.Add("@sub_" + "KID" + "_" + i, CombGuid.GetMewIdFormSequence("ZZZ_KHLXR"));
+
+            param.Add("@sub_" + "KKS" + "_" + i, subdt.Rows[i]["科室"].ToString());
+            param.Add("@sub_" + "Klianiren" + "_" + i, subdt.Rows[i]["姓名"].ToString());
+            param.Add("@sub_" + "Kzhicheng" + "_" + i, subdt.Rows[i]["职位"].ToString());
+            param.Add("@sub_" + "Kxingbie" + "_" + i, subdt.Rows[i]["性别"].ToString());
+            param.Add("@sub_" + "Kdianhua" + "_" + i, subdt.Rows[i]["电话"].ToString());
+            param.Add("@sub_" + "Kbeizhu" + "_" + i, subdt.Rows[i]["备注"].ToString());
+
+            string INSERTsql = "INSERT INTO ZZZ_KHLXR (  KID, K_YYID, KKS, Klianiren, Kzhicheng, Kxingbie, Kdianhua, Kbeizhu ) VALUES(@sub_" + "KID" + "_" + i + ", @sub_MainID,@sub_" + "KKS" + "_" + i + ", @sub_" + "Klianiren" + "_" + i + ", @sub_" + "Kzhicheng" + "_" + i + ", @sub_" + "Kxingbie" + "_" + i + ", @sub_" + "Kdianhua" + "_" + i + ", @sub_" + "Kbeizhu" + "_" + i + "  )";
+            alsql.Add(INSERTsql);
+        }
+
+
+
         return_ht = I_DBL.RunParam_SQL(alsql, param);
 
         if ((bool)(return_ht["return_float"]))
@@ -146,7 +175,44 @@ public class NoReSet_160422000029
         param.Add("@YYbeizhu", ht_forUI["YYbeizhu"].ToString());
 
         alsql.Add("UPDATE ZZZ_KHDA SET YYname=@YYname, yhb_city_Promary_diquxian=@yhb_city_Promary_diquxian, yhb_city_City_diquxian=@yhb_city_City_diquxian, yhb_city_Qu_diquxian=@yhb_city_Qu_diquxian, YYdizhi=@YYdizhi,     YYdianhua=@YYdianhua, YYchuanzhen=@YYchuanzhen, YYkaipiao=@YYkaipiao, YYerp=@YYerp, YYquyudaima=@YYquyudaima, YYzuobiao=@YYzuobiao, YYcaixueliang=@YYcaixueliang, YYbeizhu=@YYbeizhu where YYID=@YYID ");
-   
+
+
+
+        //遍历子表，先删除，再插入，已有主键的不重新生成。
+        string zibiao_lxr_id = "grid-table-subtable-160425000589";
+        DataTable subdt = jsontodatatable.ToDataTable(ht_forUI[zibiao_lxr_id].ToString());
+        //必须验证js脚本获取的数量和c#反序列化获取的数量一致才能继续。防止出错
+        if (ht_forUI[zibiao_lxr_id + "_fcjsq"].ToString() != subdt.Rows.Count.ToString())
+        {
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "子表数据量与获取量不相符，系统出现问题。";
+            return dsreturn;
+        }
+        param.Add("@sub_" + "MainID", ht_forUI["idforedit"].ToString()); //隶属主表id
+        alsql.Add("delete ZZZ_KHLXR where  K_YYID = @sub_" + "MainID");
+        for (int i = 0; i < subdt.Rows.Count; i++)
+        {
+            if (subdt.Rows[i]["隐藏编号"].ToString().Trim() == "")
+            {
+                param.Add("@sub_" + "KID" + "_" + i, CombGuid.GetMewIdFormSequence("ZZZ_KHLXR"));
+            }
+            else
+            {
+                param.Add("@sub_" + "KID" + "_" + i, subdt.Rows[i]["隐藏编号"].ToString());
+            }
+
+            param.Add("@sub_" + "KKS" + "_" + i, subdt.Rows[i]["科室"].ToString());
+            param.Add("@sub_" + "Klianiren" + "_" + i, subdt.Rows[i]["姓名"].ToString());
+            param.Add("@sub_" + "Kzhicheng" + "_" + i, subdt.Rows[i]["职位"].ToString());
+            param.Add("@sub_" + "Kxingbie" + "_" + i, subdt.Rows[i]["性别"].ToString());
+            param.Add("@sub_" + "Kdianhua" + "_" + i, subdt.Rows[i]["电话"].ToString());
+            param.Add("@sub_" + "Kbeizhu" + "_" + i, subdt.Rows[i]["备注"].ToString());
+
+
+            string INSERTsql = "INSERT INTO ZZZ_KHLXR (  KID, K_YYID, KKS, Klianiren, Kzhicheng, Kxingbie, Kdianhua, Kbeizhu ) VALUES(@sub_" + "KID" + "_" + i + ", @sub_MainID,@sub_" + "KKS" + "_" + i + ", @sub_" + "Klianiren" + "_" + i + ", @sub_" + "Kzhicheng" + "_" + i + ", @sub_" + "Kxingbie" + "_" + i + ", @sub_" + "Kdianhua" + "_" + i + ", @sub_" + "Kbeizhu" + "_" + i + "  )";
+            alsql.Add(INSERTsql);
+        }
+
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
 
