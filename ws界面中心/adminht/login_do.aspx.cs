@@ -83,6 +83,11 @@ public partial class login_do : System.Web.UI.Page
                     UserSession.最终权值_特殊权限 = dsreturn.Tables["用户信息"].Rows[0]["UfinalUnumber4"].ToString();
                     UserSession.最终权值_备用权限 = dsreturn.Tables["用户信息"].Rows[0]["UfinalUnumber5"].ToString();
                     Response.Cookies["user_Uloginname_onlyforinput"].Value = Server.UrlEncode(dsreturn.Tables["用户信息"].Rows[0]["Uloginname"].ToString());
+                    if (dsreturn.Tables["返回值单条"].Rows[0]["附件信息1"].ToString() != "")
+                    {
+                        Response.Cookies["user_Uloginname_onlyforinput"].Value = Server.UrlEncode(dsreturn.Tables["返回值单条"].Rows[0]["附件信息1"].ToString());
+                    }
+             
                     Response.Cookies["user_Uloginname_onlyforinput"].Expires = DateTime.MaxValue;
                     Response.Write("ok");
                     return;

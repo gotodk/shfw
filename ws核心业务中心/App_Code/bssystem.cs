@@ -646,8 +646,8 @@ public class bssystem : System.Web.Services.WebService
         I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
 
         Hashtable param = new Hashtable();
-        param.Add("@Uloginname", zhanghao);
-        param.Add("@Uloginpassword", StringOP.encMe(mima.Trim(), "mima"));
+        param.Add("@Uloginname", zhanghao); //写死账号
+        param.Add("@Uloginpassword", StringOP.encMe(mima.Trim(), "mima")); //写死密码
 
 
 
@@ -664,6 +664,132 @@ public class bssystem : System.Web.Services.WebService
             {
                 dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err_olnypassworderr";
                 dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "账号或密码错误!";
+
+
+                //账号密码错误，尝试进行erp验证
+                DataSet ds_erp = CheckLogin_Back_temp_erp(zhanghao,mima,"");
+
+
+                return ds_erp;
+            }
+
+
+
+            //重新处理权限，把最终的权值算出来赋上值，权限验证真正用的是这个
+            //计算UfinalUnumber的新值
+            BigInteger groupNum1 = 0;//组权限搞出来的值
+            BigInteger groupNum2 = 0;
+            BigInteger groupNum3 = 0;
+            BigInteger groupNum4 = 0;
+            BigInteger groupNum5 = 0;
+            string tiaojian = redb.Rows[0]["Uingroups"].ToString();
+            if (tiaojian.Trim() == "")
+            { tiaojian = "0"; }
+            Hashtable htyiju = I_DBL.RunProc("select Unumber1,Unumber2,Unumber3,Unumber4,Unumber5 from auth_group where SortID in (" + tiaojian + ")", "计算依据");
+            if ((bool)(htyiju["return_float"]))
+            {
+                DataSet ds_yiju = ((DataSet)htyiju["return_ds"]).Copy();
+                //累加所有组权限
+                for (int i = 0; i < ds_yiju.Tables["计算依据"].Rows.Count; i++)
+                {
+                    groupNum1 = groupNum1 | BigInteger.Parse(ds_yiju.Tables["计算依据"].Rows[i]["Unumber1"].ToString());
+                    groupNum2 = groupNum2 | BigInteger.Parse(ds_yiju.Tables["计算依据"].Rows[i]["Unumber2"].ToString());
+                    groupNum3 = groupNum3 | BigInteger.Parse(ds_yiju.Tables["计算依据"].Rows[i]["Unumber3"].ToString());
+                    groupNum4 = groupNum4 | BigInteger.Parse(ds_yiju.Tables["计算依据"].Rows[i]["Unumber4"].ToString());
+                    groupNum5 = groupNum5 | BigInteger.Parse(ds_yiju.Tables["计算依据"].Rows[i]["Unumber5"].ToString());
+                }
+                //把组权限累加到直接权限上产生最终权限
+                redb.Rows[0]["UfinalUnumber1"] = BigInteger.Parse(redb.Rows[0]["Unumber1"].ToString()) | groupNum1;
+                redb.Rows[0]["UfinalUnumber2"] = BigInteger.Parse(redb.Rows[0]["Unumber2"].ToString()) | groupNum2;
+                redb.Rows[0]["UfinalUnumber3"] = BigInteger.Parse(redb.Rows[0]["Unumber3"].ToString()) | groupNum3;
+                redb.Rows[0]["UfinalUnumber4"] = BigInteger.Parse(redb.Rows[0]["Unumber4"].ToString()) | groupNum4;
+                redb.Rows[0]["UfinalUnumber5"] = BigInteger.Parse(redb.Rows[0]["Unumber5"].ToString()) | groupNum5;
+
+
+                dsreturn.Tables.Add(redb);
+
+
+  
+
+
+
+                    //记录登录ip
+                    ArrayList lasp = new ArrayList();
+                lasp.Add("INSERT INTO auth_login_ip (Lid,LUAid,Lip) VALUES ('" + CombGuid.GetNewCombGuid("IP") + "','" + redb.Rows[0]["UAid"].ToString() + "','" + ip + "')");
+                I_DBL.RunParam_SQL(lasp);
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "";
+
+
+
+            }
+            else
+            {
+                //枚得不到正常的计算依据，不再继续保存
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "获取组权限时出现问题！";
+            }
+
+
+        }
+        else
+        {
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "意外错误：登录失败";
+        }
+
+
+
+
+
+        return dsreturn;
+    }
+
+
+
+
+    /// <summary>
+    /// 临时的二次验证，尝试验证erp的账号密码
+    /// </summary>
+    /// <param name="zhanghao"></param>
+    /// <param name="mima"></param>
+    /// <param name="ip"></param>
+    /// <returns></returns>
+    public DataSet CheckLogin_Back_temp_erp(string zhanghao, string mima, string ip)
+    {
+
+
+
+        //初始化返回值
+        DataSet dsreturn = initReturnDataSet().Clone();
+        dsreturn.Tables["返回值单条"].Rows.Add(new string[] { "err", "初始化" });
+
+        //参数合法性各种验证，这里省略
+
+        //开始真正的处理，这里只是演示，所以直接在这里写业务逻辑代码了
+
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+
+        Hashtable param = new Hashtable();
+        param.Add("@Uloginname", "k3pub"); //写死账号
+        param.Add("@Uloginpassword", StringOP.encMe("k3pub", "mima")); //写死密码
+
+
+
+        Hashtable return_ht = new Hashtable();
+
+        //密码验证，其他相关用户状态验证要独立出去，不能混合在这个语句中
+        return_ht = I_DBL.RunParam_SQL("select  top 1 UAid,Uloginname ,Uattrcode ,Unumber1  ,Unumber2  ,Unumber3,Unumber4,Unumber5,Uingroups,SuperUser,'0' as UfinalUnumber1,'0' as UfinalUnumber2,'0' as UfinalUnumber3,'0' as UfinalUnumber4,'0' as UfinalUnumber5 from auth_users_auths where Uloginname=@Uloginname and Uloginpassword=@Uloginpassword", "用户信息", param);
+
+        if ((bool)(return_ht["return_float"]))
+        {
+            DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["用户信息"].Copy();
+
+            if (redb.Rows.Count < 1)
+            {
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err_olnypassworderr";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "账号或密码错误!";
+ 
                 return dsreturn;
             }
 
@@ -701,12 +827,44 @@ public class bssystem : System.Web.Services.WebService
 
 
                 dsreturn.Tables.Add(redb);
-                //记录登录ip
-                ArrayList lasp = new ArrayList();
-                lasp.Add("INSERT INTO auth_login_ip (Lid,LUAid,Lip) VALUES ('" + CombGuid.GetNewCombGuid("IP") + "','" + redb.Rows[0]["UAid"].ToString() + "','" + ip + "')");
-                I_DBL.RunParam_SQL(lasp);
-                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
-                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "";
+
+
+
+
+                //加入额外的ERP账号验证，原有验证已经被强制通过
+                string jiamimima = K3MM.GetMM(mima);
+                Hashtable erpmima = I_DBL.RunProc("select * from View_M_MOB_view_user where FName='"+zhanghao+ "' and  replace(fsid,' ','') like '%)0" + jiamimima.Replace(" ","") + "'", "验证");
+                if ((bool)(erpmima["return_float"]))
+                {
+                    DataSet ds_erpmima = ((DataSet)erpmima["return_ds"]).Copy();
+                    if (ds_erpmima.Tables["验证"].Rows.Count > 0)
+                    {
+                        //通过密码验证
+            
+                        dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
+                        dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "";
+                        dsreturn.Tables["返回值单条"].Rows[0]["附件信息1"] = zhanghao;
+        
+
+                    }
+                    else
+                    {
+                        dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                        dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "ERP账号密码错误！";
+                    }
+                }
+                else
+                {
+                    dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                    dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "验证erp账号时出现问题！";
+                }
+
+
+
+
+
+
+
             }
             else
             {
@@ -729,6 +887,10 @@ public class bssystem : System.Web.Services.WebService
 
         return dsreturn;
     }
+
+
+
+
     #  endregion
 
     # region 权限处理相关接口
@@ -2981,7 +3143,7 @@ public class bssystem : System.Web.Services.WebService
 
             alsql.Add("update old set old.FS_type = ly.FS_type,old.FS_D_haveD=ly.FS_D_haveD,old.FS_D_yinruzhi=ly.FS_D_yinruzhi, old.FS_D_shrinkToFit=ly.FS_D_shrinkToFit, old.FS_D_setGroupHeaders=ly.FS_D_setGroupHeaders, old.FS_D_field=ly.FS_D_field, old.FS_D_datatable=ly.FS_D_datatable, old.FS_D_where=ly.FS_D_where, old.FS_D_order=ly.FS_D_order,   old.FD_D_key=ly.FD_D_key, old.FD_D_pagesize=ly.FD_D_pagesize  from FUP_FormsSubInfo as  ly,FUP_FormsSubInfo as old where old.fsid='" + oldid + "' and ly.FSID='"+ kelongziid + "'");
             //取出子表并重新插入
-            Hashtable HTsub = I_DBL.RunParam_SQL("select DID from FUP_FormsSubDialog where DID_FSID='" + kelongziid + "' ", "数据记录", param);
+            Hashtable HTsub = I_DBL.RunParam_SQL("select DID from FUP_FormsSubDialog where DID_FSID='" + oldid + "' ", "数据记录", param);
             DataTable DTsub = ((DataSet)HTsub["return_ds"]).Tables["数据记录"].Copy();
             for (int i = 0; i < DTsub.Rows.Count; i++)
             {

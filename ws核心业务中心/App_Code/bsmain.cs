@@ -198,6 +198,76 @@ public class bsmain : System.Web.Services.WebService
 
 
 
-    # endregion
+    #endregion
+
+
+
+    /// <summary>
+    /// 获取单据图片列表
+    /// </summary>
+    /// <param name="parameter_forUI">参数</param>
+    /// <returns>返回ok就是接口正常</returns>
+    [WebMethod(MessageName = "获取单据图片列表", Description = "获取单据图片列表")]
+    public DataSet getdanjutupian(DataTable parameter_forUI)
+    {
+        //接收转换参数
+        Hashtable ht_forUI = new Hashtable();
+        for (int i = 0; i < parameter_forUI.Rows.Count; i++)
+        {
+            ht_forUI[parameter_forUI.Rows[i]["参数名"].ToString()] = parameter_forUI.Rows[i]["参数值"].ToString();
+        }
+
+
+        //初始化返回值
+        DataSet dsreturn = initReturnDataSet().Clone();
+        dsreturn.Tables["返回值单条"].Rows.Add(new string[] { "err", "初始化" });
+
+
+
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+        Hashtable return_ht = new Hashtable();
+        Hashtable param = new Hashtable();
+
+        if (ht_forUI["lx"].ToString() == "tsd")
+        {
+            param.Add("@TID", ht_forUI["idforedit"].ToString());
+
+            return_ht = I_DBL.RunParam_SQL("select top 1 *,Ttupian as tupian from ZZZ_M_TSD where TID=@TID", "数据记录", param);
+        }
+        if (ht_forUI["lx"].ToString() == "xld")
+        {
+            param.Add("@XID", ht_forUI["idforedit"].ToString());
+
+            return_ht = I_DBL.RunParam_SQL("select top 1 *,Xtupian as tupian from ZZZ_M_XLD where XID=@XID", "数据记录", param);
+        }
+
+        //if (ht_forUI["lx"].ToString() == "temp")
+        //{
+
+        //    return_ht = I_DBL.RunParam_SQL("select * from K3mimabiao", "数据记录", param);
+        //}
+
+        if ((bool)(return_ht["return_float"]))
+        {
+            DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+
+            if (redb.Rows.Count < 1)
+            {
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "没有找到指定数据!";
+                return dsreturn;
+            }
+            //redb.WriteXmlSchema("d://k3mima_s.xml");
+            //redb.WriteXml("d://k3mima.xml");
+            dsreturn.Tables.Add(redb);
+            return dsreturn;
+        }
+        else
+        {
+            return dsreturn;
+        }
+
+
+    }
 
 }

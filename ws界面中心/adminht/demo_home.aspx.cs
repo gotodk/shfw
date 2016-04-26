@@ -9,6 +9,6 @@ public partial class demo_home : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        WUC_fordemohome.Visible = false;
     }
 }

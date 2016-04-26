@@ -133,10 +133,12 @@
 
 		<script src="/assets/js/bootstrap-tag.js"></script>
 
-
+    <!-- page specific plugin scripts -->
+		<script src="../assets/js/jquery.colorbox.js"></script>
 
     <!-- ace scripts -->
     <script src="/assets/js/ace/elements.scroller.js"></script>
+     
     <script src="/assets/js/ace/elements.typeahead.js"></script>
     <script src="/assets/js/ace/elements.spinner.js"></script>
     <script src="/assets/js/ace/elements.aside.js"></script>
@@ -151,43 +153,7 @@
     <script src="/assets/js/ace/ace.searchbox-autocomplete.js"></script>
 
 
-    <script type="text/javascript">
-
-    
-        jQuery(function ($) {
-
-            //$(document).off('click.bs.dropdown.data-api');
-            $(document).on('click', "#forexit", function () {
-                
-                bootbox.confirm({  
-                    buttons: {  
-                        confirm: {  
-                            label: '确定',  
-                            className: 'btn-sm btn-danger'
-                        },  
-                        cancel: {  
-                            label: '取消',  
-                            className: 'btn-sm'
-                        }  
-                    },  
-                    message: '您确定要退出登录吗？',  
-                    callback: function(result) {  
-                        if (result) {
-                            window.top.location.href = "/adminht/login.aspx?f=exit";
-                            
-                        } else {  
-                            //alert('点击取消按钮了');  
-                        }  
-                    },  
-                    //title: "退出登录",  
-                });
-            });
-
-        });
-
-
-
-    </script>
+ 
     <asp:ContentPlaceHolder ID="sp_script" runat="server"></asp:ContentPlaceHolder>
 </body>
 </html>

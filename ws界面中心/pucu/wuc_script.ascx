@@ -764,7 +764,7 @@
                     Dropzone.autoDiscover = false;
                     myDropzone = new Dropzone("#dropzone", {
                         paramName: "file1", // The name that will be used to transfer the file
-                        maxFilesize: 3, // MB
+                        maxFilesize: 6, // MB
                         maxFiles: 20,
                         url: '/ajaxdropzoneupload.aspx',
                         addRemoveLinks: true,

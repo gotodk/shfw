@@ -23,7 +23,7 @@
                     sort: 'R_OrderBy',
                     order: 'R_Sort'
                 },
-                height: 400,
+                height: 200,
 
                 autowidth: false,
                 shrinkToFit: [*[FS_D_shrinkToFit]*], //是否自动缩放列宽
