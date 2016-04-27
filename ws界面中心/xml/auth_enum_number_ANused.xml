@@ -142,46 +142,6 @@
     <ANused>1</ANused>
   </Unumber1>
   <Unumber1>
-    <ANID>E-A4A600B1E92D-4B51F073-25D7-409A-A942</ANID>
-    <ANClass>Unumber1</ANClass>
-    <ANClassName>后台菜单权限</ANClassName>
-    <ANBaseName>明细-反馈报告</ANBaseName>
-    <ANBaseNumber>2048</ANBaseNumber>
-    <ANBaseNumber_p>11</ANBaseNumber_p>
-    <ANextendID>81</ANextendID>
-    <ANused>1</ANused>
-  </Unumber1>
-  <Unumber1>
-    <ANID>E-A4A600B1E934-CE6753D2-3F77-4DBC-99C4</ANID>
-    <ANClass>Unumber1</ANClass>
-    <ANClassName>后台菜单权限</ANClassName>
-    <ANBaseName>明细-销量发票</ANBaseName>
-    <ANBaseNumber>4096</ANBaseNumber>
-    <ANBaseNumber_p>12</ANBaseNumber_p>
-    <ANextendID>82</ANextendID>
-    <ANused>1</ANused>
-  </Unumber1>
-  <Unumber1>
-    <ANID>E-A4A600B1E91D-9F8156DB-F828-4388-AA16</ANID>
-    <ANClass>Unumber1</ANClass>
-    <ANClassName>后台菜单权限</ANClassName>
-    <ANBaseName>上传-反馈报告</ANBaseName>
-    <ANBaseNumber>512</ANBaseNumber>
-    <ANBaseNumber_p>9</ANBaseNumber_p>
-    <ANextendID>79</ANextendID>
-    <ANused>1</ANused>
-  </Unumber1>
-  <Unumber1>
-    <ANID>E-A4A600B1E928-9556A186-9B1A-4E92-B905</ANID>
-    <ANClass>Unumber1</ANClass>
-    <ANClassName>后台菜单权限</ANClassName>
-    <ANBaseName>上传-销量发票</ANBaseName>
-    <ANBaseNumber>1024</ANBaseNumber>
-    <ANBaseNumber_p>10</ANBaseNumber_p>
-    <ANextendID>80</ANextendID>
-    <ANused>1</ANused>
-  </Unumber1>
-  <Unumber1>
     <ANID>E-A4A600B1E907-0492D2EA-055D-4764-98C4</ANID>
     <ANClass>Unumber1</ANClass>
     <ANClassName>后台菜单权限</ANClassName>

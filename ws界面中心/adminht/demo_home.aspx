@@ -16,7 +16,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="sp_pagecontent" runat="Server">
     <!-- 附加的右侧主要功能切换区内容,不含导航 -->
  <uc1:WUC_fordemohome runat="server" ID="WUC_fordemohome" />
-    欢迎访问吉威医疗。
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="sp_script" runat="Server">
     <!-- 附加的body底部本页专属的自定义js脚本 -->

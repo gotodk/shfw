@@ -36,7 +36,7 @@ public partial class MasterPageMain : System.Web.UI.MasterPage
         this.Page.Title = ConfigurationManager.AppSettings["SYSname"] + " --- 系统管理";
         titleshowname.InnerHtml = ConfigurationManager.AppSettings["SYSname"] + " --- 系统管理";
         mysmlogo.Src = ConfigurationManager.AppSettings["mylogo_s"];
-        showusername.InnerHtml = Server.UrlDecode(Request.Cookies["user_Uloginname_onlyforinput"].Value);
+        showusername.InnerHtml = UserSession.登录名;
 
 
         //获取用户头像
@@ -77,7 +77,7 @@ public partial class MasterPageMain : System.Web.UI.MasterPage
     private void MyWebControl_OnNeedLoadData(ArrayList al_daohang, string ERRinfo)
     {
         //修改导航
-        dongtaidaohang.InnerHtml = "<li><i class='ace-icon fa fa-home home-icon'></i><a href='/adminht/demo_home.aspx'>首页</a></li>";
+        dongtaidaohang.InnerHtml = "<li><i class='ace-icon fa fa-home home-icon'></i><a href='demo_home.aspx'>首页</a></li>";
         int alli = al_daohang.Count;
         for (int i = 1; i < al_daohang.Count; i++)
         {

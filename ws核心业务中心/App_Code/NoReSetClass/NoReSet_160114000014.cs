@@ -68,14 +68,23 @@ public class NoReSet_160114000014
         param.Add("@Uloginpassword", mima_enc);
 
         param.Add("@xingming", ht_forUI["xingming"].ToString());
-        param.Add("@xingbie", ht_forUI["xingbie"].ToString());
-        param.Add("@nianling", ht_forUI["nianling"].ToString());
         param.Add("@zhuangtai", ht_forUI["zhuangtai"].ToString());
+        param.Add("@zhiwei", ht_forUI["zhiwei"].ToString());
+        param.Add("@xingbie", ht_forUI["xingbie"].ToString());
+ 
+     
         param.Add("@beizhu", ht_forUI["beizhu"].ToString());
+
+        param.Add("@gongzuodi", ht_forUI["gongzuodi"].ToString());
+        param.Add("@suoshuquyu", ht_forUI["suoshuquyu"].ToString());
+        param.Add("@shoujihao", ht_forUI["shoujihao"].ToString());
+        param.Add("@gudingdianhua", ht_forUI["gudingdianhua"].ToString());
+        param.Add("@youxiang", ht_forUI["youxiang"].ToString());
+        param.Add("@lingdao", ht_forUI["lingdao"].ToString());
 
         alsql.Add("INSERT INTO  auth_users_auths(UAid ,Uloginname,Uloginpassword) VALUES(@UAid ,@Uloginname,@Uloginpassword )");
 
-        alsql.Add("INSERT INTO  ZZZ_userinfo(UAid ,xingming,xingbie,nianling,zhuangtai,beizhu) VALUES(@UAid ,@xingming,@xingbie,@nianling,@zhuangtai,@beizhu)");
+        alsql.Add("INSERT INTO  ZZZ_userinfo(UAid ,xingming,zhuangtai,zhiwei,xingbie,beizhu,gongzuodi,suoshuquyu,shoujihao,gudingdianhua,youxiang,lingdao) VALUES(@UAid ,@xingming,@zhuangtai,@zhiwei,@xingbie,@beizhu,@gongzuodi,@suoshuquyu,@shoujihao,@gudingdianhua,@youxiang,@lingdao)");
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
 
@@ -127,13 +136,23 @@ public class NoReSet_160114000014
         param.Add("@UAid", ht_forUI["idforedit"].ToString());
         param.Add("@Uloginname", ht_forUI["Uloginname"].ToString());
         param.Add("@Uloginpassword", StringOP.encMe(ht_forUI["Uloginpassword"].ToString(), "mima"));
+
         param.Add("@xingming", ht_forUI["xingming"].ToString());
-        param.Add("@xingbie", ht_forUI["xingbie"].ToString());
-        param.Add("@nianling", ht_forUI["nianling"].ToString());
         param.Add("@zhuangtai", ht_forUI["zhuangtai"].ToString());
+        param.Add("@zhiwei", ht_forUI["zhiwei"].ToString());
+        param.Add("@xingbie", ht_forUI["xingbie"].ToString());
+
+
         param.Add("@beizhu", ht_forUI["beizhu"].ToString());
 
-        alsql.Add("UPDATE ZZZ_userinfo SET xingming=@xingming,xingbie=@xingbie,nianling=@nianling,zhuangtai=@zhuangtai,beizhu=@beizhu where UAid=@UAid ");
+        param.Add("@gongzuodi", ht_forUI["gongzuodi"].ToString());
+        param.Add("@suoshuquyu", ht_forUI["suoshuquyu"].ToString());
+        param.Add("@shoujihao", ht_forUI["shoujihao"].ToString());
+        param.Add("@gudingdianhua", ht_forUI["gudingdianhua"].ToString());
+        param.Add("@youxiang", ht_forUI["youxiang"].ToString());
+        param.Add("@lingdao", ht_forUI["lingdao"].ToString());
+
+        alsql.Add("UPDATE ZZZ_userinfo SET xingming=@xingming,zhuangtai=@zhuangtai,zhiwei=@zhiwei,xingbie=@xingbie,beizhu=@beizhu,gongzuodi=@gongzuodi,suoshuquyu=@suoshuquyu,shoujihao=@shoujihao,gudingdianhua=@gudingdianhua,youxiang=@youxiang,lingdao=@lingdao where UAid=@UAid ");
         alsql.Add("UPDATE auth_users_auths SET Uloginname=@Uloginname,Uloginpassword=@Uloginpassword  where UAid=@UAid ");
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
