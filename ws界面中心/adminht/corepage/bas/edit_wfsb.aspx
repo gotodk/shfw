@@ -60,6 +60,17 @@
 
 
  
+
+                 var jiancha_Sleixing = window.setInterval(function () {
+
+                     //弹窗特殊条件
+
+                     var str_Sleixing = $("#Sleixing").val();
+                     $("#searchopenyhbspgogo_Sbanben").attr("teshuwhere", "BBB_SBID in (select SBID from ZZZ_SBLXBASE  where SBname='" + str_Sleixing + "')");
+
+                 }, 500);
+
+ 
  
         });
         </script>
