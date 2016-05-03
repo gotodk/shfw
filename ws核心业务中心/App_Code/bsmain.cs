@@ -198,6 +198,143 @@ public class bsmain : System.Web.Services.WebService
 
 
 
+
+    /// <summary>
+    /// 获取考勤数据
+    /// </summary>
+    /// <param name="parameter_forUI">参数</param>
+    /// <returns>返回ok就是接口正常</returns>
+    [WebMethod(MessageName = "获取考勤数据", Description = "获取考勤数据")]
+    public string get_kaoqinshuju(DataTable parameter_forUI)
+    {
+        //接收转换参数
+        Hashtable ht_forUI = new Hashtable();
+        for (int i = 0; i < parameter_forUI.Rows.Count; i++)
+        {
+            ht_forUI[parameter_forUI.Rows[i]["参数名"].ToString()] = parameter_forUI.Rows[i]["参数值"].ToString();
+        }
+
+
+        if (ht_forUI["zhiling"].ToString() == "all")
+        {
+
+
+            I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+            Hashtable return_ht = new Hashtable();
+            Hashtable param = new Hashtable();
+            param.Add("@start", ht_forUI["start"].ToString());
+            param.Add("@end", ht_forUI["end"].ToString());
+            return_ht = I_DBL.RunParam_SQL("select *,Kfx+'-'+Kfanweinei as showstr  from ZZZ_kaoqin where Ktime >= @start and Ktime <= @end  ", "数据记录", param);
+
+            if ((bool)(return_ht["return_float"]))
+            {
+                DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+
+                if (redb.Rows.Count < 1)
+                {
+                    return "错误err，日期不存在！";
+                }
+                else
+                {
+                    string restr = "[";
+                    for (int i = 0; i < redb.Rows.Count; i++)
+                    {
+                        string dayrq = ((DateTime)(redb.Rows[i]["Ktime"])).ToLocalTime().ToString();
+                        string daytype = redb.Rows[i]["showstr"].ToString();
+                        string classname = "label-danger";
+
+                        string[] daytype_arr = daytype.Split(',');
+                        for (int a = 0; a < daytype_arr.Length; a++)
+                        {
+                          
+                            if (daytype_arr[a].IndexOf( "正常") >=0)
+                            { classname = "label-success"; }
+                            else if (daytype_arr[a].IndexOf("迟到") >= 0 || daytype_arr[a].IndexOf("早退") >= 0)
+                            { classname = "label-danger"; }
+                            else  
+                            { classname = "label-yellow"; }
+                            restr = restr + "{\"title\":\"" + daytype_arr[a] + "\",\"start\":\"" + dayrq + "\",\"end\":\"" + dayrq + "\",\"url\":null,\"allDay\":false,\"className\":\"" + classname + "\"},";
+                        }
+
+
+
+                    }
+                    restr = restr.TrimEnd(',');
+                    restr = restr + "]";
+                    return restr;
+                }
+
+            }
+            else
+            {
+                return "错误err，系统异常！";
+            }
+        }
+
+        return "无效指令";
+
+    }
+
+
+    /// <summary>
+    /// 获取单据图片列表
+    /// </summary>
+    /// <param name="parameter_forUI">参数</param>
+    /// <returns>返回ok就是接口正常</returns>
+    [WebMethod(MessageName = "获取单据图片列表", Description = "获取单据图片列表")]
+    public DataSet getdanjutupian(DataTable parameter_forUI)
+    {
+        //接收转换参数
+        Hashtable ht_forUI = new Hashtable();
+        for (int i = 0; i < parameter_forUI.Rows.Count; i++)
+        {
+            ht_forUI[parameter_forUI.Rows[i]["参数名"].ToString()] = parameter_forUI.Rows[i]["参数值"].ToString();
+        }
+
+
+        //初始化返回值
+        DataSet dsreturn = initReturnDataSet().Clone();
+        dsreturn.Tables["返回值单条"].Rows.Add(new string[] { "err", "初始化" });
+
+
+
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+        Hashtable return_ht = new Hashtable();
+        Hashtable param = new Hashtable();
+
+        if (ht_forUI["mod"].ToString().ToLower() == "wendang")
+        {
+            param.Add("@FID", ht_forUI["idforedit"].ToString());
+
+            return_ht = I_DBL.RunParam_SQL("select top 1 *,Ffujian as tupian from  ZZZ_WENDANG where FID=@FID", "数据记录", param);
+        }
+    
+ 
+
+        if ((bool)(return_ht["return_float"]))
+        {
+            DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+
+            if (redb.Rows.Count < 1)
+            {
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "没有找到指定数据!";
+                return dsreturn;
+            }
+            //redb.WriteXmlSchema("d://k3mima_s.xml");
+            //redb.WriteXml("d://k3mima.xml");
+            dsreturn.Tables.Add(redb);
+            return dsreturn;
+        }
+        else
+        {
+            return dsreturn;
+        }
+
+
+    }
+
+
     # endregion
 
 }

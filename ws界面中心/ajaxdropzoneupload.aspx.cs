@@ -39,8 +39,8 @@ public partial class ajaxdropzoneupload : System.Web.UI.Page
             HttpPostedFile file = Request.Files[0];
 
             int fileSizeInBytes = file.ContentLength;
-            //判定文件大小是否符合要求(10M,实际限制在前台控制就行了)
-            if (fileSizeInBytes > 10485760)
+            //判定文件大小是否符合要求(20M,实际限制在前台控制就行了)
+            if (fileSizeInBytes > 10485760*2)
             {
                 Response.StatusCode = 500;
                 Response.Write("失败：文件过大，上限10M");
@@ -57,7 +57,7 @@ public partial class ajaxdropzoneupload : System.Web.UI.Page
                 return;
             }
             fileExtension = fileExtension.ToLower();
-            string leixing = "[.jpg][.bmp][.jpeg][.gif][.png][.rar][.zip][.txt][.docx][.doc][.xsl][.xslx]";
+            string leixing = "[.jpg][.bmp][.jpeg][.gif][.png][.rar][.zip][.txt][.docx][.doc][.xsl][.xslx][.pdf][.vsdx][.vsd]";
             if (leixing.IndexOf("[" + fileExtension + "]") < 0)
             {
                 Response.StatusCode = 500;
