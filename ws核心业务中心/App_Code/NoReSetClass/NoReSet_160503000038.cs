@@ -105,6 +105,11 @@ public class NoReSet_160503000038
         DataSet dsreturn = initReturnDataSet().Clone();
         dsreturn.Tables["返回值单条"].Rows.Add(new string[] { "err", "初始化" });
         //参数合法性各种验证，这里要根据具体业务逻辑处理
+
+
+        //检查是否连续签到了，五分钟内不允许连续签到
+
+        //坐标检查
         string zuobiao = ht_forUI["zuobiao"].ToString();
         if (zuobiao.Trim() == "" || zuobiao.IndexOf(",") < 0)
         {
@@ -129,7 +134,7 @@ public class NoReSet_160503000038
         param.Add("@Ksheng", ht_forUI["shengfen"].ToString());
         param.Add("@Kshi", ht_forUI["chengshi"].ToString());
         param.Add("@Kqu", ht_forUI["quxian"].ToString());
-
+        param.Add("@Kbeizhu", ht_forUI["beizhu"].ToString());
         //分析当前时间是迟到还是早退，还是被忽略的考勤数据
         if (ht_forUI["leixing"].ToString() != "上下班")
         {
@@ -159,7 +164,7 @@ public class NoReSet_160503000038
         }
 
 
-        alsql.Add("INSERT INTO ZZZ_kaoqin(KID, K_UAID, Kleixing, Kzuobiao, Kdizhi, Ksheng, Kshi, Kqu, Ktime, Kfx,Kfanweinei) VALUES(@KID, @K_UAID, @Kleixing, @Kzuobiao, @Kdizhi, @Ksheng, @Kshi, @Kqu, getdate(), @Kfx,@Kfanweinei )");
+        alsql.Add("INSERT INTO ZZZ_kaoqin(KID, K_UAID, Kleixing, Kzuobiao, Kdizhi, Ksheng, Kshi, Kqu, Ktime, Kfx,Kfanweinei,Kbeizhu) VALUES(@KID, @K_UAID, @Kleixing, @Kzuobiao, @Kdizhi, @Ksheng, @Kshi, @Kqu, getdate(), @Kfx,@Kfanweinei,@Kbeizhu )");
  
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);

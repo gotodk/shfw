@@ -26,7 +26,17 @@
        <!-- 附加的body底部本页专属的自定义js脚本 -->
     <uc1:wuc_script runat="server" ID="wuc_script" />
 
+
         <script type="text/javascript">
+
+            //新增提交后强制调用的函数
+            function addok_after_msgshow(msg) {
+                if (msg.indexOf("保存成功") >= 0) {
+                    window.location.href = '/adminht/corepage/qiandao/qd_rili.aspx';
+                }
+
+            }
+
              jQuery(function ($) {
                  if (getUrlParam("fff") == "1") {
 
@@ -37,7 +47,7 @@
                  $("#addbutton1").attr({ "disabled": "disabled" });
  
                  $(document).on('click', "#reloaddb", function () { window.location.reload(); });
-
+          
         });
         </script>
 
