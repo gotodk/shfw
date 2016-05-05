@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/adminht/MasterPageMain.master" AutoEventWireup="true" CodeFile="qdgo.aspx.cs" Inherits="qiandao_qdgo" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/adminht/MasterPageMain.master" AutoEventWireup="true" CodeFile="edit_dd.aspx.cs" Inherits="qiandao_edit_dd" %>
 
 <%@ Register Src="~/pucu/wuc_css.ascx" TagPrefix="uc1" TagName="wuc_css" %>
 <%@ Register Src="~/pucu/wuc_content.ascx" TagPrefix="uc1" TagName="wuc_content" %>
@@ -31,23 +31,35 @@
 
             //新增提交后强制调用的函数
             function addok_after_msgshow(msg) {
-                if (msg.indexOf("保存成功") >= 0) {
-                    window.location.href = '/adminht/corepage/qiandao/qd_rili.aspx';
-                }
+                ;
 
             }
 
              jQuery(function ($) {
                  if (getUrlParam("fff") == "1") {
+                     setTimeout(bjtd, 500);
 
+                     function bjtd() {
+                         var zuobiao = $("#DDzuobiao").val();
+                         if (zuobiao != "" && zuobiao.indexOf(',') >= 0) {
+                             var zuobiao_arr = zuobiao.split(",");
+                             //
+                             var point = new BMap.Point($.trim(zuobiao_arr[0]), $.trim(zuobiao_arr[1]));
+                             map.centerAndZoom(point, 16);
+
+                             //跳动标记
+                             map.clearOverlays();
+                             var marker = new BMap.Marker(point);  // 创建标注
+                             map.addOverlay(marker);               // 将标注添加到地图中
+                             marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+                         }
+
+                     };
+                    
                       
                  }
          
-                 $("#addbutton1_top").attr({"disabled":"disabled"});
-                 $("#addbutton1").attr({ "disabled": "disabled" });
- 
-                 $(document).on('click', "#reloaddb", function () { window.location.reload(); });
-
+          
           
         });
         </script>

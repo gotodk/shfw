@@ -86,8 +86,55 @@ public class NoReSet_160503000038
     }
 
 
-  
+
+    /// <summary>
+    /// 获取签到参数
+    /// </summary>
+    /// <param name="parameter_forUI">获取签到参数</param>
+    /// <returns></returns>
+    public DataSet GetCS(string uaid)
+    {
  
+
+        //初始化返回值
+        DataSet dsreturn = initReturnDataSet().Clone();
+        dsreturn.Tables["返回值单条"].Rows.Add(new string[] { "err", "初始化" });
+
+        //参数合法性各种验证，这里省略
+
+        //开始真正的处理，这里只是演示，所以直接在这里写业务逻辑代码了
+
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+        Hashtable return_ht = new Hashtable();
+        Hashtable param = new Hashtable();
+        param.Add("@CSID", "10000");
+
+        return_ht = I_DBL.RunParam_SQL("select top 1 * from ZZZ_kaoqin_cs where CSID=@CSID;select top 1 * from  ZZZ_kaoqin where  K_UAID='" + uaid + "' order by Ktime desc;select top 1 * from ZZZ_kaoqin_dd order by DDID;", "签到参数", param);
+
+        if ((bool)(return_ht["return_float"]))
+        {
+            DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["Table1"].Copy();
+ 
+
+            dsreturn.Tables.Add(redb);
+            dsreturn.Tables.Add(((DataSet)return_ht["return_ds"]).Tables["Table2"].Copy());
+            dsreturn.Tables.Add(((DataSet)return_ht["return_ds"]).Tables["签到参数"].Copy());
+
+
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "";
+        }
+        else
+        {
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "意外错误，获取失败：" + return_ht["return_errmsg"].ToString();
+        }
+
+
+        return dsreturn;
+    }
+
+
     /// <summary>
     /// 增加数据
     /// </summary>
@@ -107,7 +154,44 @@ public class NoReSet_160503000038
         //参数合法性各种验证，这里要根据具体业务逻辑处理
 
 
-        //检查是否连续签到了，五分钟内不允许连续签到
+        //获取参数 “Table1”是最后一次签到记录，“Table2”是地点标示，“签到参数”是参数
+        DataSet dscs = GetCS(ht_forUI["yhbsp_session_uer_UAid"].ToString());
+        //检查是否连续签到了，N分钟内不允许连续签到
+        if (dscs.Tables["Table1"].Rows.Count > 0 )
+        {
+            DateTime lastQD = (DateTime)(dscs.Tables["Table1"].Rows[0]["Ktime"]);
+            DateTime nowQD = DateTime.Now;
+            TimeSpan ND = nowQD - lastQD;
+            double mm = ND.TotalMinutes;
+            if (mm < Convert.ToDouble(dscs.Tables["签到参数"].Rows[0]["CSjiange"]))
+            {
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "保存失败，"+ dscs.Tables["签到参数"].Rows[0]["CSjiange"].ToString() + "分钟内不允许重复签到，距离上次签到"+  Math.Round(mm, 2).ToString() + "分钟！";
+                return dsreturn;
+            }
+        }
+
+        //检查不在签到时间段内不允许签到
+        string CSshang1 = dscs.Tables["签到参数"].Rows[0]["CSshang1"].ToString().Replace(":",".");
+        string CSshang2 = dscs.Tables["签到参数"].Rows[0]["CSshang2"].ToString().Replace(":", ".");
+        string CSxia1 = dscs.Tables["签到参数"].Rows[0]["CSxia1"].ToString().Replace(":", ".");
+        string CSxia2 = dscs.Tables["签到参数"].Rows[0]["CSxia2"].ToString().Replace(":", ".");
+        string dqsj = DateTime.Now.Hour.ToString() + "." + DateTime.Now.Minute.ToString();
+        bool canqd = false;
+        if (Convert.ToDouble(dqsj) >= Convert.ToDouble(CSshang1) && Convert.ToDouble(dqsj) <= Convert.ToDouble(CSshang2))
+        {
+            canqd = true;
+        }
+        if (Convert.ToDouble(dqsj) >= Convert.ToDouble(CSxia1) && Convert.ToDouble(dqsj) <= Convert.ToDouble(CSxia2))
+        {
+            canqd = true;
+        }
+        if (!canqd)
+        {
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "保存失败，特定时间段以外不允许签到，上班"+ CSshang1.Replace(".",":") + "到" + CSshang2.Replace(".", ":") + "，下班" + CSxia1.Replace(".", ":") + "到" + CSxia2.Replace(".", ":") + "。";
+            return dsreturn;
+        }
 
         //坐标检查
         string zuobiao = ht_forUI["zuobiao"].ToString();
@@ -148,20 +232,32 @@ public class NoReSet_160503000038
 
 
         //分析当前是否在指定的预设范围内。
-        double mLat1 = Convert.ToDouble( point_now[0].Trim()); // point1纬度
+    
 
-        double mLon1 = Convert.ToDouble(point_now[1].Trim()); // point1经度
+        double mLon1 = Convert.ToDouble(point_now[0].Trim()); // point1经度
+        double mLat1 = Convert.ToDouble(point_now[1].Trim()); // point1纬度
 
-        double mLat2 = 122.12833;// point2纬度
 
-        double mLon2 = 37.518964;// point2经度
-
-        double distance = GetShortDistance(mLon1, mLat1, mLon2, mLat2);
-        
-        if(distance < 400000)
+        for (int i = 0; i < dscs.Tables["Table2"].Rows.Count; i++)
         {
-            param.Add("@Kfanweinei", "总部");
+          
+
+            double mLon2 = Convert.ToDouble(dscs.Tables["Table2"].Rows[i]["DDzuobiao"].ToString().Split(',')[0]);// point2经度
+            double mLat2 = Convert.ToDouble(dscs.Tables["Table2"].Rows[i]["DDzuobiao"].ToString().Split(',')[1]);// point2纬度
+            double distance = GetShortDistance(mLon1, mLat1, mLon2, mLat2);
+            //单位是米
+            double DDfanwei = Convert.ToDouble(dscs.Tables["Table2"].Rows[i]["DDfanwei"].ToString());
+            if (distance < DDfanwei)
+            {
+                param.Add("@Kfanweinei", dscs.Tables["Table2"].Rows[i]["DDbiaojiming"].ToString());
+                break;
+            }
         }
+        if (!param.Contains("@Kfanweinei"))
+        {
+            param.Add("@Kfanweinei", "");
+        }
+    
 
 
         alsql.Add("INSERT INTO ZZZ_kaoqin(KID, K_UAID, Kleixing, Kzuobiao, Kdizhi, Ksheng, Kshi, Kqu, Ktime, Kfx,Kfanweinei,Kbeizhu) VALUES(@KID, @K_UAID, @Kleixing, @Kzuobiao, @Kdizhi, @Ksheng, @Kshi, @Kqu, getdate(), @Kfx,@Kfanweinei,@Kbeizhu )");
