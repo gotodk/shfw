@@ -186,7 +186,7 @@ public class NoReSet_160503000038
         {
             canqd = true;
         }
-        if (!canqd)
+        if (!canqd && ht_forUI["leixing"].ToString() == "上下班")
         {
             dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
             dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "保存失败，特定时间段以外不允许签到，上班"+ CSshang1.Replace(".",":") + "到" + CSshang2.Replace(".", ":") + "，下班" + CSxia1.Replace(".", ":") + "到" + CSxia2.Replace(".", ":") + "。";
@@ -227,7 +227,27 @@ public class NoReSet_160503000038
         else
         {
             //判定迟到还是早退
-            param.Add("@Kfx", "正常");
+            string CSshang1P = dscs.Tables["签到参数"].Rows[0]["CSshang1P"].ToString().Replace(":", ".");
+            string CSshang2P = dscs.Tables["签到参数"].Rows[0]["CSshang2P"].ToString().Replace(":", ".");
+            string CSxia1P = dscs.Tables["签到参数"].Rows[0]["CSxia1P"].ToString().Replace(":", ".");
+            string CSxia2P = dscs.Tables["签到参数"].Rows[0]["CSxia2P"].ToString().Replace(":", ".");
+            string dqsjP = DateTime.Now.Hour.ToString() + "." + DateTime.Now.Minute.ToString();
+            
+            if (Convert.ToDouble(dqsjP) >= Convert.ToDouble(CSshang1P) && Convert.ToDouble(dqsjP) <= Convert.ToDouble(CSshang2P))
+            {
+                //迟到
+                param.Add("@Kfx", "迟到");
+            }
+            if (Convert.ToDouble(dqsjP) >= Convert.ToDouble(CSxia1P) && Convert.ToDouble(dqsjP) <= Convert.ToDouble(CSxia2P))
+            {
+                //早退
+                if (!param.Contains("@Kfx"))
+                {
+                    param.Add("@Kfx", "早退");
+                }
+                
+            }
+           
         }
 
 

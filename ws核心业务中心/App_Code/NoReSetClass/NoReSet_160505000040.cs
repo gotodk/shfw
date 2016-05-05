@@ -86,7 +86,12 @@ public class NoReSet_160505000040
         param.Add("@CSxia1", ht_forUI["CSxia1"].ToString());
         param.Add("@CSxia2", ht_forUI["CSxia2"].ToString());
 
-        alsql.Add("UPDATE  ZZZ_kaoqin_cs SET  CSjiange=@CSjiange, CSshang1=@CSshang1, CSshang2=@CSshang2, CSxia1=@CSxia1, CSxia2=@CSxia2  where CSID =@CSID ");
+        param.Add("@CSshang1P", ht_forUI["CSshang1P"].ToString());
+        param.Add("@CSshang2P", ht_forUI["CSshang2P"].ToString());
+        param.Add("@CSxia1P", ht_forUI["CSxia1P"].ToString());
+        param.Add("@CSxia2P", ht_forUI["CSxia2P"].ToString());
+
+        alsql.Add("UPDATE  ZZZ_kaoqin_cs SET  CSjiange=@CSjiange, CSshang1=@CSshang1, CSshang2=@CSshang2, CSxia1=@CSxia1, CSxia2=@CSxia2,CSshang1P=@CSshang1P ,CSshang2P=@CSshang2P,CSxia1P=@CSxia1P,CSxia2P=@CSxia2P where CSID =@CSID ");
 
 
 
