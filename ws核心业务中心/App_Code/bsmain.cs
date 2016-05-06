@@ -72,6 +72,12 @@ public class bsmain : System.Web.Services.WebService
 
 
 
+
+    #endregion
+
+
+
+
     /// <summary>
     /// 获取扫码演示结果并处理
     /// </summary>
@@ -177,8 +183,8 @@ public class bsmain : System.Web.Services.WebService
                             restr = restr + "{\"title\":\"" + daytype_arr[a] + "\",\"start\":\"" + dayrq + "\",\"end\":\"" + dayrq + "\",\"url\":null,\"allDay\":true,\"className\":\"" + classname + "\"},";
                         }
 
-                     
-                     
+
+
                     }
                     restr = restr.TrimEnd(',');
                     restr = restr + "]";
@@ -246,12 +252,12 @@ public class bsmain : System.Web.Services.WebService
                         string[] daytype_arr = daytype.Split(',');
                         for (int a = 0; a < daytype_arr.Length; a++)
                         {
-                          
-                            if (daytype_arr[a].IndexOf( "正常") >=0)
+
+                            if (daytype_arr[a].IndexOf("正常") >= 0)
                             { classname = "label-success"; }
                             else if (daytype_arr[a].IndexOf("迟到") >= 0 || daytype_arr[a].IndexOf("早退") >= 0)
                             { classname = "label-danger"; }
-                            else  
+                            else
                             { classname = "label-yellow"; }
                             restr = restr + "{\"title\":\"" + daytype_arr[a] + "\",\"start\":\"" + dayrq + "\",\"end\":\"" + dayrq + "\",\"url\":null,\"allDay\":false,\"className\":\"" + classname + "\"},";
                         }
@@ -308,8 +314,8 @@ public class bsmain : System.Web.Services.WebService
 
             return_ht = I_DBL.RunParam_SQL("select top 1 *,Ffujian as tupian from  ZZZ_WENDANG where FID=@FID", "数据记录", param);
         }
-    
- 
+
+
 
         if ((bool)(return_ht["return_float"]))
         {
@@ -335,6 +341,49 @@ public class bsmain : System.Web.Services.WebService
     }
 
 
-    # endregion
+    /// <summary>
+    /// 获取用户头像
+    /// </summary>
+    /// <param name="UAid">UI端的参数</param>
+    /// <returns>只要返回值不是“可用”，就不能再注册了</returns>
+    [WebMethod(MessageName = "获取用户头像", Description = "获取用户头像")]
+    public string GetUserTouxiang(string UAid)
+    {
+
+
+        //开始真正的处理，这里只是演示，所以直接在这里写业务逻辑代码了
+
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+
+        Hashtable param = new Hashtable();
+
+        Hashtable return_ht = new Hashtable();
+
+        param.Add("@UAid", UAid);
+        return_ht = I_DBL.RunParam_SQL("select top 1 myshowface from ZZZ_userinfo where UAid=@UAid     ", "数据记录", param);
+
+        if ((bool)(return_ht["return_float"]))
+        {
+            DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+            if (redb.Rows.Count > 0)
+            {
+                return redb.Rows[0]["myshowface"].ToString();
+            }
+            else
+            {
+                return "/mytutu/defaulttouxiang_err.jpg";
+            }
+
+        }
+        else
+        {
+            return "/mytutu/defaulttouxiang_err.jpg";
+        }
+
+        return "/mytutu/defaulttouxiang_err.jpg";
+    }
+
+
+
 
 }

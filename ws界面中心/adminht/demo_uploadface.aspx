@@ -20,17 +20,18 @@
     <div class="row"><div class="col-sm-12">
          <!-- 模拟小图，使用默认初始图片-->
  
-        <uc1:upimageuc runat="server" ID="upimageuc1" Cloadingimg="/mytutu/uploadto.gif" Csite="sm" Cnowimg="/mytutu/uploadto_a.gif" Ctitle="" Cisp="yes" Cidname="qqtutu1"   /> 
+<%--        <uc1:upimageuc runat="server" ID="upimageuc1" Cloadingimg="/mytutu/uploadto.gif" Csite="sm" Cnowimg="/mytutu/uploadto_a.gif" Ctitle="" Cisp="yes" Cidname="qqtutu1"   /> 
         <br/>
         
         <!-- 模拟大图，随便一张初始图片(应从数据库读取)  -->
         <uc1:upimageuc runat="server" ID="upimageuc2" Cloadingimg="" Csite="md" Cnowimg="/mytutu/uploadto_a.gif" Ctitle="" Cisp="no"  Cidname="qqtutu2"  />
 
-                <br/>
+                <br/>--%>
         
         <!-- 模拟很大图，随便一张初始图片(应从数据库读取)  -->
-        <uc1:upimageuc runat="server" ID="upimageuc3" Cloadingimg="/mytutu/uploadto.gif" Csite="bg" Cnowimg="/mytutu/uploadto_a.gif" Ctitle="" Cisp="no"  Cidname="qqtutu3"  />
+        <uc1:upimageuc runat="server" ID="upimageuc3" Cloadingimg="/mytutu/uploadto.gif" Csite="bg" Cnowimg="/mytutu/uploadto_a.gif" Ctitle="" Cisp="yes"  Cidname="qqtutu3"  />
  
+        <br/>
 
                      </div></div>
  </form>

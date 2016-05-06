@@ -30,13 +30,22 @@
     <script type="text/javascript">
              jQuery(function ($) {
                 
+               
 
 
                  //隐藏子表弹窗共享字段
        
                  if (getUrlParam("fff") != "1") {
 
+                     //隐藏状态，并自动带入执行人
                      $("input[name='Gjieguo']").closest(".form-group").hide();
+                     $("#G_UAID").val("<%=UserSession.唯一键%>");
+                     $("#xingming").val("隐藏了");
+                     $("#G_UAID").closest(".form-group").hide();
+                     $("#xingming").closest(".form-group").hide();
+                 }
+                 else {
+                     $("#G_UAID").closest(".form-group").hide();
                  }
 
                  var dfx_str_kh = "#show_searchopenyhbspgogo_G_UAID";

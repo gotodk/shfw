@@ -171,14 +171,14 @@
                                     修改密码
                                 </a>
                             </li>
-<%--                            <li class="divider"></li>
+                           <li class="divider"></li>
                             <li>
                                 <a href="/adminht/demo_uploadface.aspx">
                                     <i class="ace-icon fa fa-user"></i>
                                     设置头像
                                 </a>
                             </li>
-
+                            <%-- 
                             <li class="divider"></li>
 
                             <li>
