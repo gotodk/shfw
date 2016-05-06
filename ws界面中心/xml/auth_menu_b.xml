@@ -195,6 +195,10 @@
     <SortParentID>83</SortParentID>
     <SortParentPath>,83,</SortParentPath>
     <SortOrder>11</SortOrder>
+    <m_url>/adminht/corepage/gzjh/edit_workplan.aspx</m_url>
+    <m_tip />
+    <m_tag />
+    <m_ico />
     <m_show>不隐藏</m_show>
     <SortNameTree>│├新建计划</SortNameTree>
     <SortMoveUp>0</SortMoveUp>
@@ -207,6 +211,10 @@
     <SortParentID>83</SortParentID>
     <SortParentPath>,83,</SortParentPath>
     <SortOrder>12</SortOrder>
+    <m_url>/adminht/corepage/gzjh/list_workplan_my.aspx</m_url>
+    <m_tip />
+    <m_tag />
+    <m_ico />
     <m_show>不隐藏</m_show>
     <SortNameTree>│├我的计划</SortNameTree>
     <SortMoveUp>1</SortMoveUp>
@@ -219,7 +227,7 @@
     <SortParentID>83</SortParentID>
     <SortParentPath>,83,</SortParentPath>
     <SortOrder>13</SortOrder>
-    <m_url />
+    <m_url>/adminht/corepage/gzjh/list_workplan.aspx</m_url>
     <m_tip />
     <m_tag />
     <m_ico />

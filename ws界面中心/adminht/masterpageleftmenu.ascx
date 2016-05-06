@@ -7,21 +7,23 @@
 
     <div class="sidebar-shortcuts" id="sidebar-shortcuts">
         <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-            <button class="btn btn-success" onclick="window.top.location.href='demo_home.aspx'">
+            <button class="btn btn-success" onclick="window.top.location.href='/adminht/demo_home.aspx'">
                 <i class="ace-icon fa fa-home"></i>
-            </button>
-
-            <button class="btn btn-info">
-                <i class="ace-icon fa fa-pencil"></i>
             </button>
 
             <!-- #section:basics/sidebar.layout.shortcuts -->
             <button class="btn btn-warning">
-                <i class="ace-icon fa fa-users"></i>
+                <i class="ace-icon fa fa-briefcase"  onclick="window.top.location.href='/adminht/corepage/fwbg/edit_bxsq.aspx'"></i>
             </button>
 
+            <button class="btn btn-info">
+                <i class="ace-icon fa fa-file-word-o" onclick="window.top.location.href='/adminht/corepage/fwbg/edit_fwbg.aspx'"></i>
+            </button>
+
+      
+
             <button class="btn btn-grey">
-                <i class="ace-icon fa fa-cogs"></i>
+                <i class="ace-icon fa fa-share-alt" onclick="window.top.location.href='/adminht/corepage/bas/list_zhishi.aspx'"></i>
             </button>
 
             <!-- /section:basics/sidebar.layout.shortcuts -->
