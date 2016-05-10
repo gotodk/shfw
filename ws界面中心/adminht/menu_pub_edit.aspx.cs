@@ -285,7 +285,7 @@ public partial class menu_pub_edit : System.Web.UI.Page
 
                 //这个就是得到远程方法真正的返回值，不同类型的，自行进行强制转换即可。
                 dtT = (DataTable)re_dsiT[1];
-                dtT.WriteXml(Server.MapPath("/xml/" + dbtbname.Text + ".xml"), XmlWriteMode.WriteSchema);
+                //dtT.WriteXml(Server.MapPath("/xml/" + dbtbname.Text + ".xml"), XmlWriteMode.WriteSchema);
             }
             else
             {
@@ -301,7 +301,7 @@ public partial class menu_pub_edit : System.Web.UI.Page
 
                 //这个就是得到远程方法真正的返回值，不同类型的，自行进行强制转换即可。
                 ds_mj = (DataSet)re_dsi_mj[1];
-                ds_mj.WriteXml(Server.MapPath("/xml/auth_enum_number_ANused.xml"), XmlWriteMode.WriteSchema);
+                //ds_mj.WriteXml(Server.MapPath("/xml/auth_enum_number_ANused.xml"), XmlWriteMode.WriteSchema);
 
             }
             else
@@ -335,11 +335,11 @@ public partial class menu_pub_edit : System.Web.UI.Page
             string dsreturn = re_dsi[1].ToString();
             if (b.ID == "shanchu")
             {
-                Response.Redirect("/adminht/auth_menu_edit.aspx?tb=" + dbtbname.Text);
+                Response.Redirect("/adminht/menu_pub_edit.aspx?tb=" + dbtbname.Text);
             }
             else
             {
-                Response.Redirect("/adminht/auth_menu_edit.aspx?sortid=" + sh_SortID.Text + "&tb=" + dbtbname.Text);
+                Response.Redirect("/adminht/menu_pub_edit.aspx?sortid=" + sh_SortID.Text + "&tb=" + dbtbname.Text);
             }
             
 

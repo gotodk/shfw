@@ -54,7 +54,7 @@
                                             </div>
 
                                         </div>
-                                          <div class="form-group">
+                                          <div class="form-group hidden">
                                             <label class="col-sm-3 control-label no-padding-right" for="ee_m_url">链接地址：</label>
 
                                             <div class="col-sm-9">
@@ -64,15 +64,15 @@
 
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label no-padding-right" for="ee_m_tip">tip提示：</label>
+                                            <label class="col-sm-3 control-label no-padding-right" for="ee_m_tip">备注：</label>
 
                                             <div class="col-sm-9">
-                                                <asp:TextBox ID="ee_m_tip" runat="server" data-rel="tooltip" placeholder="填写节点tip提示…" title="新节点tip提示" CssClass="col-xs-12 col-sm-9 "></asp:TextBox>
+                                                <asp:TextBox ID="ee_m_tip" runat="server" data-rel="tooltip" placeholder="填写节点备注…" title="新节点备注" CssClass="col-xs-12 col-sm-9 "></asp:TextBox>
                           
                                             </div>
 
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group hidden">
                                             <label class="col-sm-3 control-label no-padding-right" for="ee_m_tag">打开方式：</label>
 
                                             <div class="col-sm-9">
@@ -81,7 +81,7 @@
                                             </div>
 
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group hidden">
                                             <label class="col-sm-3 control-label no-padding-right" for="ee_m_ico">图标：</label>
 
                                             <div class="col-sm-9">
@@ -154,7 +154,7 @@
                                                     </p>
                                                     <h3 class="header smaller lighter blue">其他操作</h3>
                                                     <p>
-                                                      <asp:Button Visible="false" ID="shengchengxml" runat="server" CssClass="btn btn-sm btn-pink" Text="生成xml" OnClick="editjiedian_Click" />&nbsp;&nbsp;&nbsp;<asp:Button ID="shang" runat="server" CssClass="btn btn-sm btn-pink" Text="上移排序" OnClick="editjiedian_Click" />&nbsp;&nbsp;&nbsp;<asp:Button ID="xia" runat="server" CssClass="btn btn-sm btn-pink" Text="下移排序" OnClick="editjiedian_Click" />  &nbsp;&nbsp;&nbsp;<asp:Button ID="shanchu" runat="server" CssClass="btn btn-sm btn-pink" Text="删除当前节点" OnClientClick="javascript:return confirm('危险操作无法恢复！彻底删除当前节点及其所有子节点，确定吗？');"  OnClick="editjiedian_Click" />&nbsp;&nbsp;&nbsp;<asp:Button ID="zhengli" runat="server" CssClass="btn btn-sm btn-pink" Text="修正全部节点" OnClientClick="javascript:return confirm('危险操作无法恢复！重新整理全部节点排序和父级关系，确定吗？');"  OnClick="editjiedian_Click" />
+                                                      <asp:Button Visible="false" ID="shengchengxml" runat="server" CssClass="btn btn-sm btn-pink" Text="生成xml" OnClick="editjiedian_Click" />&nbsp;&nbsp;&nbsp;<asp:Button ID="shang" runat="server" CssClass="btn btn-sm btn-pink" Text="上移排序" OnClick="editjiedian_Click" />&nbsp;&nbsp;&nbsp;<asp:Button ID="xia" runat="server" CssClass="btn btn-sm btn-pink" Text="下移排序" OnClick="editjiedian_Click" />  &nbsp;&nbsp;&nbsp;<asp:Button ID="shanchu" runat="server" CssClass="btn btn-sm btn-pink" Text="删除当前节点" OnClientClick="javascript:return confirm('危险操作无法恢复！彻底删除当前节点及其所有子节点，确定吗？');"  OnClick="editjiedian_Click" />&nbsp;&nbsp;&nbsp;<asp:Button ID="zhengli" runat="server"  Visible="false"  CssClass="btn btn-sm btn-pink" Text="修正全部节点" OnClientClick="javascript:return confirm('危险操作无法恢复！重新整理全部节点排序和父级关系，确定吗？');"  OnClick="editjiedian_Click" />
                                                     
 
 
