@@ -171,9 +171,10 @@
                                     修改密码
                                 </a>
                             </li>
+                            
                            <li class="divider"></li>
                             <li>
-                                <a href="/adminht/demo_uploadface.aspx">
+                                <a href="/adminht/demo_uploadface_ss.aspx">
                                     <i class="ace-icon fa fa-user"></i>
                                     设置头像
                                 </a>

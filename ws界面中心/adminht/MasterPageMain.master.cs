@@ -14,7 +14,7 @@ public partial class MasterPageMain : System.Web.UI.MasterPage
 {
 
     public string znxsl = "0";
-    public string mytouiang = "/mytutu/defaulttouxiang_err.jpg";
+    public string mytouiang = "/mytutu/defaulttouxiang.jpg";
 
     private DataSet GetInfo_znxtop()
     {
@@ -32,6 +32,9 @@ public partial class MasterPageMain : System.Web.UI.MasterPage
 
     protected void Page_Load(object sender, EventArgs e)
     {
+
+
+
         masterpageleftmenu1.OnNeedLoadData += new masterpageleftmenu.OnNeedDataHandler(MyWebControl_OnNeedLoadData);
         this.Page.Title = ConfigurationManager.AppSettings["SYSname"] + " --- 系统管理";
         titleshowname.InnerHtml = ConfigurationManager.AppSettings["SYSname"] + " --- 系统管理";
@@ -40,12 +43,17 @@ public partial class MasterPageMain : System.Web.UI.MasterPage
 
 
         //获取用户头像
-        object[] re_dsi = IPC.Call("获取用户头像", new object[] { UserSession.唯一键 });
-        if (re_dsi[0].ToString() == "ok")
+        if (System.IO.File.Exists(Server.MapPath("/uploadfiles/faceup/" + UserSession.唯一键 + ".jpg")))
         {
-            //这个就是得到远程方法真正的返回值，不同类型的，自行进行强制转换即可。
-            mytouiang = re_dsi[1].ToString();
+            mytouiang = "/uploadfiles/faceup/" + UserSession.唯一键 + ".jpg";
         }
+        
+        //object[] re_dsi = IPC.Call("获取用户头像", new object[] { UserSession.唯一键 });
+        //if (re_dsi[0].ToString() == "ok")
+        //{
+        //    //这个就是得到远程方法真正的返回值，不同类型的，自行进行强制转换即可。
+        //    mytouiang = re_dsi[1].ToString();
+        //}
 
         DataSet ds_znx = GetInfo_znxtop();
         if (ds_znx != null)

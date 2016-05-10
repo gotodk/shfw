@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/adminht/MasterPageMain.master" AutoEventWireup="true" CodeFile="demo_uploadface.aspx.cs" Inherits="demo_uploadface" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/adminht/MasterPageMain.master" AutoEventWireup="true" CodeFile="demo_uploadface_ss.aspx.cs" Inherits="demo_uploadface_ss" %>
  
 <%@ Register Src="~/upimageuc.ascx" TagPrefix="uc1" TagName="upimageuc" %>
 
@@ -29,7 +29,7 @@
                 <br/>--%>
         
         <!-- 模拟很大图，随便一张初始图片(应从数据库读取)  -->
-        <uc1:upimageuc runat="server" ID="upimageuc3"  Csite="md"  Ctitle="上传头像" Cisp="yes"  Cidname="qqtutu3"  />
+        <uc1:upimageuc runat="server" ID="upimageuc3"  Csite="md" Ctitle="上传头像" Cisp="yes"  Cidname="qqtutu3"  />
  
         <br/>
 
@@ -40,5 +40,13 @@
     <!-- 附加的body底部本页专属的自定义js脚本 -->
    <script src="/assets/js/cropper/cropper.min.js"></script>
   <script src="/assets/js/cropper/main.js"></script>
+        <script type="text/javascript">
+            //同步顶部头像
+            jQuery(function ($) {
+                var jiancha_UAid = window.setInterval(function () {
+             
+                $(".nav-user-photo").attr("src", $(".avatar-Cidname").val());
+                }, 500);
+            });
+            </script>
 </asp:Content>
-

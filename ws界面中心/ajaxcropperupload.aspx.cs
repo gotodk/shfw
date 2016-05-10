@@ -256,6 +256,14 @@ public partial class ajaxcropperupload : System.Web.UI.Page
 
                 string saveDBpath = "/uploadfiles/" + DateTime.Now.Year.ToString() + "/" + monthStr + "/" + DayStr + "/";
                 string saveDBname = CombGuid.GetNewCombGuid("img") + fileExtension;
+
+                //特殊处理头像
+                if (Request["touxiang"] != null && Request["touxiang"].ToString() == "1")
+                {
+                    saveDBpath = "/uploadfiles/faceup/";
+                    saveDBname = Request["uaid"].ToString() + ".jpg";
+                }
+
                 string UploadURL = Server.MapPath(saveDBpath);//上传的目录
 
 
@@ -307,7 +315,17 @@ public partial class ajaxcropperupload : System.Web.UI.Page
                 File.Delete(savedFileName + ".temp");
 
 
-                Response.Write(getjson("200", re_width.ToString() + "," + re_height.ToString(), saveDBpath + saveDBname));
+             
+                //特殊处理头像
+                if (Request["touxiang"] != null && Request["touxiang"].ToString() == "1")
+                {
+                    Response.Write(getjson("200", re_width.ToString() + "," + re_height.ToString(), saveDBpath + saveDBname + "?r="+Guid.NewGuid().ToString()));
+                }
+                else
+                {
+                    Response.Write(getjson("200", re_width.ToString() + "," + re_height.ToString(), saveDBpath + saveDBname));
+                }
+
                 return;
             }
             if (hhbiaozhi == "onlyupload")
@@ -353,6 +371,10 @@ public partial class ajaxcropperupload : System.Web.UI.Page
 
                 string saveDBpath = "/uploadfiles/" + DateTime.Now.Year.ToString() + "/" + monthStr + "/" + DayStr + "/";
                 string saveDBname = "tempadel_"+CombGuid.GetNewCombGuid("img") + fileExtension;
+
+              
+
+
                 string UploadURL = Server.MapPath(saveDBpath);//上传的目录
 
 
