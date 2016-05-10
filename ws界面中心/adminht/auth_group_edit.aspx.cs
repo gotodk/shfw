@@ -13,6 +13,19 @@ using System.Web.UI.WebControls;
 public partial class auth_group_edit : System.Web.UI.Page
 {
 
+    private void zhankai(TreeNode tn)
+    {
+        if (tn.Parent == null)
+        {
+            return;
+        }
+        else
+        {
+            tn.Parent.Expanded = true;
+            zhankai(tn.Parent);
+        }
+    }
+
     public string tbshowname = "";
     Hashtable ht_nemu_tb = new Hashtable();
     protected void Page_Load(object sender, EventArgs e)
@@ -202,7 +215,7 @@ public partial class auth_group_edit : System.Web.UI.Page
 
         }
         this.InitNode(dt);
-        TV.ExpandAll();
+        //TV.ExpandAll();
     }
 
     /// <summary>
@@ -233,6 +246,17 @@ public partial class auth_group_edit : System.Web.UI.Page
                 root.NavigateUrl = "?sortid=" + drRoot_nowzi["SortID"].ToString();
                 root.Target = "_top";
                 this.TV.Nodes.Add(root);
+                if (yanse == "red")
+                {
+
+                    root.Expanded = true;
+                    zhankai(root);
+                }
+                else
+                {
+                    root.Expanded = false;
+                }
+
                 this.BuildChild(drRoot_nowzi, root, dt);
 
 
@@ -270,6 +294,17 @@ public partial class auth_group_edit : System.Web.UI.Page
                 node.NavigateUrl = "?sortid=" + drChild["SortID"].ToString();
                 node.Target = "_top";
                 root.ChildNodes.Add(node);
+                if (yanse == "red")
+                {
+
+                    node.Expanded = true;
+                    zhankai(node);
+                }
+                else
+                {
+                    node.Expanded = false;
+                }
+
                 this.BuildChild(drChild, node, dt);
 
 

@@ -9,8 +9,28 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class auth_menu_edit : System.Web.UI.Page
+public partial class menu_pub_edit : System.Web.UI.Page
 {
+
+    public string tbshowname = "";
+    Hashtable ht_nemu_tb = new Hashtable();
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        //验证权限
+        //AuthComm.chekcAuth_fromsession("1", UserSession.最终权值_后台菜单权限, true);
+
+        if(!IsPostBack)
+        {
+            //加载菜单  
+            ReLoadNode();
+        }
+     
+
+         
+
+ 
+    }
+
 
     private void zhankai(TreeNode tn)
     {
@@ -25,25 +45,7 @@ public partial class auth_menu_edit : System.Web.UI.Page
         }
     }
 
-    public string tbshowname = "";
-    Hashtable ht_nemu_tb = new Hashtable();
-    protected void Page_Load(object sender, EventArgs e)
-    {
-        //验证权限
-        AuthComm.chekcAuth_fromsession("1", UserSession.最终权值_后台菜单权限, true);
-
-        if(!IsPostBack)
-        {
-            //加载菜单  
-            ReLoadNode();
-        }
-     
-
-         
-
- 
-    }
- 
+  
 
     /// <summary>
     /// 重新加载菜单
@@ -51,13 +53,13 @@ public partial class auth_menu_edit : System.Web.UI.Page
     private void ReLoadNode()
     {
         errmsg.Text = "";
-        ht_nemu_tb["auth_menu_b"] = "后台菜单";
-        ht_nemu_tb["auth_menu_f"] = "前台菜单";
+        ht_nemu_tb["class_org"] = "组织架构";
+        ht_nemu_tb["class_pro"] = "产品分类";
       
         if (Request["tb"] == null || Request["tb"].ToString().Trim() == "")
         {
-            tbshowname = "后台菜单";
-            dbtbname.Text = "auth_menu_b";
+            tbshowname = "组织架构";
+            dbtbname.Text = "class_org";
         }
         else
         {
@@ -144,8 +146,12 @@ public partial class auth_menu_edit : System.Web.UI.Page
             errmsg.Text = re_dsi[1].ToString();//向客户端输出错误字符串
 
         }
+       
         this.InitNode(dt);
-        //TV.ExpandAll();
+ 
+
+ 
+
     }
 
     /// <summary>
@@ -179,6 +185,8 @@ public partial class auth_menu_edit : System.Web.UI.Page
                 {
                     yanse = "red";
                 }
+               
+
                 root.Text = tubiao + "<span class='" + yanse + "'>" + drRoot_nowzi["SortName"].ToString() + "</span>";
                 root.NavigateUrl = "?sortid=" + drRoot_nowzi["SortID"].ToString() + "&tb=" + dbtbname.Text;
                 root.Target = "_top";
@@ -234,14 +242,17 @@ public partial class auth_menu_edit : System.Web.UI.Page
                 if (sh_SortID.Text == drChild["SortID"].ToString())
                 {
                     yanse = "red";
+               
+                  
                 }
+               
                 node.Text = tubiao + "<span class='" + yanse + "'>" + drChild["SortName"].ToString() + "</span>";
                 node.NavigateUrl = "?sortid=" + drChild["SortID"].ToString() + "&tb=" + dbtbname.Text;
                 node.Target = "_top";
                 root.ChildNodes.Add(node);
                 if (yanse == "red")
                 {
-
+ 
                     node.Expanded = true;
                     zhankai(node);
                 }
@@ -249,6 +260,7 @@ public partial class auth_menu_edit : System.Web.UI.Page
                 {
                     node.Expanded = false;
                 }
+
                 this.BuildChild(drChild, node, dt);
 
 
