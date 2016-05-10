@@ -68,7 +68,7 @@
 												保存
 											</button></li>
                             <li class="">&nbsp;&nbsp;</li>
-                            <li class=""><button class="btn btn-white btn-info btn-bold printarea_go_dayinanniu" id="dayinzheyiye_top">
+                            <li class="hidden-480"><button class="btn btn-white btn-info btn-bold printarea_go_dayinanniu" id="dayinzheyiye_top">
 												<i class="ace-icon fa fa-print grey"></i>
 												打印
 											</button></li>
