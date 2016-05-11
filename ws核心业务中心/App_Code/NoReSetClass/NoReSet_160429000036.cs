@@ -56,13 +56,25 @@ public class NoReSet_160429000036
         Hashtable return_ht = new Hashtable();
         ArrayList alsql = new ArrayList();
         Hashtable param = new Hashtable();
-        //以可排序guid方式生成
-        string guid = CombGuid.GetMewIdFormSequence("ZZZ_SBLXBASE");
+        //以可排序guid方式生成 
+        //SBID, SBmingcheng, SBxinghao, SBdanwei, SBchengbenjia, SBbaoxiuqixian, SBbaoyangzhouqi,  SBchanpinshouming, SBxiaoshoujiage, SBshengchanchang, SBerpbianma, SBzhuangtai, SBbeizhu
+        string guid = ht_forUI["SBID"].ToString();
         param.Add("@SBID", guid);
-        param.Add("@SBname", ht_forUI["SBname"].ToString());
-        param.Add("@SBshuoming", ht_forUI["SBshuoming"].ToString());
- 
-        alsql.Add("INSERT INTO ZZZ_SBLXBASE(SBID,SBname, SBshuoming ) VALUES(@SBID,@SBname, @SBshuoming )");
+        param.Add("@SBmingcheng", ht_forUI["SBmingcheng"].ToString());
+        param.Add("@SBxinghao", ht_forUI["SBxinghao"].ToString());
+        param.Add("@SBdanwei", ht_forUI["SBdanwei"].ToString());
+        param.Add("@SBchengbenjia", ht_forUI["SBchengbenjia"].ToString());
+        param.Add("@SBbaoxiuqixian", ht_forUI["SBbaoxiuqixian"].ToString());
+        param.Add("@SBbaoyangzhouqi", ht_forUI["SBbaoyangzhouqi"].ToString());
+        param.Add("@SBchanpinshouming", ht_forUI["SBchanpinshouming"].ToString());
+        param.Add("@SBxiaoshoujiage", ht_forUI["SBxiaoshoujiage"].ToString());
+        param.Add("@SBshengchanchang", ht_forUI["SBshengchanchang"].ToString());
+        param.Add("@SBerpbianma", ht_forUI["SBerpbianma"].ToString());
+        param.Add("@SBzhuangtai", ht_forUI["SBzhuangtai"].ToString());
+        param.Add("@SBbeizhu", ht_forUI["SBbeizhu"].ToString());
+        
+
+        alsql.Add("INSERT INTO ZZZ_SBLXBASE(SBID, SBmingcheng, SBxinghao, SBdanwei, SBchengbenjia, SBbaoxiuqixian, SBbaoyangzhouqi,  SBchanpinshouming, SBxiaoshoujiage, SBshengchanchang, SBerpbianma, SBzhuangtai, SBbeizhu ) VALUES(@SBID, @SBmingcheng, @SBxinghao, @SBdanwei, @SBchengbenjia, @SBbaoxiuqixian, @SBbaoyangzhouqi,  @SBchanpinshouming, @SBxiaoshoujiage, @SBshengchanchang, @SBerpbianma, @SBzhuangtai, @SBbeizhu)");
 
  
         //遍历子表， 插入 
@@ -140,10 +152,20 @@ public class NoReSet_160429000036
         ArrayList alsql = new ArrayList();
         Hashtable param = new Hashtable();
         param.Add("@SBID", ht_forUI["idforedit"].ToString());
-        param.Add("@SBname", ht_forUI["SBname"].ToString());
-        param.Add("@SBshuoming", ht_forUI["SBshuoming"].ToString());
+        param.Add("@SBmingcheng", ht_forUI["SBmingcheng"].ToString());
+        param.Add("@SBxinghao", ht_forUI["SBxinghao"].ToString());
+        param.Add("@SBdanwei", ht_forUI["SBdanwei"].ToString());
+        param.Add("@SBchengbenjia", ht_forUI["SBchengbenjia"].ToString());
+        param.Add("@SBbaoxiuqixian", ht_forUI["SBbaoxiuqixian"].ToString());
+        param.Add("@SBbaoyangzhouqi", ht_forUI["SBbaoyangzhouqi"].ToString());
+        param.Add("@SBchanpinshouming", ht_forUI["SBchanpinshouming"].ToString());
+        param.Add("@SBxiaoshoujiage", ht_forUI["SBxiaoshoujiage"].ToString());
+        param.Add("@SBshengchanchang", ht_forUI["SBshengchanchang"].ToString());
+        param.Add("@SBerpbianma", ht_forUI["SBerpbianma"].ToString());
+        param.Add("@SBzhuangtai", ht_forUI["SBzhuangtai"].ToString());
+        param.Add("@SBbeizhu", ht_forUI["SBbeizhu"].ToString());
 
-        alsql.Add("UPDATE ZZZ_SBLXBASE SET  SBname=@SBname, SBshuoming=@SBshuoming  where SBID=@SBID ");
+        alsql.Add("UPDATE ZZZ_SBLXBASE SET SBmingcheng=@SBmingcheng, SBxinghao=@SBxinghao, SBdanwei=@SBdanwei, SBchengbenjia=@SBchengbenjia, SBbaoxiuqixian=@SBbaoxiuqixian, SBbaoyangzhouqi=@SBbaoyangzhouqi,  SBchanpinshouming=@SBchanpinshouming, SBxiaoshoujiage=@SBxiaoshoujiage, SBshengchanchang=@SBshengchanchang, SBerpbianma=@SBerpbianma, SBzhuangtai=@SBzhuangtai, SBbeizhu=@SBbeizhu  where SBID=@SBID ");
 
 
         //遍历子表，先删除，再插入，已有主键的不重新生成。

@@ -993,35 +993,19 @@
     <SortMoveDown>0</SortMoveDown>
   </菜单表>
   <菜单表>
-    <ID>1121</ID>
-    <SortID>125</SortID>
-    <SortName>设备分类</SortName>
-    <SortParentID>112</SortParentID>
-    <SortParentPath>,43,112,</SortParentPath>
-    <SortOrder>68</SortOrder>
-    <m_url>/adminht/menu_pub_edit.aspx?tb=class_pro</m_url>
-    <m_tip />
-    <m_tag />
-    <m_ico />
-    <m_show>不隐藏</m_show>
-    <SortNameTree>││├设备分类</SortNameTree>
-    <SortMoveUp>0</SortMoveUp>
-    <SortMoveDown>-5</SortMoveDown>
-  </菜单表>
-  <菜单表>
     <ID>1113</ID>
     <SortID>117</SortID>
     <SortName>单位选项</SortName>
     <SortParentID>112</SortParentID>
     <SortParentPath>,43,112,</SortParentPath>
-    <SortOrder>69</SortOrder>
+    <SortOrder>68</SortOrder>
     <m_url>/adminht/corepage/zfcmjwh_edit.aspx?idforedit=cpdw&amp;fff=1</m_url>
     <m_tip />
     <m_tag />
     <m_ico />
     <m_show>不隐藏</m_show>
     <SortNameTree>││├单位选项</SortNameTree>
-    <SortMoveUp>1</SortMoveUp>
+    <SortMoveUp>0</SortMoveUp>
     <SortMoveDown>-4</SortMoveDown>
   </菜单表>
   <菜单表>
@@ -1030,14 +1014,14 @@
     <SortName>维修错误分类</SortName>
     <SortParentID>112</SortParentID>
     <SortParentPath>,43,112,</SortParentPath>
-    <SortOrder>70</SortOrder>
+    <SortOrder>69</SortOrder>
     <m_url>/adminht/menu_pub_edit.aspx?tb=class_wxerr</m_url>
     <m_tip />
     <m_tag />
     <m_ico />
     <m_show>不隐藏</m_show>
     <SortNameTree>││├维修错误分类</SortNameTree>
-    <SortMoveUp>2</SortMoveUp>
+    <SortMoveUp>1</SortMoveUp>
     <SortMoveDown>-3</SortMoveDown>
   </菜单表>
   <菜单表>
@@ -1046,14 +1030,14 @@
     <SortName>采购渠道选项</SortName>
     <SortParentID>112</SortParentID>
     <SortParentPath>,43,112,</SortParentPath>
-    <SortOrder>71</SortOrder>
+    <SortOrder>70</SortOrder>
     <m_url>/adminht/corepage/zfcmjwh_edit.aspx?idforedit=sb_cgqd&amp;fff=1</m_url>
     <m_tip />
     <m_tag />
     <m_ico />
     <m_show>不隐藏</m_show>
     <SortNameTree>││├采购渠道选项</SortNameTree>
-    <SortMoveUp>3</SortMoveUp>
+    <SortMoveUp>2</SortMoveUp>
     <SortMoveDown>-2</SortMoveDown>
   </菜单表>
   <菜单表>
@@ -1062,14 +1046,14 @@
     <SortName>科室选项</SortName>
     <SortParentID>112</SortParentID>
     <SortParentPath>,43,112,</SortParentPath>
-    <SortOrder>72</SortOrder>
+    <SortOrder>71</SortOrder>
     <m_url>/adminht/corepage/zfcmjwh_edit.aspx?idforedit=keshi&amp;fff=1</m_url>
     <m_tip />
     <m_tag />
     <m_ico />
     <m_show>不隐藏</m_show>
     <SortNameTree>││├科室选项</SortNameTree>
-    <SortMoveUp>4</SortMoveUp>
+    <SortMoveUp>3</SortMoveUp>
     <SortMoveDown>-1</SortMoveDown>
   </菜单表>
   <菜单表>
@@ -1078,14 +1062,14 @@
     <SortName>知识分类选项</SortName>
     <SortParentID>112</SortParentID>
     <SortParentPath>,43,112,</SortParentPath>
-    <SortOrder>73</SortOrder>
+    <SortOrder>72</SortOrder>
     <m_url>/adminht/corepage/zfcmjwh_edit.aspx?idforedit=zhishifenlei&amp;fff=1</m_url>
     <m_tip />
     <m_tag />
     <m_ico />
     <m_show>不隐藏</m_show>
     <SortNameTree>││└知识分类选项</SortNameTree>
-    <SortMoveUp>5</SortMoveUp>
+    <SortMoveUp>4</SortMoveUp>
     <SortMoveDown>0</SortMoveDown>
   </菜单表>
   <菜单表>
@@ -1094,7 +1078,7 @@
     <SortName>开发专用</SortName>
     <SortParentID>0</SortParentID>
     <SortParentPath>,</SortParentPath>
-    <SortOrder>74</SortOrder>
+    <SortOrder>73</SortOrder>
     <m_url />
     <m_tip />
     <m_tag />
@@ -1110,7 +1094,7 @@
     <SortName>权限数据维护</SortName>
     <SortParentID>28</SortParentID>
     <SortParentPath>,28,</SortParentPath>
-    <SortOrder>75</SortOrder>
+    <SortOrder>74</SortOrder>
     <m_url />
     <m_tip />
     <m_tag />
@@ -1126,7 +1110,7 @@
     <SortName>系统菜单调整</SortName>
     <SortParentID>27</SortParentID>
     <SortParentPath>,28,27,</SortParentPath>
-    <SortOrder>76</SortOrder>
+    <SortOrder>75</SortOrder>
     <m_url>/adminht/auth_menu_edit.aspx</m_url>
     <m_tip />
     <m_tag />
@@ -1142,7 +1126,7 @@
     <SortName>权限枚举维护</SortName>
     <SortParentID>27</SortParentID>
     <SortParentPath>,28,27,</SortParentPath>
-    <SortOrder>77</SortOrder>
+    <SortOrder>76</SortOrder>
     <m_url>/adminht/auth_enum_list.aspx</m_url>
     <m_tip />
     <m_tag />
@@ -1158,7 +1142,7 @@
     <SortName>权限组维护</SortName>
     <SortParentID>27</SortParentID>
     <SortParentPath>,28,27,</SortParentPath>
-    <SortOrder>78</SortOrder>
+    <SortOrder>77</SortOrder>
     <m_url>/adminht/auth_group_edit.aspx</m_url>
     <m_tip />
     <m_tag />
@@ -1174,7 +1158,7 @@
     <SortName>基本表单demo</SortName>
     <SortParentID>28</SortParentID>
     <SortParentPath>,28,</SortParentPath>
-    <SortOrder>79</SortOrder>
+    <SortOrder>78</SortOrder>
     <m_url />
     <m_tip />
     <m_tag />
@@ -1190,7 +1174,7 @@
     <SortName>数据列表demo</SortName>
     <SortParentID>13</SortParentID>
     <SortParentPath>,28,13,</SortParentPath>
-    <SortOrder>80</SortOrder>
+    <SortOrder>79</SortOrder>
     <m_url>/adminht/linshi/demo_dblist.aspx</m_url>
     <m_tip />
     <m_tag />
@@ -1206,7 +1190,7 @@
     <SortName>编辑保存demo</SortName>
     <SortParentID>13</SortParentID>
     <SortParentPath>,28,13,</SortParentPath>
-    <SortOrder>81</SortOrder>
+    <SortOrder>80</SortOrder>
     <m_url>/adminht/linshi/demo_pz_edit.aspx?fff=1&amp;idforedit=150915000006</m_url>
     <m_tip />
     <m_tag />
@@ -1222,7 +1206,7 @@
     <SortName>提交表单demo</SortName>
     <SortParentID>13</SortParentID>
     <SortParentPath>,28,13,</SortParentPath>
-    <SortOrder>82</SortOrder>
+    <SortOrder>81</SortOrder>
     <m_url>/adminht/linshi/demo_pz_add.aspx</m_url>
     <m_tip />
     <m_tag />
@@ -1238,7 +1222,7 @@
     <SortName>扫描条码例子</SortName>
     <SortParentID>13</SortParentID>
     <SortParentPath>,28,13,</SortParentPath>
-    <SortOrder>83</SortOrder>
+    <SortOrder>82</SortOrder>
     <m_url>/adminht/linshi/demo_tiaomasoamiao.aspx</m_url>
     <m_tip />
     <m_tag />
@@ -1254,7 +1238,7 @@
     <SortName>上传头像demo</SortName>
     <SortParentID>13</SortParentID>
     <SortParentPath>,28,13,</SortParentPath>
-    <SortOrder>84</SortOrder>
+    <SortOrder>83</SortOrder>
     <m_url>/adminht/demo_uploadface.aspx</m_url>
     <m_tip />
     <m_tag />
@@ -1270,7 +1254,7 @@
     <SortName>通用配置维护</SortName>
     <SortParentID>28</SortParentID>
     <SortParentPath>,28,</SortParentPath>
-    <SortOrder>85</SortOrder>
+    <SortOrder>84</SortOrder>
     <m_url />
     <m_tip />
     <m_tag />
@@ -1286,7 +1270,7 @@
     <SortName>浏览表单</SortName>
     <SortParentID>37</SortParentID>
     <SortParentPath>,28,37,</SortParentPath>
-    <SortOrder>86</SortOrder>
+    <SortOrder>85</SortOrder>
     <m_url>/adminht/baseset/bs_showformmain.aspx</m_url>
     <m_tip />
     <m_tag />
@@ -1302,7 +1286,7 @@
     <SortName>浏览表单字段</SortName>
     <SortParentID>37</SortParentID>
     <SortParentPath>,28,37,</SortParentPath>
-    <SortOrder>87</SortOrder>
+    <SortOrder>86</SortOrder>
     <m_url>/adminht/baseset/bs_showformSubInfo.aspx</m_url>
     <m_tip />
     <m_tag />
@@ -1318,7 +1302,7 @@
     <SortName>浏览表单弹窗</SortName>
     <SortParentID>37</SortParentID>
     <SortParentPath>,28,37,</SortParentPath>
-    <SortOrder>88</SortOrder>
+    <SortOrder>87</SortOrder>
     <m_url>/adminht/baseset/bs_showformSubDialog.aspx</m_url>
     <m_tip />
     <m_tag />
@@ -1334,7 +1318,7 @@
     <SortName>浏览通用列表</SortName>
     <SortParentID>37</SortParentID>
     <SortParentPath>,28,37,</SortParentPath>
-    <SortOrder>89</SortOrder>
+    <SortOrder>88</SortOrder>
     <m_url>/adminht/baseset/bs_showalllist.aspx</m_url>
     <m_tip />
     <m_tag />
@@ -1350,7 +1334,7 @@
     <SortName>浏览通用列表字段</SortName>
     <SortParentID>37</SortParentID>
     <SortParentPath>,28,37,</SortParentPath>
-    <SortOrder>90</SortOrder>
+    <SortOrder>89</SortOrder>
     <m_url>/adminht/baseset/bs_showalllist_field.aspx</m_url>
     <m_tip />
     <m_tag />
@@ -1366,7 +1350,7 @@
     <SortName>系统权限配置</SortName>
     <SortParentID>0</SortParentID>
     <SortParentPath>,</SortParentPath>
-    <SortOrder>91</SortOrder>
+    <SortOrder>90</SortOrder>
     <m_url />
     <m_tip />
     <m_tag />
@@ -1382,7 +1366,7 @@
     <SortName>用户权限分配</SortName>
     <SortParentID>1</SortParentID>
     <SortParentPath>,1,</SortParentPath>
-    <SortOrder>92</SortOrder>
+    <SortOrder>91</SortOrder>
     <m_url>/adminht/auth_oneuser.aspx</m_url>
     <m_tip />
     <m_tag />
@@ -1398,7 +1382,7 @@
     <SortName>用户权限浏览</SortName>
     <SortParentID>1</SortParentID>
     <SortParentPath>,1,</SortParentPath>
-    <SortOrder>93</SortOrder>
+    <SortOrder>92</SortOrder>
     <m_url>/adminht/auth_userlist.aspx</m_url>
     <m_tip />
     <m_tag />

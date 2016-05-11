@@ -29,10 +29,7 @@
     <script type="text/javascript">
         jQuery(function ($) {
 
-            if (getUrlParam("fff") == "1") {
-
-                $("#SID").attr("readonly", "readonly");
-            }
+        
 
                 
                  var dfx_str = "#show_searchopenyhbspgogo_S_YYID";
@@ -59,14 +56,55 @@
 
 
 
+
+
+                 var dfx_str_sb = "#show_searchopenyhbspgogo_S_SBID";
+                 var oldzhi_sb = $(dfx_str_sb).text();
+                 var jiancha_UAid_sb = window.setInterval(function () {
+
+                     if ($(dfx_str_sb).text() != oldzhi_sb) {
+                         var re = /\[.*?\]/ig;
+                         var arr = $(dfx_str_sb).text().match(re);
+
+                         if (arr != null) {//如果能匹配成功即arr数组不为空，循环输出结果
+                             for (var i = 0; i < arr.length; i++) {
+                                 var arr_z = arr[i].split(':');
+                                 if (arr_z[0] == "[设备名称")
+                                 { $("#Smingcheng").val($.trim(arr_z[1]).replace("]", "")); }
+                                 if (arr_z[0] == "[规格型号")
+                                 { $("#Sxinghao").val($.trim(arr_z[1]).replace("]", "")); }
+                  
+                                     if (getUrlParam("fff") == "1") {
+
+                                       
+                                     }
+                                     else {
+                                         
+                                         if (arr_z[0] == "[成本价")
+                                         { $("#Schenbenjia").val($.trim(arr_z[1]).replace("]", "")); }
+                                         if (arr_z[0] == "[保修期限")
+                                         { $("#Sbaoxiuqixian").val($.trim(arr_z[1]).replace("]", "")); }
+                                         if (arr_z[0] == "[保养周期")
+                                         { $("#Sbaoyangzhouqi").val($.trim(arr_z[1]).replace("]", "")); }
+                                     }
+                               
+
+                             }
+                         }
+
+                         oldzhi_sb = $(dfx_str_sb).text();
+                     }
+                 }, 500);
+
+
  
 
                  var jiancha_Sleixing = window.setInterval(function () {
 
                      //弹窗特殊条件
 
-                     var str_Sleixing = $("#Sleixing").val();
-                     $("#searchopenyhbspgogo_Sbanben").attr("teshuwhere", "BBB_SBID in (select SBID from ZZZ_SBLXBASE  where SBname='" + str_Sleixing + "')");
+                     var str_Sleixing = $("#S_SBID").val();
+                     $("#searchopenyhbspgogo_Sbanben").attr("teshuwhere", "BBB_SBID in (select SBID from ZZZ_SBLXBASE  where BBB_SBID='" + str_Sleixing + "')");
 
                  }, 500);
 

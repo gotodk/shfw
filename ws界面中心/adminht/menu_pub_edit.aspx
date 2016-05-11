@@ -182,9 +182,9 @@
 															<a href="menu_pub_edit.aspx?tb=class_org">组织架构</a>
 														</li>
 
-														<li>
+													<%--	<li>
 															<a href="menu_pub_edit.aspx?tb=class_pro">产品分类</a>
-														</li>
+														</li>--%>
 
                                                         <li>
 															<a href="menu_pub_edit.aspx?tb=class_wxerr">维修错误分类</a>
