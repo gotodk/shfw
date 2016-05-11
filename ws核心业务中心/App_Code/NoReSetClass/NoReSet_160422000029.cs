@@ -75,10 +75,13 @@ public class NoReSet_160422000029
 
         param.Add("@YYquyudaima", ht_forUI["YYquyudaima"].ToString());
         param.Add("@YYzuobiao", ht_forUI["YYzuobiao"].ToString());
-        param.Add("@YYcaixueliang", ht_forUI["YYcaixueliang"].ToString());
+
+        param.Add("@YYssbumen", ht_forUI["YYssbumen"].ToString());
+        param.Add("@YYfuwufuzeren", ht_forUI["YYfuwufuzeren"].ToString());
+
         param.Add("@YYbeizhu", ht_forUI["YYbeizhu"].ToString());
 
-        alsql.Add("INSERT INTO  ZZZ_KHDA(YYID, YYname, yhb_city_Promary_diquxian, yhb_city_City_diquxian, yhb_city_Qu_diquxian, YYdizhi,     YYdianhua, YYchuanzhen, YYkaipiao, YYerp, YYquyudaima, YYzuobiao, YYcaixueliang, YYbeizhu) VALUES(@YYID, @YYname, @yhb_city_Promary_diquxian, @yhb_city_City_diquxian, @yhb_city_Qu_diquxian, @YYdizhi,     @YYdianhua, @YYchuanzhen, @YYkaipiao, @YYerp, @YYquyudaima, @YYzuobiao, @YYcaixueliang, @YYbeizhu)");
+        alsql.Add("INSERT INTO  ZZZ_KHDA(YYID, YYname, yhb_city_Promary_diquxian, yhb_city_City_diquxian, yhb_city_Qu_diquxian, YYdizhi,     YYdianhua, YYchuanzhen, YYkaipiao, YYerp, YYquyudaima, YYzuobiao,  YYbeizhu,YYssbumen,YYfuwufuzeren) VALUES(@YYID, @YYname, @yhb_city_Promary_diquxian, @yhb_city_City_diquxian, @yhb_city_Qu_diquxian, @YYdizhi,     @YYdianhua, @YYchuanzhen, @YYkaipiao, @YYerp, @YYquyudaima, @YYzuobiao , @YYbeizhu,@YYssbumen,@YYfuwufuzeren)");
 
 
         //遍历子表， 插入 
@@ -171,10 +174,13 @@ public class NoReSet_160422000029
 
         param.Add("@YYquyudaima", ht_forUI["YYquyudaima"].ToString());
         param.Add("@YYzuobiao", ht_forUI["YYzuobiao"].ToString());
-        param.Add("@YYcaixueliang", ht_forUI["YYcaixueliang"].ToString());
+
+        param.Add("@YYssbumen", ht_forUI["YYssbumen"].ToString());
+        param.Add("@YYfuwufuzeren", ht_forUI["YYfuwufuzeren"].ToString());
+
         param.Add("@YYbeizhu", ht_forUI["YYbeizhu"].ToString());
 
-        alsql.Add("UPDATE ZZZ_KHDA SET YYname=@YYname, yhb_city_Promary_diquxian=@yhb_city_Promary_diquxian, yhb_city_City_diquxian=@yhb_city_City_diquxian, yhb_city_Qu_diquxian=@yhb_city_Qu_diquxian, YYdizhi=@YYdizhi,     YYdianhua=@YYdianhua, YYchuanzhen=@YYchuanzhen, YYkaipiao=@YYkaipiao, YYerp=@YYerp, YYquyudaima=@YYquyudaima, YYzuobiao=@YYzuobiao, YYcaixueliang=@YYcaixueliang, YYbeizhu=@YYbeizhu where YYID=@YYID ");
+        alsql.Add("UPDATE ZZZ_KHDA SET YYname=@YYname, yhb_city_Promary_diquxian=@yhb_city_Promary_diquxian, yhb_city_City_diquxian=@yhb_city_City_diquxian, yhb_city_Qu_diquxian=@yhb_city_Qu_diquxian, YYdizhi=@YYdizhi,     YYdianhua=@YYdianhua, YYchuanzhen=@YYchuanzhen, YYkaipiao=@YYkaipiao, YYerp=@YYerp, YYquyudaima=@YYquyudaima, YYzuobiao=@YYzuobiao,  YYbeizhu=@YYbeizhu, YYssbumen=@YYssbumen,YYfuwufuzeren=@YYfuwufuzeren where YYID=@YYID ");
 
 
 
@@ -268,7 +274,7 @@ public class NoReSet_160422000029
         Hashtable param = new Hashtable();
         param.Add("@YYID", ht_forUI["idforedit"].ToString());
 
-        return_ht = I_DBL.RunParam_SQL("select  top 1 *,yhb_city_Promary_diquxian as yhb_city_Promary_YYshengshiqu,yhb_city_City_diquxian as yhb_city_City_YYshengshiqu, yhb_city_Qu_diquxian as yhb_city_Qu_YYshengshiqu from ZZZ_KHDA where YYID=@YYID", "数据记录", param);
+        return_ht = I_DBL.RunParam_SQL("select  top 1 *,yhb_city_Promary_diquxian as yhb_city_Promary_YYshengshiqu,yhb_city_City_diquxian as yhb_city_City_YYshengshiqu, yhb_city_Qu_diquxian as yhb_city_Qu_YYshengshiqu from View_ZZZ_KHDA where YYID=@YYID", "数据记录", param);
 
         if ((bool)(return_ht["return_float"]))
         {
