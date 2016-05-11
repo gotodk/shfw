@@ -55,7 +55,8 @@ public partial class menu_pub_edit : System.Web.UI.Page
         errmsg.Text = "";
         ht_nemu_tb["class_org"] = "组织架构";
         ht_nemu_tb["class_pro"] = "产品分类";
-      
+        ht_nemu_tb["class_wxerr"] = "维修错误分类";
+
         if (Request["tb"] == null || Request["tb"].ToString().Trim() == "")
         {
             tbshowname = "组织架构";

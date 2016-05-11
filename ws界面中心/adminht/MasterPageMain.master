@@ -354,6 +354,30 @@
                 });
             });
 
+
+
+            $('#qiehuancaidanfengge').on('click', function () {
+                
+                if ($('#qiehuancaidanfengge').attr("cc") == "0") {
+                    $('#qiehuancaidanfengge').attr("cc","1");
+                    $('#sidebar li').addClass('hover')
+                    .filter('.open').removeClass('open').find('> .submenu').css('display', 'none');
+                    //and remove .open items
+                    bootbox.alert("已切换为浮动菜单。");
+                }
+                else {
+                    $('#qiehuancaidanfengge').attr("cc", "0");
+                    $('#sidebar li.hover').removeClass('hover');
+                    bootbox.alert("已切换为下拉菜单。");
+                }
+
+                $('.sidebar[data-sidebar-hover=true]').ace_sidebar_hover('reset');
+                $('.sidebar[data-sidebar-scroll=true]').ace_sidebar_scroll('reset');
+
+                if (ace.vars['old_ie']) ace.helper.redraw($('#sidebar')[0]);
+            })/*.removeAttr('checked')*/
+
+
         });
 
 

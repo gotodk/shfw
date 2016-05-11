@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="masterpageleftmenu.ascx.cs" Inherits="masterpageleftmenu" %>
-<!-- #section:basics/sidebar -->
-<div id="sidebar" class="sidebar                  responsive">
+ 
+<div id="sidebar" class="sidebar                  responsive   ">
     <script type="text/javascript">
         try { ace.settings.check('sidebar', 'fixed') } catch (e) { }
     </script>
@@ -23,7 +23,7 @@
       
 
             <button class="btn btn-grey">
-                <i class="ace-icon fa fa-share-alt" onclick="window.top.location.href='/adminht/corepage/bas/list_zhishi.aspx'"></i>
+                <i class="ace-icon fa fa-bars" cc="0" id="qiehuancaidanfengge"  ></i>
             </button>
 
             <!-- /section:basics/sidebar.layout.shortcuts -->
