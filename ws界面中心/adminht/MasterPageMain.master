@@ -320,7 +320,7 @@
     <script src="/assets/js/ace/ace.widget-box.js"></script>
     <script src="/assets/js/ace/ace.widget-on-reload.js"></script>
     <script src="/assets/js/ace/ace.searchbox-autocomplete.js"></script>
-
+           <script src="/assets/js/jquery.cookie.js"></script>
 
     <script type="text/javascript">
 
@@ -357,16 +357,26 @@
 
 
             $('#qiehuancaidanfengge').on('click', function () {
-                
-                if ($('#qiehuancaidanfengge').attr("cc") == "0") {
-                    $('#qiehuancaidanfengge').attr("cc","1");
+             
+                if ($.cookie('cdqhys') == null || $.cookie('cdqhys') == "" || $.cookie('cdqhys') == "undefined")
+                {
+           
+                    $.cookie('cdqhys', "0", { expires: 7 });
+                   
+                }
+  
+                if ($.cookie('cdqhys') == "0") {
+                  
+                    $.cookie('cdqhys', "1", { expires: 7  });
                     $('#sidebar li').addClass('hover')
                     .filter('.open').removeClass('open').find('> .submenu').css('display', 'none');
                     //and remove .open items
+                    
                     bootbox.alert("已切换为浮动菜单。");
+
                 }
                 else {
-                    $('#qiehuancaidanfengge').attr("cc", "0");
+                    $.cookie('cdqhys', "0", { expires: 7 });
                     $('#sidebar li.hover').removeClass('hover');
                     bootbox.alert("已切换为下拉菜单。");
                 }

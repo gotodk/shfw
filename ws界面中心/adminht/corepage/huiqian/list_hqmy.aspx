@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/adminht/MasterPageMain.master" AutoEventWireup="true" CodeFile="list_workplan_my.aspx.cs" Inherits="gzjh_list_workplan_my" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/adminht/MasterPageMain.master" AutoEventWireup="true" CodeFile="list_hqmy.aspx.cs" Inherits="huiqian_list_hqmy" %>
 
  
 <%@ Register Src="~/pucu/wuc_css_onlygrid.ascx" TagPrefix="uc1" TagName="wuc_css_onlygrid" %>
@@ -98,13 +98,13 @@
          }
      </script>
 
-  
-        <!-- 强制添加列表特殊条件 -->
+
+            <!-- 强制添加列表特殊条件 -->
     <script type="text/javascript">
              jQuery(function ($) {
                  //
         
-                 $("#zheshiliebiaoquyu").attr('teshuwhere', "G_UAID='<%=UserSession.唯一键%>'");
+                 $("#zheshiliebiaoquyu").attr('teshuwhere', "  Qjiedanren='<%=UserSession.唯一键%>' or Qcjr='<%=UserSession.唯一键%>' or  QID in (select YJ_QID from ZZZ_HQ_YJ where YJqianhsuren='<%=UserSession.唯一键%>' ) ");
                 
  
         });

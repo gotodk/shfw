@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/adminht/MasterPageMain.master" AutoEventWireup="true" CodeFile="list_workplan_my.aspx.cs" Inherits="gzjh_list_workplan_my" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/adminht/MasterPageMain.master" AutoEventWireup="true" CodeFile="list_hqall.aspx.cs" Inherits="huiqian_list_hqall" %>
 
  
 <%@ Register Src="~/pucu/wuc_css_onlygrid.ascx" TagPrefix="uc1" TagName="wuc_css_onlygrid" %>
@@ -97,18 +97,6 @@
              });
          }
      </script>
-
-  
-        <!-- 强制添加列表特殊条件 -->
-    <script type="text/javascript">
-             jQuery(function ($) {
-                 //
-        
-                 $("#zheshiliebiaoquyu").attr('teshuwhere', "G_UAID='<%=UserSession.唯一键%>'");
-                
- 
-        });
-        </script>
 
 </asp:Content>
 

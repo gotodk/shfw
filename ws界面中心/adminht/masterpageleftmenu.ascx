@@ -22,8 +22,8 @@
 
       
 
-            <button class="btn btn-grey">
-                <i class="ace-icon fa fa-bars" cc="0" id="qiehuancaidanfengge"  ></i>
+            <button class="btn btn-grey"   id="qiehuancaidanfengge">
+                <i class="ace-icon fa fa-bars"   ></i>
             </button>
 
             <!-- /section:basics/sidebar.layout.shortcuts -->

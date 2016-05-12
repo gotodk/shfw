@@ -364,7 +364,7 @@
                                                     <%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_title"] %>：</label>
 
                                                 <div class="col-sm-10">
-                                                    <select multiple="" data-placeholder="请选择…" class=" select2 tag-input-style" id="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" name="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>">
+                                                    <select   multiple="" data-placeholder="请选择…" class=" select2 tag-input-style" id="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" name="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>">
 
                                                         <%
 
