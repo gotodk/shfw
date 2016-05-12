@@ -785,7 +785,23 @@
                                 hide_server_path.checked = "checked";
                                 $(hide_server_path).hide();
                                 file.previewTemplate.appendChild(hide_server_path);
-                                $(file.previewTemplate).find("img").attr('src', servermsg);
+                                
+                          
+                                var houzhui = servermsg.substring(servermsg.lastIndexOf("."), servermsg.lastIndexOf(".").length);//后缀名 
+                          
+                                if (houzhui != ".jpg" && houzhui != ".bmp" && houzhui != ".gif" && houzhui != ".png")
+                                {
+                                    //$(file.previewTemplate).find("img").remove();
+                                    file.previewElement.classList.remove("dz-image-preview");
+                                    file.previewElement.classList.add("dz-file-preview");
+                                }
+                                else
+                                {
+                                    $(file.previewTemplate).find("img").attr('src', servermsg);
+                                }
+                                
+
+                            
                                 //调试用，显示服务返回的数据
                                 //file.previewTemplate.appendChild(document.createTextNode(servermsg));
                             });
