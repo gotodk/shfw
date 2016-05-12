@@ -26,12 +26,24 @@
 										<!-- #section:pages/gallery -->
 				 
                                        <%      
-                                                        for (int i = 0; i < arr_tupian.Length; i++)
-                                                        { %>
+    for (int i = 0; i < arr_tupian.Length; i++)
+    { %>
                                      
 										<li class="list-group-item">
-											<a href="st_d.aspx?fn=<%=arr_tupian[i] %>" >
 
+                                            <%
+    if (Checktu(arr_tupian[i]))
+    {
+                                                 %>
+
+											<a href="st_d.aspx?fn=<%=arr_tupian[i] %>" >
+                                                <%
+    }
+    else
+    { 
+                                                     %>
+                                                <a href="<%=arr_tupian[i] %>" target="_blank" >
+                                                <%} %>
                                                 <% if (Checktu(arr_tupian[i]))
                                                     {
                                                         %>

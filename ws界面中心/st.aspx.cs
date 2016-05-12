@@ -13,6 +13,9 @@ public partial class st : System.Web.UI.Page
     public string[] arr_tupian = null;
 
 
+  
+
+
     /// <summary>
     /// 检查是否图片
     /// </summary>
