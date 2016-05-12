@@ -69,11 +69,11 @@ public class NoReSet_160427000032
         param.Add("@Lzuidijia", ht_forUI["Lzuidijia"].ToString());
         param.Add("@Lshoujia", ht_forUI["Lshoujia"].ToString());
 
-        param.Add("@Lbaoyangzhouqi", ht_forUI["Lbaoyangzhouqi"].ToString());
+        param.Add("@Lerpbianhao", ht_forUI["Lerpbianhao"].ToString());
         param.Add("@Lbaoxiuqi", ht_forUI["Lbaoxiuqi"].ToString());
-  
+        param.Add("@Lzhuangtai", ht_forUI["Lzhuangtai"].ToString());
 
-        alsql.Add("INSERT INTO   ZZZ_WFLJ(LID, Lmingcheng, Lguige, Ldanwei, Lpinyin, Lchengbenjia, Lzuidijia, Lshoujia, Lbaoyangzhouqi, Lbaoxiuqi) VALUES(@LID, @Lmingcheng, @Lguige, @Ldanwei, @Lpinyin, @Lchengbenjia, @Lzuidijia, @Lshoujia, @Lbaoyangzhouqi, @Lbaoxiuqi)");
+        alsql.Add("INSERT INTO   ZZZ_WFLJ(LID, Lmingcheng, Lguige, Ldanwei, Lpinyin, Lchengbenjia, Lzuidijia, Lshoujia, Lerpbianhao, Lbaoxiuqi,Lzhuangtai) VALUES(@LID, @Lmingcheng, @Lguige, @Ldanwei, @Lpinyin, @Lchengbenjia, @Lzuidijia, @Lshoujia, @Lerpbianhao, @Lbaoxiuqi,@Lzhuangtai)");
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
 
@@ -133,11 +133,11 @@ public class NoReSet_160427000032
         param.Add("@Lzuidijia", ht_forUI["Lzuidijia"].ToString());
         param.Add("@Lshoujia", ht_forUI["Lshoujia"].ToString());
 
-        param.Add("@Lbaoyangzhouqi", ht_forUI["Lbaoyangzhouqi"].ToString());
+        param.Add("@Lerpbianhao", ht_forUI["Lerpbianhao"].ToString());
         param.Add("@Lbaoxiuqi", ht_forUI["Lbaoxiuqi"].ToString());
+        param.Add("@Lzhuangtai", ht_forUI["Lzhuangtai"].ToString());
 
-
-        alsql.Add("UPDATE ZZZ_WFLJ SET Lmingcheng=@Lmingcheng, Lguige=@Lguige, Ldanwei=@Ldanwei, Lpinyin=@Lpinyin, Lchengbenjia=@Lchengbenjia, Lzuidijia=@Lzuidijia, Lshoujia=@Lshoujia, Lbaoyangzhouqi=@Lbaoyangzhouqi, Lbaoxiuqi=@Lbaoxiuqi  where LID=@LID ");
+        alsql.Add("UPDATE ZZZ_WFLJ SET Lmingcheng=@Lmingcheng, Lguige=@Lguige, Ldanwei=@Ldanwei, Lpinyin=@Lpinyin, Lchengbenjia=@Lchengbenjia, Lzuidijia=@Lzuidijia, Lshoujia=@Lshoujia, Lerpbianhao=@Lerpbianhao, Lbaoxiuqi=@Lbaoxiuqi,Lzhuangtai=@Lzhuangtai  where LID=@LID ");
    
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);

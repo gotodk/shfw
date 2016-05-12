@@ -179,7 +179,7 @@ public class NoReSet_160427000033
         Hashtable param = new Hashtable();
         param.Add("@EID", ht_forUI["idforedit"].ToString());
 
-        return_ht = I_DBL.RunParam_SQL("select  top 1 *  from ZZZ_YZCW where EID=@EID", "数据记录", param);
+        return_ht = I_DBL.RunParam_SQL("select  top 1 *  from View_ZZZ_YZCW_list where EID=@EID", "数据记录", param);
 
         if ((bool)(return_ht["return_float"]))
         {

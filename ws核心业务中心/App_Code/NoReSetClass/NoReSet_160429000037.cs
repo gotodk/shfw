@@ -178,7 +178,7 @@ public class NoReSet_160429000037
         Hashtable param = new Hashtable();
         param.Add("@FID", ht_forUI["idforedit"].ToString());
 
-        return_ht = I_DBL.RunParam_SQL("select top 1 * from ZZZ_WENDANG where FID=@FID", "数据记录", param);
+        return_ht = I_DBL.RunParam_SQL("select top 1 * from View_ZZZ_WENDANG_list where FID=@FID", "数据记录", param);
 
         if ((bool)(return_ht["return_float"]))
         {

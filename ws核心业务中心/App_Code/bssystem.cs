@@ -666,6 +666,22 @@ public class bssystem : System.Web.Services.WebService
                 dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "账号或密码错误!";
                 return dsreturn;
             }
+            else
+            {
+                //状态字段判定
+                if (redb.Rows[0]["Uattrcode"].ToString() == "1")
+                {
+                    dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err_olnypassworderr";
+                    dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "员工已离职，禁止登录!";
+                    return dsreturn;
+                }
+                if (redb.Rows[0]["Uattrcode"].ToString() == "2")
+                {
+                    dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err_olnypassworderr";
+                    dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "员工已被冻结，禁止登录!";
+                    return dsreturn;
+                }
+            }
 
 
 

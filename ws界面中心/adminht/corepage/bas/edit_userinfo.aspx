@@ -26,6 +26,30 @@
        <!-- 附加的body底部本页专属的自定义js脚本 -->
     <uc1:wuc_script runat="server" ID="wuc_script" />
 
+        <script type="text/javascript">
+            jQuery(function ($) {
 
+                var dfx_str = "#show_searchopenyhbspgogo_suoshuquyu";
+                var oldzhi = $(dfx_str).text();
+                var jiancha_UAid = window.setInterval(function () {
+
+                    if ($(dfx_str).text() != oldzhi) {
+                        var re = /\[.*?\]/ig;
+                        var arr = $(dfx_str).text().match(re);
+
+                        if (arr != null) {//如果能匹配成功即arr数组不为空，循环输出结果
+                            for (var i = 0; i < arr.length; i++) {
+                                var arr_z = arr[i].split(':');
+                                if (arr_z[0] == "[名称")
+                                { $("#suoshuquyu_show").val($.trim(arr_z[1]).replace("]", "")); }
+
+                            }
+                        }
+
+                        oldzhi = $(dfx_str).text();
+                    }
+                }, 500);
+
+                  });
+        </script>
 </asp:Content>
-

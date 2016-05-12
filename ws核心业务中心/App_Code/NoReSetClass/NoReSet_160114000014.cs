@@ -82,7 +82,13 @@ public class NoReSet_160114000014
         param.Add("@youxiang", ht_forUI["youxiang"].ToString());
         param.Add("@lingdao", ht_forUI["lingdao"].ToString());
 
-        alsql.Add("INSERT INTO  auth_users_auths(UAid ,Uloginname,Uloginpassword) VALUES(@UAid ,@Uloginname,@Uloginpassword )");
+        if (ht_forUI["zhuangtai"].ToString() == "离职")
+        { param.Add("@Uattrcode", "1"); }
+        else
+        { param.Add("@Uattrcode", "-1"); }
+
+
+        alsql.Add("INSERT INTO  auth_users_auths(UAid ,Uloginname,Uloginpassword,Uattrcode) VALUES(@UAid ,@Uloginname,@Uloginpassword,@Uattrcode )");
 
         alsql.Add("INSERT INTO  ZZZ_userinfo(UAid ,xingming,zhuangtai,zhiwei,xingbie,beizhu,gongzuodi,suoshuquyu,shoujihao,gudingdianhua,youxiang,lingdao) VALUES(@UAid ,@xingming,@zhuangtai,@zhiwei,@xingbie,@beizhu,@gongzuodi,@suoshuquyu,@shoujihao,@gudingdianhua,@youxiang,@lingdao)");
 
@@ -152,8 +158,13 @@ public class NoReSet_160114000014
         param.Add("@youxiang", ht_forUI["youxiang"].ToString());
         param.Add("@lingdao", ht_forUI["lingdao"].ToString());
 
+        if (ht_forUI["zhuangtai"].ToString() == "离职")
+        { param.Add("@Uattrcode", "1"); }
+        else
+        { param.Add("@Uattrcode", "-1"); }
+
         alsql.Add("UPDATE ZZZ_userinfo SET xingming=@xingming,zhuangtai=@zhuangtai,zhiwei=@zhiwei,xingbie=@xingbie,beizhu=@beizhu,gongzuodi=@gongzuodi,suoshuquyu=@suoshuquyu,shoujihao=@shoujihao,gudingdianhua=@gudingdianhua,youxiang=@youxiang,lingdao=@lingdao where UAid=@UAid ");
-        alsql.Add("UPDATE auth_users_auths SET Uloginname=@Uloginname,Uloginpassword=@Uloginpassword  where UAid=@UAid ");
+        alsql.Add("UPDATE auth_users_auths SET Uloginname=@Uloginname,Uloginpassword=@Uloginpassword,Uattrcode=@Uattrcode  where UAid=@UAid ");
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
 

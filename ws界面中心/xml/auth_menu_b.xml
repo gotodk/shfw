@@ -967,7 +967,7 @@
     <SortParentID>43</SortParentID>
     <SortParentPath>,43,</SortParentPath>
     <SortOrder>66</SortOrder>
-    <m_url>/adminht/corepage/bas/list_yzcw.aspx</m_url>
+    <m_url>/adminht/menu_pub_edit.aspx?tb=class_wxerr</m_url>
     <m_tip />
     <m_tag />
     <m_ico />
@@ -1063,7 +1063,7 @@
     <SortParentID>112</SortParentID>
     <SortParentPath>,43,112,</SortParentPath>
     <SortOrder>72</SortOrder>
-    <m_url>/adminht/corepage/zfcmjwh_edit.aspx?idforedit=zhishifenlei&amp;fff=1</m_url>
+    <m_url>/adminht/menu_pub_edit.aspx?tb=class_zhishi</m_url>
     <m_tip />
     <m_tag />
     <m_ico />
