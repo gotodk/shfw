@@ -296,6 +296,12 @@
                 if (isedit == "1") {
                     //加载表单数据
                     loadinfoajax1($("#idforedit").val());
+
+                    //是更新，强制调用一个函数，不一定存在
+                    try {
+                        eval("editok_after_msgshow('" + msg + "')");
+                    } catch (e) { }
+
                 }
                 else {
                     //不是更新，强制调用一个函数，不一定存在
@@ -396,18 +402,18 @@
     <!-- **********ajax获初始化表单数据******** -->
     <script type="text/javascript">
 
-
+         
         function callback_info(xml) {
 
 
             //解析xml并显示在界面上
             if ($(xml).find('返回值单条>执行结果').text() != "ok") {
+          
                 bootbox.alert("查找数据失败!");
                 return false;
             };
 
-
-            
+         
 
 
 

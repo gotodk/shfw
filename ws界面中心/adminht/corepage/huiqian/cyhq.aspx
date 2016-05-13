@@ -27,9 +27,49 @@
     <uc1:wuc_script runat="server" ID="wuc_script" />
         <!-- 某些字段，在编辑时禁用，不想用新页面的情况使用 -->
     <script type="text/javascript">
+
+        //新增提交后强制调用的函数
+        function editok_after_msgshow(msg) {
+          
+            if (msg.indexOf("保存成功") >= 0) {
+                window.location.href = '/adminht/corepage/huiqian/cyhq_list_s.aspx';
+            }
+
+        }
+
+
              jQuery(function ($) {
                  if (getUrlParam("fff") == "1") {
 
+          
+                     //不是结单人，不显示是否结单选项
+                     if ($("#h_jdr").val() != '<%=UserSession.唯一键%>')
+                     {
+                         $("input[name='Qzhuangtai']").closest(".form-group").remove();
+                         
+                     }
+                     //只有被分发的人才显示会签意见输入框
+
+                     window.setTimeout(function () {
+
+                          $("#YJyijian").closest(".form-group").hide();
+                     $("#YJyijian").val("自动隐藏");
+                     $("input[name='h_qsr']").each(function () {
+                        
+                         if ($(this).val() == '<%=UserSession.唯一键%>')
+                         {
+                             $("#YJyijian").val("d");
+                             $("#YJyijian").closest(".form-group").show();
+                         }
+                     });
+
+                     },500); 
+
+                    
+
+
+
+                   
              
                  }
  

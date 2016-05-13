@@ -386,4 +386,95 @@ public class bsmain : System.Web.Services.WebService
 
 
 
+    /// <summary>
+    /// 获取会签数据
+    /// </summary>
+    /// <param name="parameter_forUI">UI端的参数</param>
+    /// <returns></returns>
+    [WebMethod(MessageName = "获取会签数据", Description = "获取会签数据")]
+    public DataSet GetList_HQ(DataTable parameter_forUI)
+    {
+
+        //接收转换参数
+        Hashtable ht_forUI = new Hashtable();
+        for (int i = 0; i < parameter_forUI.Rows.Count; i++)
+        {
+            ht_forUI[parameter_forUI.Rows[i]["参数名"].ToString()] = parameter_forUI.Rows[i]["参数值"].ToString();
+        }
+
+
+        //初始化返回值
+        DataSet dsreturn = initReturnDataSet().Clone();
+        dsreturn.Tables["返回值单条"].Rows.Add(new string[] { "err", "初始化" });
+
+        //参数合法性各种验证，这里省略
+
+        //开始真正的处理，这里只是演示，所以直接在这里写业务逻辑代码了
+
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+
+        Hashtable param = new Hashtable();
+        param.Add("@uaid", ht_forUI["yhbsp_session_uer_UAid"].ToString());
+
+        Hashtable return_ht = new Hashtable();
+
+        //偷懒，一个接口一起处理了。
+        string sql = "";
+        if (ht_forUI["hqlx"].ToString() == "mylist")
+        {
+            //所有需要我参与的未结单的会签
+            sql = "select *, case when Qcjr=@uaid then '由我发起' when Qjiedanren=@uaid then '待我结单' else '需我参与' end  as canyuqingkuang from View_ZZZ_HQ_ex where ( Qjiedanren=@uaid  or  Qcjr=@uaid  or  QID in (select YJ_QID from ZZZ_HQ_YJ where YJqianhsuren=@uaid ) ) and Qzhuangtai='未结单' order by Qaddtime desc";
+
+             
+        }
+        if (ht_forUI["hqlx"].ToString() == "one")
+        {
+            param.Add("@QID", ht_forUI["idforedit"].ToString());
+
+            sql = "select * from View_ZZZ_HQ_ex where QID = @QID; select * from View_ZZZ_HQ_YJ_ex where YJ_QID = @QID order by YJlysj asc;";
+
+            
+        }
+            return_ht = I_DBL.RunParam_SQL(sql, "数据记录", param);
+
+
+
+        if ((bool)(return_ht["return_float"]))
+        {
+            DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+
+            if (redb.Rows.Count < 1)
+            {
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "没有找到指定数据!";
+                return dsreturn;
+            }
+
+            dsreturn.Tables.Add(redb);
+            if (ht_forUI["hqlx"].ToString() == "one")
+            {
+                DataTable redb1 = ((DataSet)return_ht["return_ds"]).Tables["Table1"].Copy();
+                dsreturn.Tables.Add(redb1);
+
+            }
+
+
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "";
+        }
+        else
+        {
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "意外错误，修改失败：" + return_ht["return_errmsg"].ToString();
+        }
+
+
+
+
+
+        return dsreturn;
+    }
+
+
+
 }
