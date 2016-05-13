@@ -58,7 +58,7 @@
                             <li class="active">
                                 <a data-toggle="tab" href="#addadd">
                                     <i class="green ace-icon fa fa-pencil-square-o bigger-120"></i>
-                                    <% =htPP["title_f"].ToString()%>
+                                    <span id="title_f_id"><% =htPP["title_f"].ToString()%></span>  
                                 </a>
                                  
                             </li>

@@ -49,6 +49,9 @@
                                                                     <dt>发起时间</dt>
 																<dd><%=dsr.Tables["数据记录"].Rows[0]["Qaddtime"].ToString() %></dd>
 
+                                                                    <dt>附件</dt>
+																<dd><a target="_blank" href="/st.aspx?idforedit=<%=dsr.Tables["数据记录"].Rows[0]["QID"].ToString() %>&leixing=0&mod=huiqian">点击查看附件</a></dd>
+
 															</dl>
 <%-- <div class="input-group"> 
     									 

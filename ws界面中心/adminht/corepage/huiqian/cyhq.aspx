@@ -38,9 +38,18 @@
         }
 
 
-             jQuery(function ($) {
-                 if (getUrlParam("fff") == "1") {
+        jQuery(function ($) {
 
+            if (getUrlParam("jck") == "1") {
+
+         
+
+                $("#addbutton1_top").attr({ "disabled": "disabled" });
+                $("#addbutton1").attr({ "disabled": "disabled" });
+                $("#reloaddb").attr({ "disabled": "disabled" });
+            }
+                 if (getUrlParam("fff") == "1") {
+                     $("#title_f_id").html("参与会签");
           
                      //不是结单人，不显示是否结单选项
                      if ($("#h_jdr").val() != '<%=UserSession.唯一键%>')
