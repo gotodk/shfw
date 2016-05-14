@@ -591,6 +591,10 @@
     <SortParentID>82</SortParentID>
     <SortParentPath>,82,</SortParentPath>
     <SortOrder>39</SortOrder>
+    <m_url>/adminht/corepage/fanchang/list_fcsqlb.aspx</m_url>
+    <m_tip />
+    <m_tag />
+    <m_ico />
     <m_show>不隐藏</m_show>
     <SortNameTree>│├返厂申请</SortNameTree>
     <SortMoveUp>0</SortMoveUp>
@@ -635,12 +639,16 @@
   <菜单表>
     <ID>1128</ID>
     <SortID>132</SortID>
-    <SortName>返厂记录</SortName>
+    <SortName>全部返厂记录</SortName>
     <SortParentID>82</SortParentID>
     <SortParentPath>,82,</SortParentPath>
     <SortOrder>43</SortOrder>
+    <m_url>/adminht/corepage/fanchang/list_allfcjl.aspx</m_url>
+    <m_tip />
+    <m_tag />
+    <m_ico />
     <m_show>不隐藏</m_show>
-    <SortNameTree>│└返厂记录</SortNameTree>
+    <SortNameTree>│└全部返厂记录</SortNameTree>
     <SortMoveUp>4</SortMoveUp>
     <SortMoveDown>0</SortMoveDown>
   </菜单表>

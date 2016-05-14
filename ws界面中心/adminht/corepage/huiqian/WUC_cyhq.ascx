@@ -35,21 +35,21 @@
 													<div class="widget-body">
 														<div class="widget-main" style="word-wrap: break-word;word-break: normal;">
                                                             	 
-                                                            	<dl id="dt-list-1">
+                                                            	<dl id="dt-list-1 ">
 																<dt>主题：</dt>
 																<dd><%=dsr.Tables["数据记录"].Rows[0]["Qzhuti"].ToString() %></dd>
-																<dt>会签内容</dt>
+																<dt>会签内容：</dt>
 																<dd><%=dsr.Tables["数据记录"].Rows[0]["Qneirong"].ToString() %></dd>
 															 
-																<dt>发起人</dt>
+																<dt>发起人：</dt>
 																<dd><%=dsr.Tables["数据记录"].Rows[0]["Qcjr_name"].ToString() %>[<%=dsr.Tables["数据记录"].Rows[0]["Qcjr_bumen"].ToString() %>]</dd>
-																<dt>结单人</dt>
+																<dt>结单人：</dt>
 																<dd><%=dsr.Tables["数据记录"].Rows[0]["Qjiedanren_name"].ToString() %>[<%=dsr.Tables["数据记录"].Rows[0]["Qjiedanren_bumen"].ToString() %>]<input type="text"  class="hidden" id="h_jdr" value="<%=dsr.Tables["数据记录"].Rows[0]["Qjiedanren"].ToString() %>" />
 																</dd>
-                                                                    <dt>发起时间</dt>
+                                                                    <dt>发起时间：</dt>
 																<dd><%=dsr.Tables["数据记录"].Rows[0]["Qaddtime"].ToString() %></dd>
 
-                                                                    <dt>附件</dt>
+                                                                    <dt>附件：</dt>
 																<dd><a target="_blank" href="/st.aspx?idforedit=<%=dsr.Tables["数据记录"].Rows[0]["QID"].ToString() %>&leixing=0&mod=huiqian">点击查看附件</a></dd>
 
 															</dl>
