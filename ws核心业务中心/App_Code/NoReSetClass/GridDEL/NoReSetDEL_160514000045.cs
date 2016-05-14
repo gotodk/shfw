@@ -10,7 +10,7 @@ using System.Numerics;
 
 
 
-public class NoReSetDEL_160513000042
+public class NoReSetDEL_160514000045
 {
 
     /// <summary>
@@ -45,10 +45,10 @@ public class NoReSetDEL_160513000042
             string[] delids = ht_forUI["id"].ToString().Split(',');
             for (int d = 0; d < delids.Length; d++)
             {
-                param.Add("@FCID_" + d, delids[d]);
+                //param.Add("@FCID_" + d, delids[d]);
 
-                alsql.Add("delete ZZZ_fanchang  where FCID=@FCID_" + d);
-                alsql.Add("delete ZZZ_fanchang_sb  where FCS_FCID=@FCID_" + d);
+                //alsql.Add("delete ZZZ_fanchang  where FCID=@FCID_" + d);
+                //alsql.Add("delete ZZZ_fanchang_sb  where FCS_FCID=@FCID_" + d);
             }
 
 
@@ -79,7 +79,7 @@ public class NoReSetDEL_160513000042
     /// </summary>
     /// <param name="parameter_forUI">前台表单传来的参数</param>
     /// <returns></returns>
-    public string NRS_ZDY_tijiaoshenqing(DataTable parameter_forUI)
+    public string NRS_ZDY_querenshouhuo(DataTable parameter_forUI)
     {
         //接收转换参数
         Hashtable ht_forUI = new Hashtable();
@@ -113,7 +113,8 @@ public class NoReSetDEL_160513000042
                 if (ids[d].Trim() != "")
                 {
                     param.Add("@FCID_" + d, ids[d]);
-                    alsql.Add("UPDATE ZZZ_fanchang SET  FCzhuangtai='提交',FCshenqingshijian=getdate()  where FCzhuangtai='草稿' and FCID =@FCID_" + d);
+                    param.Add("@FCqurenshoujianren", ht_forUI["yhbsp_session_uer_UAid"].ToString());
+                    alsql.Add("UPDATE ZZZ_fanchang SET  FCzhuangtai='收件',FCqurenshoujianren=@FCqurenshoujianren,FCshoujianshijian=getdate()  where FCzhuangtai='在途' and FCID =@FCID_" + d);
                 }
 
             }
@@ -125,14 +126,14 @@ public class NoReSetDEL_160513000042
             if ((bool)(return_ht["return_float"]))
             {
 
-                return "批量提交申请完成！";
+                return "批量确认收件完成！";
             }
 
         }
 
 
 
-        return "批量提交申请失败，发生错误";
+        return "批量确认收件失败，发生错误";
     }
 
 

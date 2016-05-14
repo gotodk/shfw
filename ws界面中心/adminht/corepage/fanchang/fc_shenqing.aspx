@@ -72,6 +72,10 @@
                      $("#FCqurenshoujianren").closest(".form-group").hide();
                      $("#FCqurenshoujianren_name").closest(".form-group").hide();
                      $("#FCzhuangtai").closest(".form-group").hide();
+
+                     window.setInterval(function () {
+                     $("#grid-pager-subtable-160514000780_left").html("");
+                     }, 500);
                  }
                
                  //把业务类型参数放到隐藏控件里面

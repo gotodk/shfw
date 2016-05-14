@@ -607,6 +607,10 @@
     <SortParentID>82</SortParentID>
     <SortParentPath>,82,</SortParentPath>
     <SortOrder>40</SortOrder>
+    <m_url>/adminht/corepage/fanchang/list_fcshenhelb.aspx</m_url>
+    <m_tip />
+    <m_tag />
+    <m_ico />
     <m_show>不隐藏</m_show>
     <SortNameTree>│├返厂审核</SortNameTree>
     <SortMoveUp>1</SortMoveUp>
@@ -619,6 +623,10 @@
     <SortParentID>82</SortParentID>
     <SortParentPath>,82,</SortParentPath>
     <SortOrder>41</SortOrder>
+    <m_url>/adminht/corepage/fanchang/list_fcfahuolb.aspx</m_url>
+    <m_tip />
+    <m_tag />
+    <m_ico />
     <m_show>不隐藏</m_show>
     <SortNameTree>│├客户发货</SortNameTree>
     <SortMoveUp>2</SortMoveUp>
@@ -631,6 +639,10 @@
     <SortParentID>82</SortParentID>
     <SortParentPath>,82,</SortParentPath>
     <SortOrder>42</SortOrder>
+    <m_url>/adminht/corepage/fanchang/list_fcshouhuolb.aspx</m_url>
+    <m_tip />
+    <m_tag />
+    <m_ico />
     <m_show>不隐藏</m_show>
     <SortNameTree>│├工厂收货</SortNameTree>
     <SortMoveUp>3</SortMoveUp>
