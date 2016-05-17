@@ -63,7 +63,7 @@
                              }
                          }
 
-                         oldzhi = $(dfx_str).text();
+                         oldzhi_kh = $(dfx_str_kh).text();
                      }
                  }, 500);
  

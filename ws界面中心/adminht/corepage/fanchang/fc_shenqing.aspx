@@ -72,10 +72,7 @@
                      $("#FCqurenshoujianren").closest(".form-group").hide();
                      $("#FCqurenshoujianren_name").closest(".form-group").hide();
                      $("#FCzhuangtai").closest(".form-group").hide();
-
-                     window.setInterval(function () {
-                     $("#grid-pager-subtable-160514000780_left").html("");
-                     }, 500);
+ 
                  }
                
                  //把业务类型参数放到隐藏控件里面
@@ -86,6 +83,10 @@
 
                      $("#chuanhaotanhuang").closest(".form-group").hide();
                      $("#ywlx_yincang").closest(".form-group").hide();
+
+                     //弹窗特殊条件，隐藏的弹窗的条件
+                     var khbh_str = $("#FC_YYID").val();
+                     $("#searchopenyhbspgogo_subtcid_FCSbh").attr("teshuwhere", "S_YYID='" + khbh_str + "'");
 
                      
                  }, 500);
@@ -139,9 +140,50 @@
                              }
                          }
 
-                         oldzhi = $(dfx_str).text();
+                         oldzhi_kh = $(dfx_str_kh).text();
                      }
                  }, 500);
+
+
+
+
+
+
+                 var dfx_str_subtt = "#show_searchopenyhbspgogo_subtcid_FCSbh";
+                 var oldzhi_subtt = $(dfx_str_subtt).text();
+
+                 var jiancha_subtt = window.setInterval(function () {
+
+                     
+
+                     //带入字段
+                     if ($(dfx_str_subtt).text() != oldzhi_subtt) {
+                         var re = /\[.*?\]/ig;
+                         var arr = $(dfx_str_subtt).text().match(re);
+
+                         if (arr != null) {//如果能匹配成功即arr数组不为空，循环输出结果
+                             for (var i = 0; i < arr.length; i++) {
+                                 var arr_z = arr[i].split(':');
+                                 if (arr_z[0] == "[设备型号")
+                                 {
+                                     //离弹窗最近的特定name的输入框  设备规格
+                                
+                                     var zj = $(dfx_str_subtt).closest("tr").find("input[name='设备规格']");
+                                
+                                     zj.val($.trim(arr_z[1]).replace("]", ""));
+                                 }
+                                 if (arr_z[0] == "[设备名称") {
+                                     //离弹窗最近的特定name的输入框  
+                                     var zj = $(dfx_str_subtt).closest("tr").find("input[name='设备名称']");
+                                     zj.val($.trim(arr_z[1]).replace("]", ""));
+                                 }
+                             }
+                         }
+
+                         oldzhi_subtt = $(dfx_str_subtt).text();
+                     }
+                 }, 500);
+
  
         });
         </script>
