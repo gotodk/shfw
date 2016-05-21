@@ -37,7 +37,13 @@
                      $("label[for='lxr_list']").closest(".form-group").hide();
                  }
 
+                 window.setInterval(function () {
+                 //弹窗特殊条件，隐藏的弹窗的条件
+                 var YYname_str = $("#YYname").val();
+                 $("#searchopenyhbspgogo_YYname").attr("teshuwhere", "   YYname like '%" + YYname_str + "%'");
+                 $("#searchopenyhbspgogo_YYname").html("检索");
 
+                 }, 500);
 
                  var dfx_str = "#show_searchopenyhbspgogo_YYssbumen";
                  var oldzhi = $(dfx_str).text();
