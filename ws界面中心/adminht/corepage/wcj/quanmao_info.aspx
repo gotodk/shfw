@@ -69,11 +69,15 @@
 
 
 
-       
+       <asp:Repeater ID="showinfor" runat="server"> 
+<HeaderTemplate><!--头--> 
+          
+</HeaderTemplate> 
+<ItemTemplate><!--中间循环部分--> 
 
              <div class="widget-box">
             <div class="widget-header widget-header-flat">
-                <h4 class="widget-title smaller">客户全貌(........)</h4>
+                <h4 class="widget-title smaller">客户全貌(<%#Eval("uucjlx") %>)</h4>
 
                 <div class="widget-toolbar">
                 </div>
@@ -84,23 +88,23 @@
 
                     <dl>
                         <dt>客户名称/编号：</dt>
-                        <dd>........</dd>
+                        <dd><%#Eval("YYname") %> / <%#Eval("YYID_uuuu") %></dd>
                     
 
                         <dt>省市区：</dt>
-                        <dd>........</dd>
+                        <dd><%#Eval("Promary_str") %>，<%#Eval("City_str") %>，<%#Eval("Qu_str") %></dd>
                         <dt>地址：</dt>
-                        <dd>........</dd>
+                        <dd><%#Eval("YYdizhi") %></dd>
                         <dt>电话传真：</dt>
-                        <dd>........ / ........</dd>
+                        <dd><%#Eval("YYdianhua") %> / <%#Eval("YYchuanzhen") %></dd>
                         <dt>开票信息：</dt>
-                        <dd>........</dd>
+                        <dd><%#Eval("YYkaipiao") %></dd>
                         <dt>创建日期：</dt>
-                        <dd>........</dd>
+                        <dd><%#Eval("YYaddtime") %></dd>
                         <dt>所属部门/负责人：</dt>
-                        <dd>........</dd>
+                        <dd><%#Eval("YYssbumen_name") %> / <%#Eval("YYfuwufuzeren_name") %></dd>
                         <dt>所有联系人：</dt>
-                        <dd>........,........,........</dd>
+                        <dd><%#Eval("lianxirenstr") %></dd>
                     </dl>
 
 
@@ -113,7 +117,11 @@
         </div>
 
 
-
+    </ItemTemplate> 
+<FooterTemplate><!--尾--> 
+     
+</FooterTemplate> 
+</asp:Repeater> 
 
 
 
@@ -129,46 +137,37 @@
                 <div class="widget-main" style="word-wrap: break-word; word-break: normal;">
 
                     <dl>
+
+       <asp:Repeater ID="Rqingbao" runat="server"> 
+<HeaderTemplate><!--头--> 
+          
+</HeaderTemplate> 
+<ItemTemplate><!--中间循环部分--> 
                        <dt>情报日期/创建人：</dt>
-                        <dd>........ / ........</dd>
+                        <dd><%#Eval("QBtime") %> / <%#Eval("xingming") %></dd>
                         
                         <dt>情报来源：</dt>
-                        <dd>........</dd>
+                        <dd><%#Eval("QBlaiyuan") %></dd>
                         <dt>情报设备/品牌：</dt>
-                        <dd>........</dd>
+                        <dd><%#Eval("QBsb") %> / <%#Eval("QBpinpai") %></dd>
 
                         <dt>情报描述：</dt>
-                        <dd>........</dd>
+                        <dd><%#Eval("QBmiaoshu") %></dd>
                         <dt>年采血量：</dt>
-                        <dd>........</dd>
+                        <dd><%#Eval("QBcxl") %></dd>
                         <dt>采购负责人：</dt>
-                        <dd>........ / ........</dd>
+                        <dd><%#Eval("QBcgfzr") %></dd>
                         <dt>备用资料1/2/3：</dt>
-                        <dd>........</dd>
+                        <dd><%#Eval("QBbaka") %>/<%#Eval("QBbakb") %>/<%#Eval("QBbakc") %></dd>
                     </dl>
                     <hr />
 
-                    <dl>
-                        <dt>情报日期/创建人：</dt>
-                        <dd>........ / ........</dd>
-                        
-                        <dt>情报来源：</dt>
-                        <dd>........</dd>
-                        <dt>情报设备/品牌：</dt>
-                        <dd>........</dd>
-
-                        <dt>情报描述：</dt>
-                        <dd>........</dd>
-                        <dt>年采血量：</dt>
-                        <dd>........</dd>
-                        <dt>采购负责人：</dt>
-                        <dd>........ / ........</dd>
-                        <dt>备用资料1/2/3：</dt>
-                        <dd>........</dd>
                    
-                        
-                    </dl>
-
+  </ItemTemplate> 
+<FooterTemplate><!--尾--> 
+     
+</FooterTemplate> 
+</asp:Repeater> 
 
 
                 </div>

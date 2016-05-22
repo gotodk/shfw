@@ -483,4 +483,109 @@ public class bsmain : System.Web.Services.WebService
 
 
 
+
+
+
+
+
+    /// <summary>
+    /// 获取客户全貌
+    /// </summary>
+    /// <param name="parameter_forUI">UI端的参数</param>
+    /// <returns></returns>
+    [WebMethod(MessageName = "获取客户全貌", Description = "获取客户全貌")]
+    public DataSet GetList_quanmao(string sp,string str,string a, string b)
+    {
+
+        
+
+
+        //初始化返回值
+        DataSet dsreturn = initReturnDataSet().Clone();
+        dsreturn.Tables["返回值单条"].Rows.Add(new string[] { "err", "初始化" });
+
+        //参数合法性各种验证，这里省略
+
+        //开始真正的处理，这里只是演示，所以直接在这里写业务逻辑代码了
+
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+
+        Hashtable param = new Hashtable();
+     
+        Hashtable return_ht = new Hashtable();
+
+        //偷懒，一个接口一起处理了。
+        string sql = "";
+        if (sp == "找客户")
+        {
+            param.Add("@key", str);
+
+            sql = "SELECT   TOP (50) YYID_uuuu, uucjlx, YYID, YYname, YYaddtime, YYname + '('+uucjlx+')'as Lshowname FROM      View_ZZZ_KHDA_wcj_hb where YYname like '%'+@key+'%' or YYID_uuuu like '%'+@key+'%' ORDER BY YYaddtime desc";
+
+
+        }
+        if (sp == "找详情")
+        {
+            string lxrb = "";
+            if (str.IndexOf('W') == 0)
+            {
+                param.Add("@QBleibie", "未成交");
+                lxrb = "ZZZ_KHLXR_wcj";
+            }
+            if (str.IndexOf('C') == 0)
+            {
+                param.Add("@QBleibie", "成交");
+                lxrb = "ZZZ_KHLXR";
+            }
+            param.Add("@YYID_uuuu", str);
+
+            param.Add("@QB_YYID", str.Replace("W","").Replace("C", ""));
+
+          
+
+
+            sql = "SELECT   TOP (1) *,'' as lianxirenstr FROM      View_ZZZ_KHDA_wcj_hb where YYID_uuuu=@YYID_uuuu; SELECT  * FROM "+ lxrb + " where K_YYID =  @QB_YYID; select top 50 * from   View_ZZZ_KHDA_QB_list where QBleibie=@QBleibie and QB_YYID=@QB_YYID ";
+
+
+        }
+        return_ht = I_DBL.RunParam_SQL(sql, "数据记录", param);
+
+
+
+        if ((bool)(return_ht["return_float"]))
+        {
+            DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+
+          
+
+            dsreturn.Tables.Add(redb);
+            if (sp == "找详情")
+            {
+                //二次处理联系人,并把情报表加入数据集
+                DataTable redb1 = ((DataSet)return_ht["return_ds"]).Tables["Table1"].Copy();
+                dsreturn.Tables.Add(redb1);
+                DataTable redb2 = ((DataSet)return_ht["return_ds"]).Tables["Table2"].Copy();
+                dsreturn.Tables.Add(redb2);
+
+            }
+
+
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "";
+        }
+        else
+        {
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "意外错误，获取失败：" + return_ht["return_errmsg"].ToString();
+        }
+
+
+
+
+
+        return dsreturn;
+    }
+
+
+
 }
