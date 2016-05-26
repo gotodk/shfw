@@ -99,11 +99,11 @@ public class NoReSet_160513000045
         param.Add("@FCID", guid);
         param.Add("@FC_YYID", ht_forUI["FC_YYID"].ToString());
         param.Add("@FCshenqingren", ht_forUI["yhbsp_session_uer_UAid"].ToString());
- 
-       
+        param.Add("@Fhuiqiandanhao", ht_forUI["Fhuiqiandanhao"].ToString());
 
 
-        alsql.Add("INSERT INTO ZZZ_fanchang(FCID,FC_YYID,FCshenqingren,FCshenqingshijian,FCzhuangtai) VALUES(@FCID,@FC_YYID,@FCshenqingren,getdate(),'草稿')");
+
+        alsql.Add("INSERT INTO ZZZ_fanchang(FCID,FC_YYID,FCshenqingren,FCshenqingshijian,FCzhuangtai,Fhuiqiandanhao) VALUES(@FCID,@FC_YYID,@FCshenqingren,getdate(),'草稿',@Fhuiqiandanhao)");
 
 
         //遍历子表， 插入 
@@ -255,7 +255,40 @@ public class NoReSet_160513000045
 
             alsql.Add("UPDATE  ZZZ_fanchang SET FCwuliudan=@FCwuliudan,FCwuliugongsi=@FCwuliugongsi,FCfahuoren=@FCfahuoren,FCfahuoshijian=getdate(),FCjisongdizhi=@FCjisongdizhi,FClianxifangshi=@FClianxifangshi,FCshoujianren=@FCshoujianren,FCzhuangtai='在途'  where FCID =@FCID ");
         }
-     
+
+
+
+
+        if (ht_forUI["ywlx_yincang"].ToString() == "shenhe")
+        {
+            if (check_zhuangtai(ht_forUI["idforedit"].ToString().Trim()) != "提交")
+            {
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "保存失败，只有提交状态才允许进行审核或驳回。";
+                return dsreturn;
+            }
+
+            if (ht_forUI.Contains("shenhe_yincang"))
+            {
+                //判断是审核还是驳回
+                if (ht_forUI["shenhe_yincang"].ToString() == "审核通过")
+                {
+                    param.Add("@FCshenheren", ht_forUI["yhbsp_session_uer_UAid"].ToString());
+                    alsql.Add("UPDATE ZZZ_fanchang SET  FCzhuangtai='审核',FCshenheren=@FCshenheren,FCshenheshijian=getdate()  where FCzhuangtai='提交' and FCID =@FCID");
+                }
+                if (ht_forUI["shenhe_yincang"].ToString() == "驳回")
+                {
+                    alsql.Add("UPDATE ZZZ_fanchang SET  FCzhuangtai='草稿'  where FCzhuangtai='提交' and FCID =@FCID");
+                }
+            }
+            else
+            {
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "保存失败，审核选项必须选择。";
+                return dsreturn;
+            }
+           
+        }
 
 
 

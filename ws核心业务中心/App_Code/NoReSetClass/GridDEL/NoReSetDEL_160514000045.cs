@@ -114,7 +114,7 @@ public class NoReSetDEL_160514000045
                 {
                     param.Add("@FCID_" + d, ids[d]);
                     param.Add("@FCqurenshoujianren", ht_forUI["yhbsp_session_uer_UAid"].ToString());
-                    alsql.Add("UPDATE ZZZ_fanchang SET  FCzhuangtai='收件',FCqurenshoujianren=@FCqurenshoujianren,FCshoujianshijian=getdate()  where FCzhuangtai='在途' and FCID =@FCID_" + d);
+                    alsql.Add("UPDATE ZZZ_fanchang SET  FCzhuangtai='已收件',FCqurenshoujianren=@FCqurenshoujianren,FCshoujianshijian=getdate()  where FCzhuangtai='在途' and FCID =@FCID_" + d);
                 }
 
             }

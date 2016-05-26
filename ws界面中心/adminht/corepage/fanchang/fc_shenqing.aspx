@@ -50,6 +50,8 @@
                      $("#FCqurenshoujianren").closest(".form-group").hide();
                      $("#FCqurenshoujianren_name").closest(".form-group").hide();
                      $("#FCzhuangtai").closest(".form-group").hide();
+                     $("input[name='shenhe_yincang']").closest(".form-group").hide();
+                     $("hr").hide();
                  }
 
                  //发货处理
@@ -72,6 +74,7 @@
                      $("#FCqurenshoujianren").closest(".form-group").hide();
                      $("#FCqurenshoujianren_name").closest(".form-group").hide();
                      $("#FCzhuangtai").closest(".form-group").hide();
+                     $("input[name='shenhe_yincang']").closest(".form-group").hide();
  
                  }
                
@@ -109,6 +112,8 @@
                          $("#addbutton1_top").attr({ "disabled": "disabled" });
                          $("#addbutton1").attr({ "disabled": "disabled" });
                          $("#reloaddb").attr({ "disabled": "disabled" });
+
+                         $("input[name='shenhe_yincang']").closest(".form-group").hide();
                      }
                 
                   
