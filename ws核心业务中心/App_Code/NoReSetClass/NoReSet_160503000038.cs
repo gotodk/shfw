@@ -275,7 +275,8 @@ public class NoReSet_160503000038
         }
         if (!param.Contains("@Kfanweinei"))
         {
-            param.Add("@Kfanweinei", "");
+            //找不到范围标记，记录下城市名
+            param.Add("@Kfanweinei", ht_forUI["chengshi"].ToString().Replace("市",""));
         }
     
 

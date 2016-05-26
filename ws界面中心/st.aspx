@@ -24,7 +24,7 @@
     <div>
 									<ul class="list-group">
 										<!-- #section:pages/gallery -->
-				 
+				 <li class="list-group-item red">共<%=arr_tupian.Length.ToString() %>个附件</li>
                                        <%      
     for (int i = 0; i < arr_tupian.Length; i++)
     { %>
@@ -47,13 +47,14 @@
                                                 <% if (Checktu(arr_tupian[i]))
                                                     {
                                                         %>
+                                                    这是图片附件<%=i.ToString() %>
                                                 <img class="img-responsive"   src="<%=arr_tupian[i] %>" />
                                                 <%
                                                     }
                                                     else
                                                     {
                                                 %>
-                                                点击下载此文件：这是附件<%=i.ToString() %>
+                                                点击下载此文件：这是文件附件<%=i.ToString() %>
                                                 <%
                                                     }
                                                         %>
@@ -71,8 +72,8 @@
 
 
                              
-                                   
 
+                                   
 
 
 

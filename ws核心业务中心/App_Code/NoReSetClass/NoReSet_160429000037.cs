@@ -61,7 +61,14 @@ public class NoReSet_160429000037
         param.Add("@FID", guid);
         param.Add("@Fmingcheng", ht_forUI["Fmingcheng"].ToString());
         param.Add("@Fleixing", ht_forUI["Fleixing"].ToString());
-        param.Add("@Ffujian", ht_forUI["allpath_file1"].ToString());
+        
+        if (ht_forUI.Contains("allpath_file1"))
+        { param.Add("@Ffujian", ht_forUI["allpath_file1"].ToString()); }
+        else
+        {
+            param.Add("@Ffujian", "");
+        }
+
         param.Add("@Fjianshu", ht_forUI["Fjianshu"].ToString());
 
         alsql.Add("INSERT INTO ZZZ_WENDANG(FID, Fmingcheng, Fleixing, Ffujian, Fjianshu, Friqi ) VALUES(@FID, @Fmingcheng, @Fleixing, @Ffujian, @Fjianshu, getdate() )");
@@ -117,7 +124,15 @@ public class NoReSet_160429000037
         param.Add("@FID", ht_forUI["idforedit"].ToString());
         param.Add("@Fmingcheng", ht_forUI["Fmingcheng"].ToString());
         param.Add("@Fleixing", ht_forUI["Fleixing"].ToString());
-        param.Add("@Ffujian", ht_forUI["allpath_file1"].ToString());
+
+        if (ht_forUI.Contains("allpath_file1"))
+        { param.Add("@Ffujian", ht_forUI["allpath_file1"].ToString()); }
+        else
+        {
+            param.Add("@Ffujian", "");
+        }
+
+        
         param.Add("@Fjianshu", ht_forUI["Fjianshu"].ToString());
 
         alsql.Add("UPDATE ZZZ_WENDANG SET  Fmingcheng=@Fmingcheng, Fleixing=@Fleixing, Ffujian=@Ffujian, Fjianshu=@Fjianshu, Friqi=getdate()  where FID=@FID ");

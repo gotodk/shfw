@@ -67,7 +67,7 @@
                         
                          if ($(this).val() == '<%=UserSession.唯一键%>')
                          {
-                             $("#YJyijian").val("d");
+                             $("#YJyijian").val("");
                              $("#YJyijian").closest(".form-group").show();
                          }
                      });

@@ -63,7 +63,12 @@ public class NoReSet_160512000042
         param.Add("@QID", guid);
         param.Add("@Qzhuti", ht_forUI["Qzhuti"].ToString());
         param.Add("@Qneirong", ht_forUI["Qneirong"].ToString());
-        param.Add("@Qfujian", ht_forUI["allpath_file1"].ToString());
+        if (ht_forUI.Contains("allpath_file1"))
+        { param.Add("@Qfujian", ht_forUI["allpath_file1"].ToString()); }
+        else
+        {
+            param.Add("@Qfujian", "");
+        }
         param.Add("@Qjiedanren", ht_forUI["Qjiedanren"].ToString());
         param.Add("@Qzhuangtai", "未结单");
         param.Add("@Qcjr", ht_forUI["yhbsp_session_uer_UAid"].ToString()); 
