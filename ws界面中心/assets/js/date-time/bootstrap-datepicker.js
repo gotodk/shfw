@@ -20,10 +20,36 @@
  * limitations under the License.
  * ========================================================= */
 
+
+
+
+ 
 (function($, undefined){
 	var $date_prev_icon = '&laquo;';//ACE
 	var $date_next_icon = '&raquo;';//ACE
 	var $window = $(window);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	function UTCDate(){
 		return new Date(Date.UTC.apply(Date, arguments));

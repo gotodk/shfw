@@ -517,7 +517,49 @@
                                                             <i class="fa fa-exchange"></i>
                                                         </span>
                                                         <input class="form-control date-picker" id="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>2" name="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>2" type="text" />
+                                                        
+ 
+
+ 
+
+<div class=" input-daterange input-group-btn btn-group zheshiyigekuiajieshezhi">
+												<button data-toggle="dropdown" class="btn badge dropdown-toggle">
+												     快捷
+													<span class="ace-icon fa fa-caret-down icon-on-right"></span>
+												</button>
+
+												<ul class="dropdown-menu dropdown-default">
+													<li>
+														<a href="javascript:void(0);" onclick="js_method_kj('<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>1','<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>2','本周')">本周</a>
+													</li>
+
+													<li>
+														<a href="javascript:void(0);" onclick="js_method_kj('<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>1','<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>2','本月')">本月</a>
+													</li>
+
+													<li>
+														<a href="javascript:void(0);" onclick="js_method_kj('<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>1','<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>2','本季度')">本季度</a>
+													</li>
+                                                    <li>
+														<a href="javascript:void(0);" onclick="js_method_kj('<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>1','<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>2','本年')">本年</a>
+													</li>
+													 
+												</ul>
+											</div>
+
+
+
+
+
+
+
+
+                                                    
+                                                        
                                                     </div>
+                                                      
+                                                   
+                                                         
                                                     <div class="ValidErrInfo col-sm-12 no-padding-left"></div>
                                                 </div>
                                             </div>

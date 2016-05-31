@@ -3,6 +3,8 @@
     <!-- 附加的body底部本页专属的自定义js脚本 -->
     <script src="/assets/js/jquery.validate.js"></script>
     <script src="/assets/js/date-time/bootstrap-datepicker.js"></script>
+<script src="/assets/js/date-time/dateRangeUtil.js"></script>
+
     <script src="/assets/js/jquery.inputlimiter.1.3.1.js"></script>
     <script src="/assets/js/jquery.maskedinput.js"></script>
 
@@ -70,6 +72,33 @@
             var pp = tmp[tmp.length - 1];//获取最后一部分，即文件名和参数 
             tmp = pp.split("?");//把参数和文件名分割开 
             return tmp[0];
+        }
+
+ 
+
+        function js_method_kj(t1,t2,sp) //日期段快捷设置
+        {
+            if (sp == "本周")
+            {
+                var startStop = dateRangeUtil.getCurrentWeek();
+                $("#" + t1).datepicker('setDate', startStop[0]);
+                $("#" + t2).datepicker('setDate', startStop[1]);
+            }
+            if (sp == "本月") {
+                var startStop = dateRangeUtil.getCurrentMonth();
+                $("#" + t1).datepicker('setDate', startStop[0]);
+                $("#" + t2).datepicker('setDate', startStop[1]);
+            }
+            if (sp == "本季度") {
+                var startStop = dateRangeUtil.getCurrentSeason();
+                $("#" + t1).datepicker('setDate', startStop[0]);
+                $("#" + t2).datepicker('setDate', startStop[1]);
+            }
+            if (sp == "本年") {
+                var startStop = dateRangeUtil.getCurrentYear();
+                $("#" + t1).datepicker('setDate', startStop[0]);
+                $("#" + t2).datepicker('setDate', startStop[1]);
+            }
         }
 
 

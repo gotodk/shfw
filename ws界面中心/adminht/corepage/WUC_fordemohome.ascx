@@ -23,7 +23,7 @@
 									<i class="ace-icon fa fa-check green"></i>
 									您好，
 									<strong class="red2">
-										欢迎使用阿凡提MES系统，系统有新版本更新
+										欢迎使用威高售后服务系统，系统有新版本更新
 									</strong>, 
                                     请联系客服人员。
 	 
