@@ -40,6 +40,9 @@ public class NoReSet_160224000021
     /// <returns></returns>
     public DataSet NRS_ADD(DataTable parameter_forUI)
     {
+
+        //库存调整单即刻生效，状态为"已审核",审核人为登录账号。
+
         //接收转换参数
         Hashtable ht_forUI = new Hashtable();
         for (int i = 0; i < parameter_forUI.Rows.Count; i++)
@@ -61,11 +64,12 @@ public class NoReSet_160224000021
         param.Add("@rid", guid);
         param.Add("@rdb", ht_forUI["rdb"].ToString());
         param.Add("@rbzr", ht_forUI["yhbsp_session_uer_UAid"].ToString());
-        param.Add("@rzhuangtai", "未审核");
+        param.Add("@rshr", ht_forUI["yhbsp_session_uer_UAid"].ToString());
+        param.Add("@rzhuangtai", "已审核");
         param.Add("@rbeizhu", ht_forUI["rbeizhu"].ToString());
         
 
-        alsql.Add("INSERT INTO  ZZZ_C_record(rid, rdb,  rbzr,   rzhuangtai, rbeizhu) VALUES(@rid, @rdb,  @rbzr,   @rzhuangtai, @rbeizhu)");
+        alsql.Add("INSERT INTO  ZZZ_C_record(rid, rdb,  rbzr, rshr ,rshenheshijian,  rzhuangtai, rbeizhu) VALUES(@rid, @rdb,  @rbzr, @rshr, getdate(),  @rzhuangtai, @rbeizhu)");
 
         //遍历子表， 插入 
         string zibiao_gts_id = "grid-table-subtable-160224000354";
@@ -104,11 +108,12 @@ public class NoReSet_160224000021
 
             param.Add("@sub_" + "r_chu" + "_" + i, chuku_kw);
             param.Add("@sub_" + "r_ru" + "_" + i, ruku_kw);
-            param.Add("@sub_" + "r_cpbh" + "_" + i, subdt.Rows[i]["调整品号"].ToString());
+            param.Add("@sub_" + "r_cpbh" + "_" + i, subdt.Rows[i]["调整零件"].ToString());
             param.Add("@sub_" + "r_shuliang" + "_" + i, subdt.Rows[i]["调整数量"].ToString());
             param.Add("@sub_" + "r_danwei" + "_" + i, subdt.Rows[i]["单位"].ToString());
+            param.Add("@sub_" + "r_pihao" + "_" + i, subdt.Rows[i]["批号"].ToString());
 
-            string INSERTsql = "INSERT INTO ZZZ_C_record_sub (subid, rid, r_chu, r_ru, r_cpbh, r_shuliang, r_danwei ) VALUES(@sub_" + "subid" + "_" + i + ", @sub_MainID, @sub_" + "r_chu" + "_" + i + ", @sub_" + "r_ru" + "_" + i + ", @sub_" + "r_cpbh" + "_" + i + ", @sub_" + "r_shuliang" + "_" + i + ", @sub_" + "r_danwei" + "_" + i + ")";
+            string INSERTsql = "INSERT INTO ZZZ_C_record_sub (subid, rid, r_chu, r_ru, r_cpbh, r_shuliang, r_danwei ,r_pihao) VALUES(@sub_" + "subid" + "_" + i + ", @sub_MainID, @sub_" + "r_chu" + "_" + i + ", @sub_" + "r_ru" + "_" + i + ", @sub_" + "r_cpbh" + "_" + i + ", @sub_" + "r_shuliang" + "_" + i + ", @sub_" + "r_danwei" + "_" + i + " , @sub_" + "r_pihao" + "_" + i + ")";
             alsql.Add(INSERTsql);
         }
 
@@ -120,7 +125,7 @@ public class NoReSet_160224000021
         if ((bool)(return_ht["return_float"]))
         {
             dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
-            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "新增成功！{"+ guid + "}";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "新增成功！";
         }
         else
         {
@@ -172,7 +177,7 @@ public class NoReSet_160224000021
         Hashtable param = new Hashtable();
         param.Add("@rid", ht_forUI["idforedit"].ToString());
 
-        return_ht = I_DBL.RunParam_SQL("select  top 1 *  from ZZZ_C_record where rid=@rid", "数据记录", param);
+        return_ht = I_DBL.RunParam_SQL("select  top 1 *  from View_ZZZ_C_record_ex where rid=@rid", "数据记录", param);
 
         if ((bool)(return_ht["return_float"]))
         {

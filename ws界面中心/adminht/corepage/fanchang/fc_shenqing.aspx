@@ -84,7 +84,7 @@
                      $("#ywlx_yincang").val(getUrlParam("ywlx"));
 
 
-                     $("#chuanhaotanhuang").closest(".form-group").hide();
+                 
                      $("#ywlx_yincang").closest(".form-group").hide();
 
                      //弹窗特殊条件，隐藏的弹窗的条件

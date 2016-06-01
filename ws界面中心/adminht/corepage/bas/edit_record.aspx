@@ -32,6 +32,145 @@
 
                  //    $("#did").attr("readonly", "readonly");
                  //}
+
+
+                 window.setInterval(function () {
+
+                     //设置子表输入框只读
+                     $("#gview_grid-table-subtable-160224000354").find("input[id^='subtcid_']").attr("readonly", "readonly");
+                 
+                     $("#gview_grid-table-subtable-160224000354").find("input[id^='自动生成']").attr("readonly", "readonly");
+
+                     $("#gview_grid-table-subtable-160224000354").find("input[name='调整数量']").removeAttr("readonly");
+
+                     $("#gview_grid-table-subtable-160224000354").find("input[name='批号']").removeAttr("readonly");
+                      
+                 }, 500);
+
+
+
+                 //出库子表弹窗
+
+                 var dfx_str_subchu = "#show_searchopenyhbspgogo_subtcid_r_chu";
+                 var oldzhi_subchu = $(dfx_str_subchu).text();
+
+                 var jiancha_subchu = window.setInterval(function () {
+
+
+
+                     //带入字段
+                     if ($(dfx_str_subchu).text() != oldzhi_subchu) {
+                         var re = /\[.*?\]/ig;
+                         var arr = $(dfx_str_subchu).text().match(re);
+
+                         if (arr != null) {//如果能匹配成功即arr数组不为空，循环输出结果
+                             for (var i = 0; i < arr.length; i++) {
+                                 var arr_z = arr[i].split(':');
+                                 if (arr_z[0] == "[库位名称") {
+                                     //离弹窗最近的特定name的输入框  设备规格
+
+                                     var zj = $(dfx_str_subchu).closest("tr").find("input[name='出库库位名']");
+
+                                     zj.val($.trim(arr_z[1]).replace("]", ""));
+                                 }
+                                 if (arr_z[0] == "[仓库名称") {
+                                     //离弹窗最近的特定name的输入框  
+                                     var zj = $(dfx_str_subchu).closest("tr").find("input[name='出库仓库名']");
+                                     zj.val($.trim(arr_z[1]).replace("]", ""));
+                                 }
+                             }
+                         }
+
+                         oldzhi_subchu = $(dfx_str_subchu).text();
+                     }
+                 }, 500);
+
+
+
+
+
+                 //入库子表弹窗
+
+                 var dfx_str_subru = "#show_searchopenyhbspgogo_subtcid_r_ru";
+                 var oldzhi_subru = $(dfx_str_subru).text();
+
+                 var jiancha_subru = window.setInterval(function () {
+
+
+
+                     //带入字段
+                     if ($(dfx_str_subru).text() != oldzhi_subru) {
+                         var re = /\[.*?\]/ig;
+                         var arr = $(dfx_str_subru).text().match(re);
+
+                         if (arr != null) {//如果能匹配成功即arr数组不为空，循环输出结果
+                             for (var i = 0; i < arr.length; i++) {
+                                 var arr_z = arr[i].split(':');
+                                 if (arr_z[0] == "[库位名称") {
+                                     //离弹窗最近的特定name的输入框  设备规格
+
+                                     var zj = $(dfx_str_subru).closest("tr").find("input[name='入库库位名']");
+
+                                     zj.val($.trim(arr_z[1]).replace("]", ""));
+                                 }
+                                 if (arr_z[0] == "[仓库名称") {
+                                     //离弹窗最近的特定name的输入框  
+                                     var zj = $(dfx_str_subru).closest("tr").find("input[name='入库仓库名']");
+                                     zj.val($.trim(arr_z[1]).replace("]", ""));
+                                 }
+                             }
+                         }
+
+                         oldzhi_subru = $(dfx_str_subru).text();
+                     }
+                 }, 500);
+
+
+
+
+
+                 //选择品号的子表弹窗
+
+                 var dfx_str_subtt = "#show_searchopenyhbspgogo_subtcid_r_cpbh";
+                 var oldzhi_subtt = $(dfx_str_subtt).text();
+
+                 var jiancha_subtt = window.setInterval(function () {
+
+
+
+                     //带入字段
+                     if ($(dfx_str_subtt).text() != oldzhi_subtt) {
+                         var re = /\[.*?\]/ig;
+                         var arr = $(dfx_str_subtt).text().match(re);
+
+                         if (arr != null) {//如果能匹配成功即arr数组不为空，循环输出结果
+                             for (var i = 0; i < arr.length; i++) {
+                                 var arr_z = arr[i].split(':');
+                                 if (arr_z[0] == "[名称") {
+                                     //离弹窗最近的特定name的输入框  设备规格
+
+                                     var zj = $(dfx_str_subtt).closest("tr").find("input[name='零件名称']");
+
+                                     zj.val($.trim(arr_z[1]).replace("]", ""));
+                                 }
+                                 if (arr_z[0] == "[规格") {
+                                     //离弹窗最近的特定name的输入框  
+                                     var zj = $(dfx_str_subtt).closest("tr").find("input[name='零件规格']");
+                                     zj.val($.trim(arr_z[1]).replace("]", ""));
+                                 }
+                                 if (arr_z[0] == "[单位") {
+                                     //离弹窗最近的特定name的输入框  
+                                     var zj = $(dfx_str_subtt).closest("tr").find("input[name='单位']");
+                                     zj.val($.trim(arr_z[1]).replace("]", ""));
+                                 }
+                             }
+                         }
+
+                         oldzhi_subtt = $(dfx_str_subtt).text();
+                     }
+                 }, 500);
+
+
  
         });
         </script>
