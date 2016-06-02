@@ -108,12 +108,13 @@ public class NoReSetDEL_160514000045
 
             //删除数据表里的数据 
             string[] ids = ht_forUI["xuanzhongzhi"].ToString().Split(',');
+            param.Add("@FCqurenshoujianren", ht_forUI["yhbsp_session_uer_UAid"].ToString());
             for (int d = 0; d < ids.Length; d++)
             {
                 if (ids[d].Trim() != "")
                 {
                     param.Add("@FCID_" + d, ids[d]);
-                    param.Add("@FCqurenshoujianren", ht_forUI["yhbsp_session_uer_UAid"].ToString());
+
                     alsql.Add("UPDATE ZZZ_fanchang SET  FCzhuangtai='已收件',FCqurenshoujianren=@FCqurenshoujianren,FCshoujianshijian=getdate()  where FCzhuangtai='在途' and FCID =@FCID_" + d);
                 }
 

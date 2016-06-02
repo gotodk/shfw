@@ -371,6 +371,10 @@
     <SortParentID>60</SortParentID>
     <SortParentPath>,60,</SortParentPath>
     <SortOrder>23</SortOrder>
+    <m_url>/adminht/corepage/lpjgl/list_my_shenqing.aspx</m_url>
+    <m_tip />
+    <m_tag />
+    <m_ico />
     <m_show>不隐藏</m_show>
     <SortNameTree>│├零配件申请</SortNameTree>
     <SortMoveUp>0</SortMoveUp>
@@ -383,6 +387,10 @@
     <SortParentID>60</SortParentID>
     <SortParentPath>,60,</SortParentPath>
     <SortOrder>24</SortOrder>
+    <m_url>/adminht/corepage/lpjgl/list_my_diaobo.aspx</m_url>
+    <m_tip />
+    <m_tag />
+    <m_ico />
     <m_show>不隐藏</m_show>
     <SortNameTree>│├零配件调拨</SortNameTree>
     <SortMoveUp>1</SortMoveUp>
@@ -395,6 +403,10 @@
     <SortParentID>60</SortParentID>
     <SortParentPath>,60,</SortParentPath>
     <SortOrder>25</SortOrder>
+    <m_url>/adminht/corepage/lpjgl/list_my_shenhe.aspx</m_url>
+    <m_tip />
+    <m_tag />
+    <m_ico />
     <m_show>不隐藏</m_show>
     <SortNameTree>│├零配件审核</SortNameTree>
     <SortMoveUp>2</SortMoveUp>
@@ -407,7 +419,7 @@
     <SortParentID>60</SortParentID>
     <SortParentPath>,60,</SortParentPath>
     <SortOrder>26</SortOrder>
-    <m_url />
+    <m_url>/adminht/corepage/lpjgl/list_my_fahuo.aspx</m_url>
     <m_tip />
     <m_tag />
     <m_ico />
@@ -423,6 +435,10 @@
     <SortParentID>60</SortParentID>
     <SortParentPath>,60,</SortParentPath>
     <SortOrder>27</SortOrder>
+    <m_url>/adminht/corepage/lpjgl/list_my_shouhuo.aspx</m_url>
+    <m_tip />
+    <m_tag />
+    <m_ico />
     <m_show>不隐藏</m_show>
     <SortNameTree>│├零配件收货</SortNameTree>
     <SortMoveUp>4</SortMoveUp>
@@ -435,6 +451,10 @@
     <SortParentID>60</SortParentID>
     <SortParentPath>,60,</SortParentPath>
     <SortOrder>28</SortOrder>
+    <m_url>/adminht/corepage/lpjgl/edit_record_tui.aspx</m_url>
+    <m_tip />
+    <m_tag />
+    <m_ico />
     <m_show>不隐藏</m_show>
     <SortNameTree>│├零配件退回</SortNameTree>
     <SortMoveUp>5</SortMoveUp>
@@ -475,7 +495,7 @@
     <SortParentID>108</SortParentID>
     <SortParentPath>,60,108,</SortParentPath>
     <SortOrder>31</SortOrder>
-    <m_url />
+    <m_url>/adminht/corepage/lpjgl/list_record_main.aspx?rdb=shenqing</m_url>
     <m_tip />
     <m_tag />
     <m_ico />
@@ -491,6 +511,10 @@
     <SortParentID>108</SortParentID>
     <SortParentPath>,60,108,</SortParentPath>
     <SortOrder>32</SortOrder>
+    <m_url>/adminht/corepage/lpjgl/list_record_main.aspx?rdb=diaobo</m_url>
+    <m_tip />
+    <m_tag />
+    <m_ico />
     <m_show>不隐藏</m_show>
     <SortNameTree>││├零配件调拨列表</SortNameTree>
     <SortMoveUp>1</SortMoveUp>
@@ -503,6 +527,10 @@
     <SortParentID>108</SortParentID>
     <SortParentPath>,60,108,</SortParentPath>
     <SortOrder>33</SortOrder>
+    <m_url>/adminht/corepage/lpjgl/list_record_main.aspx?rdb=tiaozheng</m_url>
+    <m_tip />
+    <m_tag />
+    <m_ico />
     <m_show>不隐藏</m_show>
     <SortNameTree>││├库存调整单列表</SortNameTree>
     <SortMoveUp>2</SortMoveUp>
@@ -515,6 +543,10 @@
     <SortParentID>108</SortParentID>
     <SortParentPath>,60,108,</SortParentPath>
     <SortOrder>34</SortOrder>
+    <m_url>/adminht/corepage/lpjgl/list_record_main.aspx?rdb=tuihui</m_url>
+    <m_tip />
+    <m_tag />
+    <m_ico />
     <m_show>不隐藏</m_show>
     <SortNameTree>││└零配件退回列表</SortNameTree>
     <SortMoveUp>3</SortMoveUp>

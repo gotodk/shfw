@@ -95,15 +95,15 @@ public class NoReSet_160224000021
                 chuku_kw = subdt.Rows[i]["出库库位"].ToString();
                 ruku_kw = subdt.Rows[i]["入库库位"].ToString();
             }
-            if (ht_forUI["rdb"].ToString() == "出库单")
-            {
-                chuku_kw = subdt.Rows[i]["出库库位"].ToString();
-                ruku_kw = "";
-            }
-            if (ht_forUI["rdb"].ToString() == "入库单")
+            if (ht_forUI["rdb"].ToString() == "申请单")
             {
                 chuku_kw = "";
                 ruku_kw = subdt.Rows[i]["入库库位"].ToString();
+            }
+            if (ht_forUI["rdb"].ToString() == "退回单")
+            {
+                chuku_kw = subdt.Rows[i]["出库库位"].ToString();
+                ruku_kw = "";
             }
 
             param.Add("@sub_" + "r_chu" + "_" + i, chuku_kw);

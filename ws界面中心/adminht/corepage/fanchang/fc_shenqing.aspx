@@ -70,9 +70,7 @@
                      $("#FClianxifangshi").removeAttr("readonly");
                      $("#FCshoujianren").removeAttr("readonly");
 
-                     $("#FCshoujianshijian").closest(".form-group").hide();
-                     $("#FCqurenshoujianren").closest(".form-group").hide();
-                     $("#FCqurenshoujianren_name").closest(".form-group").hide();
+                   
                      $("#FCzhuangtai").closest(".form-group").hide();
                      $("input[name='shenhe_yincang']").closest(".form-group").hide();
  
