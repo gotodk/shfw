@@ -68,8 +68,12 @@ public class NoReSetDEL_160602000051
                 if (ids[d].Trim() != "")
                 {
                     param.Add("@rid_" + d, ids[d]);
-
+                    ClassKuCun CKC = new ClassKuCun();
+                    ArrayList al_kc =  CKC.get_sql_str(ids[d],"标准");
                     alsql.Add("UPDATE ZZZ_C_record SET  rzhuangtai='审核',rshr=@rshr,rshenheshijian=getdate()  where rzhuangtai='提交' and rid =@rid_" + d);
+
+                    al_kc.RemoveAt(0);
+                    alsql.AddRange(al_kc);
                 }
 
             }

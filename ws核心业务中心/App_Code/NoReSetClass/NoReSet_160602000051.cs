@@ -114,7 +114,17 @@ public class NoReSet_160602000051
             param.Add("@sub_" + "r_pihao" + "_" + i, subdt.Rows[i]["批号"].ToString());
 
             string INSERTsql = "INSERT INTO ZZZ_C_record_sub (subid, rid, r_chu, r_ru, r_cpbh, r_shuliang, r_danwei ,r_pihao) VALUES(@sub_" + "subid" + "_" + i + ", @sub_MainID, @sub_" + "r_chu" + "_" + i + ", @sub_" + "r_ru" + "_" + i + ", @sub_" + "r_cpbh" + "_" + i + ", @sub_" + "r_shuliang" + "_" + i + ", @sub_" + "r_danwei" + "_" + i + " , @sub_" + "r_pihao" + "_" + i + ")";
+
+
+      
             alsql.Add(INSERTsql);
+
+            //生成库存变更语句
+            ClassKuCun CKC = new ClassKuCun();
+            ArrayList al_kc = CKC.get_sql_str(chuku_kw, ruku_kw, subdt.Rows[i]["调整零件"].ToString(), subdt.Rows[i]["批号"].ToString(), subdt.Rows[i]["调整数量"].ToString(), subdt.Rows[i]["单位"].ToString(), "标准");
+
+            al_kc.RemoveAt(0);
+            alsql.AddRange(al_kc);
         }
 
         //更新库存
