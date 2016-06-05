@@ -9,7 +9,7 @@ using FMPublicClass;
 using System.Numerics;
 using System.Web.Script.Serialization;
 
-public class NoReSet_160423000030
+public class NoReSet_160605000054
 {
  
 
@@ -56,16 +56,20 @@ public class NoReSet_160423000030
         Hashtable return_ht = new Hashtable();
         ArrayList alsql = new ArrayList();
         Hashtable param = new Hashtable();
-        //以可排序guid方式生成
-        //string guid = CombGuid.GetNewCombGuid("D"); 
-        //以两位年+两位月+两位日+6位序列顺序号方式生成
-        string guid = CombGuid.GetMewIdFormSequence("ZZZ_userinfo_glkh");
-        param.Add("@GLKHID", guid);
-        param.Add("@UAid", ht_forUI["UAid"].ToString());
-        param.Add("@YYID", ht_forUI["YYID"].ToString());
-        param.Add("@shixiaoriqi", ht_forUI["shixiaoriqi"].ToString());
+        //BID, B_YYID, Blianxiren, Bdianhua, Bmiaoshu, Bsbtime, Bsbr, Bzhuangtai, Bjstime, Bwctime, Bfwfzr
+        string guid = CombGuid.GetMewIdFormSequence("ZZZ_BXSQ");
+        param.Add("@BID", guid);
+        param.Add("@B_YYID", ht_forUI["B_YYID"].ToString());
+        param.Add("@Blianxiren", ht_forUI["Blianxiren"].ToString());
+        param.Add("@Bdianhua", ht_forUI["Bdianhua"].ToString());
+        param.Add("@Bmiaoshu", ht_forUI["Bmiaoshu"].ToString());
+        param.Add("@Bsbr", ht_forUI["yhbsp_session_uer_UAid"].ToString());
+        param.Add("@Bzhuangtai", "待处理");
+        param.Add("@Bfwfzr", ht_forUI["Bfwfzr"].ToString());
+        
 
-        alsql.Add("INSERT INTO  ZZZ_userinfo_glkh(GLKHID, UAid, YYID, shixiaoriqi ) VALUES(@GLKHID, @UAid, @YYID, @shixiaoriqi)");
+        alsql.Add("INSERT INTO  ZZZ_BXSQ(BID, B_YYID, Blianxiren, Bdianhua, Bmiaoshu,  Bsbr, Bzhuangtai ,Bfwfzr) VALUES(@BID, @B_YYID, @Blianxiren, @Bdianhua, @Bmiaoshu,   @Bsbr, @Bzhuangtai,  @Bfwfzr)");
+ 
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
 
@@ -89,62 +93,10 @@ public class NoReSet_160423000030
     /// <returns></returns>
     public DataSet NRS_EDIT(DataTable parameter_forUI)
     {
-        //接收转换参数
-        Hashtable ht_forUI = new Hashtable();
-        for (int i = 0; i < parameter_forUI.Rows.Count; i++)
-        {
-            ht_forUI[parameter_forUI.Rows[i]["参数名"].ToString()] = parameter_forUI.Rows[i]["参数值"].ToString();
-        }
+        
 
 
-        //初始化返回值
-        DataSet dsreturn = initReturnDataSet().Clone();
-        dsreturn.Tables["返回值单条"].Rows.Add(new string[] { "err", "初始化" });
-
-        //参数合法性各种验证，这里省略
-        if (ht_forUI["idforedit"].ToString().Trim() == "")
-        {
-            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
-            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "没有明确的修改目标！";
-            return dsreturn;
-        }
-        //开始真正的处理，这里只是演示，所以直接在这里写业务逻辑代码了
-
-        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
-        Hashtable return_ht = new Hashtable();
-        ArrayList alsql = new ArrayList();
-        Hashtable param = new Hashtable();
-        param.Add("@GLKHID", ht_forUI["idforedit"].ToString());
-        param.Add("@UAid", ht_forUI["UAid"].ToString());
-        param.Add("@YYID", ht_forUI["YYID"].ToString());
-        param.Add("@shixiaoriqi", ht_forUI["shixiaoriqi"].ToString());
-        alsql.Add("UPDATE ZZZ_userinfo_glkh SET UAid=@UAid, YYID=@YYID, shixiaoriqi=@shixiaoriqi  where GLKHID=@GLKHID ");
-   
-
-        return_ht = I_DBL.RunParam_SQL(alsql, param);
-
-
-
-
-        if ((bool)(return_ht["return_float"]))
-        {
-
-            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
-            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "修改成功！"+ ht_forUI["shixiaoriqi"].ToString();
-        }
-        else
-        {
-            //其实要记录日志，而不是输出，这里只是演示
-            //dsreturn.Tables.Add(parameter_forUI.Copy());
-            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
-            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "系统故障，修改失败：" + return_ht["return_errmsg"].ToString();
-        }
-
-
-
-
-
-        return dsreturn;
+        return null;
     }
 
     /// <summary>
@@ -173,9 +125,9 @@ public class NoReSet_160423000030
         I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
         Hashtable return_ht = new Hashtable();
         Hashtable param = new Hashtable();
-        param.Add("@GLKHID", ht_forUI["idforedit"].ToString());
+        param.Add("@BID", ht_forUI["idforedit"].ToString());
 
-        return_ht = I_DBL.RunParam_SQL("select  top 1 *  from View_ZZZ_userinfo_glkh_list where GLKHID=@GLKHID", "数据记录", param);
+        return_ht = I_DBL.RunParam_SQL("select  top 1 * from View_ZZZ_BXSQ_ex where BID=@BID", "数据记录", param);
 
         if ((bool)(return_ht["return_float"]))
         {
@@ -187,7 +139,6 @@ public class NoReSet_160423000030
                 dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "没有找到指定数据!";
                 return dsreturn;
             }
- 
             dsreturn.Tables.Add(redb);
 
 

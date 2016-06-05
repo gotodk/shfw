@@ -453,11 +453,12 @@
             string[] ARR_list_static = dsFPZ.Tables["表单配置子表"].Rows[i]["FS_SPPZ_list_static"].ToString().Split(',');
                                             %>
             <%
+        
         switch (dsFPZ.Tables["表单配置子表"].Rows[i]["FS_type"].ToString())
         {
             case "输入框":
                                             %>
-
+            
             $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>").val($(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>').text());
 
             <%    break;
@@ -540,12 +541,21 @@
         case "日期框":
                                                         %>
             <%--$("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>").val($(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>').text());--%>
+          <%--  var riqi = $(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>').text();
+            var rd = new Date(Date.parse("2016-10-10"));
+            var riqi2 = rd.getFullYear() + "-" + rd.getUTCMonth() + "-" + rd.getUTCDay();
+            console.log("抛出", riqi + "------" + riqi2);--%>
+           
             $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>").datepicker('setDate', $(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>').text());
 
             <%
             break;
         case "日期区间框":
                                                         %>
+
+
+   <%--         var riqi = $(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>1').text();
+            console.log("抛出", riqi);--%>
 
             $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>1").datepicker('setDate', $(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>1').text());
             $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>2").datepicker('setDate', $(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>2').text());
