@@ -1,5 +1,4 @@
-﻿using FMipcClass;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -8,9 +7,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class fwbh_edit_fwbg : System.Web.UI.Page
+public partial class fwbg_list_sqddd_all : System.Web.UI.Page
 {
-
     #region 必备的公共变量
     /// <summary>
     /// 表单配置
@@ -24,19 +22,17 @@ public partial class fwbh_edit_fwbg : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //表单识别号
-        string FID = "160427000035";
+        //列表识别号
+        string FID = "160610000056";
         #region 必备的配置代码
         //获取表单配置
-        dsFPZ = CallIPCPB.Get_FormInfoDB(FID);
-        htPP = FUPpublic.initPP(Request, dsFPZ);
+        dsFPZ = CallIPCPB.Get_FormsListDB(FID);
+        htPP = FUPpublic.initPP_list(Request, dsFPZ);
         //给控件传值
-        wuc_content._dsFPZ = dsFPZ;
-        wuc_content._htPP = htPP;
-        wuc_script._dsFPZ = dsFPZ;
-        wuc_script._htPP = htPP;
+        wuc_content_onlygrid._dsFPZ = dsFPZ;
+        wuc_content_onlygrid._htPP = htPP;
+        wuc_script_onlygrid._dsFPZ = dsFPZ;
+        wuc_script_onlygrid._htPP = htPP;
         #endregion
- 
-
     }
 }
