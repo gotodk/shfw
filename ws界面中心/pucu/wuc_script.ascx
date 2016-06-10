@@ -256,15 +256,14 @@
             {
                 var objDB = $(this).jqGrid("getRowData");
          
-                JSON_sub_str = JSON_sub_str = "&" + $(this).attr('id') + "_fcjsq=" + objDB.length + "&" + $(this).attr('id') + "=" + encMe(JSON.stringify(objDB), "mima");
-             
+                JSON_sub_str = JSON_sub_str + "&" + $(this).attr('id') + "_fcjsq=" + objDB.length + "&" + $(this).attr('id') + "=" + encMe(JSON.stringify(objDB), "mima");
                 if ($(this).attr('lastsel_yhb') != "-999999")
                 {
                     canbesavesub++;
                 }
                 
             });
- 
+            
             if (canbesavesub > 0)
             {
                 bootbox.alert("错误：某些子表尚未保存，无法提交!");
@@ -1042,12 +1041,19 @@
             });
 
 
-
+            
             //resize to fit page size
             $(window).on('resize.jqGrid', function () {
 
                 $(grid_selector).setGridWidth($(window).width() * 0.78);
- 
+                
+
+                var youbianquyu_for_gw = $("#addadd").width();
+                $("table[id^='grid-table-subtable-']").each(function () {
+               
+                    $(this).setGridWidth(youbianquyu_for_gw);
+                });
+                 
             });
 
 
@@ -1074,13 +1080,13 @@
 
             var grid_selector_001 = "grid-table-subtable-" + FSID;
             var pager_selector_001 = "grid-pager-subtable-" + FSID;
-
+           
             //resize to fit page size
-            $(window).on('resize.jqGrid', function () {
+            //$(window).on('resize.jqGrid', function () {
 
-                $("#" + grid_selector_001).setGridWidth($("#" + grid_selector_001).parent().width() - 15);
+            //    $("#" + grid_selector_001).setGridWidth($("#" + grid_selector_001).parent().width() - 15);
                
-            });
+            //});
 
          
   
