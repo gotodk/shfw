@@ -497,13 +497,19 @@ public class NoReSet_160427000035
                 alsql.Add("UPDATE ZZZ_FWBG SET Gzhuangtai=@Gzhuangtai,Gspyj=@Gspyj,Gtianxieren=@Gtianxieren,Gspshijian=getdate() where GID=@GID");
             }
 
+
+
             
 
-            //如果结单，并且审核通过了，反写报修申请单状态
+            if (ht_forUI.Contains("Gshenpixuanxiang") && ht_forUI["Gshenpixuanxiang"].ToString() == "审核通过")
+            {
+                //如果结单，并且审核通过了，反写报修申请单状态
+                alsql.Add("UPDATE ZZZ_BXSQ SET Bzhuangtai='已结单',Bwctime=getdate() where BID=(select  G_BID from ZZZ_FWBG where GID=@GID and Gjiedan='是') ");
+                //如果结单，并且审核通过了，反写序列号表安装日期(另外写个函数获取sql语句)
+                alsql.Add("UPDATE ZZZ_WFSB SET Sanzhuangriqi=getdate() where SID in (select  sb_SID from ZZZ_FWBG_shebei where sb_GID=@GID ) and (select Gjiedan from ZZZ_FWBG where GID=@GID) = '是' ");
 
-            //如果结单，并且审核通过了，反写序列号表安装日期(另外写个函数获取sql语句)
-
-            //如果结单，并且审核通过了，减少个人库存(怎么对应个人库存待研究，调取变更库存的sql语句)
+                //如果结单，并且审核通过了，减少个人库存(怎么对应个人库存待研究，调取变更库存的sql语句)
+            }
         }
 
 
