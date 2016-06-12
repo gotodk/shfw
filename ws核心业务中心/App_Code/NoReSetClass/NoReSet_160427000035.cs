@@ -227,8 +227,9 @@ public class NoReSet_160427000035
             param.Add("@sub_" + "ljbaoxiujiezhi" + "_" + i, subdt_lj.Rows[i]["保修截止日期"].ToString());
             param.Add("@sub_" + "ljpihao" + "_" + i, subdt_lj.Rows[i]["批号"].ToString());
             param.Add("@sub_" + "ljbeizhu" + "_" + i, subdt_lj.Rows[i]["备注"].ToString());
-  
-            string INSERTsql = "INSERT INTO ZZZ_FWBG_lingjian (  ljid, lj_GID, lj_LID, ljmingcheng, ljxinghao, ljdanwei, ljsjsj, ljlsj, ljshuliang, ljzje, ljbaoxiujiezhi, ljpihao,   ljbeizhu) VALUES(@sub_" + "ljid" + "_" + i + ", @sub_MainID, @sub_" + "lj_LID" + "_" + i + ", @sub_" + "ljmingcheng" + "_" + i + ", @sub_" + "ljxinghao" + "_" + i + ", @sub_" + "ljdanwei" + "_" + i + ", @sub_" + "ljsjsj" + "_" + i + ", @sub_" + "ljlsj" + "_" + i + ", @sub_" + "ljshuliang" + "_" + i + ", @sub_" + "ljzje" + "_" + i + ", @sub_" + "ljbaoxiujiezhi" + "_" + i + ", @sub_" + "ljpihao" + "_" + i + ", @sub_" + "ljbeizhu" + "_" + i + " )";
+            param.Add("@sub_" + "ljchukukuwei" + "_" + i, subdt_lj.Rows[i]["出库库位"].ToString());
+
+            string INSERTsql = "INSERT INTO ZZZ_FWBG_lingjian (  ljid, lj_GID, lj_LID, ljmingcheng, ljxinghao, ljdanwei, ljsjsj, ljlsj, ljshuliang, ljzje, ljbaoxiujiezhi, ljpihao,   ljbeizhu,ljchukukuwei) VALUES(@sub_" + "ljid" + "_" + i + ", @sub_MainID, @sub_" + "lj_LID" + "_" + i + ", @sub_" + "ljmingcheng" + "_" + i + ", @sub_" + "ljxinghao" + "_" + i + ", @sub_" + "ljdanwei" + "_" + i + ", @sub_" + "ljsjsj" + "_" + i + ", @sub_" + "ljlsj" + "_" + i + ", @sub_" + "ljshuliang" + "_" + i + ", @sub_" + "ljzje" + "_" + i + ", @sub_" + "ljbaoxiujiezhi" + "_" + i + ", @sub_" + "ljpihao" + "_" + i + ", @sub_" + "ljbeizhu" + "_" + i + ", @sub_" + "ljchukukuwei" + "_" + i + " )";
             alsql.Add(INSERTsql);
         }
 
@@ -508,8 +509,11 @@ public class NoReSet_160427000035
                 //如果结单，并且审核通过了，反写序列号表安装日期
                 alsql.Add("UPDATE ZZZ_WFSB SET Sanzhuangriqi=getdate() where SID in (select  sb_SID from ZZZ_FWBG_shebei where sb_GID=@GID ) and (select Gjiedan from ZZZ_FWBG where GID=@GID) = '是' ");
 
-                //如果结单，并且审核通过了，减少个人库存(怎么对应个人库存待研究，调取变更库存的sql语句)
-
+                //如果结单，并且审核通过了，减少个人库存
+                ClassKuCun CKC = new ClassKuCun();
+                ArrayList al_kc = CKC.get_sql_str_fwbg(ht_forUI["idforedit"].ToString(), "标准");
+                al_kc.RemoveAt(0);
+                alsql.AddRange(al_kc);
             }
         }
 
@@ -525,7 +529,7 @@ public class NoReSet_160427000035
             dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
             if (ht_forUI["yc_czlx"].ToString() == "shenhe")
             {
-                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "审核或驳回完成！";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = ht_forUI["Gshenpixuanxiang"].ToString()+"--完成！";
             }
             else
             {

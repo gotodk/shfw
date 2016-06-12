@@ -85,6 +85,12 @@ public class ClassKuCun
     }
 
 
+    /// <summary>
+    /// 通过调整单表出库
+    /// </summary>
+    /// <param name="rid"></param>
+    /// <param name="sp"></param>
+    /// <returns></returns>
     public ArrayList get_sql_str(string rid,string sp)
     {
         ArrayList alre = new ArrayList();
@@ -126,6 +132,59 @@ public class ClassKuCun
         {
             alre[0] = "err";
             alre[1] = "获取错误z";
+            return alre;
+        }
+    }
+
+
+
+    /// <summary>
+    /// 通过服务报告表出库
+    /// </summary>
+    /// <param name="rid"></param>
+    /// <param name="sp"></param>
+    /// <returns></returns>
+    public ArrayList get_sql_str_fwbg(string GID, string sp)
+    {
+        ArrayList alre = new ArrayList();
+        alre.Add("err"); //默认提示
+        alre.Add("");
+
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+        Hashtable return_ht = new Hashtable();
+        Hashtable param = new Hashtable();
+        param.Add("@GID", GID);
+
+
+        return_ht = I_DBL.RunParam_SQL("select * from ZZZ_FWBG_lingjian where  lj_GID=@GID  and (select Gjiedan from ZZZ_FWBG where GID=@GID) = '是' ", "数据记录", param);
+
+        if ((bool)(return_ht["return_float"]))
+        {
+            DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+
+            for (int i = 0; i < redb.Rows.Count; i++)
+            {
+                ArrayList al = get_sql_str(redb.Rows[i]["ljchukukuwei"].ToString(), "", redb.Rows[i]["lj_LID"].ToString(), redb.Rows[i]["ljpihao"].ToString(), redb.Rows[i]["ljshuliang"].ToString(), redb.Rows[i]["ljdanwei"].ToString(), sp);
+                if (al[0].ToString() == "ok")
+                {
+                    alre[0] = "ok";
+                    al.RemoveAt(0);
+                    alre.AddRange(al);
+                }
+                else
+                {
+                    alre[0] = al[0].ToString();
+                    alre[1] = al[1].ToString();
+                    return alre;
+                }
+            }
+            return alre;
+
+        }
+        else
+        {
+            alre[0] = "err";
+            alre[1] = "获取错误f";
             return alre;
         }
     }

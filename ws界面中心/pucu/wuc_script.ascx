@@ -276,6 +276,7 @@
                 return false;
             }
 
+            var tijiaoanniu_str_old = $(t_buttonid).text();
 
             //验证
             if (!$(t_formid).valid()) {
@@ -350,9 +351,9 @@
                     //取消等待显示，开放禁用区域
                     gogoajax1_CanRun = true;
                     $(t_buttonid).removeClass("disabled");
-                    $(t_buttonid).html("<i class='ace-icon fa fa-check bigger-110'></i>保存");
+                    $(t_buttonid).html("<i class='ace-icon fa fa-check bigger-110'></i>" + tijiaoanniu_str_old);
                     $(t_buttonid+"_top").removeClass("disabled");
-                    $(t_buttonid + "_top").html("<i class='ace-icon fa fa-floppy-o bigger-120 blue'></i>保存");
+                    $(t_buttonid + "_top").html("<i class='ace-icon fa fa-floppy-o bigger-120 blue'></i>" + tijiaoanniu_str_old);
                 }, 1500)
 
 

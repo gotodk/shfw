@@ -43,7 +43,7 @@ public class NoReSetDEL_160602000051
         }
 
 
-        //存在有效目标才删除
+        //存在有效目标才更新
         if (ht_forUI.Contains("zdyname") && ht_forUI["xuanzhongzhi"].ToString() != "")
         {
             if (ht_forUI["xuanzhongzhi"].ToString().Trim() == "")
@@ -60,7 +60,7 @@ public class NoReSetDEL_160602000051
             ArrayList alsql = new ArrayList();
 
 
-            //删除数据表里的数据 
+            //更新数据表里的数据 
             string[] ids = ht_forUI["xuanzhongzhi"].ToString().Split(',');
             param.Add("@rshr", ht_forUI["yhbsp_session_uer_UAid"].ToString());
             for (int d = 0; d < ids.Length; d++)

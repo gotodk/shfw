@@ -37,7 +37,10 @@
                      }
                      if (yc_czlx == "shenhe")
                      {
-
+                         $("#addbutton1_top").html($("#addbutton1_top").html().replace("保存", "确定"));
+                         $("#addbutton1").html($("#addbutton1").html().replace("保存", "确定"));
+ 
+                      
                      }
                      if (yc_czlx == "chakan")
                      {
@@ -105,6 +108,11 @@
                      var khbh_str = $("#G_YYID").val();
                      $("#searchopenyhbspgogo_subtcid_sb_SID").attr("teshuwhere", "S_YYID='" + khbh_str + "'");
 
+
+                     //弹窗特殊条件，隐藏的弹窗的条件
+                     var userlogin = "<%=UserSession.唯一键%>";
+                     $("#searchopenyhbspgogo_subtcid_lj_LID").attr("teshuwhere", "dpname=(select xingming from  ZZZ_userinfo where UAid='" + userlogin + "')");
+                         
  
                  }, 500);
 
@@ -239,6 +247,11 @@
                                  if (arr_z[0] == "[批号") {
                                      //离弹窗最近的特定name的输入框  
                                      var zj = $(dfx_str_subljbh).closest("tr").find("input[name='批号']");
+                                     zj.val($.trim(arr_z[1]).replace("]", ""));
+                                 }
+                                 if (arr_z[0] == "[库位") {
+                                     //离弹窗最近的特定name的输入框  
+                                     var zj = $(dfx_str_subljbh).closest("tr").find("input[name='出库库位']");
                                      zj.val($.trim(arr_z[1]).replace("]", ""));
                                  }
                              }
