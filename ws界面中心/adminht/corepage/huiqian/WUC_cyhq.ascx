@@ -47,7 +47,7 @@
 																<dd><%=dsr.Tables["数据记录"].Rows[0]["Qjiedanren_name"].ToString() %>[<%=dsr.Tables["数据记录"].Rows[0]["Qjiedanren_bumen"].ToString() %>]<input type="text"  class="hidden" id="h_jdr" value="<%=dsr.Tables["数据记录"].Rows[0]["Qjiedanren"].ToString() %>" />
 																</dd>
                                                                     <dt>发起时间：</dt>
-																<dd><%=dsr.Tables["数据记录"].Rows[0]["Qaddtime"].ToString() %></dd>
+																<dd><%=((DateTime)(dsr.Tables["数据记录"].Rows[0]["Qaddtime"])).ToString("yyyy-MM-dd hh:mm:ss") %></dd>
 
                                                                     <dt>附件：</dt>
 																<dd><a target="_blank" href="/st.aspx?idforedit=<%=dsr.Tables["数据记录"].Rows[0]["QID"].ToString() %>&leixing=0&mod=huiqian">点击查看附件</a></dd>
@@ -118,8 +118,12 @@
 													<!-- #section:pages/dashboard.conversations -->
 													<div class="dialogs "> 
 													 
-                                                        <%for (int i = 0; i < dsr.Tables["Table1"].Rows.Count; i++)
-                                                            { %>
+                                                        <%
+                                                            string ymtime = "";
+                                                            for (int i = 0; i < dsr.Tables["Table1"].Rows.Count; i++)
+                                                            {
+                                                                ymtime = ymtime + dsr.Tables["Table1"].Rows[i]["YJqsshijian"].ToString() + ",";
+                                                                %>
 														<div class="itemdiv dialogdiv">
 															<div class="user">
 																<img  src="<%=dsr.Tables["Table1"].Rows[i]["utouxiang"].ToString() %>">
@@ -160,7 +164,7 @@
 														</div>
  
                                                         <%} %>
-													 
+													
                                                         </div>
 													<!-- /section:pages/dashboard.conversations -->
 												<%-- <div class="input-group">
@@ -197,7 +201,7 @@
 
 
 
-
+ <input type="hidden" id="ymtime_hidden" name="ymtime_hidden" value="<%=ymtime %>" />
 
 
  

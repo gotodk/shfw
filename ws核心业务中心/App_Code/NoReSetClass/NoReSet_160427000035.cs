@@ -509,6 +509,7 @@ public class NoReSet_160427000035
                 alsql.Add("UPDATE ZZZ_WFSB SET Sanzhuangriqi=getdate() where SID in (select  sb_SID from ZZZ_FWBG_shebei where sb_GID=@GID ) and (select Gjiedan from ZZZ_FWBG where GID=@GID) = '是' ");
 
                 //如果结单，并且审核通过了，减少个人库存(怎么对应个人库存待研究，调取变更库存的sql语句)
+
             }
         }
 

@@ -34,8 +34,46 @@ public class NoReSet_160512000043
     }
 
 
-  
- 
+
+    /// <summary>
+    /// 获取当前数据库内容，用于时间对比字符串
+    /// </summary>
+    /// <param name="parameter_forUI">前台表单传来的参数</param>
+    /// <returns></returns>
+    private string get_dbtime(string QID)
+    {
+        string dbtime = "";
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+        Hashtable return_ht = new Hashtable();
+        Hashtable param = new Hashtable();
+        param.Add("@QID", QID);
+
+        return_ht = I_DBL.RunParam_SQL("select * from View_ZZZ_HQ_YJ_ex where YJ_QID = @QID order by YJlysj asc", "数据记录", param);
+
+        if ((bool)(return_ht["return_float"]))
+        {
+            DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+
+            for (int i = 0; i < redb.Rows.Count; i++)
+            {
+                dbtime = dbtime + redb.Rows[i]["YJqsshijian"].ToString() + ",";
+            }
+            return dbtime;
+
+        }
+        else
+        {
+            return "";
+        }
+
+
+
+    }
+
+
+
+
+
     /// <summary>
     /// 增加数据
     /// </summary>
@@ -123,6 +161,17 @@ public class NoReSet_160512000043
         //更新会签单状态,如果是结单人才更新
         if (ht_forUI.Contains("Qzhuangtai"))
         {
+            //会签结单时， 如果界面时间跟数据库时间有差异， 提示意见已变化。。
+            if (ht_forUI["Qzhuangtai"].ToString() == "已结单")
+            {
+                if (get_dbtime(ht_forUI["idforedit"].ToString()) != ht_forUI["ymtime_hidden"].ToString())
+                {
+                    dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                    dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "结单失败，打开页面后，签署意见有变更，请刷新重新审阅！";
+                    return dsreturn;
+                }
+            }
+
             param.Add("@Qzhuangtai", ht_forUI["Qzhuangtai"].ToString());
             alsql.Add("UPDATE ZZZ_HQ SET  Qzhuangtai=@Qzhuangtai   where QID=@YJ_QID ");
         }
