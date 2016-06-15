@@ -64,6 +64,15 @@
 
                                         </div>
                                         <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right" for="ee_m_url_formenu_g">高亮跟踪：</label>
+
+                                            <div class="col-sm-9">
+                                                <asp:TextBox ID="ee_m_url_formenu_g" runat="server" data-rel="tooltip" placeholder="填写高亮等效地址关键字…" title="高亮等效地址关键字，★隔开" CssClass="col-xs-12 col-sm-9 "></asp:TextBox>
+                          
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
                                             <label class="col-sm-3 control-label no-padding-right" for="ee_m_tip">tip提示：</label>
 
                                             <div class="col-sm-9">

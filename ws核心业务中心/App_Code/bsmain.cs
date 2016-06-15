@@ -456,7 +456,7 @@ public class bsmain : System.Web.Services.WebService
         {
             DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
 
-            if (redb.Rows.Count < 1)
+            if (ht_forUI["hqlx"].ToString() == "one" && redb.Rows.Count < 1)
             {
                 dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
                 dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "没有找到指定数据!";

@@ -18,6 +18,7 @@
                 <xs:element name="m_tag" type="xs:string" minOccurs="0" />
                 <xs:element name="m_ico" type="xs:string" minOccurs="0" />
                 <xs:element name="m_show" type="xs:string" minOccurs="0" />
+                <xs:element name="m_url_formenu_g" type="xs:string" minOccurs="0" />
                 <xs:element name="SortNameTree" type="xs:string" minOccurs="0" />
                 <xs:element name="SortMoveUp" type="xs:int" minOccurs="0" />
                 <xs:element name="SortMoveDown" type="xs:int" minOccurs="0" />
@@ -40,6 +41,7 @@
     <m_tag />
     <m_ico>fa-tachometer</m_ico>
     <m_show>不隐藏</m_show>
+    <m_url_formenu_g />
     <SortNameTree>├仪表盘</SortNameTree>
     <SortMoveUp>0</SortMoveUp>
     <SortMoveDown>-13</SortMoveDown>
@@ -120,6 +122,7 @@
     <m_tag />
     <m_ico />
     <m_show>隐藏</m_show>
+    <m_url_formenu_g />
     <SortNameTree>│├轨迹浏览</SortNameTree>
     <SortMoveUp>3</SortMoveUp>
     <SortMoveDown>-1</SortMoveDown>
@@ -152,6 +155,7 @@
     <m_tag />
     <m_ico />
     <m_show>不隐藏</m_show>
+    <m_url_formenu_g>/adminht/corepage/qiandao/edit_dd.aspx</m_url_formenu_g>
     <SortNameTree>││├特定地点</SortNameTree>
     <SortMoveUp>0</SortMoveUp>
     <SortMoveDown>-1</SortMoveDown>
@@ -324,6 +328,7 @@
     <m_tag />
     <m_ico />
     <m_show>不隐藏</m_show>
+    <m_url_formenu_g>/adminht/corepage/fwbg/edit_sqddd.aspx</m_url_formenu_g>
     <SortNameTree>│├申请调度列表</SortNameTree>
     <SortMoveUp>3</SortMoveUp>
     <SortMoveDown>-3</SortMoveDown>
@@ -404,6 +409,7 @@
     <m_tag />
     <m_ico />
     <m_show>不隐藏</m_show>
+    <m_url_formenu_g>/adminht/corepage/lpjgl/edit_record_shenqing.aspx</m_url_formenu_g>
     <SortNameTree>│├零配件申请</SortNameTree>
     <SortMoveUp>0</SortMoveUp>
     <SortMoveDown>-8</SortMoveDown>
@@ -420,6 +426,7 @@
     <m_tag />
     <m_ico />
     <m_show>不隐藏</m_show>
+    <m_url_formenu_g>/adminht/corepage/lpjgl/edit_record_diaobo.aspx</m_url_formenu_g>
     <SortNameTree>│├零配件调拨</SortNameTree>
     <SortMoveUp>1</SortMoveUp>
     <SortMoveDown>-7</SortMoveDown>
@@ -436,6 +443,7 @@
     <m_tag />
     <m_ico />
     <m_show>不隐藏</m_show>
+    <m_url_formenu_g>/adminht/corepage/lpjgl/edit_record_pub.aspx.*ywlx=shenhe</m_url_formenu_g>
     <SortNameTree>│├零配件审核</SortNameTree>
     <SortMoveUp>2</SortMoveUp>
     <SortMoveDown>-6</SortMoveDown>
@@ -452,6 +460,7 @@
     <m_tag />
     <m_ico />
     <m_show>不隐藏</m_show>
+    <m_url_formenu_g>/adminht/corepage/lpjgl/edit_record_pub.aspx.*ywlx=fahuo</m_url_formenu_g>
     <SortNameTree>│├零配件发货</SortNameTree>
     <SortMoveUp>3</SortMoveUp>
     <SortMoveDown>-5</SortMoveDown>
@@ -608,6 +617,7 @@
     <m_tag />
     <m_ico>fa-cubes</m_ico>
     <m_show>不隐藏</m_show>
+    <m_url_formenu_g>/adminht/corepage/bas/edit_htgl.aspx</m_url_formenu_g>
     <SortNameTree>├合同管理</SortNameTree>
     <SortMoveUp>5</SortMoveUp>
     <SortMoveDown>-8</SortMoveDown>
@@ -640,6 +650,7 @@
     <m_tag />
     <m_ico />
     <m_show>不隐藏</m_show>
+    <m_url_formenu_g>/adminht/corepage/fanchang/fc_shenqing.aspx</m_url_formenu_g>
     <SortNameTree>│├返厂申请</SortNameTree>
     <SortMoveUp>0</SortMoveUp>
     <SortMoveDown>-4</SortMoveDown>
@@ -656,6 +667,7 @@
     <m_tag />
     <m_ico />
     <m_show>不隐藏</m_show>
+    <m_url_formenu_g>/adminht/corepage/fanchang/fc_shenqing.aspx.*ywlx=shenhe</m_url_formenu_g>
     <SortNameTree>│├返厂审核</SortNameTree>
     <SortMoveUp>1</SortMoveUp>
     <SortMoveDown>-3</SortMoveDown>
@@ -672,6 +684,7 @@
     <m_tag />
     <m_ico />
     <m_show>不隐藏</m_show>
+    <m_url_formenu_g>/adminht/corepage/fanchang/fc_shenqing.aspx.*ywlx=fahuo</m_url_formenu_g>
     <SortNameTree>│├客户发货</SortNameTree>
     <SortMoveUp>2</SortMoveUp>
     <SortMoveDown>-2</SortMoveDown>
@@ -800,6 +813,7 @@
     <m_tag />
     <m_ico>fa-share-alt </m_ico>
     <m_show>不隐藏</m_show>
+    <m_url_formenu_g>/adminht/corepage/bas/edit_zhishi.aspx</m_url_formenu_g>
     <SortNameTree>├知识管理</SortNameTree>
     <SortMoveUp>8</SortMoveUp>
     <SortMoveDown>-5</SortMoveDown>
@@ -960,6 +974,7 @@
     <m_tag />
     <m_ico />
     <m_show>不隐藏</m_show>
+    <m_url_formenu_g>/adminht/corepage/bas/edit_khda.aspx</m_url_formenu_g>
     <SortNameTree>│├客户信息维护</SortNameTree>
     <SortMoveUp>0</SortMoveUp>
     <SortMoveDown>-9</SortMoveDown>
@@ -976,6 +991,7 @@
     <m_tag />
     <m_ico />
     <m_show>不隐藏</m_show>
+    <m_url_formenu_g>/adminht/corepage/bas/edit_sbbase.aspx</m_url_formenu_g>
     <SortNameTree>│├设备信息维护</SortNameTree>
     <SortMoveUp>1</SortMoveUp>
     <SortMoveDown>-8</SortMoveDown>
@@ -992,6 +1008,7 @@
     <m_tag />
     <m_ico />
     <m_show>不隐藏</m_show>
+    <m_url_formenu_g>/adminht/corepage/bas/edit_wfsb.aspx</m_url_formenu_g>
     <SortNameTree>│├序列号信息维护</SortNameTree>
     <SortMoveUp>2</SortMoveUp>
     <SortMoveDown>-7</SortMoveDown>
@@ -1008,6 +1025,7 @@
     <m_tag />
     <m_ico />
     <m_show>不隐藏</m_show>
+    <m_url_formenu_g>/adminht/corepage/bas/edit_wflj.aspx</m_url_formenu_g>
     <SortNameTree>│├零配件信息维护</SortNameTree>
     <SortMoveUp>3</SortMoveUp>
     <SortMoveDown>-6</SortMoveDown>
@@ -1024,6 +1042,7 @@
     <m_tag />
     <m_ico />
     <m_show>不隐藏</m_show>
+    <m_url_formenu_g>/adminht/corepage/bas/edit_warehouse.aspx</m_url_formenu_g>
     <SortNameTree>│├仓库维护</SortNameTree>
     <SortMoveUp>4</SortMoveUp>
     <SortMoveDown>-5</SortMoveDown>
@@ -1056,6 +1075,7 @@
     <m_tag />
     <m_ico />
     <m_show>不隐藏</m_show>
+    <m_url_formenu_g>/adminht/corepage/bas/edit_userinfo.aspx</m_url_formenu_g>
     <SortNameTree>│├员工信息维护</SortNameTree>
     <SortMoveUp>6</SortMoveUp>
     <SortMoveDown>-3</SortMoveDown>
@@ -1072,6 +1092,7 @@
     <m_tag />
     <m_ico />
     <m_show>不隐藏</m_show>
+    <m_url_formenu_g>/adminht/corepage/bas/edit_glkh.aspx</m_url_formenu_g>
     <SortNameTree>│├客户员工匹配</SortNameTree>
     <SortMoveUp>7</SortMoveUp>
     <SortMoveDown>-2</SortMoveDown>
@@ -1088,6 +1109,7 @@
     <m_tag />
     <m_ico />
     <m_show>不隐藏</m_show>
+    <m_url_formenu_g>/adminht/corepage/bas/edit_yzcw.aspx</m_url_formenu_g>
     <SortNameTree>│├维修错误预制</SortNameTree>
     <SortMoveUp>8</SortMoveUp>
     <SortMoveDown>-1</SortMoveDown>
@@ -1456,6 +1478,7 @@
     <m_tag />
     <m_ico />
     <m_show>不隐藏</m_show>
+    <m_url_formenu_g>/adminht/baseset/addnewbiaodan_default.aspx★/adminht/baseset/edit_tables_pz.aspx.*pzid=sys_editadd_FUP_FormsMainInfo</m_url_formenu_g>
     <SortNameTree>││├浏览表单</SortNameTree>
     <SortMoveUp>0</SortMoveUp>
     <SortMoveDown>-4</SortMoveDown>
@@ -1472,6 +1495,7 @@
     <m_tag />
     <m_ico />
     <m_show>不隐藏</m_show>
+    <m_url_formenu_g>/adminht/baseset/edit_tables_pz.aspx.*pzid=sys_editadd_FUP_FormsSubInfo</m_url_formenu_g>
     <SortNameTree>││├浏览表单字段</SortNameTree>
     <SortMoveUp>1</SortMoveUp>
     <SortMoveDown>-3</SortMoveDown>
@@ -1488,6 +1512,7 @@
     <m_tag />
     <m_ico />
     <m_show>不隐藏</m_show>
+    <m_url_formenu_g>/adminht/baseset/addnewtianchuang_default.aspx★/adminht/baseset/edit_tables_pz.aspx.*pzid=sys_editadd_FUP_FormsSubDialog</m_url_formenu_g>
     <SortNameTree>││├浏览表单弹窗</SortNameTree>
     <SortMoveUp>2</SortMoveUp>
     <SortMoveDown>-2</SortMoveDown>
@@ -1504,6 +1529,7 @@
     <m_tag />
     <m_ico />
     <m_show>不隐藏</m_show>
+    <m_url_formenu_g>/adminht/baseset/addnewlist_default.aspx★/adminht/baseset/edit_tables_pz.aspx.*pzid=sys_editadd_FUP_FormsList</m_url_formenu_g>
     <SortNameTree>││├浏览通用列表</SortNameTree>
     <SortMoveUp>3</SortMoveUp>
     <SortMoveDown>-1</SortMoveDown>
@@ -1520,6 +1546,7 @@
     <m_tag />
     <m_ico />
     <m_show>不隐藏</m_show>
+    <m_url_formenu_g>/adminht/baseset/edit_tables_pz.aspx.*pzid=sys_editadd_FUP_FormsList_field</m_url_formenu_g>
     <SortNameTree>││└浏览通用列表字段</SortNameTree>
     <SortMoveUp>4</SortMoveUp>
     <SortMoveDown>0</SortMoveDown>

@@ -102,6 +102,7 @@ public partial class auth_menu_edit : System.Web.UI.Page
                     sh_SortName.Text = dsD.Tables["数据记录"].Rows[0]["SortName"].ToString();
 
                     ee_m_url.Text = dsD.Tables["数据记录"].Rows[0]["m_url"].ToString();
+                    ee_m_url_formenu_g.Text = dsD.Tables["数据记录"].Rows[0]["m_url_formenu_g"].ToString();
                     ee_m_tip.Text = dsD.Tables["数据记录"].Rows[0]["m_tip"].ToString();
                     ee_m_tag.Text = dsD.Tables["数据记录"].Rows[0]["m_tag"].ToString();
                     ee_m_ico.Text = dsD.Tables["数据记录"].Rows[0]["m_ico"].ToString();
@@ -308,6 +309,7 @@ public partial class auth_menu_edit : System.Web.UI.Page
         HTforParameter["move_SortParentID"] = movenewsid.Text;
         HTforParameter["ee_SortName"] = ee_SortName.Text;
         HTforParameter["ee_m_url"] = ee_m_url.Text;
+        HTforParameter["ee_m_url_formenu_g"] = ee_m_url_formenu_g.Text;
         HTforParameter["ee_m_tip"] = ee_m_tip.Text;
         HTforParameter["ee_m_tag"] = ee_m_tag.Text;
         HTforParameter["ee_m_ico"] = ee_m_ico.Text;

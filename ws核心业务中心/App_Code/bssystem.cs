@@ -829,6 +829,11 @@ public class bssystem : System.Web.Services.WebService
                 {
                     //一般菜单
                     putin_ht["@m_url"] = dt_request.Rows[0]["ee_m_url"].ToString();
+                    if(dt_request.Columns.Contains("ee_m_url_formenu_g"))
+                    {
+                        putin_ht["@m_url_formenu_g"] = dt_request.Rows[0]["ee_m_url_formenu_g"].ToString();
+                    }
+                   
                     putin_ht["@m_tip"] = dt_request.Rows[0]["ee_m_tip"].ToString();
                     putin_ht["@m_tag"] = dt_request.Rows[0]["ee_m_tag"].ToString();
                     putin_ht["@m_ico"] = dt_request.Rows[0]["ee_m_ico"].ToString();
@@ -842,7 +847,15 @@ public class bssystem : System.Web.Services.WebService
                     }
 
                     ArrayList alsql = new ArrayList();
-                    alsql.Add("UPDATE " + dt_request.Rows[0]["dbtbname"].ToString() + " SET  SortName=@SortName ,m_url=@m_url,m_tip=@m_tip,m_tag=@m_tag,m_ico=@m_ico,m_show=@m_show   where SortID=@SortID");
+                    if (dt_request.Columns.Contains("ee_m_url_formenu_g"))
+                    {
+                        alsql.Add("UPDATE " + dt_request.Rows[0]["dbtbname"].ToString() + " SET  SortName=@SortName ,m_url=@m_url,m_url_formenu_g=@m_url_formenu_g,m_tip=@m_tip,m_tag=@m_tag,m_ico=@m_ico,m_show=@m_show   where SortID=@SortID");
+                    }
+                    else
+                    {
+                        alsql.Add("UPDATE " + dt_request.Rows[0]["dbtbname"].ToString() + " SET  SortName=@SortName ,m_url=@m_url,m_tip=@m_tip,m_tag=@m_tag,m_ico=@m_ico,m_show=@m_show   where SortID=@SortID");
+                    }
+                    
                     I_DBL.RunParam_SQL(alsql, putin_ht);
                 }
                 break;

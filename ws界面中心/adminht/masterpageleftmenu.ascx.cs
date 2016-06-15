@@ -71,6 +71,11 @@ public partial class masterpageleftmenu : System.Web.UI.UserControl
     /// </summary>
     string del_str_parents = "";
 
+    /// <summary>
+    /// 防止重复匹配
+    /// </summary>
+    bool zppyc = true;
+
     protected void Page_Load(object sender, EventArgs e)
     {
          
@@ -249,11 +254,40 @@ public partial class masterpageleftmenu : System.Web.UI.UserControl
             if (dr_nextnotesCount < 1)
             {
                 css_open = "";
-                if (DRarr[t]["m_url"].ToString().Trim() != "" && Request.Url.ToString().IndexOf(DRarr[t]["m_url"].ToString()) >= 0)
+
+                //是否存在匹配的高亮跟踪地址
+                bool H_M = false;
+                string[] formenu = DRarr[t]["m_url_formenu_g"].ToString().Split('★');
+
+           
+                for (int m = 0; m < formenu.Length; m++)
+                {
+                    string Pattern = formenu[m].Trim();
+                    Regex r = new Regex(Pattern,RegexOptions.IgnoreCase);
+                    string source = Request.Url.ToString();
+                    Match PPP = r.Match(source);
+
+                    if (formenu[m].Trim() != "" && PPP.Success)
+                    {
+                        H_M = true;
+                    }
+                }
+
+                ////尝试匹配来源地址,只匹配一次
+                if (DRarr[t]["m_url"].ToString().Trim() != "" && Request.Url.ToString().IndexOf(DRarr[t]["m_url"].ToString()) < 0 && !H_M)
+                {
+                    if (Request.UrlReferrer != null && Request.UrlReferrer.ToString().Trim() != "" && Request.UrlReferrer.ToString().IndexOf(DRarr[t]["m_url"].ToString()) >= 0 && zppyc)
+                    {
+                        H_M = true;
+                    }
+                }
+
+                if (DRarr[t]["m_url"].ToString().Trim() != "" && (Request.Url.ToString().IndexOf(DRarr[t]["m_url"].ToString()) >= 0 || H_M))
                 {
                     //发现这个项目没有子菜单并且链接跟浏览器地址相符，记录下这个有效的每层父级追溯
                     s_daohang_ID = next_allparentsID;
                     s_daohang_name = next_allparentsName;
+                    zppyc = false;
                 }
           
             }
