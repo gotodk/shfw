@@ -29,50 +29,12 @@
     <script type="text/javascript">
              jQuery(function ($) {
                   
-                 function bianjicaogao() {
-                     $("#rbeizhu").removeAttr("readonly");
-                     $("#rshr_name").closest(".form-group").hide();
-                     $("#rshenheshijian").closest(".form-group").hide();
-                     $("#rwuliudan").closest(".form-group").hide();
-                     $("#rwuliugongsi").closest(".form-group").hide();
-                     $("#rfahuoren_name").closest(".form-group").hide();
-                     $("#rfahuoshijian").closest(".form-group").hide();
-                     $("#rjisongdizhi").closest(".form-group").hide();
-                     $("#rlianxifangshi").closest(".form-group").hide();
-                     $("#rshoujianren").closest(".form-group").hide();
-                     $("#rshoujianshijian").closest(".form-group").hide();
-                     $("#rqurenren_name").closest(".form-group").hide();
-                     $("#rzhuangtai").closest(".form-group").hide();
-                     $("input[name='shenhe_yincang']").closest(".form-group").hide();
-                     $("hr").hide();
-                 }
 
-                 //发货处理
-                 function fahuo() {
-                     
-                 
-                     $("#rwuliudan").removeAttr("readonly");
-                     $("#rwuliugongsi").removeAttr("readonly");
- 
-                     $("#rfahuoren_name").closest(".form-group").hide();
-                     $("#rfahuoshijian").closest(".form-group").hide();
-
-                     $("#rjisongdizhi").removeAttr("readonly");
-                     $("#rlianxifangshi").removeAttr("readonly");
-                     $("#rshoujianren").removeAttr("readonly");
-
-                    
-                     $("#rzhuangtai").closest(".form-group").hide();
-                     $("input[name='shenhe_yincang']").closest(".form-group").hide();
-
-                 }
 
                  //把业务类型参数放到隐藏控件里面
                  //
                  window.setInterval(function () {
-                     $("#ywlx_yincang").val(getUrlParam("ywlx"));
- 
-                     $("#ywlx_yincang").closest(".form-group").hide();
+
 
                      //设置子表输入框只读
                      $("#gview_grid-table-subtable-160602000842").find("input[id^='subtcid_']").attr("readonly", "readonly");
@@ -89,29 +51,11 @@
 
                  if (getUrlParam("fff") == "1") {
 
-                     //编辑草稿时候的处理
-                     if (getUrlParam("ywlx") == "bianjicaogao") {
-                         bianjicaogao();
-                     }
-                     //编辑发货申请时的处理
-                     if (getUrlParam("ywlx") == "fahuo") {
-
-                         fahuo();
-                     }
-                     //仅查看时的处理
-                     if (getUrlParam("ywlx") == "chakan") {
-                         $("#addbutton1_top").attr({ "disabled": "disabled" });
-                         $("#addbutton1").attr({ "disabled": "disabled" });
-                         $("#reloaddb").attr({ "disabled": "disabled" });
-
-                         $("input[name='shenhe_yincang']").closest(".form-group").hide();
-                     }
 
 
                  }
                  else {
-                     //新增申请隐藏一些数据
-                     //bianjicaogao();
+                
 
                  }
 
@@ -194,6 +138,43 @@
                          oldzhi_subru = $(dfx_str_subru).text();
                      }
                  }, 500);
+
+
+
+
+
+
+
+                 //入库主表弹窗
+
+                 var dfx_str_subruzhubiao = "#show_searchopenyhbspgogo_yincangkucun";
+                 var oldzhi_subruzhubiao = $(dfx_str_subruzhubiao).text();
+
+                 var jiancha_subruzhubiao = window.setInterval(function () {
+
+
+
+                     //带入字段
+                     if ($(dfx_str_subruzhubiao).text() != oldzhi_subruzhubiao) {
+                         var re = /\[.*?\]/ig;
+                         var arr = $(dfx_str_subruzhubiao).text().match(re);
+
+                         if (arr != null) {//如果能匹配成功即arr数组不为空，循环输出结果
+                             for (var i = 0; i < arr.length; i++) {
+                                 var arr_z = arr[i].split(':');
+                                 if (arr_z[0] == "[库位名称") {
+                                     $("#t_rukukuwei").val($.trim(arr_z[1]).replace("]", ""));
+                                 }
+                                 if (arr_z[0] == "[仓库名称") {
+                                     $("#t_rukucangku").val($.trim(arr_z[1]).replace("]", ""));
+                                 }
+                             }
+                         }
+
+                         oldzhi_subruzhubiao = $(dfx_str_subruzhubiao).text();
+                     }
+                 }, 500);
+
 
 
 

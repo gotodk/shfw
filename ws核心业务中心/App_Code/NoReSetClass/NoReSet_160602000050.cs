@@ -94,8 +94,18 @@ public class NoReSet_160602000050
             string ruku_kw = "";
             if (ht_forUI["rdb"].ToString() == "调拨单" || ht_forUI["rdb"].ToString() == "调整单")
             {
-                chuku_kw = subdt.Rows[i]["出库库位"].ToString();
-                ruku_kw = subdt.Rows[i]["入库库位"].ToString();
+                if (1 == 1)
+                {
+                    chuku_kw = ht_forUI["chukuwei"].ToString();
+                    ruku_kw = ht_forUI["yincangkucun"].ToString();
+                }
+                else
+                {
+                    chuku_kw = subdt.Rows[i]["出库库位"].ToString();
+                    ruku_kw = subdt.Rows[i]["入库库位"].ToString();
+                }
+
+                
             }
             if (ht_forUI["rdb"].ToString() == "申请单")
             {
@@ -176,6 +186,7 @@ public class NoReSet_160602000050
         param.Add("@rid", ht_forUI["idforedit"].ToString());
 
         return_ht = I_DBL.RunParam_SQL("select  top 1 *  from View_ZZZ_C_record_ex where rid=@rid", "数据记录", param);
+   
 
         if ((bool)(return_ht["return_float"]))
         {

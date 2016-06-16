@@ -120,121 +120,69 @@ public class NoReSet_160602000052
         param.Add("@rid", ht_forUI["idforedit"].ToString());
 
 
-        if (ht_forUI["ywlx_yincang"].ToString() == "bianjicaogao")
+        if (check_zhuangtai(ht_forUI["idforedit"].ToString().Trim()) != "草稿")
         {
-
-            if (check_zhuangtai(ht_forUI["idforedit"].ToString().Trim()) != "草稿")
-            {
-                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
-                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "保存失败，只有草稿状态才允许编辑。";
-                return dsreturn;
-            }
-
-            //只有草稿可以编辑
-
-            param.Add("@rbeizhu", ht_forUI["rbeizhu"].ToString());
-            alsql.Add("UPDATE  ZZZ_C_record SET rbeizhu=@rbeizhu  where rid =@rid ");
-
-
-            //遍历子表，先删除，再插入，已有主键的不重新生成。
-            string zibiao_gts_id = "grid-table-subtable-160602000842";
-            DataTable subdt = jsontodatatable.ToDataTable(ht_forUI[zibiao_gts_id].ToString());
-            //必须验证js脚本获取的数量和c#反序列化获取的数量一致才能继续。防止出错
-            if (ht_forUI[zibiao_gts_id + "_fcjsq"].ToString() != subdt.Rows.Count.ToString())
-            {
-                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
-                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "子表数据量与获取量不相符，系统出现问题。";
-                return dsreturn;
-            }
-            param.Add("@sub_" + "MainID", ht_forUI["idforedit"].ToString()); //隶属主表id
-            alsql.Add("delete ZZZ_C_record_sub where  rid = @sub_" + "MainID");
-            for (int i = 0; i < subdt.Rows.Count; i++)
-            {
-                param.Add("@sub_" + "subid" + "_" + i, CombGuid.GetMewIdFormSequence("ZZZ_C_record_sub"));
-
-                string chuku_kw = "";
-                string ruku_kw = "";
-                if (ht_forUI["rdb"].ToString() == "调拨单" || ht_forUI["rdb"].ToString() == "调整单")
-                {
-                    chuku_kw = subdt.Rows[i]["出库库位"].ToString();
-                    ruku_kw = subdt.Rows[i]["入库库位"].ToString();
-                }
-                if (ht_forUI["rdb"].ToString() == "申请单")
-                {
-                    chuku_kw = "";
-                    ruku_kw = subdt.Rows[i]["入库库位"].ToString();
-                }
-                if (ht_forUI["rdb"].ToString() == "退回单")
-                {
-                    chuku_kw = subdt.Rows[i]["出库库位"].ToString();
-                    ruku_kw = "";
-                }
-
-                param.Add("@sub_" + "r_chu" + "_" + i, chuku_kw);
-                param.Add("@sub_" + "r_ru" + "_" + i, ruku_kw);
-                param.Add("@sub_" + "r_cpbh" + "_" + i, subdt.Rows[i]["调整零件"].ToString());
-                param.Add("@sub_" + "r_shuliang" + "_" + i, subdt.Rows[i]["调整数量"].ToString());
-                param.Add("@sub_" + "r_danwei" + "_" + i, subdt.Rows[i]["单位"].ToString());
-                param.Add("@sub_" + "r_pihao" + "_" + i, subdt.Rows[i]["批号"].ToString());
-
-                string INSERTsql = "INSERT INTO ZZZ_C_record_sub (subid, rid, r_chu, r_ru, r_cpbh, r_shuliang, r_danwei ,r_pihao) VALUES(@sub_" + "subid" + "_" + i + ", @sub_MainID, @sub_" + "r_chu" + "_" + i + ", @sub_" + "r_ru" + "_" + i + ", @sub_" + "r_cpbh" + "_" + i + ", @sub_" + "r_shuliang" + "_" + i + ", @sub_" + "r_danwei" + "_" + i + " , @sub_" + "r_pihao" + "_" + i + ")";
-                alsql.Add(INSERTsql);
-            }
-
-        }
-        if (ht_forUI["ywlx_yincang"].ToString() == "fahuo")
-        {
-            if (check_zhuangtai(ht_forUI["idforedit"].ToString().Trim()) != "审核")
-            {
-                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
-                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "保存失败，只有审核状态才允许录入发货信息。";
-                return dsreturn;
-            }
-
-            //只更新发货信息，不更新子表
-            param.Add("@rwuliudan", ht_forUI["rwuliudan"].ToString());
-            param.Add("@rwuliugongsi", ht_forUI["rwuliugongsi"].ToString());
-            param.Add("@rfahuoren", ht_forUI["yhbsp_session_uer_UAid"].ToString());
-
-            param.Add("@rjisongdizhi", ht_forUI["rjisongdizhi"].ToString());
-            param.Add("@rlianxifangshi", ht_forUI["rlianxifangshi"].ToString());
-            param.Add("@rshoujianren", ht_forUI["rshoujianren"].ToString());
-
-            alsql.Add("UPDATE  ZZZ_C_record SET rwuliudan=@rwuliudan,rwuliugongsi=@rwuliugongsi,rfahuoren=@rfahuoren,rfahuoshijian=getdate(),rjisongdizhi=@rjisongdizhi,rlianxifangshi=@rlianxifangshi,rshoujianren=@rshoujianren,rzhuangtai='在途'  where rid =@rid ");
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "保存失败，只有草稿状态才允许编辑。";
+            return dsreturn;
         }
 
+        //只有草稿可以编辑
+
+        param.Add("@rbeizhu", ht_forUI["rbeizhu"].ToString());
+        alsql.Add("UPDATE  ZZZ_C_record SET rbeizhu=@rbeizhu  where rid =@rid ");
 
 
-
-        if (ht_forUI["ywlx_yincang"].ToString() == "shenhe")
+        //遍历子表，先删除，再插入，已有主键的不重新生成。
+        string zibiao_gts_id = "grid-table-subtable-160602000842";
+        DataTable subdt = jsontodatatable.ToDataTable(ht_forUI[zibiao_gts_id].ToString());
+        //必须验证js脚本获取的数量和c#反序列化获取的数量一致才能继续。防止出错
+        if (ht_forUI[zibiao_gts_id + "_fcjsq"].ToString() != subdt.Rows.Count.ToString())
         {
-            if (check_zhuangtai(ht_forUI["idforedit"].ToString().Trim()) != "提交")
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "子表数据量与获取量不相符，系统出现问题。";
+            return dsreturn;
+        }
+        param.Add("@sub_" + "MainID", ht_forUI["idforedit"].ToString()); //隶属主表id
+        alsql.Add("delete ZZZ_C_record_sub where  rid = @sub_" + "MainID");
+        for (int i = 0; i < subdt.Rows.Count; i++)
+        {
+            param.Add("@sub_" + "subid" + "_" + i, CombGuid.GetMewIdFormSequence("ZZZ_C_record_sub"));
+
+            string chuku_kw = "";
+            string ruku_kw = "";
+            if (ht_forUI["rdb"].ToString() == "调拨单" || ht_forUI["rdb"].ToString() == "调整单")
             {
-                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
-                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "保存失败，只有提交状态才允许进行审核或驳回。";
-                return dsreturn;
+                chuku_kw = subdt.Rows[i]["出库库位"].ToString();
+                ruku_kw = subdt.Rows[i]["入库库位"].ToString();
+            }
+            if (ht_forUI["rdb"].ToString() == "申请单")
+            {
+                chuku_kw = "";
+                if (1 == 1)
+                {
+                    ruku_kw = ht_forUI["yincangkucun"].ToString();
+                }
+                else
+                {
+                    ruku_kw = subdt.Rows[i]["入库库位"].ToString();
+                }
+            }
+            if (ht_forUI["rdb"].ToString() == "退回单")
+            {
+                chuku_kw = subdt.Rows[i]["出库库位"].ToString();
+                ruku_kw = "";
             }
 
-            if (ht_forUI.Contains("shenhe_yincang"))
-            {
-                //判断是审核还是驳回
-                if (ht_forUI["shenhe_yincang"].ToString() == "审核通过")
-                {
-                    param.Add("@rshr", ht_forUI["yhbsp_session_uer_UAid"].ToString());
-                    alsql.Add("UPDATE ZZZ_C_record SET  rzhuangtai='审核',rshr=@rshr,rshenheshijian=getdate()  where rzhuangtai='提交' and rid =@rid");
-                }
-                if (ht_forUI["shenhe_yincang"].ToString() == "驳回")
-                {
-                    alsql.Add("UPDATE ZZZ_C_record SET  rzhuangtai='草稿'  where rzhuangtai='提交' and rid =@rid");
-                }
-            }
-            else
-            {
-                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
-                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "保存失败，审核选项必须选择。";
-                return dsreturn;
-            }
+            param.Add("@sub_" + "r_chu" + "_" + i, chuku_kw);
+            param.Add("@sub_" + "r_ru" + "_" + i, ruku_kw);
+            param.Add("@sub_" + "r_cpbh" + "_" + i, subdt.Rows[i]["调整零件"].ToString());
+            param.Add("@sub_" + "r_shuliang" + "_" + i, subdt.Rows[i]["调整数量"].ToString());
+            param.Add("@sub_" + "r_danwei" + "_" + i, subdt.Rows[i]["单位"].ToString());
+            param.Add("@sub_" + "r_pihao" + "_" + i, subdt.Rows[i]["批号"].ToString());
 
+            string INSERTsql = "INSERT INTO ZZZ_C_record_sub (subid, rid, r_chu, r_ru, r_cpbh, r_shuliang, r_danwei ,r_pihao) VALUES(@sub_" + "subid" + "_" + i + ", @sub_MainID, @sub_" + "r_chu" + "_" + i + ", @sub_" + "r_ru" + "_" + i + ", @sub_" + "r_cpbh" + "_" + i + ", @sub_" + "r_shuliang" + "_" + i + ", @sub_" + "r_danwei" + "_" + i + " , @sub_" + "r_pihao" + "_" + i + ")";
+            alsql.Add(INSERTsql);
         }
 
 
@@ -293,7 +241,8 @@ public class NoReSet_160602000052
         Hashtable param = new Hashtable();
         param.Add("@rid", ht_forUI["idforedit"].ToString());
 
-        return_ht = I_DBL.RunParam_SQL("select  top 1 *  from View_ZZZ_C_record_ex where rid=@rid", "数据记录", param);
+        //return_ht = I_DBL.RunParam_SQL("select  top 1 *  from View_ZZZ_C_record_ex where rid=@rid", "数据记录", param);
+        return_ht = I_DBL.RunParam_SQL("select  top 1 *,(select top 1 r_ru from  ZZZ_C_record_sub where rid=@rid) as yincangkucun, (select top 1 wh_ru_wmname from  View_ZZZ_C_record_sub_ex where rid=@rid) as t_rukucangku, (select top 1 wh_ru_dpname from  View_ZZZ_C_record_sub_ex where rid=@rid) as t_rukukuwei  from View_ZZZ_C_record_ex where rid=@rid", "数据记录", param);
 
         if ((bool)(return_ht["return_float"]))
         {

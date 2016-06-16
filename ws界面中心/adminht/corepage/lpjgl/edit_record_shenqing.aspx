@@ -129,6 +129,43 @@
 
 
 
+
+
+
+                 //入库主表弹窗
+
+                 var dfx_str_subruzhubiao = "#show_searchopenyhbspgogo_yincangkucun";
+                 var oldzhi_subruzhubiao = $(dfx_str_subruzhubiao).text();
+
+                 var jiancha_subruzhubiao = window.setInterval(function () {
+
+
+
+                     //带入字段
+                     if ($(dfx_str_subruzhubiao).text() != oldzhi_subruzhubiao) {
+                         var re = /\[.*?\]/ig;
+                         var arr = $(dfx_str_subruzhubiao).text().match(re);
+
+                         if (arr != null) {//如果能匹配成功即arr数组不为空，循环输出结果
+                             for (var i = 0; i < arr.length; i++) {
+                                 var arr_z = arr[i].split(':');
+                                 if (arr_z[0] == "[库位名称") {
+                                     $("#t_rukukuwei").val($.trim(arr_z[1]).replace("]", ""));
+                                 }
+                                 if (arr_z[0] == "[仓库名称") {
+                                     $("#t_rukucangku").val($.trim(arr_z[1]).replace("]", ""));
+                                 }
+                             }
+                         }
+
+                         oldzhi_subruzhubiao = $(dfx_str_subruzhubiao).text();
+                     }
+                 }, 500);
+
+
+
+
+
                  //选择品号的子表弹窗
 
                  var dfx_str_subtt = "#show_searchopenyhbspgogo_subtcid_r_cpbh";
@@ -169,6 +206,36 @@
                          oldzhi_subtt = $(dfx_str_subtt).text();
                      }
                  }, 500);
+
+
+
+
+
+
+                 //获取默认个人库存信息
+                 zdy_ajaxdb("");
+                 function callback_zdy_ajaxdb(xml) {
+                     //解析xml并显示在界面上
+                     if ($(xml).find('返回值单条>执行结果').text() != "ok") {
+                         bootbox.alert("查找数据失败!" + $(xml).find('返回值单条>提示文本').text());
+                         return false;
+                     };
+                     $("#yincangkucun").val($(xml).find('数据记录>dpid').text());
+                     $("#t_rukucangku").val($(xml).find('数据记录>wmname').text());
+                     $("#t_rukukuwei").val($(xml).find('数据记录>dpname').text());
+                 };
+                 function zdy_ajaxdb(cs) {
+                     $.ajax({
+                         type: "POST",
+                         url: url1 + "?guid=" + randomnumber(),
+                         dataType: "xml",
+                         data: "ajaxrun=info&jkname=" + encodeURIComponent("获取某些个人资料") + "&idforedit=<%=UserSession.唯一键%>&spspsp=gerenkuwei",
+                         success: callback_zdy_ajaxdb, //请求成功
+                         error: errorForAjax//请求出错 
+                         //complete: complete//请求完成
+                     });
+
+                 };
 
 
  

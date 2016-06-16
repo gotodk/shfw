@@ -595,4 +595,83 @@ public class bsmain : System.Web.Services.WebService
 
 
 
+
+
+
+
+    /// <summary>
+    /// 根据客户uaid，获取某些信息,获取某些个人资料
+    /// </summary>
+    /// <param name="parameter_forUI">UI端的参数</param>
+    /// <returns></returns>
+    [WebMethod(MessageName = "获取某些个人资料", Description = "获取某些个人资料")]
+    public DataSet GetInfoFromUAid(DataTable parameter_forUI)
+    {
+
+        //接收转换参数
+        Hashtable ht_forUI = new Hashtable();
+        for (int i = 0; i < parameter_forUI.Rows.Count; i++)
+        {
+            ht_forUI[parameter_forUI.Rows[i]["参数名"].ToString()] = parameter_forUI.Rows[i]["参数值"].ToString();
+        }
+
+
+        //初始化返回值
+        DataSet dsreturn = initReturnDataSet().Clone();
+        dsreturn.Tables["返回值单条"].Rows.Add(new string[] { "err", "初始化" });
+
+        //参数合法性各种验证，这里省略
+
+        //开始真正的处理，这里只是演示，所以直接在这里写业务逻辑代码了
+
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+
+        Hashtable param = new Hashtable();
+        param.Add("@UAid", ht_forUI["idforedit"].ToString());
+
+
+
+
+        Hashtable return_ht = new Hashtable();
+        string linghangtishi = "";//0行提示
+        if(ht_forUI["spspsp"].ToString() == "gerenkuwei")
+        {
+            linghangtishi = "没有找到对应个人库位信息!";
+            return_ht = I_DBL.RunParam_SQL("select top 1 dpid,dpname,wmname from View_ZZZ_C_warehouse_ex where dpname = (select top 1 xingming from ZZZ_userinfo where UAid=@UAid)", "数据记录", param);
+        }
+
+
+        if ((bool)(return_ht["return_float"]))
+        {
+            DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+
+            if (redb.Rows.Count < 1)
+            {
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = linghangtishi;
+                return dsreturn;
+            }
+
+            dsreturn.Tables.Add(redb);
+ 
+ 
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "";
+        }
+        else
+        {
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "意外错误，获取失败：" + return_ht["return_errmsg"].ToString();
+        }
+
+
+
+
+
+        return dsreturn;
+    }
+
+
+
+
 }

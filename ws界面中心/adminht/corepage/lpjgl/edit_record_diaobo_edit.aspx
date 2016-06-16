@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/adminht/MasterPageMain.master" AutoEventWireup="true" CodeFile="edit_record_diaobo.aspx.cs" Inherits="lpjgl_edit_record_diaobo" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/adminht/MasterPageMain.master" AutoEventWireup="true" CodeFile="edit_record_diaobo_edit.aspx.cs" Inherits="lpjgl_edit_record_diaobo_edit" %>
 
 <%@ Register Src="~/pucu/wuc_css.ascx" TagPrefix="uc1" TagName="wuc_css" %>
 <%@ Register Src="~/pucu/wuc_content.ascx" TagPrefix="uc1" TagName="wuc_content" %>
@@ -27,29 +27,40 @@
     <uc1:wuc_script runat="server" ID="wuc_script" />
         <!-- 某些字段，在编辑时禁用，不想用新页面的情况使用 -->
     <script type="text/javascript">
-        jQuery(function ($) {
-
- 
-
-                 //if (getUrlParam("fff") == "1") {
-
-                 //    $("#did").attr("readonly", "readonly");
-                 //}
+             jQuery(function ($) {
+                  
 
 
+                 //把业务类型参数放到隐藏控件里面
+                 //
                  window.setInterval(function () {
 
+
                      //设置子表输入框只读
-                     $("#gview_grid-table-subtable-160602000832").find("input[id^='subtcid_']").attr("readonly", "readonly");
+                     $("#gview_grid-table-subtable-160616000940").find("input[id^='subtcid_']").attr("readonly", "readonly");
+
+                     $("#gview_grid-table-subtable-160616000940").find("input[id^='自动生成']").attr("readonly", "readonly");
+
+                     $("#gview_grid-table-subtable-160616000940").find("input[name='调整数量']").removeAttr("readonly");
+
+                     $("#gview_grid-table-subtable-160616000940").find("input[name='批号']").removeAttr("readonly");
                  
-                     $("#gview_grid-table-subtable-160602000832").find("input[id^='自动生成']").attr("readonly", "readonly");
-
-                     $("#gview_grid-table-subtable-160602000832").find("input[name='调整数量']").removeAttr("readonly");
-
-                     $("#gview_grid-table-subtable-160602000832").find("input[name='批号']").removeAttr("readonly");
-                      
                  }, 500);
 
+                 //业务处理
+
+                 if (getUrlParam("fff") == "1") {
+
+
+
+                 }
+                 else {
+                
+
+                 }
+
+
+           
 
 
                  //出库子表弹窗
@@ -133,7 +144,8 @@
 
 
 
-                 //入库主表入库弹窗
+
+                 //入库主表弹窗
 
                  var dfx_str_subruzhubiao = "#show_searchopenyhbspgogo_yincangkucun";
                  var oldzhi_subruzhubiao = $(dfx_str_subruzhubiao).text();
@@ -164,35 +176,6 @@
                  }, 500);
 
 
-                 //入库主表出库弹窗
-
-                 var dfx_str_subchuzhubiao = "#show_searchopenyhbspgogo_chukuwei";
-                 var oldzhi_subchuzhubiao = $(dfx_str_subchuzhubiao).text();
-
-                 var jiancha_subchuzhubiao = window.setInterval(function () {
-
-
-
-                     //带入字段
-                     if ($(dfx_str_subchuzhubiao).text() != oldzhi_subchuzhubiao) {
-                         var re = /\[.*?\]/ig;
-                         var arr = $(dfx_str_subchuzhubiao).text().match(re);
-
-                         if (arr != null) {//如果能匹配成功即arr数组不为空，循环输出结果
-                             for (var i = 0; i < arr.length; i++) {
-                                 var arr_z = arr[i].split(':');
-                                 if (arr_z[0] == "[库位名称") {
-                                     $("#t_chukukuwei").val($.trim(arr_z[1]).replace("]", ""));
-                                 }
-                                 if (arr_z[0] == "[仓库名称") {
-                                     $("#t_chukucangku").val($.trim(arr_z[1]).replace("]", ""));
-                                 }
-                             }
-                         }
-
-                         oldzhi_subchuzhubiao = $(dfx_str_subchuzhubiao).text();
-                     }
-                 }, 500);
 
 
 
@@ -239,48 +222,8 @@
                  }, 500);
 
 
-
-
-
-                 //获取默认个人库存信息
-                 zdy_ajaxdb("");
-                 function callback_zdy_ajaxdb(xml) {
-                     //解析xml并显示在界面上
-                     if ($(xml).find('返回值单条>执行结果').text() != "ok") {
-                         bootbox.alert("查找数据失败!" + $(xml).find('返回值单条>提示文本').text());
-                         return false;
-                     };
-                     $("#yincangkucun").val($(xml).find('数据记录>dpid').text());
-                     $("#t_rukucangku").val($(xml).find('数据记录>wmname').text());
-                     $("#t_rukukuwei").val($(xml).find('数据记录>dpname').text());
-                 };
-                 function zdy_ajaxdb(cs) {
-                     $.ajax({
-                         type: "POST",
-                         url: url1 + "?guid=" + randomnumber(),
-                         dataType: "xml",
-                         data: "ajaxrun=info&jkname=" + encodeURIComponent("获取某些个人资料") + "&idforedit=<%=UserSession.唯一键%>&spspsp=gerenkuwei",
-                         success: callback_zdy_ajaxdb, //请求成功
-                         error: errorForAjax//请求出错 
-                         //complete: complete//请求完成
-                     });
-
-                 };
-
-
  
         });
-
-
-
-
-
-
-
-             
         </script>
-
-
-     
 </asp:Content>
 

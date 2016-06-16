@@ -104,6 +104,8 @@
                          $("#addbutton1").attr({ "disabled": "disabled" });
                          $("#reloaddb").attr({ "disabled": "disabled" });
 
+                         
+                         $("input[name='ss_fahuofangshi']").closest(".form-group").hide();
                          $("input[name='shenhe_yincang']").closest(".form-group").hide();
                      }
 
