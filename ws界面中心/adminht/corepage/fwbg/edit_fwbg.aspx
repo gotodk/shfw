@@ -28,6 +28,19 @@
          <!-- 某些字段，在编辑时禁用，不想用新页面的情况使用 -->
     <script type="text/javascript">
         jQuery(function ($) {
+
+
+            if (getUrlParam("fff") == "1") {
+
+
+            }
+            else {
+                $("#Gkaigongtime").datepicker('setDate', new Date());
+                $("#Gwangongtime").datepicker('setDate', new Date());
+            }
+
+
+
             $("#yc_czlx").closest(".form-group").hide();
                  if (getUrlParam("fff") == "1") {
                      var yc_czlx = getUrlParam("yc_czlx");
@@ -72,22 +85,21 @@
                      $("#yc_czlx").val(getUrlParam("yc_czlx"));
 
                      //设置子表输入框只读
-                     $("#gview_grid-table-subtable-160427000664").find("input[id^='subtcid_']").attr("readonly", "readonly");
-                     $("#gview_grid-table-subtable-160427000664").find("input[id^='自动生成']").attr("readonly", "readonly");
+                  
+                     $("#gview_grid-table-subtable-160427000664").find("input").attr("readonly", "readonly");
                      $("#gview_grid-table-subtable-160427000664").find("input[name='运转时间']").removeAttr("readonly");
                      $("#gview_grid-table-subtable-160427000664").find("input[name='备注']").removeAttr("readonly");
 
 
-
-                     $("#gview_grid-table-subtable-160427000665").find("input[id^='subtcid_']").attr("readonly", "readonly");
-                     $("#gview_grid-table-subtable-160427000665").find("input[id^='自动生成']").attr("readonly", "readonly");
+ 
+                     $("#gview_grid-table-subtable-160427000665").find("input").attr("readonly", "readonly");
                      $("#gview_grid-table-subtable-160427000665").find("input[name='备注']").removeAttr("readonly");
 
 
 
 
-                     $("#gview_grid-table-subtable-160427000666").find("input[id^='subtcid_']").attr("readonly", "readonly");
-                     $("#gview_grid-table-subtable-160427000666").find("input[id^='自动生成']").attr("readonly", "readonly");
+                 
+                     $("#gview_grid-table-subtable-160427000666").find("input").attr("readonly", "readonly");
                      $("#gview_grid-table-subtable-160427000666").find("input[name='实际售价']").removeAttr("readonly");
                      $("#gview_grid-table-subtable-160427000666").find("input[name='零件数量']").removeAttr("readonly");
                      $("#gview_grid-table-subtable-160427000666").find("input[name='保修截止日期']").removeAttr("readonly");
@@ -342,6 +354,43 @@
                  }, 500);
 
 
+
+
+
+                 var lz_bid = getUrlParam("lz_bid");
+                 if (lz_bid != "" && getUrlParam("fff") == "0") {
+
+                     //获取带入单据的资料
+                 zdy_ajaxdb("");
+                 function callback_zdy_ajaxdb(xml) {
+                     //解析xml并显示在界面上
+                     if ($(xml).find('返回值单条>执行结果').text() != "ok") {
+                         bootbox.alert("查找数据失败!" + $(xml).find('返回值单条>提示文本').text());
+                         return false;
+                     };
+                     $("#G_BID").val($(xml).find('数据记录>BID').text());
+                     $("#G_YYID").val($(xml).find('数据记录>B_YYID').text());
+                     $("#YYname").val($(xml).find('数据记录>YYname').text());
+                     var Bsbtime_zz_ss = new Date($(xml).find('数据记录>Bsbtime').text()).Format_go("yyyy-MM-dd");
+                     $("#Gsbtime").datepicker('setDate', Bsbtime_zz_ss);
+ 
+                 };
+                 function zdy_ajaxdb(cs) {
+                     $.ajax({
+                         type: "POST",
+                         url: url1 + "?guid=" + randomnumber(),
+                         dataType: "xml",
+                         data: "ajaxrun=info&jkname=" + encodeURIComponent("获取某些个人资料") + "&idforedit=" + lz_bid + "&spspsp=guanliandanju",
+                         success: callback_zdy_ajaxdb, //请求成功
+                         error: errorForAjax//请求出错 
+                         //complete: complete//请求完成
+                     });
+
+                 };
+
+                 }
+
+                 
 
 
  

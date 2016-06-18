@@ -75,6 +75,57 @@ public class NoReSet_160427000035
 
 
     /// <summary>
+    /// 获取关联单据中的客户编号
+    /// </summary>
+    /// <param name="parameter_forUI">前台表单传来的参数</param>
+    /// <returns></returns>
+    private string get_gldj_khbh(string G_BID)
+    {
+
+        if (G_BID.Trim() == "")
+        {
+            return "";
+        }
+
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+        Hashtable return_ht = new Hashtable();
+        Hashtable param = new Hashtable();
+        param.Add("@G_BID", G_BID);
+
+        return_ht = I_DBL.RunParam_SQL("select  top 1 B_YYID from ZZZ_BXSQ where BID=@G_BID", "数据记录", param);
+
+        if ((bool)(return_ht["return_float"]))
+        {
+            DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+
+            if (redb.Rows.Count > 0)
+            {
+                if (redb.Rows[0]["B_YYID"].ToString().Trim() == "")
+                {
+                    return "";
+                }
+                else
+                {
+                    return redb.Rows[0]["B_YYID"].ToString();
+                }
+          
+            }
+            else
+            {
+                return "";
+            }
+
+        }
+        else
+        {
+            return "";
+        }
+
+
+
+    }
+
+    /// <summary>
     /// 增加数据
     /// </summary>
     /// <param name="parameter_forUI">前台表单传来的参数</param>
@@ -105,7 +156,17 @@ public class NoReSet_160427000035
         param.Add("@Gtianxieren", ht_forUI["yhbsp_session_uer_UAid"].ToString());
         param.Add("@Gbylx", ht_forUI["Gbylx"].ToString());
         param.Add("@G_BID", ht_forUI["G_BID"].ToString());
-        param.Add("@G_YYID", ht_forUI["G_YYID"].ToString());
+        string gl_khbh = get_gldj_khbh(ht_forUI["G_BID"].ToString());
+        if (gl_khbh == "")
+        {
+            param.Add("@G_YYID", ht_forUI["G_YYID"].ToString());
+        }
+        else
+        {
+            //强制使用关联单据中的客户编号
+            param.Add("@G_YYID", gl_khbh);
+        }
+        
         param.Add("@Gkeshi", ht_forUI["Gkeshi"].ToString());
         param.Add("@Glianxiren", ht_forUI["Glianxiren"].ToString());
 
@@ -147,6 +208,15 @@ public class NoReSet_160427000035
         {
             dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
             dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "子表数据量与获取量不相符，系统出现问题。";
+            return dsreturn;
+        }
+
+
+        //额外验证一下，如果是维修类型，子表只允许出现一条信息。
+        if (ht_forUI["Gfwlx"].ToString() == "维修" && subdt.Rows.Count > 1)
+        {
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "提交错误,服务类型若选择“维修”，则只允许录入一条设备信息！";
             return dsreturn;
         }
 
@@ -207,6 +277,15 @@ public class NoReSet_160427000035
         {
             dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
             dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "子表数据量与获取量不相符，系统出现问题。";
+            return dsreturn;
+        }
+
+
+        //只有存在一个设备时，才允许录入零配件列表
+        if (subdt.Rows.Count != 1 && subdt_lj.Rows.Count > 0)
+        {
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "提交错误,只有存在一个设备时，才允许录入零配件列表！";
             return dsreturn;
         }
 
@@ -303,7 +382,16 @@ public class NoReSet_160427000035
 
             param.Add("@Gbylx", ht_forUI["Gbylx"].ToString());
             param.Add("@G_BID", ht_forUI["G_BID"].ToString());
-            param.Add("@G_YYID", ht_forUI["G_YYID"].ToString());
+            string gl_khbh = get_gldj_khbh(ht_forUI["G_BID"].ToString());
+            if (gl_khbh == "")
+            {
+                param.Add("@G_YYID", ht_forUI["G_YYID"].ToString());
+            }
+            else
+            {
+                //强制使用关联单据中的客户编号
+                param.Add("@G_YYID", gl_khbh);
+            }
             param.Add("@Gkeshi", ht_forUI["Gkeshi"].ToString());
             param.Add("@Glianxiren", ht_forUI["Glianxiren"].ToString());
 
@@ -348,6 +436,15 @@ public class NoReSet_160427000035
             {
                 dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
                 dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "子表数据量与获取量不相符，系统出现问题。";
+                return dsreturn;
+            }
+
+
+            //额外验证一下，如果是维修类型，子表只允许出现一条信息。
+            if (ht_forUI["Gfwlx"].ToString() == "维修" && subdt.Rows.Count > 1)
+            {
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "提交错误,服务类型若选择“维修”，则只允许录入一条设备信息！";
                 return dsreturn;
             }
 
@@ -427,6 +524,14 @@ public class NoReSet_160427000035
                 return dsreturn;
             }
 
+            //只有存在一个设备时，才允许录入零配件列表
+            if (subdt.Rows.Count != 1 && subdt_lj.Rows.Count > 0)
+            {
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "提交错误,只有存在一个设备时，才允许录入零配件列表！";
+                return dsreturn;
+            }
+
             //param.Add("@sub_" + "MainID_cw", guid); //隶属主表id
             alsql.Add("delete ZZZ_FWBG_lingjian where  lj_GID = @sub_" + "MainID");
             for (int i = 0; i < subdt_lj.Rows.Count; i++)
@@ -482,13 +587,51 @@ public class NoReSet_160427000035
                 return dsreturn;
             }
 
+
+            //修改调整过的技术服务费和零件价格
+            param.Add("@Gjishufuwufei", ht_forUI["Gjishufuwufei"].ToString());
+            param.Add("@Gzongjia", ht_forUI["Gzongjia"].ToString());
+
             //进行审核;
             if (ht_forUI.Contains("Gshenpixuanxiang") && ht_forUI["Gshenpixuanxiang"].ToString() == "审核通过")
             {
                 param.Add("@Gzhuangtai", "审核");
                 param.Add("@Gspyj", ht_forUI["Gspyj"].ToString());
                 param.Add("@Gtianxieren", ht_forUI["yhbsp_session_uer_UAid"].ToString());
-                alsql.Add("UPDATE ZZZ_FWBG SET Gzhuangtai=@Gzhuangtai,Gspyj=@Gspyj,Gtianxieren=@Gtianxieren,Gspshijian=getdate() where GID=@GID");
+                alsql.Add("UPDATE ZZZ_FWBG SET Gjishufuwufei=@Gjishufuwufei, Gzongjia=@Gzongjia,Gzhuangtai=@Gzhuangtai,Gspyj=@Gspyj,Gtianxieren=@Gtianxieren,Gspshijian=getdate() where GID=@GID");
+
+                //遍历零配件子表，也反写零件价格
+                //遍历子表， 准备反写 (零件信息)
+                string zibiao_lj_id = "grid-table-subtable-160427000666";
+                DataTable subdt_lj = jsontodatatable.ToDataTable(ht_forUI[zibiao_lj_id].ToString());
+                //必须验证js脚本获取的数量和c#反序列化获取的数量一致才能继续。防止出错
+                if (ht_forUI[zibiao_lj_id + "_fcjsq"].ToString() != subdt_lj.Rows.Count.ToString())
+                {
+                    dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                    dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "子表数据量与获取量不相符，系统出现问题。";
+                    return dsreturn;
+                }
+                for (int i = 0; i < subdt_lj.Rows.Count; i++)
+                {
+
+                    if (subdt_lj.Rows[i]["隐藏编号"].ToString().Trim() == "")
+                    {
+                        //新增的不反写
+                    }
+                    else
+                    {
+                        //原有子表编号的，反写
+                        param.Add("@sub_" + "ljid" + "_" + i, subdt_lj.Rows[i]["隐藏编号"].ToString());
+                        param.Add("@sub_" + "ljsjsj" + "_" + i, subdt_lj.Rows[i]["实际售价"].ToString());
+                        param.Add("@sub_" + "ljzje" + "_" + i, subdt_lj.Rows[i]["金额"].ToString());
+
+                        string upupsql = "update ZZZ_FWBG_lingjian set ljsjsj=@sub_" + "ljsjsj" + "_" + i + " ,ljzje=@sub_" + "ljzje" + "_" + i + " where ljid=@sub_" + "ljid" + "_" + i;
+                        alsql.Add(upupsql);
+                    }
+                }
+
+
+
             }
             if (ht_forUI.Contains("Gshenpixuanxiang") && ht_forUI["Gshenpixuanxiang"].ToString() == "驳回报告")
             {

@@ -37,12 +37,8 @@
                  window.setInterval(function () {
 
                      //设置子表输入框只读
-                     $("#gview_grid-table-subtable-160224000354").find("input[id^='subtcid_']").attr("readonly", "readonly");
-                 
-                     $("#gview_grid-table-subtable-160224000354").find("input[id^='自动生成']").attr("readonly", "readonly");
-
+                     $("#gview_grid-table-subtable-160224000354").find("input").attr("readonly", "readonly");
                      $("#gview_grid-table-subtable-160224000354").find("input[name='调整数量']").removeAttr("readonly");
-
                      $("#gview_grid-table-subtable-160224000354").find("input[name='批号']").removeAttr("readonly");
                       
                  }, 500);

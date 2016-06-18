@@ -639,7 +639,12 @@ public class bsmain : System.Web.Services.WebService
             linghangtishi = "没有找到对应个人库位信息!";
             return_ht = I_DBL.RunParam_SQL("select top 1 dpid,dpname,wmname from View_ZZZ_C_warehouse_ex where dpname = (select top 1 xingming from ZZZ_userinfo where UAid=@UAid)", "数据记录", param);
         }
-
+        if (ht_forUI["spspsp"].ToString() == "guanliandanju")
+        {
+            linghangtishi = "没有找到关联单据信息!";
+            param.Add("@BID", ht_forUI["idforedit"].ToString());
+            return_ht = I_DBL.RunParam_SQL("select top 1 BID,B_YYID,YYname,Bsbtime from View_ZZZ_BXSQ_ex where BID=@BID", "数据记录", param);
+        }
 
         if ((bool)(return_ht["return_float"]))
         {
