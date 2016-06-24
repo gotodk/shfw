@@ -140,7 +140,7 @@
 				 
 							</div><!-- /.position-relative -->
 
-							<div class="navbar-fixed-top align-right">
+							<div class="navbar-fixed-top align-right hidden">
 								<br />
 								&nbsp;
 								<a id="btn-login-dark" href="#">黑夜</a>

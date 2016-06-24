@@ -36,8 +36,8 @@ public partial class MasterPageMain : System.Web.UI.MasterPage
 
 
         masterpageleftmenu1.OnNeedLoadData += new masterpageleftmenu.OnNeedDataHandler(MyWebControl_OnNeedLoadData);
-        this.Page.Title = ConfigurationManager.AppSettings["SYSname"] + " --- 系统管理";
-        titleshowname.InnerHtml = ConfigurationManager.AppSettings["SYSname"] + " --- 系统管理";
+        this.Page.Title = ConfigurationManager.AppSettings["SYSname"] + "";
+        titleshowname.InnerHtml = ConfigurationManager.AppSettings["SYSname"] + "";
         mysmlogo.Src = ConfigurationManager.AppSettings["mylogo_s"];
         showusername.InnerHtml = UserSession.登录名;
 
