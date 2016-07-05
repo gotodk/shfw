@@ -542,6 +542,9 @@
                                                         %>
       
             var time_zz = new Date($(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>').text()).Format_go("yyyy-MM-dd");
+            if (time_zz == "" || time_zz == null || time_zz.indexOf("aN") >= 0) {
+                time_zz = null;
+            }
             $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>").datepicker('setDate', time_zz);
 
             <%
@@ -550,6 +553,12 @@
                                                         %>
             var time_zz1 = new Date($(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>1').text()).Format_go("yyyy-MM-dd");
             var time_zz2 = new Date($(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>2').text()).Format_go("yyyy-MM-dd");
+            if (time_zz1 == "" || time_zz1 == null || time_zz1.indexOf("aN") >= 0) {
+                time_zz1 = null;
+            }
+            if (time_zz2 == "" || time_zz2 == null || time_zz2.indexOf("aN") >= 0) {
+                time_zz2 = null;
+            }
             $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>1").datepicker('setDate', time_zz1);
             $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>2").datepicker('setDate', time_zz2);
  
