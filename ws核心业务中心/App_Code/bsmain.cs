@@ -679,4 +679,64 @@ public class bsmain : System.Web.Services.WebService
 
 
 
+    /// <summary>
+    /// 获取微信自动登录参数
+    /// </summary>
+    /// <param name="username_wx">UI端的参数</param>
+    /// <returns></returns>
+    [WebMethod(MessageName = "获取微信自动登录参数", Description = "获取微信自动登录参数")]
+    public string GetInfoFromUsername_wx(string username_wx)
+    {
+ 
+        //初始化返回值
+        DataSet dsreturn = initReturnDataSet().Clone();
+        dsreturn.Tables["返回值单条"].Rows.Add(new string[] { "err", "初始化" });
+
+        //参数合法性各种验证，这里省略
+
+        //开始真正的处理，这里只是演示，所以直接在这里写业务逻辑代码了
+
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+
+        Hashtable param = new Hashtable();
+        param.Add("@Uloginname", username_wx);
+
+
+
+
+        Hashtable return_ht = new Hashtable();
+
+        return_ht = I_DBL.RunParam_SQL("select top 1 UAid, Uloginname, Uloginpassword from auth_users_auths where Uloginname=@Uloginname", "数据记录", param);
+
+
+        if ((bool)(return_ht["return_float"]))
+        {
+            DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+
+            if (redb.Rows.Count < 1)
+            {
+                return "";
+            }
+            else
+            {
+                string zhanghao = redb.Rows[0]["Uloginname"].ToString();
+                string mima = redb.Rows[0]["Uloginpassword"].ToString();
+                string jm = zhanghao+"|"+ mima;
+                return jm;
+            }
+
+        }
+        else
+        {
+            return "";
+        }
+
+
+
+
+
+        return "";
+    }
+
+
 }

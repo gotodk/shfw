@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -22,16 +23,61 @@ public partial class qyapi_dlhd : System.Web.UI.Page
         //公众平台上开发者设置的token, corpID, EncodingAESKey
         //string sToken = "QDG6eK";
         string sToken = ConfigurationManager.AppSettings["wx_Token"].ToString();
-        //string sCorpID = "wx5823bf96d3bd56c7";
+        //string sCorpID = "wxdb0c8553d3bf3ad5";
         string sCorpID = ConfigurationManager.AppSettings["wx_CorpID"].ToString();
         //string sEncodingAESKey = "jWmYm7qr5nMoAUwZRjGtBxmz3KA1tkAj3ykkR6q2B2C";
         string sEncodingAESKey = ConfigurationManager.AppSettings["wx_EncodingAESKey"].ToString();
+        //string wx_corpsecret = "Mte0XxwwFPy9qbcztpE9CCsbuApg6eeSmljzghtax1H7wg2jFbSH_w3h-TbeXJjq";
+        string wx_corpsecret = ConfigurationManager.AppSettings["wx_corpsecret"].ToString();
 
         if (Request["code"] != null)
         {
-            string code = Request["code"].ToString();
-            //
-            Response.Write(code);
+            try {
+                string code = Request["code"].ToString();
+                //Response.Write(code);
+
+                WebClient client = new WebClient();
+
+                //获取access_token
+                string content = client.DownloadString("https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=" + sCorpID + "&corpsecret=" + wx_corpsecret + "");
+                string access_token = content.Split(',')[0].Split(':')[1].Replace("\"", "").Replace(" ", "");
+                //Response.Write(access_token);
+
+                //client.Encoding = Encoding.UTF8;
+                string address = "https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo?access_token=" + access_token + "&code=" + code;
+                //Response.Redirect(address);
+                string endstr = client.DownloadString(address);
+                HTMLAnalyzeClass HAC = new HTMLAnalyzeClass();
+                string wxusername = HAC.My_Cut_Str(endstr, "UserId\":\"", "\"", 1, false)[0].ToString();
+
+                //尝试找到对应账号和密码，如果找到，自动跳转到自动登录界面
+                //调用框架免代理通用接口删，公用一下删除接口
+                string jm = "";
+                object[] re_dsi_wx = IPC.Call("获取微信自动登录参数", new object[] { wxusername });
+                if (re_dsi_wx[0].ToString() == "ok")
+                {
+                    //这个就是得到远程方法真正的返回值，不同类型的，自行进行强制转换即可。
+                    jm = re_dsi_wx[1].ToString();
+                }
+                else
+                {
+                    string err = "调用错误" + re_dsi_wx[1].ToString();
+                    jm = "";
+                }
+
+                //string zhanghao = wxusername;
+                //string mima = "48d757d7d2c387c0f25d7bece01768dd";
+                //string jm = zhanghao+"|"+ mima;
+                Response.Redirect("/adminht/login.aspx?aulgogo=1&aulcscs="+ jm + "");
+
+                //Response.Write(wxusername);
+            }
+            catch (Exception ex)
+            {
+                Response.Write(ex.ToString());
+            }
+       
+
         }
        
 

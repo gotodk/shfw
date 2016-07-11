@@ -40,6 +40,8 @@
 
 </head>
 	<body class="login-layout">
+ 
+
         <form id="form1" runat="server">
 		<div class="main-container">
 			<div class="main-content">
@@ -183,6 +185,7 @@
 		</script>
           
   <script src="/assets/js/jquery.cookie.js"></script>
+  <script type="text/javascript" src="/assets/js/desforcsharp.js"></script>
 		<!-- inline scripts related to this page -->
              <!-- **********全局变量配置******** -->
      <script type="text/javascript">
@@ -205,6 +208,12 @@
          function randomnumber() {
              var d = new Date();
              return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1) + "-" + d.getFullYear() + d.getMonth() + d.getDate() + d.getHours() + d.getMinutes() + d.getSeconds() + d.getMilliseconds();
+         }
+         //获取url中的参数
+         function getUrlParam(name) {
+             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+             var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+             if (r != null) return unescape(r[2]); return ""; //返回参数值
          }
      </script>
                 <!-- **********ajax提交表单******** -->
@@ -365,6 +374,49 @@
 			 
 			});
 		</script>
+
+
+          <%--  微信企业号访问内访问时，尝试获取当前微信号对应的账号，如果账号存在，提取这个账号的密码，自动写入界面并自动提交登录请求--%>
+		<script type="text/javascript">
+		    function isWeiXin() {
+		        var ua = window.navigator.userAgent.toLowerCase();
+		        if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+		            return true;
+		        } else {
+		            return false;
+		        }
+		    }
+		    //var wx_username_fra = $(window.frames["wxcheckzdy"].document);
+			jQuery(function ($) {
+			    if (isWeiXin())
+			    {
+			        var wx_url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdb0c8553d3bf3ad5&redirect_uri=soft.sdafat.com%3a8080%2fqyapi_dlhd.aspx&response_type=code&scope=SCOPE#wechat_redirect";
+			        //不能直接ajax访问，有跨域问题。 要跳转。
+			        top.location.href = wx_url;
+		
+			    }
+
+			    //如果有自动登录参数，则自动登录
+			    var aulcscs = getUrlParam("aulcscs");
+			    if (getUrlParam("aulgogo") == "1" && aulcscs.indexOf("|") > 0)
+			    {
+			        var aulcscs_arr = new Array(); //定义一数组 
+			        aulcscs_arr = aulcscs.split("|"); //字符分割 
+			    
+			        $("#zhanghao").val(aulcscs_arr[0]);
+			        $("#mima").val(uncMe(aulcscs_arr[1],"mima"));
+			        gogoajax1(formid1, buttonid1, url1, jkname_save1);
+			    }
+			  
+			     
+			   
+			});
+
+			
+		</script>
+
+
+
              </form>
 	</body>
 </html>
