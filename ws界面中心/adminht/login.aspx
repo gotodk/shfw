@@ -387,8 +387,9 @@
 		        }
 		    }
 		    //var wx_username_fra = $(window.frames["wxcheckzdy"].document);
-			jQuery(function ($) {
-			    if (isWeiXin())
+		    jQuery(function ($) {
+		        var aulcscs = getUrlParam("aulcscs");
+			    if (isWeiXin() && getUrlParam("aulgogo") != "1")
 			    {
 			        var wx_url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdb0c8553d3bf3ad5&redirect_uri=soft.sdafat.com%3a8080%2fqyapi_dlhd.aspx&response_type=code&scope=SCOPE#wechat_redirect";
 			        //不能直接ajax访问，有跨域问题。 要跳转。
@@ -397,7 +398,7 @@
 			    }
 
 			    //如果有自动登录参数，则自动登录
-			    var aulcscs = getUrlParam("aulcscs");
+			
 			    if (getUrlParam("aulgogo") == "1" && aulcscs.indexOf("|") > 0)
 			    {
 			        var aulcscs_arr = new Array(); //定义一数组 
