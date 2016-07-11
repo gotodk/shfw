@@ -185,7 +185,7 @@
 		</script>
           
   <script src="/assets/js/jquery.cookie.js"></script>
-  <script type="text/javascript" src="/assets/js/desforcsharp.js"></script>
+  <script type="text/javascript" src="/assets/js/desforcsharp.js?rrr=12345"></script>
 		<!-- inline scripts related to this page -->
              <!-- **********全局变量配置******** -->
      <script type="text/javascript">
@@ -406,7 +406,8 @@
 			        aulcscs_arr = aulcscs.split("|"); //字符分割 
 			    
 			        $("#zhanghao").val(aulcscs_arr[0]);
-			        $("#mima").val(uncMe(aulcscs_arr[1],"mima"));
+			        $("#mima").val(uncMe(aulcscs_arr[1], "mima"));
+			        //alert(uncMe(aulcscs_arr[1], "mima"));
 			        gogoajax1(formid1, buttonid1, url1, jkname_save1);
 			    }
 			  

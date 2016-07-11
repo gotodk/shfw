@@ -212,5 +212,7 @@ function encMe(s, k) {
 /// s     待解密的字符串
 /// k     密钥
 function uncMe(s, k) {
-    return des(k, HexTostring(s), 0, 0);
+  
+   
+    return des(k, HexTostring(s), 0, 0).replace(/\0/g, "");
 }
