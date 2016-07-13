@@ -104,7 +104,8 @@
              jQuery(function ($) {
                  //
         
-                 
+                 $("#zheshiliebiaoquyu").attr('teshuwhere', "FC_YYID in (select ZZZ_userinfo_glkh.YYID from ZZZ_userinfo_glkh where ZZZ_userinfo_glkh.UAid='<%=UserSession.唯一键%>' )");
+                
  
         });
 
