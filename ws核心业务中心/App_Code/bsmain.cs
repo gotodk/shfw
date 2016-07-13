@@ -645,6 +645,18 @@ public class bsmain : System.Web.Services.WebService
             param.Add("@BID", ht_forUI["idforedit"].ToString());
             return_ht = I_DBL.RunParam_SQL("select top 1 BID,B_YYID,YYname,Bsbtime from View_ZZZ_BXSQ_ex where BID=@BID", "数据记录", param);
         }
+        if (ht_forUI["spspsp"].ToString() == "erp_kehudangan")
+        {
+            linghangtishi = "没有找到ERP客户档案编号!";
+            param.Add("@YYID", ht_forUI["idforedit"].ToString().Trim());
+            return_ht = I_DBL.RunParam_SQL("select top 1 * from View_ZZZ_erp_kehudangan where YYID=@YYID", "数据记录", param);
+        }
+        if (ht_forUI["spspsp"].ToString() == "erp_wuliaoxinxi")
+        {
+            linghangtishi = "没有找到ERP物料编号!";
+            param.Add("@bianhao", ht_forUI["idforedit"].ToString().Trim());
+            return_ht = I_DBL.RunParam_SQL("select top 1 * from View_ZZZ_erp_wuliaoxinxi where bianhao=@bianhao", "数据记录", param);
+        }
 
         if ((bool)(return_ht["return_float"]))
         {

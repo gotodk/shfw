@@ -1016,7 +1016,7 @@
   <菜单表>
     <ID>1114</ID>
     <SortID>118</SortID>
-    <SortName>设备信息维护</SortName>
+    <SortName>设备物料信息维护</SortName>
     <SortParentID>43</SortParentID>
     <SortParentPath>,43,</SortParentPath>
     <SortOrder>62</SortOrder>
@@ -1026,14 +1026,14 @@
     <m_ico />
     <m_show>不隐藏</m_show>
     <m_url_formenu_g>/adminht/corepage/bas/edit_sbbase.aspx</m_url_formenu_g>
-    <SortNameTree>│├设备信息维护</SortNameTree>
+    <SortNameTree>│├设备物料信息维护</SortNameTree>
     <SortMoveUp>1</SortMoveUp>
     <SortMoveDown>-8</SortMoveDown>
   </菜单表>
   <菜单表>
     <ID>80</ID>
     <SortID>59</SortID>
-    <SortName>序列号信息维护</SortName>
+    <SortName>设备档案维护</SortName>
     <SortParentID>43</SortParentID>
     <SortParentPath>,43,</SortParentPath>
     <SortOrder>63</SortOrder>
@@ -1043,14 +1043,14 @@
     <m_ico />
     <m_show>不隐藏</m_show>
     <m_url_formenu_g>/adminht/corepage/bas/edit_wfsb.aspx</m_url_formenu_g>
-    <SortNameTree>│├序列号信息维护</SortNameTree>
+    <SortNameTree>│├设备档案维护</SortNameTree>
     <SortMoveUp>2</SortMoveUp>
     <SortMoveDown>-7</SortMoveDown>
   </菜单表>
   <菜单表>
     <ID>93</ID>
     <SortID>72</SortID>
-    <SortName>零配件信息维护</SortName>
+    <SortName>配件物料信息维护</SortName>
     <SortParentID>43</SortParentID>
     <SortParentPath>,43,</SortParentPath>
     <SortOrder>64</SortOrder>
@@ -1060,7 +1060,7 @@
     <m_ico />
     <m_show>不隐藏</m_show>
     <m_url_formenu_g>/adminht/corepage/bas/edit_wflj.aspx</m_url_formenu_g>
-    <SortNameTree>│├零配件信息维护</SortNameTree>
+    <SortNameTree>│├配件物料信息维护</SortNameTree>
     <SortMoveUp>3</SortMoveUp>
     <SortMoveDown>-6</SortMoveDown>
   </菜单表>

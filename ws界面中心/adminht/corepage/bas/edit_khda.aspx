@@ -29,9 +29,53 @@
     <script type="text/javascript">
              jQuery(function ($) {
                  if (getUrlParam("fff") == "1") {
-
-                      
+                     $("#erpyinru").closest(".form-group").hide();
+                     
                  }
+                 else {
+
+                     $('#searchopenyhbspgogo_erpyinru').unbind();
+                     $("#searchopenyhbspgogo_erpyinru").html("引入");
+                   
+                     $("#searchopenyhbspgogo_erpyinru").on('click', function (e) {
+                         //调用ajax获取数据
+                         zdy_ajaxdb($("#erpyinru").val());
+                     });
+                 }
+
+
+                 //获取默认个人库存信息
+                 function callback_zdy_ajaxdb(xml) {
+                     $("#searchopenyhbspgogo_erpyinru").html("引入");
+                     //解析xml并显示在界面上
+                     if ($(xml).find('返回值单条>执行结果').text() != "ok") {
+                         bootbox.alert("查找数据失败!" + $(xml).find('返回值单条>提示文本').text());
+                         return false;
+                     };
+                     $("#YYID").val($(xml).find('数据记录>YYID').text());
+                     $("#YYname").val($(xml).find('数据记录>YYname').text());
+
+                     bootbox.alert("引入完成！");
+
+               
+                 };
+                 function zdy_ajaxdb(cs) {
+                     $("#searchopenyhbspgogo_erpyinru").html("正在查询……");
+                     $.ajax({
+                         type: "POST",
+                         url: url1 + "?guid=" + randomnumber(),
+                         dataType: "xml",
+                         data: "ajaxrun=info&jkname=" + encodeURIComponent("获取某些个人资料") + "&idforedit=" + cs + "&spspsp=erp_kehudangan",
+                         success: callback_zdy_ajaxdb, //请求成功
+                         error: errorForAjax//请求出错 
+                         //complete: complete//请求完成
+                     });
+
+                 };
+
+                 //=================
+
+
 
 
 
