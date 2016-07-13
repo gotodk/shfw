@@ -58,7 +58,17 @@ public class NoReSet_160427000032
         Hashtable param = new Hashtable();
         //以可排序guid方式生成
         //LID, Lmingcheng, Lguige, Ldanwei, Lpinyin, Lchengbenjia, Lzuidijia, Lshoujia, Lbaoyangzhouqi, Lbaoxiuqi
-        string guid = 'L'+CombGuid.GetMewIdFormSequence("ZZZ_WFLJ");
+        string guid = CombGuid.GetNewCombGuid("L");
+        if (ht_forUI["LID"].ToString().Trim() == "" || ht_forUI["LID"].ToString() == "自动生成")
+        {
+            guid = 'L' + CombGuid.GetMewIdFormSequence("ZZZ_WFLJ");
+        }
+        else
+        {
+            guid = ht_forUI["LID"].ToString().Trim();
+        }
+
+  
         param.Add("@LID", guid);
         param.Add("@Lmingcheng", ht_forUI["Lmingcheng"].ToString());
         param.Add("@Lguige", ht_forUI["Lguige"].ToString());

@@ -59,7 +59,17 @@ public class NoReSet_160429000036
         //以可排序guid方式生成 
         //SBID, SBmingcheng, SBxinghao, SBdanwei, SBchengbenjia, SBbaoxiuqixian, SBbaoyangzhouqi,  SBchanpinshouming, SBxiaoshoujiage, SBshengchanchang, SBerpbianma, SBzhuangtai, SBbeizhu
         //string guid = ht_forUI["SBID"].ToString();
-        string guid = CombGuid.GetMewIdFormSequence("ZZZ_SBLXBASE");
+ 
+        string guid = CombGuid.GetNewCombGuid("S");
+        if (ht_forUI["SBID"].ToString().Trim() == "" || ht_forUI["SBID"].ToString() == "自动生成")
+        {
+            guid = CombGuid.GetMewIdFormSequence("ZZZ_SBLXBASE");
+        }
+        else
+        {
+            guid = ht_forUI["SBID"].ToString().Trim();
+        }
+
         param.Add("@SBID", guid);
         param.Add("@SBmingcheng", ht_forUI["SBmingcheng"].ToString());
         param.Add("@SBxinghao", ht_forUI["SBxinghao"].ToString());

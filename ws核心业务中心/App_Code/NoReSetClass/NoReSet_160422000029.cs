@@ -59,7 +59,16 @@ public class NoReSet_160422000029
         //以可排序guid方式生成
         //string guid = CombGuid.GetNewCombGuid("D"); 
         //以两位年+两位月+两位日+6位序列顺序号方式生成
-        string guid = CombGuid.GetMewIdFormSequence("ZZZ_KHDA");
+        string guid = CombGuid.GetNewCombGuid("K");
+        if (ht_forUI["YYID"].ToString().Trim() == "" || ht_forUI["YYID"].ToString() == "自动生成")
+        {
+            guid = CombGuid.GetMewIdFormSequence("ZZZ_KHDA");
+        }
+        else
+        {
+            guid = ht_forUI["YYID"].ToString().Trim();
+        }
+        
         param.Add("@YYID", guid);
         param.Add("@YYname", ht_forUI["YYname"].ToString());
 
