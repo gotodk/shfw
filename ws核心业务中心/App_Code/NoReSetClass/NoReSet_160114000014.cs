@@ -58,8 +58,17 @@ public class NoReSet_160114000014
         Hashtable param = new Hashtable();
         //以可排序guid方式生成
         //string guid = CombGuid.GetNewCombGuid("D"); 
-        //以两位年+两位月+两位日+6位序列顺序号方式生成
-        string guid = CombGuid.GetNewCombGuid("U");
+        //用登录账号作为内码
+        string guid = ht_forUI["Uloginname"].ToString();
+        System.Text.RegularExpressions.Regex reg1 = new System.Text.RegularExpressions.Regex(@"^[0-9]\d*$");
+        bool regre = reg1.IsMatch(guid);
+        if (!regre)
+        {
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "错误：登录账号必须全是数字，以工号作为登录账号！";
+            return dsreturn;
+        }
+        //string guid = CombGuid.GetNewCombGuid("U");
         param.Add("@UAid", guid);
         param.Add("@Uloginname", ht_forUI["Uloginname"].ToString());
 

@@ -63,7 +63,7 @@
         function getUrlParam(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
             var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-            if (r != null) return unescape(r[2]); return ""; //返回参数值
+            if (r != null) return  r[2] ; return ""; //返回参数值
         }
         function GetPageName() {
             var url = window.location.href;//获取完整URL 
@@ -671,7 +671,7 @@
         jQuery(function ($) {
             var isedit = getUrlParam("fff");
             var idforedit = getUrlParam("idforedit");
-
+        
             if (isedit == "1") {
                 $("#idforedit").val(idforedit);
 
