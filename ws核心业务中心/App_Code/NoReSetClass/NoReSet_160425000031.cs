@@ -69,6 +69,7 @@ public class NoReSet_160425000031
         param.Add("@Schuchangriqi", ht_forUI["Schuchangriqi"].ToString());
         param.Add("@Sanzhuangriqi", ht_forUI["Sanzhuangriqi"].ToString());
         param.Add("@Sbaoxiudaoqi", ht_forUI["Sbaoxiudaoqi"].ToString());
+        param.Add("@Sbaoyangdaoqi", ht_forUI["Sbaoyangdaoqi"].ToString());
         param.Add("@Schenbenjia", ht_forUI["Schenbenjia"].ToString());
         param.Add("@Sbaoxiuqixian", ht_forUI["Sbaoxiuqixian"].ToString());
         param.Add("@Sbaoyangzhouqi", ht_forUI["Sbaoyangzhouqi"].ToString());
@@ -78,7 +79,7 @@ public class NoReSet_160425000031
         param.Add("@Sshouming", ht_forUI["Sshouming"].ToString());
         param.Add("@Sxiaoshoujiage", ht_forUI["Sxiaoshoujiage"].ToString());
 
-        alsql.Add("INSERT INTO   ZZZ_WFSB(SID, S_YYID, Skeshi, S_SBID,Smingcheng,Sxinghao, Sbanben, Schuchangriqi, Sanzhuangriqi, Sbaoxiudaoqi, Schenbenjia,   Sbaoxiuqixian, Sbaoyangzhouqi, Szhuangtai, Scaigouqudao, Sdailishang,   Sshouming, Sxiaoshoujiage ) VALUES(@SID, @S_YYID, @Skeshi, @S_SBID,@Smingcheng,@Sxinghao, @Sbanben, @Schuchangriqi, @Sanzhuangriqi, @Sbaoxiudaoqi, @Schenbenjia,   @Sbaoxiuqixian, @Sbaoyangzhouqi, @Szhuangtai, @Scaigouqudao, @Sdailishang,   @Sshouming, @Sxiaoshoujiage)");
+        alsql.Add("INSERT INTO   ZZZ_WFSB(SID, S_YYID, Skeshi, S_SBID,Smingcheng,Sxinghao, Sbanben, Schuchangriqi, Sanzhuangriqi, Sbaoxiudaoqi,Sbaoyangdaoqi, Schenbenjia,   Sbaoxiuqixian, Sbaoyangzhouqi, Szhuangtai, Scaigouqudao, Sdailishang,   Sshouming, Sxiaoshoujiage ) VALUES(@SID, @S_YYID, @Skeshi, @S_SBID,@Smingcheng,@Sxinghao, @Sbanben, @Schuchangriqi, @Sanzhuangriqi, @Sbaoxiudaoqi,@Sbaoyangdaoqi, @Schenbenjia,   @Sbaoxiuqixian, @Sbaoyangzhouqi, @Szhuangtai, @Scaigouqudao, @Sdailishang,   @Sshouming, @Sxiaoshoujiage)");
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
 
@@ -138,6 +139,7 @@ public class NoReSet_160425000031
         param.Add("@Schuchangriqi", ht_forUI["Schuchangriqi"].ToString());
         param.Add("@Sanzhuangriqi", ht_forUI["Sanzhuangriqi"].ToString());
         param.Add("@Sbaoxiudaoqi", ht_forUI["Sbaoxiudaoqi"].ToString());
+        param.Add("@Sbaoyangdaoqi", ht_forUI["Sbaoyangdaoqi"].ToString());
         param.Add("@Schenbenjia", ht_forUI["Schenbenjia"].ToString());
         param.Add("@Sbaoxiuqixian", ht_forUI["Sbaoxiuqixian"].ToString());
         param.Add("@Sbaoyangzhouqi", ht_forUI["Sbaoyangzhouqi"].ToString());
@@ -148,7 +150,7 @@ public class NoReSet_160425000031
         param.Add("@Sxiaoshoujiage", ht_forUI["Sxiaoshoujiage"].ToString());
 
 
-        alsql.Add("UPDATE ZZZ_WFSB SET S_YYID=@S_YYID, Skeshi=@Skeshi, S_SBID=@S_SBID,Smingcheng=@Smingcheng,Sxinghao=@Sxinghao, Sbanben=@Sbanben, Schuchangriqi=@Schuchangriqi, Sanzhuangriqi=@Sanzhuangriqi, Sbaoxiudaoqi=@Sbaoxiudaoqi, Schenbenjia=@Schenbenjia,   Sbaoxiuqixian=@Sbaoxiuqixian, Sbaoyangzhouqi=@Sbaoyangzhouqi, Szhuangtai=@Szhuangtai, Scaigouqudao=@Scaigouqudao, Sdailishang=@Sdailishang,   Sshouming=@Sshouming, Sxiaoshoujiage=@Sxiaoshoujiage  where SID=@SID ");
+        alsql.Add("UPDATE ZZZ_WFSB SET S_YYID=@S_YYID, Skeshi=@Skeshi, S_SBID=@S_SBID,Smingcheng=@Smingcheng,Sxinghao=@Sxinghao, Sbanben=@Sbanben, Schuchangriqi=@Schuchangriqi, Sanzhuangriqi=@Sanzhuangriqi, Sbaoxiudaoqi=@Sbaoxiudaoqi,Sbaoyangdaoqi=@Sbaoyangdaoqi, Schenbenjia=@Schenbenjia,   Sbaoxiuqixian=@Sbaoxiuqixian, Sbaoyangzhouqi=@Sbaoyangzhouqi, Szhuangtai=@Szhuangtai, Scaigouqudao=@Scaigouqudao, Sdailishang=@Sdailishang,   Sshouming=@Sshouming, Sxiaoshoujiage=@Sxiaoshoujiage  where SID=@SID ");
    
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);

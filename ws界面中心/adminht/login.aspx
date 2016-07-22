@@ -392,7 +392,8 @@
 			    if (isWeiXin() && getUrlParam("aulgogo") != "1")
 			    {
 			        var appid = "<%=sCorpID%>";
-  var wx_url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appid + "&redirect_uri=soft.sdafat.com%3a8080%2fqyapi_dlhd.aspx&response_type=code&scope=SCOPE#wechat_redirect";
+			        var wx_checkurl = "<%=wx_checkurl%>";
+			        var wx_url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appid + "&redirect_uri=" + wx_checkurl + "&response_type=code&scope=SCOPE#wechat_redirect";
 			        //不能直接ajax访问，有跨域问题。 要跳转。
 			        top.location.href = wx_url;
 		

@@ -202,7 +202,7 @@ namespace FMipcClass
             this._wsdlUrl = wsdlUrl;
             string wsdlName = FMWScenter.getWsclassName(wsdlUrl);
             this._wsdlName = wsdlName;
-            this._assName = string.Format(_wsdlNamespace, wsdlName);
+            this._assName = string.Format(_wsdlNamespace, wsdlName).Replace("?","_");
             this._assPath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "/ForIPC/" + this._assName + getMd5Sum(this._wsdlUrl) + ".dll";
             this.CreateServiceAssembly();
         }
@@ -310,8 +310,18 @@ namespace FMipcClass
                 //调用方法
 
 
+                MethodInfo mi = null;
+               
+                //给不明确匹配详细设定
+                if (methodName == "login")
+                {
 
-                MethodInfo mi = this._typeName.GetMethod(methodName);
+                    mi = this._typeName.GetMethod(methodName, new Type[] { typeof(string), typeof(string), typeof(string), typeof(string), typeof(string), typeof(Int32) });
+                }
+                else
+                {
+                    mi = this._typeName.GetMethod(methodName);
+                }
                 FastInvoke.FastInvokeHandler fastInvoker = FastInvoke.GetMethodInvoker(mi);
 
 

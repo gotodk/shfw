@@ -71,6 +71,27 @@ public class bsuser : System.Web.Services.WebService
     }
 
 
-    # endregion
+    #endregion
+
+
+
+
+    /// <summary>
+    /// EAS登录模拟
+    /// </summary>
+    /// <param name="username_wx">登录账号</param>
+    /// <param name="username_wx">登录密码</param>
+    /// <param name="username_wx">系统解决方案名</param>
+    /// <param name="username_wx">账套编号</param>
+    /// <param name="username_wx">语言</param>
+    /// <param name="username_wx">数据库类型识别号</param>
+    /// <returns></returns>
+    [WebMethod(MessageName = "EAS登录模拟", Description = "EAS登录模拟")]
+    public string EASLogin_test(string user,string pass,string sys,string zhangtao,string lan,int sys2)
+    {
+        return "{\"status\" :  0,\"msg\" : \"信息\",\"billErrors\":[{\"id\":\"\",\"number\":\"\", errorMsgs:[\"\",\"\"]}    ]}";
+    }
+
+
 
 }

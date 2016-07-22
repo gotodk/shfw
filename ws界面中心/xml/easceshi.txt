@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<OtherIssueBill>
+ 
+<billHead>
+
+<number>12.111.5656.22</number>
+<CU>01</CU>
+<transactionType>836</transactionType>
+<bizDate>2016-07-21</bizDate>
+<bizType>510</bizType>
+<storageOrgUnit>90</storageOrgUnit>
+<costCenterOrgUnit>01.02.13.10</costCenterOrgUnit>
+
+</billHead>
+ 
+<entry>
+<seq>12.111.5656.22.1</seq>
+<material>3434</material>
+<unit>3434</unit>
+<warehouse>3434</warehouse>
+<qty>3434</qty>
+<isPresent>3434</isPresent>
+<lot>233</lot>
+</entry>
+ 
+
+</OtherIssueBill> 

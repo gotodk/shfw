@@ -311,8 +311,18 @@
                             if (newguid_re != "" && tiaozhuan == "1") {
                                
                                 //跳转到编辑
+                                 
                                 var newurl = $.UrlUpdateParams(window.location.href, "idforedit", newguid_re);
                                 newurl = $.UrlUpdateParams(newurl, "fff", "1");
+
+                                //对某些特殊结构的非标准化单据提供额外的参数，这个是定制的
+                                if (window.location.href.indexOf("adminht/corepage/xsfh/fc_shenqing.aspx") > 0)
+                                {
+                                    //销售发货的发货申请
+                                    newurl = $.UrlUpdateParams(newurl, "ywlx", "bianjicaogao");
+                                }
+                                
+
                                 location.href = newurl;
                                 
                             }

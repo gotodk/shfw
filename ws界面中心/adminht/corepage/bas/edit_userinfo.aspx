@@ -29,6 +29,11 @@
         <script type="text/javascript">
             jQuery(function ($) {
 
+                if (getUrlParam("fff") == "1") {
+
+                    $("#morenqanxianshezhi").closest(".form-group").hide();
+                }
+
                 var dfx_str = "#show_searchopenyhbspgogo_suoshuquyu";
                 var oldzhi = $(dfx_str).text();
                 var jiancha_UAid = window.setInterval(function () {

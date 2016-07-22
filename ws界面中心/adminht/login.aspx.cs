@@ -16,10 +16,11 @@ public partial class login : System.Web.UI.Page
     public string homeurl = "demo_home.aspx";
     public string inputzhanghao = "";
     public string sCorpID = "";
+    public string wx_checkurl = "";
     protected void Page_Load(object sender, EventArgs e)
     {
         sCorpID = ConfigurationManager.AppSettings["wx_CorpID"].ToString();
-
+        wx_checkurl = ConfigurationManager.AppSettings["wx_checkurl"].ToString();
         denglu_title.InnerHtml = ConfigurationManager.AppSettings["SYSname"];
 
         if (Request["u"] != null && Request["u"].ToString() != "")

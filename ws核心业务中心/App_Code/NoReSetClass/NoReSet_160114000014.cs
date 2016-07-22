@@ -101,6 +101,13 @@ public class NoReSet_160114000014
 
         alsql.Add("INSERT INTO  ZZZ_userinfo(UAid ,xingming,zhuangtai,zhiwei,xingbie,beizhu,gongzuodi,suoshuquyu,shoujihao,gudingdianhua,youxiang,lingdao) VALUES(@UAid ,@xingming,@zhuangtai,@zhiwei,@xingbie,@beizhu,@gongzuodi,@suoshuquyu,@shoujihao,@gudingdianhua,@youxiang,@lingdao)");
 
+        //设置初始权限组
+        if (ht_forUI.Contains("morenqanxianshezhi") && ht_forUI["morenqanxianshezhi"].ToString() != "")
+        {
+            param.Add("@morenqanxianshezhi", ht_forUI["morenqanxianshezhi"].ToString());
+            alsql.Add("update auth_users_auths set Uingroups=@morenqanxianshezhi where UAid=@UAid");
+        }
+
         return_ht = I_DBL.RunParam_SQL(alsql, param);
 
         if ((bool)(return_ht["return_float"]))

@@ -113,7 +113,7 @@ public class NoReSetDEL_160713000062
                 if (ids[d].Trim() != "")
                 {
                     param.Add("@FCID_" + d, ids[d]);
-                    alsql.Add("UPDATE ZZZ_xiaoshoufahuo SET  FCzhuangtai='提交',FCshenqingshijian=getdate()  where FCzhuangtai='草稿' and FCID =@FCID_" + d);
+                    alsql.Add("UPDATE ZZZ_xiaoshoufahuo SET  FCzhuangtai='提交',FCshenqingshijian=getdate()  where FCzhuangtai='草稿' and (select count(FCSID) from ZZZ_xiaoshoufahuo_sb where FCS_FCID=@FCID_" + d + ") >0 and FCID =@FCID_" + d);
                 }
 
             }
