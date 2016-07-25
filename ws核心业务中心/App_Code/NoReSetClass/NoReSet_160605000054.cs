@@ -69,7 +69,12 @@ public class NoReSet_160605000054
         
 
         alsql.Add("INSERT INTO  ZZZ_BXSQ(BID, B_YYID, Blianxiren, Bdianhua, Bmiaoshu,  Bsbr, Bzhuangtai ,Bfwfzr) VALUES(@BID, @B_YYID, @Blianxiren, @Bdianhua, @Bmiaoshu,   @Bsbr, @Bzhuangtai,  @Bfwfzr)");
- 
+
+        //添加一个初始的调度记录
+        string DDID = CombGuid.GetMewIdFormSequence("ZZZ_BXSQ_DD");
+        param.Add("@DDID", DDID);
+        param.Add("@DDoldfzr", "无");
+        alsql.Add("INSERT INTO  ZZZ_BXSQ_DD(DDID, DD_BID, DDoldfzr, DDnewfzr, caozuoren) VALUES(@DDID, @BID, @DDoldfzr, @Bfwfzr,@Bsbr)");
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
 

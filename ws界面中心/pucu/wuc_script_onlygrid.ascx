@@ -92,24 +92,24 @@
             initjqgrid();
 
             //生成一个便捷操作的按钮区域
-            window.setInterval(function () {
-                if ($("#kuaijiedaanniuquyu").html() == "") {
-                    //alert($(".ui-pg-div")[0]).html();
+            var timer_clone_pgbutton = window.setInterval(function () {
+                if ($("#kuaijiedaanniuquyu").attr("cloneover")=="0" && typeof ($(".ui-pg-button.ui-corner-all").eq(0).attr("data-original-title")) != "undefined") {
+                 
                     var ii = 0;
-                  
+                    $("#kuaijiedaanniuquyu").empty();
                     $(".ui-pg-button.ui-corner-all").each(function () {
                         
                         var newid = "pgbutton_pubcmm_" + ii;
                         $(this).attr("id", newid);
-             
-                        var newclass = $(this).find("span").attr("class").replace("ui-icon", "");
+                        var newclass = $(this).find("span").attr("class").replace("ui-icon", "").replace("bigger-140", "");
+                        var newstyle = $(this).find("span").attr("style");
                         var titlestr = $(this).attr("data-original-title");
                         if (titlestr == null)
                         {
                             titlestr = "";
                         }
                    
-                        var button_new = $("<button onclick='clon_click(this)' type='button' class='btn btn-white btn-purple btn-sm bj-dtscan' id='clon_" + newid + "'  ><i class='" + newclass + "  bigger-110'></i>" + titlestr + "</button>");
+                        var button_new = $("<button onclick='clon_click(this)' type='button' class='btn btn-white btn-sm bj-dtscan' id='clon_" + newid + "' style='" + newstyle + "'  ><i class='" + newclass + "  bigger-110'></i>" + titlestr + "</button>");
  
                             $("#kuaijiedaanniuquyu").append(button_new);
                      
@@ -118,21 +118,17 @@
 
                         ii = ii+1;
                     });
-                    $(".bj-dtscan").each(function () {
-                        var ckid = $(this).attr("id").replace("clon_", "");
-                        //$(document).on('click', $(this), function () {
-                        //    alert("dd");
-                        //});
-                        
-                    });
+                    $("#kuaijiedaanniuquyu").attr("cloneover","1");
+                    clearInterval(timer_clone_pgbutton);
+                     
                 }
                 else {
-
+                   
                 }
            
 
                    
-            }, 1000);
+            }, 100);
           
             
 

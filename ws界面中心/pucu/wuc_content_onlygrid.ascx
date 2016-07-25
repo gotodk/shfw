@@ -137,7 +137,7 @@
                </form> 
 
 
-            <div id="kuaijiedaanniuquyu"></div>
+            <div id="kuaijiedaanniuquyu" cloneover="0"><button type='button' class='btn btn-white  btn-sm' style="visibility:hidden" ><i class='    ace-icon fa fa-refresh green  bigger-110'></i>刷新</button></div>
             <div id="zheshiliebiaoquyu" class="PrintArea_F" teshuwhere=""></div>
 
 

@@ -421,7 +421,7 @@
   <菜单表>
     <ID>1122</ID>
     <SortID>126</SortID>
-    <SortName>申请调度列表</SortName>
+    <SortName>调度历史记录</SortName>
     <SortParentID>79</SortParentID>
     <SortParentPath>,79,</SortParentPath>
     <SortOrder>25</SortOrder>
@@ -431,7 +431,7 @@
     <m_ico />
     <m_show>不隐藏</m_show>
     <m_url_formenu_g>/adminht/corepage/fwbg/edit_sqddd.aspx</m_url_formenu_g>
-    <SortNameTree>│├申请调度列表</SortNameTree>
+    <SortNameTree>│├调度历史记录</SortNameTree>
     <SortMoveUp>3</SortMoveUp>
     <SortMoveDown>-3</SortMoveDown>
   </菜单表>

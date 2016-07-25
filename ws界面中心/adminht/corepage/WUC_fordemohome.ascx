@@ -23,9 +23,9 @@
 									<i class="ace-icon fa fa-check green"></i>
 									您好，
 									<strong class="red2">
-										欢迎使用威高售后服务系统，系统有新版本更新
-									</strong>, 
-                                    请联系客服人员。
+										欢迎使用威高售后服务系统，版本号V1.0。
+									</strong>
+                                     
 	 
 </div> 
 
@@ -37,41 +37,57 @@
 
 											<div class="infobox-data">
 												<span class="infobox-data-number">32%</span>
-												<div class="infobox-content">原材料利用率</div>
+												<div class="infobox-content">返修设备种类</div>
 											</div>
 
 											<!-- #section:pages/dashboard.infobox.stat -->
-											<div class="stat stat-success">8%</div>
+											<div class="badge badge-success">
+												本月
+											</div>
 
 											<!-- /section:pages/dashboard.infobox.stat -->
 										</div>
 
 										<div class="infobox infobox-blue">
 											<div class="infobox-icon">
-												<i class="ace-icon fa fa-users"></i>
+												<i class="ace-icon fa fa-recycle"></i>
 											</div>
 
 											<div class="infobox-data">
 												<span class="infobox-data-number">11</span>
-												<div class="infobox-content">出勤率</div>
+												<div class="infobox-content">返修设备种类</div>
 											</div>
 
 											<div class="badge badge-success">
-												+32%
-												<i class="ace-icon fa fa-arrow-up"></i>
+												上月
 											</div>
 										</div>
 
-										<div class="infobox infobox-pink">
+										<div class="infobox infobox-orange">
 											<div class="infobox-icon">
 												<i class="ace-icon fa fa-exclamation-triangle"></i>
 											</div>
 
 											<div class="infobox-data">
 												<span class="infobox-data-number">8</span>
-												<div class="infobox-content">质量问题</div>
+												<div class="infobox-content">服务报告金额</div>
 											</div>
-											<div class="stat stat-important">4%</div>
+											<div class="badge badge-success">
+												年度
+											</div>
+										</div>
+                                        <div class="infobox infobox-pink">
+											<div class="infobox-icon">
+												<i class="ace-icon fa fa-exclamation-triangle"></i>
+											</div>
+
+											<div class="infobox-data">
+												<span class="infobox-data-number">8</span>
+												<div class="infobox-content">服务报告金额</div>
+											</div>
+											<div class="badge badge-success">
+												上月
+											</div>
 										</div>
 
 										<div class="infobox infobox-red">
@@ -81,27 +97,14 @@
 
 											<div class="infobox-data">
 												<span class="infobox-data-number">7</span>
-												<div class="infobox-content">工程脱离量</div>
+												<div class="infobox-content">返修设备种类</div>
+											</div>
+                                            <div class="badge badge-success">
+												累积
 											</div>
 										</div>
 
-										<div class="infobox infobox-orange2">
-											<!-- #section:pages/dashboard.infobox.sparkline -->
-											<div class="infobox-chart">
-												<span class="sparkline" data-values="196,128,202,177,154,94,100,170,224"></span>
-											</div>
-
-											<!-- /section:pages/dashboard.infobox.sparkline -->
-											<div class="infobox-data">
-												<span class="infobox-data-number">6,251</span>
-												<div class="infobox-content">日产量</div>
-											</div>
-
-											<div class="badge badge-success">
-												7.2%
-												<i class="ace-icon fa fa-arrow-up"></i>
-											</div>
-										</div>
+										 
 
 										<div class="infobox infobox-blue2">
 											<div class="infobox-progress">
@@ -114,11 +117,11 @@
 											</div>
 
 											<div class="infobox-data">
-												<span class="infobox-text">计划完成率</span>
+												<span class="infobox-text">签到率</span>
 
 												<div class="infobox-content">
 													<span class="bigger-110">~</span>
-													未完成率:58%
+													仅限售后工程师
 												</div>
 											</div>
 										</div>
@@ -133,11 +136,11 @@
 											<div class="widget-header widget-header-flat widget-header-small">
 												<h5 class="widget-title">
 													<i class="ace-icon fa fa-signal"></i>
-													车间产量
+													返修设备种类排行
 												</h5>
 
 												<div class="widget-toolbar no-border">
-													<div class="inline dropdown-hover">
+											<%--		<div class="inline dropdown-hover">
 														<button class="btn btn-minier btn-primary">
 															本周
 															<i class="ace-icon fa fa-angle-down icon-on-right bigger-110"></i>
@@ -172,7 +175,7 @@
 																</a>
 															</li>
 														</ul>
-													</div>
+													</div>--%>
 												</div>
 											</div>
 
@@ -197,7 +200,7 @@
 											<div class="widget-header widget-header-flat">
 												<h4 class="widget-title lighter">
 													<i class="ace-icon fa fa-star orange"></i>
-													计划概览
+													本季度市场概览
 												</h4>
 
 												<div class="widget-toolbar">
@@ -213,85 +216,79 @@
 														<thead class="thin-border-bottom">
 															<tr>
 																<th>
-																	<i class="ace-icon fa fa-caret-right blue"></i>计划号
+																	<i class="ace-icon fa fa-caret-right blue"></i>大区
 																</th>
 
 																<th>
-																	<i class="ace-icon fa fa-caret-right blue"></i>计划量
+																	<i class="ace-icon fa fa-caret-right blue"></i>发货总金额
 																</th>
 
 																<th class="hidden-480">
-																	<i class="ace-icon fa fa-caret-right blue"></i>班组
+																	<i class="ace-icon fa fa-caret-right blue"></i>服务报告数量
 																</th>
 															</tr>
 														</thead>
 
 														<tbody>
 															<tr>
-																<td>201510230001234</td>
+																<td>华南大区</td>
 
 																<td>
-																	<small>
-																		<s class="red">29.99</s>
-																	</small>
-																	<b class="green">19.99</b>
+														 
+																	<b class="red">19.99</b>
 																</td>
 
 																<td class="hidden-480">
-																	<span class="label label-info arrowed-right arrowed-in">一班</span>
+																	<span class="label label-info arrowed-right arrowed-in">45454</span>
 																</td>
 															</tr>
 
 															<tr>
-																<td>201510230001234</td>
+																<td>西南大区</td>
 
 																<td>
-																	<b class="blue">16.45</b>
+																	<b class="red">16.45</b>
 																</td>
 
 																<td class="hidden-480">
-																	<span class="label label-success arrowed-in arrowed-in-right">二班</span>
+																	<span class="label label-info arrowed-right arrowed-in">45454</span>
 																</td>
 															</tr>
 
 															<tr>
-																<td>201511230001234</td>
+																<td>华北大区</td>
 
 																<td>
-																	<b class="blue">15.00</b>
+																	<b class="red">15.00</b>
 																</td>
 
 																<td class="hidden-480">
-																	<span class="label label-danger arrowed">三班</span>
+																	<span class="label label-info arrowed-right arrowed-in">45454</span>
 																</td>
 															</tr>
 
 															<tr>
-																<td>201511230001235</td>
+																<td>华中大区</td>
 
 																<td>
-																	<small>
-																		<s class="red">24.99</s>
-																	</small>
-																	<b class="green">19.95</b>
+																	 
+																	<b class="red">19.95</b>
 																</td>
 
 																<td class="hidden-480">
-																	<span class="label arrowed">
-																		<s>四班</s>
-																	</span>
+																	<span class="label label-info arrowed-right arrowed-in">45454</span>
 																</td>
 															</tr>
 
 															<tr>
-																<td>201511230001237</td>
+																<td>华东大区</td>
 
 																<td>
-																	<b class="blue">12.00</b>
+																	<b class="red">12.00</b>
 																</td>
 
 																<td class="hidden-480">
-																	<span class="label label-warning arrowed arrowed-right">五班</span>
+																	<span class="label label-info arrowed-right arrowed-in">45454</span>
 																</td>
 															</tr>
 														</tbody>
@@ -306,7 +303,7 @@
 											<div class="widget-header widget-header-flat">
 												<h4 class="widget-title lighter">
 													<i class="ace-icon fa fa-signal"></i>
-													环比参考
+													我的工作台
 												</h4>
 
 												<div class="widget-toolbar">
@@ -318,7 +315,59 @@
 
 											<div class="widget-body">
 												<div class="widget-main padding-4">
-													<div id="sales-charts"></div>
+													 
+
+
+
+
+                                                    <div class="row">
+									                  
+                                                        <div class="col-sm-4">
+									  <div class="well">
+											<h4 class="green smaller lighter"><a class="red" href="#">暂无快捷链接</a><i class="ace-icon fa fa-pencil-square-o align-top bigger-125 pull-right inline" style="cursor:pointer"></i></h4>
+											备忘：暂无备忘信息 
+										</div>
+									</div>
+                                                        <div class="col-sm-4">
+									  <div class="well">
+											<h4 class="green smaller lighter"><a class="red" href="#">暂无快捷链接</a><i class="ace-icon fa fa-pencil-square-o align-top bigger-125 pull-right inline" style="cursor:pointer"></i></h4>
+											备忘：暂无备忘信息
+										</div>
+									</div>
+                                                     
+                                    
+                                                                  <div class="col-sm-4">
+									  <div class="well">
+											<h4 class="green smaller lighter"><a class="red" href="#">暂无快捷链接</a><i class="ace-icon fa fa-pencil-square-o align-top bigger-125 pull-right inline" style="cursor:pointer"></i></h4>
+											备忘：暂无备忘信息
+										</div>
+									</div>                   
+								</div> <div class="row">
+									                  
+                                                        <div class="col-sm-4">
+									  <div class="well">
+											<h4 class="green smaller lighter"><a class="orange" href="#">暂无快捷链接</a><i class="ace-icon fa fa-pencil-square-o align-top bigger-125 pull-right inline" style="cursor:pointer"></i></h4>
+											备忘：暂无备忘信息 
+										</div>
+									</div>
+                                                        <div class="col-sm-4">
+									  <div class="well">
+											<h4 class="green smaller lighter"><a class="orange" href="#">暂无快捷链接</a><i class="ace-icon fa fa-pencil-square-o align-top bigger-125 pull-right inline" style="cursor:pointer"></i></h4>
+											备忘：暂无备忘信息
+										</div>
+									</div>
+                                                     
+                                       <div class="col-sm-4">
+									  <div class="well">
+											<h4 class="green smaller lighter"><a class="orange" href="#">暂无快捷链接</a><i class="ace-icon fa fa-pencil-square-o align-top bigger-125 pull-right inline" style="cursor:pointer"></i></h4>
+											备忘：暂无备忘信息
+										</div>
+									</div>                     
+								</div>
+
+
+
+
 												</div><!-- /.widget-main -->
 											</div><!-- /.widget-body -->
 										</div><!-- /.widget-box -->

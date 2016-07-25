@@ -82,7 +82,8 @@
 						clickable: true
 					}
 				 })
-			 }
+			  }
+                //
 			 drawPieChart(placeholder, data);
 			
 			 /**
