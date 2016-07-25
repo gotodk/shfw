@@ -108,7 +108,7 @@
                     refresh: true,
                     refreshicon: 'ace-icon fa fa-refresh green',
                     view: true,
-                    viewicon: 'ace-icon fa fa-search-plus grey' 
+                    viewicon: 'ace-icon fa fa-eye grey' 
 			 
                 },
                 {

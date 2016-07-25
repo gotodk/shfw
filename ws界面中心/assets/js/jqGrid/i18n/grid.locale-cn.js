@@ -66,15 +66,15 @@ $.extend($.jgrid,{
         addtext:"",
         addtitle: "添加新记录",
         deltext: "",
-        deltitle: "删除所选记录",
+        deltitle: "批量删除",
         searchtext: "",
-        searchtitle: "查找",
+        searchtitle: "高级搜索",
         refreshtext: "",
-        refreshtitle: "刷新表格",
+        refreshtitle: "刷新",
         alertcap: "注意",
         alerttext: "请选择记录",
         viewtext: "",
-        viewtitle: "查看所选记录"
+        viewtitle: "竖向阅读"
     },
     col : {
         caption: "选择列",

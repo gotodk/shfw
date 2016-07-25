@@ -81,11 +81,60 @@
         var grid_selector = "#grid-table";
         var pager_selector = "#grid-pager";
 
-
+        function clon_click(cb) {
+            var ckid = $(cb).attr("id").replace("clon_", "");
+            $(cb).blur();
+            $("#" + ckid).click();
+        }
         jQuery(function ($) {
 
  
             initjqgrid();
+
+            //生成一个便捷操作的按钮区域
+            window.setInterval(function () {
+                if ($("#kuaijiedaanniuquyu").html() == "") {
+                    //alert($(".ui-pg-div")[0]).html();
+                    var ii = 0;
+                  
+                    $(".ui-pg-button.ui-corner-all").each(function () {
+                        
+                        var newid = "pgbutton_pubcmm_" + ii;
+                        $(this).attr("id", newid);
+             
+                        var newclass = $(this).find("span").attr("class").replace("ui-icon", "");
+                        var titlestr = $(this).attr("data-original-title");
+                        if (titlestr == null)
+                        {
+                            titlestr = "";
+                        }
+                   
+                        var button_new = $("<button onclick='clon_click(this)' type='button' class='btn btn-white btn-purple btn-sm bj-dtscan' id='clon_" + newid + "'  ><i class='" + newclass + "  bigger-110'></i>" + titlestr + "</button>");
+ 
+                            $("#kuaijiedaanniuquyu").append(button_new);
+                     
+                        
+                     
+
+                        ii = ii+1;
+                    });
+                    $(".bj-dtscan").each(function () {
+                        var ckid = $(this).attr("id").replace("clon_", "");
+                        //$(document).on('click', $(this), function () {
+                        //    alert("dd");
+                        //});
+                        
+                    });
+                }
+                else {
+
+                }
+           
+
+                   
+            }, 1000);
+          
+            
 
             //快速回车搜索
             $("#mysearchtop").submit(function () {

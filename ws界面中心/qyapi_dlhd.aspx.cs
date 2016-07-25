@@ -47,6 +47,7 @@ public partial class qyapi_dlhd : System.Web.UI.Page
                 string address = "https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo?access_token=" + access_token + "&code=" + code;
                 //Response.Redirect(address);
                 string endstr = client.DownloadString(address);
+                Response.Write(endstr);
                 HTMLAnalyzeClass HAC = new HTMLAnalyzeClass();
                 string wxusername = HAC.My_Cut_Str(endstr, "UserId\":\"", "\"", 1, false)[0].ToString();
 

@@ -150,7 +150,7 @@ public partial class pucu_jqgirdjs_for_grid : System.Web.UI.Page
                 {
                     string[] tp = tempanniu.Split('|');
                     string anniustr = jsmod_zdy_op.Replace("[*[zdyop_title]*]", tp[0]);
-                    anniustr = anniustr.Replace("[*[zdyop_buttonicon]*]", tp[1]);
+                    anniustr = anniustr.Replace("[*[zdyop_buttonicon]*]", "ace-icon fa " + tp[1]);
                     anniustr = anniustr.Replace("[*[zdyop_zdyname]*]", tp[2]);
                     anniustr = anniustr.Replace("[*[FSID]*]", ds_DD.Tables["报表配置主表"].Rows[0]["FSID"].ToString());
             

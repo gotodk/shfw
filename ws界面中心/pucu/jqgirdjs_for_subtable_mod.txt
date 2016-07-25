@@ -119,7 +119,7 @@
                     refresh: false,
                     refreshicon: 'ace-icon fa fa-refresh green',
                     view: false,
-                    viewicon: 'ace-icon fa fa-search-plus grey',
+                    viewicon: 'ace-icon fa fa-eye grey',
                 },
                 {
                     //edit record form
