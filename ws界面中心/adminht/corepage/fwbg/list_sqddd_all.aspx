@@ -98,5 +98,22 @@
          }
      </script>
 
+
+            <!-- **********其他附加脚本，用于实现个性化功能******** -->
+    <script type="text/javascript">
+        jQuery(function ($) {
+            //根据穿入值，动态改变查询参数
+            var cs_name = "DD_BID";
+            var cs = getUrlParam(cs_name);
+            if (cs != null && cs != "")
+            {
+                $('#' + cs_name).val(cs);
+            }
+
+       
+
+        });
+    </script>
+
 </asp:Content>
 

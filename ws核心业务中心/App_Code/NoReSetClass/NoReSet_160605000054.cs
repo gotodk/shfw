@@ -62,13 +62,14 @@ public class NoReSet_160605000054
         param.Add("@B_YYID", ht_forUI["B_YYID"].ToString());
         param.Add("@Blianxiren", ht_forUI["Blianxiren"].ToString());
         param.Add("@Bdianhua", ht_forUI["Bdianhua"].ToString());
+        param.Add("@Bfwlx", ht_forUI["Bfwlx"].ToString());
         param.Add("@Bmiaoshu", ht_forUI["Bmiaoshu"].ToString());
         param.Add("@Bsbr", ht_forUI["yhbsp_session_uer_UAid"].ToString());
         param.Add("@Bzhuangtai", "待处理");
         param.Add("@Bfwfzr", ht_forUI["Bfwfzr"].ToString());
         
 
-        alsql.Add("INSERT INTO  ZZZ_BXSQ(BID, B_YYID, Blianxiren, Bdianhua, Bmiaoshu,  Bsbr, Bzhuangtai ,Bfwfzr) VALUES(@BID, @B_YYID, @Blianxiren, @Bdianhua, @Bmiaoshu,   @Bsbr, @Bzhuangtai,  @Bfwfzr)");
+        alsql.Add("INSERT INTO  ZZZ_BXSQ(BID, B_YYID, Blianxiren, Bdianhua,Bfwlx, Bmiaoshu,  Bsbr, Bzhuangtai ,Bfwfzr) VALUES(@BID, @B_YYID, @Blianxiren, @Bdianhua,@Bfwlx, @Bmiaoshu,   @Bsbr, @Bzhuangtai,  @Bfwfzr)");
 
         //添加一个初始的调度记录
         string DDID = CombGuid.GetMewIdFormSequence("ZZZ_BXSQ_DD");

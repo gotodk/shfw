@@ -87,6 +87,7 @@
                      //设置子表输入框只读
                   
                      $("#gview_grid-table-subtable-160427000664").find("input").attr("readonly", "readonly");
+                     $("#gview_grid-table-subtable-160427000664").find("input[name='保修截止日期']").removeAttr("readonly");
                      $("#gview_grid-table-subtable-160427000664").find("input[name='运转时间']").removeAttr("readonly");
                      $("#gview_grid-table-subtable-160427000664").find("input[name='备注']").removeAttr("readonly");
 
@@ -100,9 +101,11 @@
 
                  
                      $("#gview_grid-table-subtable-160427000666").find("input").attr("readonly", "readonly");
+                     $("#gview_grid-table-subtable-160427000666").find("input[name='位置标记']").removeAttr("readonly");
                      $("#gview_grid-table-subtable-160427000666").find("input[name='实际售价']").removeAttr("readonly");
                      $("#gview_grid-table-subtable-160427000666").find("input[name='零件数量']").removeAttr("readonly");
                      $("#gview_grid-table-subtable-160427000666").find("input[name='保修截止日期']").removeAttr("readonly");
+                     $("#gview_grid-table-subtable-160427000666").find("input[name='批号']").removeAttr("readonly");
                      $("#gview_grid-table-subtable-160427000666").find("input[name='备注']").removeAttr("readonly");
 
                      //自动计算子表金额
@@ -121,9 +124,9 @@
                      $("#searchopenyhbspgogo_subtcid_sb_SID").attr("teshuwhere", "S_YYID='" + khbh_str + "'");
 
 
-                     //弹窗特殊条件，隐藏的弹窗的条件
-                     var userlogin = "<%=UserSession.唯一键%>";
-                     $("#searchopenyhbspgogo_subtcid_lj_LID").attr("teshuwhere", "dpname=(select xingming from  ZZZ_userinfo where UAid='" + userlogin + "')");
+                     //弹窗特殊条件，隐藏的弹窗的条件(从库存选择零件时才启用)
+                     <%--var userlogin = "<%=UserSession.唯一键%>";
+                     $("#searchopenyhbspgogo_subtcid_lj_LID").attr("teshuwhere", "dpname=(select xingming from  ZZZ_userinfo where UAid='" + userlogin + "')");--%>
                          
  
                  }, 500);
@@ -163,6 +166,18 @@
                                      //离弹窗最近的特定name的输入框  
                                      var zj = $(dfx_str_subsbxlh).closest("tr").find("input[name='ERP编号']");
                                      zj.val($.trim(arr_z[1]).replace("]", ""));
+                                 }
+                                 if (arr_z[0] == "[保修到期日期") {
+                                     //离弹窗最近的特定name的输入框  
+                                     var zj = $(dfx_str_subsbxlh).closest("tr").find("input[name='保修截止日期']");
+
+                                     var time_zz = new Date($.trim(arr_z[1]).replace("]", "")).Format_go("yyyy-MM-dd");
+                                    if (time_zz == "" || time_zz == null || time_zz.indexOf("aN") >= 0) {
+                                      time_zz = null;
+                                     }
+                                     zj.datepicker('setDate', time_zz);
+
+                                     //zj.val($.trim(arr_z[1]).replace("]", ""));
                                  }
                              }
                          }
@@ -311,6 +326,8 @@
                                  { $("#G_YYID").val($.trim(arr_z[1]).replace("]", "")); }
                                  if (arr_z[0] == "[客户名称")
                                  { $("#YYname").val($.trim(arr_z[1]).replace("]", "")); }
+                                 if (arr_z[0] == "[服务类型")
+                                 { $("#Gfwlx").val($.trim(arr_z[1]).replace("]", "")); }
                                  if (arr_z[0] == "[申报时间")
                                  { $("#Gsbtime").val($.trim(arr_z[1]).replace("]", "").split(' ')[0]); }
 

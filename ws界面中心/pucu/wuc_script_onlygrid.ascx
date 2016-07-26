@@ -98,9 +98,16 @@
                     var ii = 0;
                     $("#kuaijiedaanniuquyu").empty();
                     $(".ui-pg-button.ui-corner-all").each(function () {
-                        
+                       
                         var newid = "pgbutton_pubcmm_" + ii;
-                        $(this).attr("id", newid);
+                        var thisid = $(this).attr("id");
+                        if (typeof ($(this).attr("id")) != "undefined") {
+                            newid = $(this).attr("id");
+                        }
+                        else {
+                            $(this).attr("id", newid);
+                        }
+                        
                         var newclass = $(this).find("span").attr("class").replace("ui-icon", "").replace("bigger-140", "");
                         var newstyle = $(this).find("span").attr("style");
                         var titlestr = $(this).attr("data-original-title");
