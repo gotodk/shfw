@@ -247,7 +247,12 @@
     <SortParentID>83</SortParentID>
     <SortParentPath>,83,</SortParentPath>
     <SortOrder>14</SortOrder>
-    <m_show>不隐藏</m_show>
+    <m_url />
+    <m_tip />
+    <m_tag />
+    <m_ico />
+    <m_show>隐藏</m_show>
+    <m_url_formenu_g />
     <SortNameTree>│└工作计划看板</SortNameTree>
     <SortMoveUp>3</SortMoveUp>
     <SortMoveDown>0</SortMoveDown>

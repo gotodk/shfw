@@ -36,7 +36,7 @@
 											</div>
 
 											<div class="infobox-data">
-												<span class="infobox-data-number">32%</span>
+												<span class="infobox-data-number" id="zysj_danbeng_返修设备种类_本月">--</span>
 												<div class="infobox-content">返修设备种类</div>
 											</div>
 
@@ -54,7 +54,7 @@
 											</div>
 
 											<div class="infobox-data">
-												<span class="infobox-data-number">11</span>
+												<span class="infobox-data-number"  id="zysj_danbeng_返修设备种类_上月">--</span>
 												<div class="infobox-content">返修设备种类</div>
 											</div>
 
@@ -63,40 +63,14 @@
 											</div>
 										</div>
 
-										<div class="infobox infobox-orange">
-											<div class="infobox-icon">
-												<i class="ace-icon fa fa-exclamation-triangle"></i>
-											</div>
 
-											<div class="infobox-data">
-												<span class="infobox-data-number">8</span>
-												<div class="infobox-content">服务报告金额</div>
-											</div>
-											<div class="badge badge-success">
-												年度
-											</div>
-										</div>
-                                        <div class="infobox infobox-pink">
-											<div class="infobox-icon">
-												<i class="ace-icon fa fa-exclamation-triangle"></i>
-											</div>
-
-											<div class="infobox-data">
-												<span class="infobox-data-number">8</span>
-												<div class="infobox-content">服务报告金额</div>
-											</div>
-											<div class="badge badge-success">
-												上月
-											</div>
-										</div>
-
-										<div class="infobox infobox-red">
+                                        										<div class="infobox infobox-red">
 											<div class="infobox-icon">
 												<i class="ace-icon fa fa-shield"></i>
 											</div>
 
 											<div class="infobox-data">
-												<span class="infobox-data-number">7</span>
+												<span class="infobox-data-number" id="zysj_danbeng_返修设备种类_累积">--</span>
 												<div class="infobox-content">返修设备种类</div>
 											</div>
                                             <div class="badge badge-success">
@@ -109,15 +83,15 @@
 										<div class="infobox infobox-blue2">
 											<div class="infobox-progress">
 												<!-- #section:pages/dashboard.infobox.easypiechart -->
-												<div class="easy-pie-chart percentage" data-percent="42" data-size="46">
-													<span class="percent">42</span>%
+												<div class="easy-pie-chart percentage"  id="zysj_danbeng_签到率" data-percent="0.00" data-size="46">
+													<span class="percent">--</span>%
 												</div>
 
 												<!-- /section:pages/dashboard.infobox.easypiechart -->
 											</div>
 
 											<div class="infobox-data">
-												<span class="infobox-text">签到率</span>
+												<span class="infobox-text">签到率<span id="zysj_danbeng_签到率来源">--/--</span></span>
 
 												<div class="infobox-content">
 													<span class="bigger-110">~</span>
@@ -125,6 +99,35 @@
 												</div>
 											</div>
 										</div>
+
+										<div class="infobox infobox-orange">
+											<div class="infobox-icon">
+												<i class="ace-icon fa fa-exclamation-triangle"></i>
+											</div>
+
+											<div class="infobox-data">
+												<span class="infobox-data-number" id="zysj_danbeng_服务报告金额_本年">--</span>
+												<div class="infobox-content">服务报告金额</div>
+											</div>
+											<div class="badge badge-success">
+												年度
+											</div>
+										</div>
+                                        <div class="infobox infobox-pink">
+											<div class="infobox-icon">
+												<i class="ace-icon fa fa-exclamation-triangle"></i>
+											</div>
+
+											<div class="infobox-data">
+												<span class="infobox-data-number" id="zysj_danbeng_服务报告金额_上月">--</span>
+												<div class="infobox-content">服务报告金额</div>
+											</div>
+											<div class="badge badge-success">
+												上月
+											</div>
+										</div>
+
+
 
 									 
 									</div>
@@ -182,8 +185,9 @@
 											<div class="widget-body">
 												<div class="widget-main">
 													<!-- #section:plugins/charts.flotchart -->
+                                                    <div id="loadingpie_tu"><i class="ace-icon fa fa-spinner fa-spin orange bigger-300" id="editloadinfo"></i></div>
 													<div id="piechart-placeholder"></div>
- 
+                                                     
 												</div><!-- /.widget-main -->
 											</div><!-- /.widget-body -->
 										</div><!-- /.widget-box -->
@@ -231,39 +235,39 @@
 
 														<tbody>
 															<tr>
-																<td>华南大区</td>
-
-																<td>
-														 
-																	<b class="red">19.99</b>
-																</td>
-
-																<td class="hidden-480">
-																	<span class="label label-info arrowed-right arrowed-in">45454</span>
-																</td>
-															</tr>
-
-															<tr>
-																<td>西南大区</td>
-
-																<td>
-																	<b class="red">16.45</b>
-																</td>
-
-																<td class="hidden-480">
-																	<span class="label label-info arrowed-right arrowed-in">45454</span>
-																</td>
-															</tr>
-
-															<tr>
 																<td>华北大区</td>
 
 																<td>
-																	<b class="red">15.00</b>
+														 
+																	<b class="red liess_bb" >--</b>
 																</td>
 
 																<td class="hidden-480">
-																	<span class="label label-info arrowed-right arrowed-in">45454</span>
+																	<span class="label label-info arrowed-right arrowed-in liess_bb" >--</span>
+																</td>
+															</tr>
+
+															<tr>
+																<td>华东大区</td>
+
+																<td>
+																	<b class="red liess_bb">--</b>
+																</td>
+
+																<td class="hidden-480">
+																	<span class="label label-info arrowed-right arrowed-in liess_bb">--</span>
+																</td>
+															</tr>
+
+															<tr>
+																<td>华南大区</td>
+
+																<td>
+																	<b class="red liess_bb">--</b>
+																</td>
+
+																<td class="hidden-480">
+																	<span class="label label-info arrowed-right arrowed-in liess_bb">--</span>
 																</td>
 															</tr>
 
@@ -272,23 +276,23 @@
 
 																<td>
 																	 
-																	<b class="red">19.95</b>
+																	<b class="red liess_bb">--</b>
 																</td>
 
 																<td class="hidden-480">
-																	<span class="label label-info arrowed-right arrowed-in">45454</span>
+																	<span class="label label-info arrowed-right arrowed-in liess_bb">--</span>
 																</td>
 															</tr>
 
 															<tr>
-																<td>华东大区</td>
+																<td>西南大区</td>
 
 																<td>
-																	<b class="red">12.00</b>
+																	<b class="red liess_bb">--</b>
 																</td>
 
 																<td class="hidden-480">
-																	<span class="label label-info arrowed-right arrowed-in">45454</span>
+																	<span class="label label-info arrowed-right arrowed-in liess_bb">--</span>
 																</td>
 															</tr>
 														</tbody>
@@ -318,7 +322,7 @@
 													 
 
 
-
+                                                    <div class="space-12"></div>
 
                                                     <div class="row">
 									                  

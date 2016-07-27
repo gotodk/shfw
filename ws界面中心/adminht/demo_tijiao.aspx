@@ -13,10 +13,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="sp_pagecontent" runat="Server">
     <!-- 附加的右侧主要功能切换区内容,不含导航 -->
  
-    <div class="row">
+    <div class="row ">
         <div class="col-xs-12">
             <!-- PAGE CONTENT BEGINS -->
-            <div class="row">
+            <div class="row ">
                 <div class="col-xs-12">
                     <!-- #section:elements.tab -->
                     <div class="tabbable">

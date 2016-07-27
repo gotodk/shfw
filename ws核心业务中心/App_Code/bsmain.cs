@@ -478,7 +478,7 @@ public class bsmain : System.Web.Services.WebService
         else
         {
             dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
-            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "意外错误，修改失败：" + return_ht["return_errmsg"].ToString();
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "意外错误，获取失败：" + return_ht["return_errmsg"].ToString();
         }
 
 
@@ -745,6 +745,143 @@ public class bsmain : System.Web.Services.WebService
 
 
 
+
+
+        return "";
+    }
+
+
+
+
+
+    /// <summary>
+    /// 获取仪表盘数据
+    /// </summary>
+    /// <param name="hqbz">获取标记</param>
+    /// <param name="UAid">用户标记</param>
+    /// <param name="spsp">其他参数</param>
+    /// <returns></returns>
+    [WebMethod(MessageName = "获取仪表盘数据", Description = "获取仪表盘数据")]
+    public string Get_yibiaopan(string hqbz,string UAid,string spsp)
+    {
+
+  
+        //参数合法性各种验证，这里省略
+
+        //开始真正的处理，这里只是演示，所以直接在这里写业务逻辑代码了
+
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+
+
+        //获取重要数据的饼图
+        if (hqbz == "zysj_pie")
+        {
+            Hashtable param = new Hashtable();
+            param.Add("@xxxx", "");
+
+            Hashtable return_ht = new Hashtable();
+
+            return_ht = I_DBL.RunParam_SQL("select top 5 设备种类, 种类数量 from View_yibiaopan_bing order by 种类数量 desc", "数据记录", param);
+
+
+            if ((bool)(return_ht["return_float"]))
+            {
+                DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+
+                if (redb.Rows.Count < 1)
+                {
+                    //暂无数据
+                    return "{ label: '暂无数据', data: 20, shuliang: '0', color: '#DA5430' },{ label: '暂无数据', data: 20, shuliang: '0', color: '#68BC31' },{ label: '暂无数据', data: 20, shuliang: '0', color: '#2091CF' },{ label: '暂无数据', data: 20, shuliang: '0', color: '#AF4E96' }, { label: '暂无数据', data: 20, shuliang: '0', color: '#FEE074' }";
+                }
+                else
+                {
+                    string shuju = "";
+                    string[] yanse = new string[] { "#DA5430", "#68BC31", "#2091CF", "#AF4E96", "#FEE074" };
+                    for (int i = 0; i < redb.Rows.Count; i++)
+                    {
+                        shuju = shuju + "{ label: '"+ redb.Rows[i]["设备种类"].ToString() + "', data: " + redb.Rows[i]["种类数量"].ToString() + ", shuliang: '" + redb.Rows[i]["种类数量"].ToString() + "', color: '"+ yanse[i] + "' },";
+                    }
+                    shuju = shuju.TrimEnd(',');
+                    return shuju;
+                }
+
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+
+
+        //获取重要数据的一些数字
+        if (hqbz == "zysj_yixieshuzi")
+        {
+            Hashtable param = new Hashtable();
+            param.Add("@xxxx", "");
+
+            Hashtable return_ht = new Hashtable();
+
+            return_ht = I_DBL.RunParam_SQL("select 返修设备种类_累积, 返修设备种类_本月, 返修设备种类_上月, 服务报告金额_本年, 服务报告金额_上月,   今日实际出勤人数, 今日应出勤人数 from View_yibiaopan_shu_1", "数据记录", param);
+
+
+            if ((bool)(return_ht["return_float"]))
+            {
+                DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+
+                int shijieren = Convert.ToInt32(redb.Rows[0]["今日实际出勤人数"].ToString());
+                int yingren = Convert.ToInt32(redb.Rows[0]["今日应出勤人数"].ToString());
+                double bili = 0;
+                if (yingren == 0)
+                {
+                    bili = 0;
+                }
+                else
+                {
+                    bili = shijieren / yingren;
+                }
+                string qdl = bili.ToString("f1");
+                string qdly = shijieren + "/" + yingren;
+                string restr =  "返修设备种类_累积:"+ redb.Rows[0]["返修设备种类_累积"].ToString() + ",返修设备种类_本月:" + redb.Rows[0]["返修设备种类_本月"].ToString() + ",返修设备种类_上月:" + redb.Rows[0]["返修设备种类_上月"].ToString() + ",服务报告金额_本年:" + redb.Rows[0]["服务报告金额_本年"].ToString() + ",服务报告金额_上月:" + redb.Rows[0]["服务报告金额_上月"].ToString() + ",签到率:"+ qdl + ",签到率来源:"+ qdly + "";
+                return restr;
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+
+
+        //获取重要列表
+        if (hqbz == "zysj_liebiao")
+        {
+            Hashtable param = new Hashtable();
+            param.Add("@xxxx", "");
+
+            Hashtable return_ht = new Hashtable();
+
+            return_ht = I_DBL.RunParam_SQL("select 大区, 发货总金额, 服务报告数量 from View_yibiaopan_liebiao ORDER BY 大区", "数据记录", param);
+
+
+            if ((bool)(return_ht["return_float"]))
+            {
+                DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+
+                string shuju = "";
+                for (int i = 0; i < redb.Rows.Count; i++)
+                {
+                    shuju = shuju + "" + redb.Rows[i]["发货总金额"].ToString() + ",";
+                    shuju = shuju + "" + redb.Rows[i]["服务报告数量"].ToString() + ",";
+                }
+                shuju = shuju.TrimEnd(',');
+                return shuju;
+            }
+            else
+            {
+                return "";
+            }
+        }
 
 
         return "";

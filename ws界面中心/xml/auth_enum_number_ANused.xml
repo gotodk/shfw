@@ -92,6 +92,176 @@
     </xs:element>
   </xs:schema>
   <Unumber1>
+    <ANID>E-A4A600B1E93A-759802B6-0414-4FBD-865D</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>返厂处理-返厂审核</ANBaseName>
+    <ANBaseNumber>8192</ANBaseNumber>
+    <ANBaseNumber_p>13</ANBaseNumber_p>
+    <ANextendID>136</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E944-0BBF8A47-3346-40B1-8E56</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>返厂处理-工厂收货</ANBaseName>
+    <ANBaseNumber>32768</ANBaseNumber>
+    <ANBaseNumber_p>15</ANBaseNumber_p>
+    <ANextendID>133</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E942-6D781CFC-01C8-416B-8765</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>返厂处理-客户发货</ANBaseName>
+    <ANBaseNumber>16384</ANBaseNumber>
+    <ANBaseNumber_p>14</ANBaseNumber_p>
+    <ANextendID>134</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E947-72082D9D-DC31-4542-B7AF</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>合同管理</ANBaseName>
+    <ANBaseNumber>65536</ANBaseNumber>
+    <ANBaseNumber_p>16</ANBaseNumber_p>
+    <ANextendID>104</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E934-CE6753D2-3F77-4DBC-99C4</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>会签-全部会签记录</ANBaseName>
+    <ANBaseNumber>4096</ANBaseNumber>
+    <ANBaseNumber_p>12</ANBaseNumber_p>
+    <ANextendID>97</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E919-348D53A1-A8D0-4126-A3F1</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>基础资料-部门信息</ANBaseName>
+    <ANBaseNumber>256</ANBaseNumber>
+    <ANBaseNumber_p>8</ANBaseNumber_p>
+    <ANextendID>143</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E917-7116AB79-0F6F-479A-8B22</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>基础资料-仓库维护</ANBaseName>
+    <ANBaseNumber>128</ANBaseNumber>
+    <ANBaseNumber_p>7</ANBaseNumber_p>
+    <ANextendID>77</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E8EF-BDE4FA0A-6D20-494E-B930</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>基础资料-辅助资料设置</ANBaseName>
+    <ANBaseNumber>4</ANBaseNumber>
+    <ANBaseNumber_p>2</ANBaseNumber_p>
+    <ANextendID>112</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E8F1-EDDA6259-44BB-4B29-B79D</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>基础资料-客户信息</ANBaseName>
+    <ANBaseNumber>8</ANBaseNumber>
+    <ANBaseNumber_p>3</ANBaseNumber_p>
+    <ANextendID>102</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E928-9556A186-9B1A-4E92-B905</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>基础资料-客户员工匹配</ANBaseName>
+    <ANBaseNumber>1024</ANBaseNumber>
+    <ANBaseNumber_p>10</ANBaseNumber_p>
+    <ANextendID>100</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E90F-C8704816-AB3C-4B08-96D8</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>基础资料-配件物料</ANBaseName>
+    <ANBaseNumber>64</ANBaseNumber>
+    <ANBaseNumber_p>6</ANBaseNumber_p>
+    <ANextendID>72</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E907-0492D2EA-055D-4764-98C4</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>基础资料-设备档案</ANBaseName>
+    <ANBaseNumber>32</ANBaseNumber>
+    <ANBaseNumber_p>5</ANBaseNumber_p>
+    <ANextendID>59</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E8F5-A377415C-F52B-41EA-83CA</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>基础资料-设备物料</ANBaseName>
+    <ANBaseNumber>16</ANBaseNumber>
+    <ANBaseNumber_p>4</ANBaseNumber_p>
+    <ANextendID>118</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E92D-4B51F073-25D7-409A-A942</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>基础资料-维修错误预制</ANBaseName>
+    <ANBaseNumber>2048</ANBaseNumber>
+    <ANBaseNumber_p>11</ANBaseNumber_p>
+    <ANextendID>103</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E91D-9F8156DB-F828-4388-AA16</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>基础资料-员工信息</ANBaseName>
+    <ANBaseNumber>512</ANBaseNumber>
+    <ANBaseNumber_p>9</ANBaseNumber_p>
+    <ANextendID>58</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E966-B64B7BD5-25CC-4E34-ADDE</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>技术服务-报修申请列表</ANBaseName>
+    <ANBaseNumber>2097152</ANBaseNumber>
+    <ANBaseNumber_p>21</ANBaseNumber_p>
+    <ANextendID>91</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E968-8A12FD89-C7A3-4CE7-A4E6</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>技术服务-审阅服务报告</ANBaseName>
+    <ANBaseNumber>4194304</ANBaseNumber>
+    <ANBaseNumber_p>22</ANBaseNumber_p>
+    <ANextendID>84</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
     <ANID>E-A4A600B1E8E0-58D2297B-43DD-45F4-9956</ANID>
     <ANClass>Unumber1</ANClass>
     <ANClassName>后台菜单权限</ANClassName>
@@ -99,6 +269,36 @@
     <ANBaseNumber>1</ANBaseNumber>
     <ANBaseNumber_p>0</ANBaseNumber_p>
     <ANextendID>28</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E950-9FBE31EC-AEE4-4AEE-8F47</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>考勤管理-签到设置</ANBaseName>
+    <ANBaseNumber>131072</ANBaseNumber>
+    <ANBaseNumber_p>17</ANBaseNumber_p>
+    <ANextendID>121</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E957-366D596F-5497-4A77-92A6</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>考勤管理-所有签到记录</ANBaseName>
+    <ANBaseNumber>262144</ANBaseNumber>
+    <ANBaseNumber_p>18</ANBaseNumber_p>
+    <ANextendID>87</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E970-1A2AE9B1-1D0E-4F07-9527</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>零配件责任管理模块</ANBaseName>
+    <ANBaseNumber>8388608</ANBaseNumber>
+    <ANBaseNumber_p>23</ANBaseNumber_p>
+    <ANextendID>60</ANextendID>
     <ANused>1</ANused>
   </Unumber1>
   <Unumber1>
@@ -111,6 +311,26 @@
     <ANextendID>1</ANextendID>
     <ANused>1</ANused>
   </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E959-70CDF6C2-9A05-43CB-AF99</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>销售发货-工厂发货</ANBaseName>
+    <ANBaseNumber>524288</ANBaseNumber>
+    <ANBaseNumber_p>19</ANBaseNumber_p>
+    <ANextendID>159</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E962-92E5A5EE-7D2A-4B36-BAA5</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>销售发货-全部发货记录</ANBaseName>
+    <ANBaseNumber>1048576</ANBaseNumber>
+    <ANBaseNumber_p>20</ANBaseNumber_p>
+    <ANextendID>157</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
   <Unumber3>
     <ANID>E-A4A600B32B9A-F505E9DB-F44E-4898-B2BE</ANID>
     <ANClass>Unumber3</ANClass>
@@ -118,6 +338,36 @@
     <ANBaseName>登录内部后台管理</ANBaseName>
     <ANBaseNumber>1</ANBaseNumber>
     <ANBaseNumber_p>0</ANBaseNumber_p>
+    <ANextendID>无</ANextendID>
+    <ANused>1</ANused>
+  </Unumber3>
+  <Unumber3>
+    <ANID>E-A4A600B32BAB-7BC40CFB-A5D7-4158-A31C</ANID>
+    <ANClass>Unumber3</ANClass>
+    <ANClassName>全局独立权限</ANClassName>
+    <ANBaseName>仪表盘-售后工程师关注项目</ANBaseName>
+    <ANBaseNumber>8</ANBaseNumber>
+    <ANBaseNumber_p>3</ANBaseNumber_p>
+    <ANextendID>无</ANextendID>
+    <ANused>1</ANused>
+  </Unumber3>
+  <Unumber3>
+    <ANID>E-A4A600B32B9D-3F548406-0563-4669-B2D7</ANID>
+    <ANClass>Unumber3</ANClass>
+    <ANClassName>全局独立权限</ANClassName>
+    <ANBaseName>仪表盘-售后经理关注项目</ANBaseName>
+    <ANBaseNumber>4</ANBaseNumber>
+    <ANBaseNumber_p>2</ANBaseNumber_p>
+    <ANextendID>无</ANextendID>
+    <ANused>1</ANused>
+  </Unumber3>
+  <Unumber3>
+    <ANID>E-A4A600B32B9C-017AD52E-6774-4158-BF6E</ANID>
+    <ANClass>Unumber3</ANClass>
+    <ANClassName>全局独立权限</ANClassName>
+    <ANBaseName>仪表盘-重要业务数据</ANBaseName>
+    <ANBaseNumber>2</ANBaseNumber>
+    <ANBaseNumber_p>1</ANBaseNumber_p>
     <ANextendID>无</ANextendID>
     <ANused>1</ANused>
   </Unumber3>
