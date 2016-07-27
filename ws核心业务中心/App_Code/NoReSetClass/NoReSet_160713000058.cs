@@ -252,6 +252,13 @@ public class NoReSet_160713000058
                 return dsreturn;
             }
 
+            if (ht_forUI["FCjisongdizhi"].ToString().Trim() == "" || ht_forUI["FClianxifangshi"].ToString().Trim() == "" || ht_forUI["FCshoujianren"].ToString().Trim() == "")
+            {
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "保存失败，收货人的姓名地址联系方式必填。";
+                return dsreturn;
+            }
+
             //只更新发货信息，不更新子表
             param.Add("@FCwuliudan", ht_forUI["FCwuliudan"].ToString());
             param.Add("@FCwuliugongsi", ht_forUI["FCwuliugongsi"].ToString());
@@ -262,6 +269,12 @@ public class NoReSet_160713000058
             param.Add("@FCshoujianren", ht_forUI["FCshoujianren"].ToString());
 
             alsql.Add("UPDATE  ZZZ_xiaoshoufahuo SET FCwuliudan=@FCwuliudan,FCwuliugongsi=@FCwuliugongsi,FCfahuoren=@FCfahuoren,FCfahuoshijian=getdate(),FCjisongdizhi=@FCjisongdizhi,FClianxifangshi=@FClianxifangshi,FCshoujianren=@FCshoujianren,FCzhuangtai='在途'  where FCID =@FCID ");
+            //同步在联系人中增加一条联系人，重名的不插入
+            string KID = CombGuid.GetMewIdFormSequence("ZZZ_KHLXR");
+            param.Add("@KID", KID);
+            param.Add("@K_YYID", ht_forUI["FC_YYID"].ToString());
+            param.Add("@KKS", ht_forUI["FCbumen"].ToString());
+            alsql.Add("if not exists(select top 1 KID from ZZZ_KHLXR where Klianiren=@FCshoujianren) begin insert into ZZZ_KHLXR (KID,K_YYID,KKS,Klianiren,Kzhicheng,Kxingbie,Kdianhua,Kbeizhu) values(@KID,@K_YYID,@KKS,@FCshoujianren,'','男',@FClianxifangshi,@FCjisongdizhi) end ");
         }
 
 

@@ -48,6 +48,17 @@
 
 
 
+                //依据选择的出库仓库过滤数据 
+                 window.setInterval(function () {
+
+                     //弹窗特殊条件，隐藏的弹窗的条件(从库存选择零件时才启用)
+                     var i_dpid = $("#chukuwei").val();
+                     $("#searchopenyhbspgogo_subtcid_r_cpbh").attr("teshuwhere", " i_dpid='" + i_dpid + "' ");
+
+                 }, 500);
+
+
+
                  //出库子表弹窗
 
                  var dfx_str_subchu = "#show_searchopenyhbspgogo_subtcid_r_chu";
