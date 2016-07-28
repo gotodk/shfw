@@ -1635,7 +1635,7 @@ public class bssystem : System.Web.Services.WebService
         Hashtable return_ht = new Hashtable();
 
         param.Add("@UAid", UAid);
-        return_ht = I_DBL.RunParam_SQL("select top 10 Zid,'测试' as fromuser, '测试' as fromuser_realname,SUBSTRING(msgtitle,1,10) as msgtitle,addtime ,'/mytutu/defaulttouxiang.jpg' as myshowface from auth_znx as znx   where xuanxiang <> 2 and beread = 0 and touser=@UAid     ", "站内信提醒", param);
+        return_ht = I_DBL.RunParam_SQL("select top 50 * from auth_znx as znx   where  beread = '未读' and touser=@UAid  order by addtime desc   ", "站内信提醒", param);
 
         if ((bool)(return_ht["return_float"]))
         {
@@ -1660,6 +1660,77 @@ public class bssystem : System.Web.Services.WebService
 
         return dsreturn;
     }
+
+
+
+
+    /// <summary>
+    /// 提醒相关处理
+    /// </summary>
+    /// <param name="parameter_forUI">参数</param>
+    /// <returns>返回ok就是接口正常</returns>
+    [WebMethod(MessageName = "提醒相关处理", Description = "提醒相关处理")]
+    public string tixing_up(DataTable parameter_forUI)
+    {
+        //接收转换参数
+        Hashtable ht_forUI = new Hashtable();
+        for (int i = 0; i < parameter_forUI.Rows.Count; i++)
+        {
+            ht_forUI[parameter_forUI.Rows[i]["参数名"].ToString()] = parameter_forUI.Rows[i]["参数值"].ToString();
+        }
+
+
+        if (ht_forUI["caozuo"].ToString() == "bjyd")
+        {
+
+
+            I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+            Hashtable return_ht = new Hashtable();
+            Hashtable param = new Hashtable();
+            param.Add("@Zid", ht_forUI["Zid"].ToString());
+
+            ArrayList alsql = new ArrayList();
+            alsql.Add(" update auth_znx set beread='已读' where Zid=@Zid ");
+ 
+            return_ht = I_DBL.RunParam_SQL(alsql, param);
+        
+
+            if ((bool)(return_ht["return_float"]))
+            {
+                return "ok";
+
+            }
+            else
+            {
+                return "错误err，系统异常！";
+            }
+        }
+        if (ht_forUI["caozuo"].ToString() == "quanbuyidu")
+        {
+
+
+            I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+            Hashtable return_ht = new Hashtable();
+            Hashtable param = new Hashtable();
+            param.Add("@touser", ht_forUI["touser"].ToString());
+            ArrayList alsql = new ArrayList();
+            alsql.Add(" update auth_znx set beread='已读' where touser=@touser ");
+            return_ht = I_DBL.RunParam_SQL(alsql, param);
+            if ((bool)(return_ht["return_float"]))
+            {
+                return "ok";
+
+            }
+            else
+            {
+                return "错误err，系统异常！";
+            }
+        }
+
+        return "无效指令";
+
+    }
+
 
     #endregion
 

@@ -97,14 +97,14 @@
 
                     <li class="green">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <i class="ace-icon fa fa-envelope icon-animated-vertical"></i>
-                            <span class="badge badge-success"><%=znxsl %></span>
+                            <i class="ace-icon fa fa-bell icon-animated-bell"></i>
+                            <span class="badge badge-danger tx_show_sl" ><%=znxsl %></span>
                         </a>
 
                         <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
                             <li class="dropdown-header">
-                                <i class="ace-icon fa fa-envelope-o"></i>
-                                有<%=znxsl %>条新站内信
+                                <i class="ace-icon  fa fa-bell icon-animated-bell"></i>
+                                有<span class="tx_show_sl"><%=znxsl %></span>条新未读消息
                             </li>
 
                             <li class="dropdown-content">
@@ -114,14 +114,14 @@
           
 </HeaderTemplate> 
 <ItemTemplate><!--中间循环部分-->
-                                    <li>
- <a class="clearfix">
-                                            <img src="<%# Eval("myshowface").ToString() %>" class="msg-photo" alt="" />
+                                    <li class="tx_allliebiao_li">
+                                   
+ <a class="clearfix tx_xiaoxilianjie" href="javascript:void(0)" txforlj="<%# Eval("msurl").ToString() %>" txforZid="<%# Eval("Zid").ToString() %>">
+                                          <%--  <img src="<%# Eval("myshowface").ToString() %>" class="msg-photo" alt="" />--%>
                                             <span class="msg-body">
                                                 <span class="msg-title">
-                                                    <span class="blue"><%# Eval("fromuser_realname").ToString() %>:</span>
-                                                    <br/>
-                                                    <%# Eval("msgtitle").ToString() %> 
+                                                     <i class="ace-icon fa fa-bullhorn red"></i>
+                                                   <%# Eval("msgtitle").ToString() %>
                                                 </br/>
 
                                                 <span class="msg-time">
@@ -148,7 +148,10 @@
                             </li>
 
                             <li class="dropdown-footer">
-                                <a href="/adminht/myznx_shoudao_system.aspx">查看所有站内信
+                                <a href="/adminht/corepage/bas/list_tixing.aspx">查看所有站内信
+										<i class="ace-icon fa fa-arrow-right"></i>
+                                </a>
+                                <a href="javascript:void(0)" id="tx_quanbiaoyidu">全部标记为已读
 										<i class="ace-icon fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -391,7 +394,60 @@
         });
 
 
+        //点击提醒，先标记已读，再跳转链接
+        $('.tx_xiaoxilianjie').on('click', function (e) {
 
+            var tt = $(e.target);
+          
+            $.ajax({
+                type: "POST",
+                url: "/adminht/tixing_ajax.aspx",
+                data: "caozuo=bjyd&Zid=" + $(e.target).closest("a").attr("txforZid"),
+                dataType: "html",
+                success: function (data) {
+                  
+                 
+                    var tixingurl = $(e.target).closest("a").attr("txforlj");
+               
+                    if (tixingurl != "") {
+                        
+                        window.top.location.href = tixingurl;
+                    }
+
+                    //移除自己
+                    $(e.target).closest("li").remove();
+                    var sl = $(".tx_show_sl").eq(0).text();
+                    sl = parseInt(sl) - 1;
+                    $(".tx_show_sl").text(sl);
+
+                     
+                }
+            });
+
+
+         
+            
+        });
+
+        $('#tx_quanbiaoyidu').on('click', function (e) {
+
+
+            $.ajax({
+                type: "POST",
+                url: "/adminht/tixing_ajax.aspx",
+                data: "caozuo=quanbuyidu&touser=<%=UserSession.唯一键%>",
+                dataType: "html",
+                success: function (data) {
+                    
+                    $(".tx_allliebiao_li").remove();
+                    $(".tx_show_sl").text("0");
+                }
+            });
+
+
+
+
+        });
     </script>
     <asp:ContentPlaceHolder ID="sp_script" runat="server"></asp:ContentPlaceHolder>
 </body>

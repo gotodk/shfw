@@ -20,7 +20,7 @@ public partial class MasterPageMain : System.Web.UI.MasterPage
     {
 
 
-        object[] re_dsi = IPC.Call("获取站内信右上角提醒", new object[] { "system" });
+        object[] re_dsi = IPC.Call("获取站内信右上角提醒", new object[] { UserSession.唯一键 });
         if (re_dsi[0].ToString() == "ok")
         {
             //这个就是得到远程方法真正的返回值，不同类型的，自行进行强制转换即可。
