@@ -34,7 +34,11 @@
 
 			
 		 
-			
+					                           <%
+            if(qx_zysj)
+            {
+                %>
+	
 			
 			  //flot chart resize plugin, somehow manipulates default browser resize event to optimize it!
 			  //but sometimes it brings up errors with normal resize event handlers
@@ -112,7 +116,22 @@
 					previousPoint = null;
 				}
 				
-			 });
+			  });
+
+
+
+                			 
+                                                  <%
+            }
+            %>
+
+
+
+
+
+
+
+
 			
 				/////////////////////////////////////
 				$(document).one('ajaxloadstart.page', function(e) {
@@ -138,7 +157,7 @@
 
 
 
-			    //============加载统计分析数据
+			    //============加载统计分析数据(重要数据部分)
 				function loadyibiaopan001()
 				{
 				    $.ajax({
@@ -187,7 +206,7 @@
 				    $.ajax({
 				        type: "POST",
 				        url: "/adminht/corepage/WUC_fordemohome_ajax.aspx",
-				        data: "hqbz=zysj_liebiao",
+				        data: "hqbz=zysj_liebiao_001",
 				        dataType: "html",
 				        success: function (data) {
 				            if (data != "") {
@@ -202,10 +221,36 @@
 				        }
 				    });
 
+
+
+				    $.ajax({
+				        type: "POST",
+				        url: "/adminht/corepage/WUC_fordemohome_ajax.aspx",
+				        data: "hqbz=zysj_liebiao_002",
+				        dataType: "html",
+				        success: function (data) {
+				            if (data != "") {
+				                var fengetemp = data.split(',');
+				                var i = 0;
+				                $(".liess_bb_yue").each(function (a, kj) {
+				                    $(kj).html(fengetemp[i]);
+				                    i++;
+				                });
+				            }
+
+				        }
+				    });
+
 				}
 
+		                           <%
+            if(qx_zysj)
+            {
+                %>
 				loadyibiaopan001();
-
+                                                  <%
+            }
+            %>
 
   //  			    var data = [
   //{ label: "ddd", data: 10, shuliang: '233', color: "#68BC31" },
@@ -225,5 +270,13 @@
 
 		 
 			
+			})
+		</script>
+    		<!-- 工作台相关 -->
+		<script type="text/javascript">
+		    jQuery(function ($) {
+
+		      
+
 			})
 		</script>

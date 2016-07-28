@@ -854,7 +854,7 @@ public class bsmain : System.Web.Services.WebService
 
 
         //获取重要列表
-        if (hqbz == "zysj_liebiao")
+        if (hqbz == "zysj_liebiao_001")
         {
             Hashtable param = new Hashtable();
             param.Add("@xxxx", "");
@@ -884,7 +884,93 @@ public class bsmain : System.Web.Services.WebService
         }
 
 
+        //获取重要列表
+        if (hqbz == "zysj_liebiao_002")
+        {
+            Hashtable param = new Hashtable();
+            param.Add("@xxxx", "");
+
+            Hashtable return_ht = new Hashtable();
+
+            return_ht = I_DBL.RunParam_SQL("select 大区, 发货总金额, 服务报告数量 from View_yibiaopan_liebiao_002 ORDER BY 大区", "数据记录", param);
+
+
+            if ((bool)(return_ht["return_float"]))
+            {
+                DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+
+                string shuju = "";
+                for (int i = 0; i < redb.Rows.Count; i++)
+                {
+                    shuju = shuju + "" + redb.Rows[i]["发货总金额"].ToString() + ",";
+                    shuju = shuju + "" + redb.Rows[i]["服务报告数量"].ToString() + ",";
+                }
+                shuju = shuju.TrimEnd(',');
+                return shuju;
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+
         return "";
+    }
+
+
+
+
+
+    /// <summary>
+    /// 获取我的工作台数据
+    /// </summary>
+    /// <param name="UAid">用户标记</param>
+    /// <param name="spsp">其他参数</param>
+    /// <returns></returns>
+    [WebMethod(MessageName = "获取我的工作台数据", Description = "获取我的工作台数据")]
+    public DataTable Get_gongzuotai(string UAid, string spsp)
+    {
+
+
+        //参数合法性各种验证，这里省略
+
+        //开始真正的处理，这里只是演示，所以直接在这里写业务逻辑代码了
+
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+
+
+        Hashtable param = new Hashtable();
+        param.Add("@UAid", UAid);
+
+        Hashtable return_ht = new Hashtable();
+
+        string sql = "";
+        sql = sql + " if not exists (select  MID from ZZZ_MYGZT where MID like 'gzt_'+@UAid+'_%' ) begin ";
+
+        //sql = sql + " delete ZZZ_MYGZT where MID  like 'gzt_'+@UAid+'_%' ";
+        for (int i = 0; i < 8; i++)
+        {
+            sql = sql + " insert into ZZZ_MYGZT (MID,Mbiaoti,Mdizhi,Mbeiwanglu) values('gzt_'+@UAid+'_" + i.ToString() + "','','','') ";
+        }
+        sql = sql + " end   ";
+     
+        sql = sql + " select  MID,(Case When Mbiaoti ='' then '暂无快捷链接' Else Mbiaoti End ) as Mbiaoti , (Case When Mdizhi ='' then 'javascript:void(0)' Else Mdizhi End ) as Mdizhi, (Case When Mbeiwanglu ='' then '备忘：暂无备忘信息' Else '备忘：'+Mbeiwanglu End ) as Mbeiwanglu from ZZZ_MYGZT where MID  like 'gzt_'+@UAid+'_%' order by MID asc ";
+        return_ht = I_DBL.RunParam_SQL(sql, "数据记录", param);
+
+
+        if ((bool)(return_ht["return_float"]))
+        {
+            DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+
+            return redb;
+
+        }
+        else
+        {
+            return null;
+        }
+
     }
 
 

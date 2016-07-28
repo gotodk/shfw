@@ -400,7 +400,15 @@
             }
             //添加返回代码
             $(document).on('click', "#fanhuishangyiye_top", function () {
-                history.back(-1);
+                if (location.href.indexOf("edit_mygzt.aspx") > 0)
+                {
+                    location.href = "/adminht/demo_home.aspx?guidrere=" + randomnumber();
+                }
+                else
+                {
+                    history.back(-1);
+                }
+                
 
             });
             $(document).on('click', "#xinzeng_top", function () {
