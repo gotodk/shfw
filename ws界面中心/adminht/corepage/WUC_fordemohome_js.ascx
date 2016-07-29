@@ -262,8 +262,20 @@
     			    
     			   
 
-				
+				//报修超过24小时未处理数量
+		        $.ajax({
+		            type: "POST",
+		            url: "/adminht/corepage/WUC_fordemohome_ajax.aspx",
+		            data: "hqbz=baoxiuchao24",
+		            dataType: "html",
+		            success: function (data) {
+		                if (data != "" && data != "0") {
+		                    $("#bxsqts_chao24").html(data);
+		                    $("#bxsqts_chao24").closest('.bxsqts_zzz').removeClass("hidden");
+		                }
 
+		            }
+		        });
                
 			
 

@@ -398,6 +398,50 @@ public class bsmain : System.Web.Services.WebService
 
 
 
+    /// <summary>
+    /// 获取用户基础资料
+    /// </summary>
+    /// <param name="UAid">UI端的参数</param>
+    /// <returns></returns>
+    [WebMethod(MessageName = "获取用户基础资料", Description = "获取用户基础资料")]
+    public DataTable GetUserjichuziliao(string UAid)
+    {
+
+
+        //开始真正的处理，这里只是演示，所以直接在这里写业务逻辑代码了
+
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+
+        Hashtable param = new Hashtable();
+
+        Hashtable return_ht = new Hashtable();
+
+        param.Add("@UAid", UAid);
+        return_ht = I_DBL.RunParam_SQL("select top 1 * from ZZZ_userinfo where UAid=@UAid     ", "数据记录", param);
+
+        if ((bool)(return_ht["return_float"]))
+        {
+            DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+            if (redb.Rows.Count > 0)
+            {
+                return redb;
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+        else
+        {
+            return null;
+        }
+
+        return null;
+    }
+
+
+
 
     /// <summary>
     /// 获取会签数据
@@ -906,6 +950,33 @@ public class bsmain : System.Web.Services.WebService
                     shuju = shuju + "" + redb.Rows[i]["服务报告数量"].ToString() + ",";
                 }
                 shuju = shuju.TrimEnd(',');
+                return shuju;
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+
+
+        //获取重要列表
+        if (hqbz == "baoxiuchao24")
+        {
+            Hashtable param = new Hashtable();
+            param.Add("@xxxx", "");
+
+            Hashtable return_ht = new Hashtable();
+
+            return_ht = I_DBL.RunParam_SQL("select count(*) from ZZZ_BXSQ  where Bzhuangtai='待处理' and datediff( hour, (select top 1 DDtime from ZZZ_BXSQ_DD where DD_BID=BID order by DDtime desc), getdate() ) > 24", "数据记录", param);
+
+
+            if ((bool)(return_ht["return_float"]))
+            {
+                DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+
+                string shuju = "";
+                shuju = redb.Rows[0][0].ToString();
                 return shuju;
             }
             else

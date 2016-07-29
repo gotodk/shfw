@@ -106,7 +106,7 @@ public class NoReSetDEL_160713000062
             ArrayList alsql = new ArrayList();
 
 
-            //删除数据表里的数据 
+            //更新数据表里的数据 
             string[] ids = ht_forUI["xuanzhongzhi"].ToString().Split(',');
             for (int d = 0; d < ids.Length; d++)
             {

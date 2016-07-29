@@ -84,6 +84,9 @@ public partial class login_do : System.Web.UI.Page
                     UserSession.最终权值_备用权限 = dsreturn.Tables["用户信息"].Rows[0]["UfinalUnumber5"].ToString();
                     Response.Cookies["user_Uloginname_onlyforinput"].Value = Server.UrlEncode(dsreturn.Tables["用户信息"].Rows[0]["Uloginname"].ToString());
                     Response.Cookies["user_Uloginname_onlyforinput"].Expires = DateTime.MaxValue;
+
+                    //额外获取
+
                     Response.Write("ok");
                     return;
                 }

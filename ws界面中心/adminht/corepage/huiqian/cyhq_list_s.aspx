@@ -45,7 +45,7 @@
 													 
 
 													<td style="vertical-align:Middle">
-														<span class="label label-sm label-warning">由我发起</span>
+														<span class="label label-sm label-warning"><%=dsr.Tables["数据记录"].Rows[i]["canyuqingkuang"].ToString() %></span>
 													</td>
 
 											 

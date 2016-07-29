@@ -65,7 +65,7 @@ public class NoReSet_160423000030
         param.Add("@YYID", ht_forUI["YYID"].ToString());
         param.Add("@shixiaoriqi", ht_forUI["shixiaoriqi"].ToString());
 
-        alsql.Add("INSERT INTO  ZZZ_userinfo_glkh(GLKHID, UAid, YYID, shixiaoriqi ) VALUES(@GLKHID, @UAid, @YYID, @shixiaoriqi)");
+        alsql.Add(" if not exists (select  GLKHID from ZZZ_MYGZT where UAid=@UAid and YYID=@YYID ) begin     INSERT INTO  ZZZ_userinfo_glkh(GLKHID, UAid, YYID, shixiaoriqi ) VALUES(@GLKHID, @UAid, @YYID, @shixiaoriqi)  end");
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
 
@@ -118,7 +118,7 @@ public class NoReSet_160423000030
         param.Add("@UAid", ht_forUI["UAid"].ToString());
         param.Add("@YYID", ht_forUI["YYID"].ToString());
         param.Add("@shixiaoriqi", ht_forUI["shixiaoriqi"].ToString());
-        alsql.Add("UPDATE ZZZ_userinfo_glkh SET UAid=@UAid, YYID=@YYID, shixiaoriqi=@shixiaoriqi  where GLKHID=@GLKHID ");
+        alsql.Add(" if not exists (select  GLKHID from ZZZ_MYGZT where UAid=@UAid and YYID=@YYID ) begin   UPDATE ZZZ_userinfo_glkh SET UAid=@UAid, YYID=@YYID, shixiaoriqi=@shixiaoriqi  where GLKHID=@GLKHID   end ");
    
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);

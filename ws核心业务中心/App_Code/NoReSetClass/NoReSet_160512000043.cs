@@ -147,7 +147,7 @@ public class NoReSet_160512000043
 
                     param.Add("@sub_" + "YJqianhsuren" + "_" + i, YJqianhsuren_arr[i].Trim());
  
-                    string INSERTsql = "if not exists(select YJID from ZZZ_HQ_YJ where YJ_QID=@YJ_QID and YJqianhsuren=@sub_" + "YJqianhsuren" + "_" + i + " )   begin   INSERT INTO  ZZZ_HQ_YJ ( YJID, YJ_QID, YJqianhsuren, YJzhuangtai, YJyijian, YJqsshijian, YJlaiyuan, YJlysj ) VALUES(@sub_" + "YJID" + "_" + i + ", @YJ_QID, @sub_" + "YJqianhsuren" + "_" + i + ", '待签',null,null, @YJlaiyuan,getdate()   )    end";
+                    string INSERTsql = "if not exists(select YJID from ZZZ_HQ_YJ where YJ_QID=@YJ_QID and YJqianhsuren=@sub_" + "YJqianhsuren" + "_" + i + " )   begin   INSERT INTO  ZZZ_HQ_YJ ( YJID, YJ_QID, YJqianhsuren, YJzhuangtai, YJyijian, YJqsshijian, YJlaiyuan, YJlysj ) VALUES(@sub_" + "YJID" + "_" + i + ", @YJ_QID, @sub_" + "YJqianhsuren" + "_" + i + ", '待签',null,null, @YJlaiyuan,getdate()   )  ;    INSERT INTO  auth_znx(touser, msgtitle, msurl) VALUES(@sub_" + "YJqianhsuren" + "_" + i + ", '有新的会签需要您的参与，单号[' + @YJ_QID + ']', '/adminht/corepage/huiqian/cyhq.aspx?idforedit='+@YJ_QID+'&fff=1')    end";
                     alsql.Add(INSERTsql);
                 }
                 

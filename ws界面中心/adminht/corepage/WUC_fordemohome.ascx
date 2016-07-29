@@ -1,11 +1,29 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="WUC_fordemohome.ascx.cs" Inherits="adminht_corepage_WUC_fordemohome" %>
 
 
+<!-- 报修申请超过24小时未接收的单据数量提示 -->
+<div class="row bxsqts_zzz hidden">
+							<div class="col-xs-12 col-sm-12">
+                                <div class="alert alert-block alert-warning">
+									<button type="button" class="close" data-dismiss="alert">
+										<i class="ace-icon fa fa-times"></i>
+									</button>
+
+									<i class="ace-icon fa fa-exclamation-triangle red"></i>
+									 
+										请注意：有<span id="bxsqts_chao24">0</span>个报修申请单已超过24小时未接收处理！
+								 
+                                     
+	 
+</div> 
+                                </div></div>
+
+
 
 
 
 <div class="row">
-							<div class="col-xs-12">
+							<div class="col-xs-12 col-sm-12">
 
 
                                    <%
@@ -14,14 +32,13 @@
                 %>
 
 								<div class="row">
-									<div class="space-6"></div>
-
+									 
 									<div class="col-sm-7 infobox-container">
                                                                              <!-- 重要提示 -->
 <div class="alert alert-block alert-success">
-									<button type="button" class="close" data-dismiss="alert">
+								<%--	<button type="button" class="close" data-dismiss="alert">
 										<i class="ace-icon fa fa-times"></i>
-									</button>
+									</button>--%>
 
 									<i class="ace-icon fa fa-check green"></i>
 									您好，
