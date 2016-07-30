@@ -34,7 +34,7 @@
                     [*[SubDialog]*]
                 ],
 
-                gridview: true, //这个选项必须开
+                gridview: gridview_cs_for_ie, //这个选项必须开,如果是false，支持ie8，但大量数据时会很慢
                 viewrecords: true,
                 rowNum: [*[Default_FD_D_pagesize]*],
                 rowList: [[*[FD_D_pagesize]*]],

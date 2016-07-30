@@ -55,6 +55,38 @@
             tmp = pp.split("?");//把参数和文件名分割开 
             return tmp[0];
         }
+
+        var gridview_cs_for_ie = true;
+        function isIE() {
+            if (!!window.ActiveXObject || "ActiveXObject" in window) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function IEVersion() {
+            var rv = -1;
+            if (navigator.appName == 'Microsoft Internet Explorer') {
+                var ua = navigator.userAgent;
+                var re = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+                if (re.exec(ua) != null)
+                    rv = parseFloat(RegExp.$1);
+            } else if (navigator.appName == 'Netscape') {
+                var ua = navigator.userAgent;
+                var re = new RegExp("Trident/.*rv:([0-9]{1,}[\.0-9]{0,})");
+                if (re.exec(ua) != null)
+                    rv = parseFloat(RegExp.$1);
+            }
+            return rv;
+        }
+      
+        if (isIE()) {
+            if (IEVersion() < 10) {
+                gridview_cs_for_ie = false; //针对ie9，设置jqgrid的参数。使其兼容
+            };
+        };
+
     </script>
 
     <!-- **********输入过程控制处理******** -->
@@ -80,6 +112,8 @@
     <script type="text/javascript">
         var grid_selector = "#grid-table";
         var pager_selector = "#grid-pager";
+        
+
 
         function clon_click(cb) {
             var ckid = $(cb).attr("id").replace("clon_", "");
@@ -87,6 +121,12 @@
             $("#" + ckid).click();
         }
         jQuery(function ($) {
+
+
+
+
+
+
 
  
             initjqgrid();
