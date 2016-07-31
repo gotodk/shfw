@@ -102,10 +102,10 @@ public class NoReSet_160713000058
         param.Add("@FCbumen", ht_forUI["FCbumen"].ToString());
         param.Add("@FC_erp_danbie", ht_forUI["FC_erp_danbie"].ToString());
         param.Add("@FCshenqingren", ht_forUI["yhbsp_session_uer_UAid"].ToString());
-       
+        param.Add("@FCbeizhu", ht_forUI["FCbeizhu"].ToString());
 
 
-        alsql.Add("INSERT INTO ZZZ_xiaoshoufahuo(FCID,FC_YYID,FCsmaz,FCbumen,FC_erp_danbie,FCshenqingren,FCshenqingshijian,FCzhuangtai) VALUES(@FCID,@FC_YYID,@FCsmaz,@FCbumen,@FC_erp_danbie,@FCshenqingren,getdate(),'草稿')");
+        alsql.Add("INSERT INTO ZZZ_xiaoshoufahuo(FCID,FC_YYID,FCsmaz,FCbumen,FC_erp_danbie,FCbeizhu,FCshenqingren,FCshenqingshijian,FCzhuangtai) VALUES(@FCID,@FC_YYID,@FCsmaz,@FCbumen,@FC_erp_danbie,@FCbeizhu,@FCshenqingren,getdate(),'草稿')");
 
 
         //遍历子表， 插入 
@@ -205,7 +205,9 @@ public class NoReSet_160713000058
             param.Add("@FCsmaz", ht_forUI["FCsmaz"].ToString());
             param.Add("@FCbumen", ht_forUI["FCbumen"].ToString());
             param.Add("@FC_erp_danbie", ht_forUI["FC_erp_danbie"].ToString());
-            alsql.Add("UPDATE  ZZZ_xiaoshoufahuo SET FC_YYID=@FC_YYID,FCsmaz=@FCsmaz,FCbumen=@FCbumen,FC_erp_danbie=@FC_erp_danbie  where FCID =@FCID ");
+            param.Add("@FCbeizhu", ht_forUI["FCbeizhu"].ToString());
+
+            alsql.Add("UPDATE  ZZZ_xiaoshoufahuo SET FC_YYID=@FC_YYID,FCsmaz=@FCsmaz,FCbumen=@FCbumen,FC_erp_danbie=@FC_erp_danbie,FCbeizhu=@FCbeizhu  where FCID =@FCID ");
 
 
             //遍历子表，先删除，再插入，已有主键的不重新生成。

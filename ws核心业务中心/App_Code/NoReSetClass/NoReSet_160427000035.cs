@@ -602,8 +602,8 @@ public class NoReSet_160427000035
             {
                 param.Add("@Gzhuangtai", "审核");
                 param.Add("@Gspyj", ht_forUI["Gspyj"].ToString());
-                param.Add("@Gtianxieren", ht_forUI["yhbsp_session_uer_UAid"].ToString());
-                alsql.Add("UPDATE ZZZ_FWBG SET Gjishufuwufei=@Gjishufuwufei, Gzongjia=@Gzongjia,Gzhuangtai=@Gzhuangtai,Gspyj=@Gspyj,Gtianxieren=@Gtianxieren,Gspshijian=getdate() where GID=@GID");
+                param.Add("@Gspren", ht_forUI["yhbsp_session_uer_UAid"].ToString());
+                alsql.Add("UPDATE ZZZ_FWBG SET Gjishufuwufei=@Gjishufuwufei, Gzongjia=@Gzongjia,Gzhuangtai=@Gzhuangtai,Gspyj=@Gspyj,Gspren=@Gspren,Gspshijian=getdate() where GID=@GID");
 
 
                 //获取零配件对应的设备编号，如果编号为“”，则表示不需要插入设备档案的零件子表
@@ -698,8 +698,8 @@ public class NoReSet_160427000035
             {
                 param.Add("@Gzhuangtai", "驳回");
                 param.Add("@Gspyj", ht_forUI["Gspyj"].ToString());
-                param.Add("@Gtianxieren", ht_forUI["yhbsp_session_uer_UAid"].ToString());
-                alsql.Add("UPDATE ZZZ_FWBG SET Gzhuangtai=@Gzhuangtai,Gspyj=@Gspyj,Gtianxieren=@Gtianxieren,Gspshijian=getdate() where GID=@GID");
+                param.Add("@Gspren", ht_forUI["yhbsp_session_uer_UAid"].ToString());
+                alsql.Add("UPDATE ZZZ_FWBG SET Gzhuangtai=@Gzhuangtai,Gspyj=@Gspyj,Gspren=@Gspren,Gspshijian=getdate() where GID=@GID");
             }
 
 

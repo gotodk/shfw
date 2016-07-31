@@ -77,7 +77,7 @@
 		//  }
 		//]
 	    //,
-		events: "/adminht/corepage/qiandao/qd_rili_ajax.aspx?zhiling=all&mod=qd&qdren=<%=UserSession.唯一键%>",
+		events: "/adminht/corepage/qiandao/qd_rili_ajax.aspx?zhiling=ziji&mod=qd&qdren=<%=UserSession.唯一键%>",
 		editable: true,
 		droppable: true, // this allows things to be dropped onto the calendar !!!
 		drop: function(date, allDay) { // this function is called when something is dropped

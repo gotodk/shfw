@@ -221,7 +221,7 @@ public class bsmain : System.Web.Services.WebService
         }
 
 
-        if (ht_forUI["zhiling"].ToString() == "all")
+        if (ht_forUI["zhiling"].ToString() == "ziji")
         {
 
 
@@ -230,7 +230,8 @@ public class bsmain : System.Web.Services.WebService
             Hashtable param = new Hashtable();
             param.Add("@start", ht_forUI["start"].ToString());
             param.Add("@end", ht_forUI["end"].ToString());
-            return_ht = I_DBL.RunParam_SQL("select *,Kfx+'-'+Kfanweinei as showstr  from ZZZ_kaoqin where Ktime >= @start and Ktime <= @end  ", "数据记录", param);
+            param.Add("@K_UAID", ht_forUI["qdren"].ToString());
+            return_ht = I_DBL.RunParam_SQL("select *,Kfx+'-'+Kfanweinei as showstr  from ZZZ_kaoqin where Ktime >= @start and Ktime <= @end and K_UAID=@K_UAID ", "数据记录", param);
 
             if ((bool)(return_ht["return_float"]))
             {

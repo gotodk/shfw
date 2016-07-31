@@ -103,23 +103,28 @@
 										 
 
 										<div class="infobox infobox-blue2">
+                                            
+
 											<div class="infobox-progress">
 												<!-- #section:pages/dashboard.infobox.easypiechart -->
+                                                
 												<div class="easy-pie-chart percentage"  id="zysj_danbeng_签到率" data-percent="0.00" data-size="46">
 													<span class="percent">--</span>%
 												</div>
-
+                                                   
 												<!-- /section:pages/dashboard.infobox.easypiechart -->
 											</div>
 
 											<div class="infobox-data">
-												<span class="infobox-text">签到率<span id="zysj_danbeng_签到率来源">--/--</span></span>
+												<span class="infobox-text"><a href="/adminht/corepage/qiandao/list_qd.aspx">签到率<span id="zysj_danbeng_签到率来源">--/--</span></a></span>
 
 												<div class="infobox-content">
 													<span class="bigger-110">~</span>
 													仅限售后工程师
 												</div>
-											</div>
+											</div> 
+
+										 
 										</div>
 
 										<div class="infobox infobox-orange">
@@ -161,7 +166,7 @@
 											<div class="widget-header widget-header-flat widget-header-small">
 												<h5 class="widget-title">
 													<i class="ace-icon fa fa-signal"></i>
-													返修设备种类排行
+													维修设备排行
 												</h5>
 
 												<div class="widget-toolbar no-border">

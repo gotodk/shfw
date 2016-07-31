@@ -97,6 +97,16 @@
              });
          }
      </script>
+    <!-- 默认查询当天的数据 -->
+    <script type="text/javascript">
+             jQuery(function ($) {
+                 //
+        
+                 $("#Ktime1").datepicker('setDate', new Date());;
+                 $("#Ktime2").datepicker('setDate', new Date());;
+ 
+        });
 
+        </script>
 </asp:Content>
 

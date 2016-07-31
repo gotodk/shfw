@@ -32,7 +32,7 @@
   <菜单表>
     <ID>29</ID>
     <SortID>26</SortID>
-    <SortName>仪表盘</SortName>
+    <SortName>我的工作台</SortName>
     <SortParentID>0</SortParentID>
     <SortParentPath>,</SortParentPath>
     <SortOrder>1</SortOrder>
@@ -42,7 +42,7 @@
     <m_ico>fa-tachometer</m_ico>
     <m_show>不隐藏</m_show>
     <m_url_formenu_g />
-    <SortNameTree>├仪表盘</SortNameTree>
+    <SortNameTree>├我的工作台</SortNameTree>
     <SortMoveUp>0</SortMoveUp>
     <SortMoveDown>-15</SortMoveDown>
   </菜单表>

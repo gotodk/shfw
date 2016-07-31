@@ -148,7 +148,7 @@
                     ,
                     multipleSearch: true,
                     multipleGroup: true,
-                    showQuery: true,
+                    showQuery: false,
                     jqModal: false,
 					closeAfterSearch:true
 
