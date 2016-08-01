@@ -481,7 +481,7 @@ public class bsmain : System.Web.Services.WebService
         if (ht_forUI["hqlx"].ToString() == "mylist")
         {
             //所有需要我参与的未结单的会签
-            sql = "select *, case when Qcjr=@uaid then '由我发起' when Qjiedanren=@uaid then '待我结单' else '需我参与' end  as canyuqingkuang from View_ZZZ_HQ_ex where ( Qjiedanren=@uaid  or  Qcjr=@uaid  or  QID in (select YJ_QID from ZZZ_HQ_YJ where YJqianhsuren=@uaid ) ) and Qzhuangtai='未结单' order by Qaddtime desc";
+            sql = "select *, case when Qcjr=@uaid then '由我发起' when Qjiedanren=@uaid then '待我结单' when (select count(YJID) from ZZZ_HQ_YJ where YJzhuangtai='待签' and YJ_QID=View_ZZZ_HQ_ex.QID and YJqianhsuren=@uaid) > 0 then '需我参与' else '我已参与' end  as canyuqingkuang from View_ZZZ_HQ_ex where ( Qjiedanren=@uaid  or  Qcjr=@uaid  or  QID in (select YJ_QID from ZZZ_HQ_YJ where YJqianhsuren=@uaid ) ) and Qzhuangtai='未结单' order by Qaddtime desc";
 
              
         }
@@ -688,7 +688,7 @@ public class bsmain : System.Web.Services.WebService
         {
             linghangtishi = "没有找到关联单据信息!";
             param.Add("@BID", ht_forUI["idforedit"].ToString());
-            return_ht = I_DBL.RunParam_SQL("select top 1 BID,B_YYID,YYname,Bsbtime from View_ZZZ_BXSQ_ex where BID=@BID", "数据记录", param);
+            return_ht = I_DBL.RunParam_SQL("select top 1 BID,B_YYID,YYname,Bsbtime,Bzhuangtai from View_ZZZ_BXSQ_ex where BID=@BID", "数据记录", param);
         }
         if (ht_forUI["spspsp"].ToString() == "erp_kehudangan")
         {

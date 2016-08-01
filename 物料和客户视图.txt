@@ -1,0 +1,117 @@
+USE [master]
+GO
+
+/****** Object:  LinkedServer [EASTEST]    Script Date: 2016/8/1 16:45:24 ******/
+EXEC master.dbo.sp_addlinkedserver @server = N'EASTEST', @srvproduct=N'ORACLE', @provider=N'OraOLEDB.Oracle', @datasrc=N'orcl'
+ /* For security reasons the linked server remote logins password is changed with ######## */
+EXEC master.dbo.sp_addlinkedsrvlogin @rmtsrvname=N'EASTEST',@useself=N'False',@locallogin=NULL,@rmtuser=N'wego0417',@rmtpassword='########'
+
+GO
+
+EXEC master.dbo.sp_serveroption @server=N'EASTEST', @optname=N'collation compatible', @optvalue=N'false'
+GO
+
+EXEC master.dbo.sp_serveroption @server=N'EASTEST', @optname=N'data access', @optvalue=N'true'
+GO
+
+EXEC master.dbo.sp_serveroption @server=N'EASTEST', @optname=N'dist', @optvalue=N'false'
+GO
+
+EXEC master.dbo.sp_serveroption @server=N'EASTEST', @optname=N'pub', @optvalue=N'false'
+GO
+
+EXEC master.dbo.sp_serveroption @server=N'EASTEST', @optname=N'rpc', @optvalue=N'false'
+GO
+
+EXEC master.dbo.sp_serveroption @server=N'EASTEST', @optname=N'rpc out', @optvalue=N'false'
+GO
+
+EXEC master.dbo.sp_serveroption @server=N'EASTEST', @optname=N'sub', @optvalue=N'false'
+GO
+
+EXEC master.dbo.sp_serveroption @server=N'EASTEST', @optname=N'connect timeout', @optvalue=N'0'
+GO
+
+EXEC master.dbo.sp_serveroption @server=N'EASTEST', @optname=N'collation name', @optvalue=null
+GO
+
+EXEC master.dbo.sp_serveroption @server=N'EASTEST', @optname=N'lazy schema validation', @optvalue=N'false'
+GO
+
+EXEC master.dbo.sp_serveroption @server=N'EASTEST', @optname=N'query timeout', @optvalue=N'0'
+GO
+
+EXEC master.dbo.sp_serveroption @server=N'EASTEST', @optname=N'use remote collation', @optvalue=N'true'
+GO
+
+EXEC master.dbo.sp_serveroption @server=N'EASTEST', @optname=N'remote proc transaction promotion', @optvalue=N'true'
+GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+USE [SaleSupport]
+GO
+
+/****** Object:  View [dbo].[View_ZZZ_erp_kehudangan]    Script Date: 2016/7/28 18:02:41 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER VIEW [dbo].[View_ZZZ_erp_kehudangan]
+AS
+ 
+ select FNUMBER AS YYID, FNAME_L2 AS YYname from openquery(EASTEST,'select FNUMBER, FNAME_L2 from T_BD_Customer')
+ 
+
+GO
+
+
+
+
+
+
+
+
+
+
+USE [SaleSupport]
+GO
+
+/****** Object:  View [dbo].[View_ZZZ_erp_wuliaoxinxi]    Script Date: 2016/7/28 18:03:25 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+ALTER VIEW [dbo].[View_ZZZ_erp_wuliaoxinxi]
+AS
+--SELECT   '11.22.33.44' AS bianhao, '测试名称' AS mingcheng, '测试规格' AS guige, '个' AS danwei 
+
+ select FNUMBER AS bianhao, FNAME_L2 AS mingcheng, FMODEL AS guige,danwei as danwei, danwei_FNUMBER as danwei_FNUMBER from openquery(EASTEST,'select T_BD_Material.FNUMBER as FNUMBER,T_BD_Material.FNAME_L2 as FNAME_L2,T_BD_Material.FMODEL as FMODEL, T_BD_MeasureUnit.FNUMBER as danwei_FNUMBER,T_BD_MeasureUnit.FNAME_L2 as danwei  from T_BD_Material left join T_BD_MeasureUnit on  T_BD_MeasureUnit.FID=T_BD_Material.FBASEUNIT')
+
+
+GO
+
+

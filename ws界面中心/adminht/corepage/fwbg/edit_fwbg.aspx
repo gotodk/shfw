@@ -104,7 +104,7 @@
                      $("#gview_grid-table-subtable-160427000666").find("input[name='位置标记']").removeAttr("readonly");
                      $("#gview_grid-table-subtable-160427000666").find("input[name='实际售价']").removeAttr("readonly");
                      $("#gview_grid-table-subtable-160427000666").find("input[name='零件数量']").removeAttr("readonly");
-                     $("#gview_grid-table-subtable-160427000666").find("input[name='保修截止日期']").removeAttr("readonly");
+                     //$("#gview_grid-table-subtable-160427000666").find("input[name='保修截止日期']").removeAttr("readonly");
                      $("#gview_grid-table-subtable-160427000666").find("input[name='批号']").removeAttr("readonly");
                      $("#gview_grid-table-subtable-160427000666").find("input[name='备注']").removeAttr("readonly");
 
@@ -167,6 +167,11 @@
                                      var zj = $(dfx_str_subsbxlh).closest("tr").find("input[name='ERP编号']");
                                      zj.val($.trim(arr_z[1]).replace("]", ""));
                                  }
+                                 if (arr_z[0] == "[保修期限") {
+                                     //离弹窗最近的特定name的输入框  
+                                     var zj = $(dfx_str_subsbxlh).closest("tr").find("input[name='保修期限']");
+                                     zj.val($.trim(arr_z[1]).replace("]", ""));
+                                 }
                                  if (arr_z[0] == "[保修到期日期") {
                                      //离弹窗最近的特定name的输入框  
                                      var zj = $(dfx_str_subsbxlh).closest("tr").find("input[name='保修截止日期']");
@@ -179,6 +184,7 @@
 
                                      //zj.val($.trim(arr_z[1]).replace("]", ""));
                                  }
+                                 
                              }
                          }
 
@@ -282,6 +288,31 @@
                                      zj.val($.trim(arr_z[1]).replace("]", ""));
                                  }
                              }
+                         }
+
+                         //根据规则填入保修截止日期
+                         var val_Gbylx = $('input[name="Gbylx"]:checked ').val();
+                         if (val_Gbylx == "保内")
+                         {
+                       
+                             var bxjzrq = $("#grid-table-subtable-160427000664").jqGrid("getRowData", $("#grid-table-subtable-160427000664").getGridParam('selarrrow')[0]).保修截止日期;
+                             //alert(JSON.stringify(bxjzrq));
+                             var zj = $(dfx_str_subljbh).closest("tr").find("input[name='保修截止日期']");
+                             zj.val(bxjzrq);
+                         }
+                         else
+                         {
+                     
+                             var bxqx = $("#grid-table-subtable-160427000664").jqGrid("getRowData", $("#grid-table-subtable-160427000664").getGridParam('selarrrow')[0]).保修期限;
+                            
+                             var now_data = new Date();
+                             now_data.setDate(now_data.getDate() + 10 + parseInt(bxqx));
+                             var bxjzrq = now_data.Format_go("yyyy-MM-dd");
+                             if (bxjzrq.indexOf("aN") >= 0) {
+                                 bxjzrq = "";
+                             }
+                             var zj = $(dfx_str_subljbh).closest("tr").find("input[name='保修截止日期']");
+                             zj.val(bxjzrq);
                          }
 
                          oldzhi_subljbh = $(dfx_str_subljbh).text();
@@ -390,6 +421,15 @@
                      $("#YYname").val($(xml).find('数据记录>YYname').text());
                      var Bsbtime_zz_ss = new Date($(xml).find('数据记录>Bsbtime').text()).Format_go("yyyy-MM-dd");
                      $("#Gsbtime").datepicker('setDate', Bsbtime_zz_ss);
+
+                     //验证如果保修申请已结单，则提示不需要建立报告，并禁用提交按钮
+                     var Bzhuangtai = $(xml).find('数据记录>Bzhuangtai').text();
+                     if (Bzhuangtai != "已接收")
+                     {
+                         $("#addbutton1_top").attr({ "disabled": "disabled" });
+                         $("#addbutton1").attr({ "disabled": "disabled" });
+                         bootbox.alert("错误：报修申请单状态为[" + Bzhuangtai + "]，不允许建立服务报告！");
+                     }
  
                  };
                  function zdy_ajaxdb(cs) {

@@ -24,6 +24,9 @@ public partial class fwbh_edit_sqddd : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //检查权限
+        AuthComm.chekcAuth_fromsession("16", UserSession.最终权值_全局独立权限, true);
+
         //表单识别号
         string FID = "160610000055";
         #region 必备的配置代码

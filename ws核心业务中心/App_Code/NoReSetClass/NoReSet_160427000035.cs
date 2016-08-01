@@ -211,6 +211,17 @@ public class NoReSet_160427000035
             return dsreturn;
         }
 
+        //额外验证，除综合、远程以外，设备必填
+        if (ht_forUI["Gfwlx"].ToString() != "综合" || ht_forUI["Gfwlx"].ToString() != "远程")
+        {
+            if(subdt.Rows.Count < 1)
+            {
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "提交错误,需要至少录入一条设备信息！";
+                return dsreturn;
+            }
+           
+        }
 
         //额外验证一下，如果是维修类型，子表只允许出现一条信息。
         if (ht_forUI["Gfwlx"].ToString() == "维修" && subdt.Rows.Count > 1)
@@ -230,11 +241,12 @@ public class NoReSet_160427000035
             param.Add("@sub_" + "sbmingcheng" + "_" + i, subdt.Rows[i]["设备名称"].ToString());
             param.Add("@sub_" + "sbguige" + "_" + i, subdt.Rows[i]["设备规格"].ToString());
             param.Add("@sub_" + "sbbaoxiujiezhi" + "_" + i, subdt.Rows[i]["保修截止日期"].ToString());
+            param.Add("@sub_" + "sbbaoxiuqixian" + "_" + i, subdt.Rows[i]["保修期限"].ToString());
             param.Add("@sub_" + "sberpbianhao" + "_" + i, subdt.Rows[i]["ERP编号"].ToString());
             param.Add("@sub_" + "sbyzsj" + "_" + i, subdt.Rows[i]["运转时间"].ToString());
             param.Add("@sub_" + "sbbeizhu" + "_" + i, subdt.Rows[i]["备注"].ToString());
 
-            string INSERTsql = "INSERT INTO ZZZ_FWBG_shebei (sbid, sb_GID, sb_SID, sbmingcheng, sbguige, sbbaoxiujiezhi,sberpbianhao, sbyzsj, sbbeizhu) VALUES(@sub_" + "sbid" + "_" + i + ", @sub_MainID, @sub_"+ "sb_SID" + "_" + i + ", @sub_" + "sbmingcheng" + "_" + i + ", @sub_" + "sbguige" + "_" + i + ", @sub_" + "sbbaoxiujiezhi" + "_" + i + ", @sub_" + "sberpbianhao" + "_" + i + ", @sub_" + "sbyzsj" + "_" + i + ", @sub_" + "sbbeizhu" + "_" + i + "  )";
+            string INSERTsql = "INSERT INTO ZZZ_FWBG_shebei (sbid, sb_GID, sb_SID, sbmingcheng, sbguige, sbbaoxiujiezhi,sbbaoxiuqixian,sberpbianhao, sbyzsj, sbbeizhu) VALUES(@sub_" + "sbid" + "_" + i + ", @sub_MainID, @sub_"+ "sb_SID" + "_" + i + ", @sub_" + "sbmingcheng" + "_" + i + ", @sub_" + "sbguige" + "_" + i + ", @sub_" + "sbbaoxiujiezhi" + "_" + i + ", @sub_" + "sbbaoxiuqixian" + "_" + i + ", @sub_" + "sberpbianhao" + "_" + i + ", @sub_" + "sbyzsj" + "_" + i + ", @sub_" + "sbbeizhu" + "_" + i + "  )";
             alsql.Add(INSERTsql);
         }
 
@@ -468,11 +480,12 @@ public class NoReSet_160427000035
                 param.Add("@sub_" + "sbmingcheng" + "_" + i, subdt.Rows[i]["设备名称"].ToString());
                 param.Add("@sub_" + "sbguige" + "_" + i, subdt.Rows[i]["设备规格"].ToString());
                 param.Add("@sub_" + "sbbaoxiujiezhi" + "_" + i, subdt.Rows[i]["保修截止日期"].ToString());
+                param.Add("@sub_" + "sbbaoxiuqixian" + "_" + i, subdt.Rows[i]["保修期限"].ToString());
                 param.Add("@sub_" + "sberpbianhao" + "_" + i, subdt.Rows[i]["ERP编号"].ToString());
                 param.Add("@sub_" + "sbyzsj" + "_" + i, subdt.Rows[i]["运转时间"].ToString());
                 param.Add("@sub_" + "sbbeizhu" + "_" + i, subdt.Rows[i]["备注"].ToString());
 
-                string INSERTsql = "INSERT INTO ZZZ_FWBG_shebei (sbid, sb_GID, sb_SID, sbmingcheng, sbguige,sbbaoxiujiezhi, sberpbianhao, sbyzsj, sbbeizhu) VALUES(@sub_" + "sbid" + "_" + i + ", @sub_MainID, @sub_" + "sb_SID" + "_" + i + ", @sub_" + "sbmingcheng" + "_" + i + ", @sub_" + "sbguige" + "_" + i + ", @sub_" + "sbbaoxiujiezhi" + "_" + i + ", @sub_" + "sberpbianhao" + "_" + i + ", @sub_" + "sbyzsj" + "_" + i + ", @sub_" + "sbbeizhu" + "_" + i + "  )";
+                string INSERTsql = "INSERT INTO ZZZ_FWBG_shebei (sbid, sb_GID, sb_SID, sbmingcheng, sbguige,sbbaoxiujiezhi,sbbaoxiuqixian, sberpbianhao, sbyzsj, sbbeizhu) VALUES(@sub_" + "sbid" + "_" + i + ", @sub_MainID, @sub_" + "sb_SID" + "_" + i + ", @sub_" + "sbmingcheng" + "_" + i + ", @sub_" + "sbguige" + "_" + i + ", @sub_" + "sbbaoxiujiezhi" + "_" + i + ", @sub_" + "sbbaoxiuqixian" + "_" + i + ", @sub_" + "sberpbianhao" + "_" + i + ", @sub_" + "sbyzsj" + "_" + i + ", @sub_" + "sbbeizhu" + "_" + i + "  )";
                 alsql.Add(INSERTsql);
             }
 

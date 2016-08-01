@@ -122,6 +122,11 @@
                     
                  }
 
+
+
+                 var nowloginuser = "<%=UserSession.唯一键%>";
+                 $("#searchopenyhbspgogo_FC_YYID").attr("teshuwhere", " YYID in (select YYID from ZZZ_userinfo_glkh where UAid='" + nowloginuser + "' and shixiaoriqi >= getdate()  UNION  select YYID from ZZZ_KHDA where YYfuwufuzeren='" + nowloginuser + "') ");
+
                  var dfx_str_kh = "#show_searchopenyhbspgogo_FC_YYID";
                  var oldzhi_kh = $(dfx_str_kh).text();
             

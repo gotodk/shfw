@@ -122,6 +122,16 @@
     <ANused>1</ANused>
   </Unumber1>
   <Unumber1>
+    <ANID>E-A4A600B1E972-11C76A28-FD74-45AC-9C9D</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>服务报告-填写服务报告</ANBaseName>
+    <ANBaseNumber>16777216</ANBaseNumber>
+    <ANBaseNumber_p>24</ANBaseNumber_p>
+    <ANextendID>86</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
     <ANID>E-A4A600B1E947-72082D9D-DC31-4542-B7AF</ANID>
     <ANClass>Unumber1</ANClass>
     <ANClassName>后台菜单权限</ANClassName>
@@ -368,6 +378,16 @@
     <ANBaseName>仪表盘-重要业务数据</ANBaseName>
     <ANBaseNumber>2</ANBaseNumber>
     <ANBaseNumber_p>1</ANBaseNumber_p>
+    <ANextendID>无</ANextendID>
+    <ANused>1</ANused>
+  </Unumber3>
+  <Unumber3>
+    <ANID>E-A4A600B32BB3-78CB99D5-BEE4-4597-AE32</ANID>
+    <ANClass>Unumber3</ANClass>
+    <ANClassName>全局独立权限</ANClassName>
+    <ANBaseName>重新调度功能</ANBaseName>
+    <ANBaseNumber>16</ANBaseNumber>
+    <ANBaseNumber_p>4</ANBaseNumber_p>
     <ANextendID>无</ANextendID>
     <ANused>1</ANused>
   </Unumber3>
