@@ -43,9 +43,10 @@
                      $("#FCfahuoren").closest(".form-group").hide();
                      $("#FCfahuoren_name").closest(".form-group").hide();
                      $("#FCfahuoshijian").closest(".form-group").hide();
-                     $("#FCjisongdizhi").closest(".form-group").hide();
-                     $("#FClianxifangshi").closest(".form-group").hide();
-                     $("#FCshoujianren").closest(".form-group").hide();
+                     //$("#FCjisongdizhi").closest(".form-group").hide();
+                     //$("#FClianxifangshi").closest(".form-group").hide();
+                     //$("#FCshoujianren").closest(".form-group").hide();
+                     $("#FCfahuobeizhu").closest(".form-group").hide();
                      $("#FCshoujianshijian").closest(".form-group").hide();
                      $("#FCqurenshoujianren").closest(".form-group").hide();
                      $("#FCqurenshoujianren_name").closest(".form-group").hide();
@@ -85,10 +86,26 @@
                  
                      $("#ywlx_yincang").closest(".form-group").hide();
 
+                                  //工程师只能看到配件
+                 var nowloginuser = "<%=UserSession.唯一键%>";
+                 $("#searchopenyhbspgogo_subtcid_FCSbh").attr("teshuwhere", " lb like (select  case when suoshuquyu = '129' then '%零件%' else '%%' end  from ZZZ_userinfo where UAid='" + nowloginuser + "') ");
+
                      //物料类型弄成只读的
                      $("#gview_grid-table-subtable-160713000991").find("input").attr("readonly", "readonly");
                      $("#gview_grid-table-subtable-160713000991").find("input[name='发货数量']").removeAttr("readonly");
+
+                     $("#gview_grid-table-subtable-160713000991").find("input[name='单价']").removeAttr("readonly");
+                     //$("#gview_grid-table-subtable-160713000991").find("input[name='金额']").removeAttr("readonly");
                      $("#gview_grid-table-subtable-160713000991").find("input[name='备注']").removeAttr("readonly");
+                     if (getUrlParam("ywlx") == "fahuo") {
+
+                         $("#gview_grid-table-subtable-160713000991").find("input[name='保修期限']").removeAttr("readonly");
+                     }
+
+                     //自动计算子表金额
+                     var zz_sjsj = $("#gview_grid-table-subtable-160713000991").find("input[name='单价']").val();
+                     var zz_shuliang = $("#gview_grid-table-subtable-160713000991").find("input[name='发货数量']").val();
+                     $("#gview_grid-table-subtable-160713000991").find("input[name='金额']").val((zz_sjsj * zz_shuliang).toFixed(2));
                      
                  }, 500);
 
@@ -155,8 +172,7 @@
 
 
 
-
-
+    
 
                  var dfx_str_subtt = "#show_searchopenyhbspgogo_subtcid_FCSbh";
                  var oldzhi_subtt = $(dfx_str_subtt).text();
@@ -187,6 +203,11 @@
                                  if (arr_z[0] == "[物料类别") {
                                      //离弹窗最近的特定name的输入框  
                                      var zj = $(dfx_str_subtt).closest("tr").find("input[name='物料类别']");
+                                     zj.val($.trim(arr_z[1]).replace("]", ""));
+                                 }
+                                 if (arr_z[0] == "[保修期限") {
+                                     //离弹窗最近的特定name的输入框  
+                                     var zj = $(dfx_str_subtt).closest("tr").find("input[name='保修期限']");
                                      zj.val($.trim(arr_z[1]).replace("]", ""));
                                  }
                              }

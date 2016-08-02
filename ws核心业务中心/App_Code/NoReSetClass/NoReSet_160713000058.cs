@@ -104,8 +104,11 @@ public class NoReSet_160713000058
         param.Add("@FCshenqingren", ht_forUI["yhbsp_session_uer_UAid"].ToString());
         param.Add("@FCbeizhu", ht_forUI["FCbeizhu"].ToString());
 
+        param.Add("@FCjisongdizhi", ht_forUI["FCjisongdizhi"].ToString());
+        param.Add("@FClianxifangshi", ht_forUI["FClianxifangshi"].ToString());
+        param.Add("@FCshoujianren", ht_forUI["FCshoujianren"].ToString());
 
-        alsql.Add("INSERT INTO ZZZ_xiaoshoufahuo(FCID,FC_YYID,FCsmaz,FCbumen,FC_erp_danbie,FCbeizhu,FCshenqingren,FCshenqingshijian,FCzhuangtai) VALUES(@FCID,@FC_YYID,@FCsmaz,@FCbumen,@FC_erp_danbie,@FCbeizhu,@FCshenqingren,getdate(),'草稿')");
+        alsql.Add("INSERT INTO ZZZ_xiaoshoufahuo(FCID,FC_YYID,FCsmaz,FCbumen,FC_erp_danbie,FCbeizhu,FCshenqingren,FCshenqingshijian,FCzhuangtai,FCjisongdizhi,FClianxifangshi,FCshoujianren) VALUES(@FCID,@FC_YYID,@FCsmaz,@FCbumen,@FC_erp_danbie,@FCbeizhu,@FCshenqingren,getdate(),'草稿',@FCjisongdizhi,@FClianxifangshi,@FCshoujianren)");
 
 
         //遍历子表， 插入 
@@ -128,11 +131,14 @@ public class NoReSet_160713000058
             param.Add("@sub_" + "FCSbh" + "_" + i, subdt.Rows[i]["物料编码"].ToString());
             param.Add("@sub_" + "FClb" + "_" + i, subdt.Rows[i]["物料类别"].ToString());
             param.Add("@sub_" + "FCSsl" + "_" + i, subdt.Rows[i]["发货数量"].ToString());
+            param.Add("@sub_" + "FCbxqx" + "_" + i, subdt.Rows[i]["保修期限"].ToString());
+            param.Add("@sub_" + "FCdanjia" + "_" + i, subdt.Rows[i]["单价"].ToString());
+            param.Add("@sub_" + "FCjine" + "_" + i, subdt.Rows[i]["金额"].ToString());
             param.Add("@sub_" + "FCSbz" + "_" + i, subdt.Rows[i]["备注"].ToString());
        
 
 
-            string INSERTsql = "INSERT INTO ZZZ_xiaoshoufahuo_sb ( FCSID, FCS_FCID, FCSbh,FClb, FCSsl, FCSbz ) VALUES(@sub_" + "FCSID" + "_" + i + ", @sub_MainID, @sub_" + "FCSbh" + "_" + i + ",@sub_" + "FClb" + "_" + i + ", @sub_" + "FCSsl" + "_" + i + ", @sub_" + "FCSbz" + "_" + i + "  )";
+            string INSERTsql = "INSERT INTO ZZZ_xiaoshoufahuo_sb ( FCSID, FCS_FCID, FCSbh,FClb, FCSsl,FCbxqx,FCdanjia,FCjine, FCSbz ) VALUES(@sub_" + "FCSID" + "_" + i + ", @sub_MainID, @sub_" + "FCSbh" + "_" + i + ",@sub_" + "FClb" + "_" + i + ", @sub_" + "FCSsl" + "_" + i + " , @sub_" + "FCbxqx" + "_" + i + "  , @sub_" + "FCdanjia" + "_" + i + "  , @sub_" + "FCjine" + "_" + i + " , @sub_" + "FCSbz" + "_" + i + "  )";
             alsql.Add(INSERTsql);
         }
 
@@ -207,7 +213,11 @@ public class NoReSet_160713000058
             param.Add("@FC_erp_danbie", ht_forUI["FC_erp_danbie"].ToString());
             param.Add("@FCbeizhu", ht_forUI["FCbeizhu"].ToString());
 
-            alsql.Add("UPDATE  ZZZ_xiaoshoufahuo SET FC_YYID=@FC_YYID,FCsmaz=@FCsmaz,FCbumen=@FCbumen,FC_erp_danbie=@FC_erp_danbie,FCbeizhu=@FCbeizhu  where FCID =@FCID ");
+            param.Add("@FCjisongdizhi", ht_forUI["FCjisongdizhi"].ToString());
+            param.Add("@FClianxifangshi", ht_forUI["FClianxifangshi"].ToString());
+            param.Add("@FCshoujianren", ht_forUI["FCshoujianren"].ToString());
+
+            alsql.Add("UPDATE  ZZZ_xiaoshoufahuo SET FC_YYID=@FC_YYID,FCsmaz=@FCsmaz,FCbumen=@FCbumen,FC_erp_danbie=@FC_erp_danbie,FCbeizhu=@FCbeizhu,FCjisongdizhi=@FCjisongdizhi,FClianxifangshi=@FClianxifangshi,FCshoujianren=@FCshoujianren  where FCID =@FCID ");
 
 
             //遍历子表，先删除，再插入，已有主键的不重新生成。
@@ -236,11 +246,14 @@ public class NoReSet_160713000058
                 param.Add("@sub_" + "FCSbh" + "_" + i, subdt.Rows[i]["物料编码"].ToString());
                 param.Add("@sub_" + "FClb" + "_" + i, subdt.Rows[i]["物料类别"].ToString());
                 param.Add("@sub_" + "FCSsl" + "_" + i, subdt.Rows[i]["发货数量"].ToString());
+                param.Add("@sub_" + "FCbxqx" + "_" + i, subdt.Rows[i]["保修期限"].ToString());
+                param.Add("@sub_" + "FCdanjia" + "_" + i, subdt.Rows[i]["单价"].ToString());
+                param.Add("@sub_" + "FCjine" + "_" + i, subdt.Rows[i]["金额"].ToString());
                 param.Add("@sub_" + "FCSbz" + "_" + i, subdt.Rows[i]["备注"].ToString());
 
 
 
-                string INSERTsql = "INSERT INTO ZZZ_xiaoshoufahuo_sb ( FCSID, FCS_FCID, FCSbh,FClb, FCSsl, FCSbz ) VALUES(@sub_" + "FCSID" + "_" + i + ", @sub_MainID, @sub_" + "FCSbh" + "_" + i + ",@sub_" + "FClb" + "_" + i + ", @sub_" + "FCSsl" + "_" + i + ", @sub_" + "FCSbz" + "_" + i + "  )";
+                string INSERTsql = "INSERT INTO ZZZ_xiaoshoufahuo_sb ( FCSID, FCS_FCID, FCSbh,FClb, FCSsl,FCbxqx,FCdanjia,FCjine, FCSbz ) VALUES(@sub_" + "FCSID" + "_" + i + ", @sub_MainID, @sub_" + "FCSbh" + "_" + i + ",@sub_" + "FClb" + "_" + i + ", @sub_" + "FCSsl" + "_" + i + " , @sub_" + "FCbxqx" + "_" + i + "  , @sub_" + "FCdanjia" + "_" + i + "  , @sub_" + "FCjine" + "_" + i + " , @sub_" + "FCSbz" + "_" + i + "  )";
                 alsql.Add(INSERTsql);
             }
 
@@ -270,13 +283,58 @@ public class NoReSet_160713000058
             param.Add("@FClianxifangshi", ht_forUI["FClianxifangshi"].ToString());
             param.Add("@FCshoujianren", ht_forUI["FCshoujianren"].ToString());
 
-            alsql.Add("UPDATE  ZZZ_xiaoshoufahuo SET FCwuliudan=@FCwuliudan,FCwuliugongsi=@FCwuliugongsi,FCfahuoren=@FCfahuoren,FCfahuoshijian=getdate(),FCjisongdizhi=@FCjisongdizhi,FClianxifangshi=@FClianxifangshi,FCshoujianren=@FCshoujianren,FCzhuangtai='在途'  where FCID =@FCID ");
+            param.Add("@FCfahuobeizhu", ht_forUI["FCfahuobeizhu"].ToString());
+
+            alsql.Add("UPDATE  ZZZ_xiaoshoufahuo SET FCwuliudan=@FCwuliudan,FCwuliugongsi=@FCwuliugongsi,FCfahuoren=@FCfahuoren,FCfahuoshijian=getdate(),FCjisongdizhi=@FCjisongdizhi,FClianxifangshi=@FClianxifangshi,FCshoujianren=@FCshoujianren,FCzhuangtai='在途',FCfahuobeizhu=@FCfahuobeizhu  where FCID =@FCID ");
             //同步在联系人中增加一条联系人，重名的不插入
             string KID = CombGuid.GetMewIdFormSequence("ZZZ_KHLXR");
             param.Add("@KID", KID);
             param.Add("@K_YYID", ht_forUI["FC_YYID"].ToString());
             param.Add("@KKS", ht_forUI["FCbumen"].ToString());
             alsql.Add("if not exists(select top 1 KID from ZZZ_KHLXR where Klianiren=@FCshoujianren) begin insert into ZZZ_KHLXR (KID,K_YYID,KKS,Klianiren,Kzhicheng,Kxingbie,Kdianhua,Kbeizhu) values(@KID,@K_YYID,@KKS,@FCshoujianren,'','男',@FClianxifangshi,@FCjisongdizhi) end ");
+
+
+
+
+
+
+
+            //遍历零配件子表，也反写零件价格。 并且在设备档案表零件子表中插入一条信息
+            //遍历子表， 准备反写 (零件信息)
+            string zibiao_lj_id = "grid-table-subtable-160713000991";
+            DataTable subdt_lj = jsontodatatable.ToDataTable(ht_forUI[zibiao_lj_id].ToString());
+            //必须验证js脚本获取的数量和c#反序列化获取的数量一致才能继续。防止出错
+            if (ht_forUI[zibiao_lj_id + "_fcjsq"].ToString() != subdt_lj.Rows.Count.ToString())
+            {
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "子表数据量与获取量不相符，系统出现问题。";
+                return dsreturn;
+            }
+            for (int i = 0; i < subdt_lj.Rows.Count; i++)
+            {
+
+                if (subdt_lj.Rows[i]["隐藏编号"].ToString().Trim() == "")
+                {
+                    //新增的不反写
+                }
+                else
+                {
+                    //原有子表编号的，更新
+                    param.Add("@sub_" + "FCSID" + "_" + i, subdt_lj.Rows[i]["隐藏编号"].ToString());
+
+                    param.Add("@sub_" + "FCbxqx" + "_" + i, subdt_lj.Rows[i]["保修期限"].ToString());
+                    param.Add("@sub_" + "FCdanjia" + "_" + i, subdt_lj.Rows[i]["单价"].ToString());
+                    param.Add("@sub_" + "FCjine" + "_" + i, subdt_lj.Rows[i]["金额"].ToString());
+
+                    string upupsql = "update ZZZ_xiaoshoufahuo_sb set FCbxqx=@sub_" + "FCbxqx" + "_" + i + " ,FCdanjia=@sub_" + "FCdanjia" + "_" + i + " ,FCjine=@sub_" + "FCjine" + "_" + i + " where FCSID=@sub_" + "FCSID" + "_" + i;
+                    alsql.Add(upupsql);
+ 
+
+                }
+            }
+
+
+
         }
 
 

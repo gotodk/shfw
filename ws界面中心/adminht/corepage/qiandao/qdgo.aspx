@@ -43,7 +43,7 @@
                       
                  }
          
-
+                 $("#title_f_id").html("开始签到");
                  $("#addbutton1_top").html($("#addbutton1_top").html().replace("保存", "签到"));
                  $("#addbutton1").html($("#addbutton1").html().replace("保存", "签到"));
                  $("#addbutton1_top").attr({"disabled":"disabled"});

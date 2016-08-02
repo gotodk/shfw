@@ -78,14 +78,16 @@ public class NoReSet_160610000055
         param.Add("@caozuoren", ht_forUI["yhbsp_session_uer_UAid"].ToString());
 
         alsql.Add("INSERT INTO  ZZZ_BXSQ_DD(DDID, DD_BID, DDoldfzr, DDnewfzr, caozuoren) VALUES(@DDID, @DD_BID, @DDoldfzr, @DDnewfzr,@caozuoren)");
-        alsql.Add("UPDATE ZZZ_BXSQ set Bfwfzr = @DDnewfzr where BID=@DD_BID");
+        alsql.Add("UPDATE ZZZ_BXSQ set Bfwfzr = @DDnewfzr,Bzhuangtai='待处理',Bjstime=null,Bwctime=null where BID=@DD_BID");
+        //插入提醒，发往服务负责人
+        alsql.Add("INSERT INTO  auth_znx(touser, msgtitle, msurl) VALUES(@DDnewfzr, '您有一条新的报修申请需要接收，单号['+@DD_BID+']', '/adminht/corepage/fwbg/list_bxsq_my.aspx')");
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
 
         if ((bool)(return_ht["return_float"]))
         {
             dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
-            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "调度成功！";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "调度成功！保修申请单状态已变为“待处理”，需要重新接收！";
         }
         else
         {

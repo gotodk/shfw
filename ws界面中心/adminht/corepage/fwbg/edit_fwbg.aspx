@@ -104,7 +104,7 @@
                      $("#gview_grid-table-subtable-160427000666").find("input[name='位置标记']").removeAttr("readonly");
                      $("#gview_grid-table-subtable-160427000666").find("input[name='实际售价']").removeAttr("readonly");
                      $("#gview_grid-table-subtable-160427000666").find("input[name='零件数量']").removeAttr("readonly");
-                     //$("#gview_grid-table-subtable-160427000666").find("input[name='保修截止日期']").removeAttr("readonly");
+                  
                      $("#gview_grid-table-subtable-160427000666").find("input[name='批号']").removeAttr("readonly");
                      $("#gview_grid-table-subtable-160427000666").find("input[name='备注']").removeAttr("readonly");
 
@@ -127,7 +127,10 @@
                      //弹窗特殊条件，隐藏的弹窗的条件(从库存选择零件时才启用)
                      <%--var userlogin = "<%=UserSession.唯一键%>";
                      $("#searchopenyhbspgogo_subtcid_lj_LID").attr("teshuwhere", "dpname=(select xingming from  ZZZ_userinfo where UAid='" + userlogin + "')");--%>
-                         
+                        
+                     //弹窗特殊条件，隐藏的弹窗的条件(从销售发货单选择零件时才启用)
+                   
+                     $("#searchopenyhbspgogo_subtcid_lj_LID").attr("teshuwhere", " FC_YYID='" + khbh_str + "' ");
  
                  }, 500);
 
@@ -287,33 +290,40 @@
                                      var zj = $(dfx_str_subljbh).closest("tr").find("input[name='出库库位']");
                                      zj.val($.trim(arr_z[1]).replace("]", ""));
                                  }
+                                 if (arr_z[0] == "[保修期限") {
+                                 
+                                     //根据规则填入保修截止日期
+                                     var val_Gbylx = $('input[name="Gbylx"]:checked ').val();
+                                     if (val_Gbylx == "保内") {
+
+                                         var bxjzrq = $("#grid-table-subtable-160427000664").jqGrid("getRowData", $("#grid-table-subtable-160427000664").getGridParam('selarrrow')[0]).保修截止日期;
+                                         //alert(JSON.stringify(bxjzrq));
+                                         var zj = $(dfx_str_subljbh).closest("tr").find("input[name='保修截止日期']");
+                                         zj.val(bxjzrq);
+                                     }
+                                     else {
+
+                                         var bxqx = $.trim(arr_z[1]).replace("]", ""); //带入的保修期限
+
+                                         var now_data = new Date();
+                                         now_data.setDate(now_data.getDate() + 10 + parseInt(bxqx));
+                                         var bxjzrq = now_data.Format_go("yyyy-MM-dd");
+                                         if (bxjzrq.indexOf("aN") >= 0) {
+                                             bxjzrq = "";
+                                         }
+                                         var zj = $(dfx_str_subljbh).closest("tr").find("input[name='保修截止日期']");
+                                         zj.val(bxjzrq);
+                                     }
+                                 }
+                                 if (arr_z[0] == "[使用表主键") {
+                                     //离弹窗最近的特定name的输入框  
+                                     var zj = $(dfx_str_subljbh).closest("tr").find("input[name='使用表主键']");
+                                     zj.val($.trim(arr_z[1]).replace("]", ""));
+                                 }
                              }
                          }
 
-                         //根据规则填入保修截止日期
-                         var val_Gbylx = $('input[name="Gbylx"]:checked ').val();
-                         if (val_Gbylx == "保内")
-                         {
-                       
-                             var bxjzrq = $("#grid-table-subtable-160427000664").jqGrid("getRowData", $("#grid-table-subtable-160427000664").getGridParam('selarrrow')[0]).保修截止日期;
-                             //alert(JSON.stringify(bxjzrq));
-                             var zj = $(dfx_str_subljbh).closest("tr").find("input[name='保修截止日期']");
-                             zj.val(bxjzrq);
-                         }
-                         else
-                         {
-                     
-                             var bxqx = $("#grid-table-subtable-160427000664").jqGrid("getRowData", $("#grid-table-subtable-160427000664").getGridParam('selarrrow')[0]).保修期限;
-                            
-                             var now_data = new Date();
-                             now_data.setDate(now_data.getDate() + 10 + parseInt(bxqx));
-                             var bxjzrq = now_data.Format_go("yyyy-MM-dd");
-                             if (bxjzrq.indexOf("aN") >= 0) {
-                                 bxjzrq = "";
-                             }
-                             var zj = $(dfx_str_subljbh).closest("tr").find("input[name='保修截止日期']");
-                             zj.val(bxjzrq);
-                         }
+                         
 
                          oldzhi_subljbh = $(dfx_str_subljbh).text();
                      }
