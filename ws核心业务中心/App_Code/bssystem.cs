@@ -1690,7 +1690,7 @@ public class bssystem : System.Web.Services.WebService
             param.Add("@Zid", ht_forUI["Zid"].ToString());
 
             ArrayList alsql = new ArrayList();
-            alsql.Add(" update auth_znx set beread='已读' where Zid=@Zid ");
+            alsql.Add(" update auth_znx set beread='已读',wxsend='不发' where Zid=@Zid ");
  
             return_ht = I_DBL.RunParam_SQL(alsql, param);
         
@@ -1714,7 +1714,7 @@ public class bssystem : System.Web.Services.WebService
             Hashtable param = new Hashtable();
             param.Add("@touser", ht_forUI["touser"].ToString());
             ArrayList alsql = new ArrayList();
-            alsql.Add(" update auth_znx set beread='已读' where touser=@touser ");
+            alsql.Add(" update auth_znx set beread='已读',wxsend='不发' where touser=@touser ");
             return_ht = I_DBL.RunParam_SQL(alsql, param);
             if ((bool)(return_ht["return_float"]))
             {
@@ -1730,6 +1730,69 @@ public class bssystem : System.Web.Services.WebService
         return "无效指令";
 
     }
+
+
+
+
+
+
+
+
+    /// <summary>
+    /// 获取待发送微信消息的提醒
+    /// </summary>
+    /// <param name="UAid">用户唯一编号</param>
+    /// <returns></returns>
+    [WebMethod(MessageName = "获取待发送微信消息的提醒", Description = "获取待发送微信消息的提醒")]
+    public DataSet Getuserznx_for_wx(string UAid)
+    {
+
+        //初始化返回值
+        DataSet dsreturn = initReturnDataSet().Clone();
+        dsreturn.Tables["返回值单条"].Rows.Add(new string[] { "err", "初始化" });
+
+        //参数合法性各种验证，这里省略
+
+        //开始真正的处理，这里只是演示，所以直接在这里写业务逻辑代码了
+
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+
+        Hashtable param = new Hashtable();
+
+        Hashtable return_ht = new Hashtable();
+
+        if(UAid == "所有未发送")
+        {
+            //param.Add("@UAid", UAid);
+            return_ht = I_DBL.RunParam_SQL("select auth_znx.touser, auth_znx.msgtitle, auth_users_auths.Uloginname  from auth_znx left join auth_users_auths on  auth_znx.touser=auth_users_auths.UAid where  beread = '未读' and wxsend='待发'  order by addtime asc ; update auth_znx set wxsend='已发' where wxsend='待发'  ", "待发数据", param);
+        }
+    
+
+        if ((bool)(return_ht["return_float"]))
+        {
+            DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["待发数据"].Copy();
+
+
+            dsreturn.Tables.Add(redb);
+
+
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "";
+        }
+        else
+        {
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "意外错误：" + return_ht["return_errmsg"].ToString();
+        }
+
+
+
+
+
+        return dsreturn;
+    }
+
+
 
 
     #endregion

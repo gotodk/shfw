@@ -257,8 +257,12 @@
                 $(grid_selector).setGridWidth($("#zheshiliebiaoquyu").width() );
 
                 var ss = getPageSize();
- 
-                $(grid_selector).setGridHeight(ss.WinH - $("#zheshiliebiaoquyu").offset().top - 150);
+                var new_height = ss.WinH - $("#zheshiliebiaoquyu").offset().top - 150;
+                if (new_height < 300)
+                {
+                    new_height = 410;
+                }
+                $(grid_selector).setGridHeight(new_height);
             });
 
 
@@ -599,12 +603,20 @@
 		        }
 
 		        //收缩时重新定义列表高度
-		        $(grid_selector).setGridHeight(getPageSize().WinH - $("#zheshiliebiaoquyu").offset().top - 150);
+		        var new_height = ss.WinH - $("#zheshiliebiaoquyu").offset().top - 150;
+		        if (new_height < 300) {
+		            new_height = 410;
+		        }
+		        $(grid_selector).setGridHeight(new_height);
 		        $("#zhedie_bbt").click(function () {
 
 		            setTimeout(function () {
 		                var ss = getPageSize();
-		                $(grid_selector).setGridHeight(ss.WinH - $("#zheshiliebiaoquyu").offset().top - 150);
+		                var new_height = ss.WinH - $("#zheshiliebiaoquyu").offset().top - 150;
+		                if (new_height < 300) {
+		                    new_height = 410;
+		                }
+		                $(grid_selector).setGridHeight(new_height);
 		            }, 500);
 		        });
  

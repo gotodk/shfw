@@ -7,8 +7,48 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using FMipcClass;
+using System.Text;
+using System.IO;
+using System.Data;
+
 public partial class qyapi_dlhd : System.Web.UI.Page
 {
+
+    /// <summary>
+    /// 提交post消息
+    /// </summary>
+    /// <param name="postUrl"></param>
+    /// <param name="paramData"></param>
+    /// <param name="dataEncode"></param>
+    /// <returns></returns>
+    private string PostWebRequest(string postUrl, string paramData, Encoding dataEncode)
+    {
+        string ret = string.Empty;
+        try
+        {
+            byte[] byteArray = dataEncode.GetBytes(paramData); //转化
+            HttpWebRequest webReq = (HttpWebRequest)WebRequest.Create(new Uri(postUrl));
+            webReq.Method = "POST";
+            webReq.ContentType = "application/x-www-form-urlencoded";
+
+            webReq.ContentLength = byteArray.Length;
+            Stream newStream = webReq.GetRequestStream();
+            newStream.Write(byteArray, 0, byteArray.Length);//写入参数
+            newStream.Close();
+            HttpWebResponse response = (HttpWebResponse)webReq.GetResponse();
+            StreamReader sr = new StreamReader(response.GetResponseStream(), Encoding.Default);
+            ret = sr.ReadToEnd();
+            sr.Close();
+            response.Close();
+            newStream.Close();
+        }
+        catch (Exception ex)
+        {
+            return "err:" + ex.ToString();
+        }
+        return ret;
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -30,9 +70,86 @@ public partial class qyapi_dlhd : System.Web.UI.Page
         //string wx_corpsecret = "Mte0XxwwFPy9qbcztpE9CCsbuApg6eeSmljzghtax1H7wg2jFbSH_w3h-TbeXJjq";
         string wx_corpsecret = ConfigurationManager.AppSettings["wx_corpsecret"].ToString();
 
+        string wx_agentid = ConfigurationManager.AppSettings["wx_agentid"].ToString();
+
+        if (Request["sendmsgf"] != null)
+        {
+            //发送微信消息
+            if (Request["sendmsgf"].ToString() == "test")
+            {
+                WebClient client = new WebClient();
+
+                //获取access_token
+                string content = client.DownloadString("https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=" + sCorpID + "&corpsecret=" + wx_corpsecret + "");
+                string access_token = content.Split(',')[0].Split(':')[1].Replace("\"", "").Replace(" ", "");
+
+                string msg_json = "{";
+                msg_json = msg_json + "\"touser\": \"[[UserID]]\",";
+                //msg_json = msg_json + "\"toparty\": \"PartyID1|PartyID2\",";
+                //msg_json = msg_json + "\"totag\": \"TagID1|TagID2\",";
+                msg_json = msg_json + "\"msgtype\": \"text\",";
+                msg_json = msg_json + "\"agentid\": "+ wx_agentid + ",";
+                msg_json = msg_json + "\"text\": {\"content\": \"[[MsgContent]]\"},";
+                msg_json = msg_json + "\"safe\":\"0\"}";
+
+                msg_json = msg_json.Replace("[[UserID]]", "gotodk");
+                msg_json = msg_json.Replace("[[MsgContent]]", "测试消息22");
+                string restr = PostWebRequest("https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=" + access_token, msg_json, Encoding.UTF8);
+
+                Response.Write(restr);
+            }
+            if (Request["sendmsgf"].ToString() == "send")
+            {
+                WebClient client = new WebClient();
+
+                //获取access_token
+                string content = client.DownloadString("https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=" + sCorpID + "&corpsecret=" + wx_corpsecret + "");
+                string access_token = content.Split(',')[0].Split(':')[1].Replace("\"", "").Replace(" ", "");
+
+                string msg_json = "{";
+                msg_json = msg_json + "\"touser\": \"[[UserID]]\",";
+                //msg_json = msg_json + "\"toparty\": \"PartyID1|PartyID2\",";
+                //msg_json = msg_json + "\"totag\": \"TagID1|TagID2\",";
+                msg_json = msg_json + "\"msgtype\": \"text\",";
+                msg_json = msg_json + "\"agentid\": " + wx_agentid + ",";
+                msg_json = msg_json + "\"text\": {\"content\": \"[[MsgContent]]\"},";
+                msg_json = msg_json + "\"safe\":\"0\"}";
+
+                //连接数据库，获取要发送的消息列表，获取的同时要更新成微信已发送，不管是否发送成功。
+                string restr = "微信消息发送结果：";
+                DataSet dsmsg = new DataSet();
+                object[] re_dsi_wx = IPC.Call("获取待发送微信消息的提醒", new object[] { "所有未发送" });
+                if (re_dsi_wx[0].ToString() == "ok")
+                {
+                    //这个就是得到远程方法真正的返回值，不同类型的，自行进行强制转换即可。
+                    dsmsg = (DataSet)(re_dsi_wx[1]);
+                    if (dsmsg.Tables["返回值单条"].Rows[0]["执行结果"].ToString() == "ok")
+                    {
+                        for (int i = 0; i < dsmsg.Tables["待发数据"].Rows.Count; i++)
+                        {
+                            string msg_json_init = msg_json;
+                            msg_json_init = msg_json_init.Replace("[[UserID]]", dsmsg.Tables["待发数据"].Rows[i]["Uloginname"].ToString());
+                            msg_json_init = msg_json_init.Replace("[[MsgContent]]", dsmsg.Tables["待发数据"].Rows[i]["msgtitle"].ToString());
+                            restr = restr + Environment.NewLine + "---"  + PostWebRequest("https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=" + access_token, msg_json_init, Encoding.UTF8);
+                        }
+                    }
+                }
+                else
+                {
+                    string err = "调用错误" + re_dsi_wx[1].ToString();
+                    Response.Write(err);
+                    return;
+                }
+
+                
+
+                Response.Write(restr);
+            }
+        }
         if (Request["code"] != null)
         {
-            try {
+            try
+            {
                 string code = Request["code"].ToString();
                 //Response.Write(code);
 
@@ -52,7 +169,6 @@ public partial class qyapi_dlhd : System.Web.UI.Page
                 string wxusername = HAC.My_Cut_Str(endstr, "UserId\":\"", "\"", 1, false)[0].ToString();
 
                 //尝试找到对应账号和密码，如果找到，自动跳转到自动登录界面
-                //调用框架免代理通用接口删，公用一下删除接口
                 string jm = "";
                 object[] re_dsi_wx = IPC.Call("获取微信自动登录参数", new object[] { wxusername });
                 if (re_dsi_wx[0].ToString() == "ok")
@@ -69,7 +185,7 @@ public partial class qyapi_dlhd : System.Web.UI.Page
                 //string zhanghao = wxusername;
                 //string mima = "48d757d7d2c387c0f25d7bece01768dd";
                 //string jm = zhanghao+"|"+ mima;
-                Response.Redirect("/adminht/login.aspx?aulgogo=1&aulcscs="+ jm + "");
+                Response.Redirect("/adminht/login.aspx?aulgogo=1&aulcscs=" + jm + "");
 
                 //Response.Write(wxusername);
             }
@@ -77,10 +193,10 @@ public partial class qyapi_dlhd : System.Web.UI.Page
             {
                 Response.Write(ex.ToString());
             }
-       
+
 
         }
-       
+
 
 
 
