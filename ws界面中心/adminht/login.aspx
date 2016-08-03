@@ -389,6 +389,7 @@
 		    //var wx_username_fra = $(window.frames["wxcheckzdy"].document);
 		    jQuery(function ($) {
 		        var aulcscs = getUrlParam("aulcscs");
+		        aulcscs = decodeURI(aulcscs);
 			    if (isWeiXin() && getUrlParam("aulgogo") != "1")
 			    {
 			        var appid = "<%=sCorpID%>";
