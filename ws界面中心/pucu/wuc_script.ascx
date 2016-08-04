@@ -355,15 +355,15 @@
                                 newurl = $.UrlUpdateParams(newurl, "fff", "1");
                                 newurl = $.UrlUpdateParams(newurl, "showinfo", "1");
 
-                                //对某些特殊结构的非标准化单据提供额外的参数，这个是定制的
+                                //对某些特殊结构的非标准化单据提供额外的参数，这个是定制的，针对新增。
                                 if (isedit != "1")
                                 {
                                     if (window.location.href.indexOf("adminht/corepage/xsfh/fc_shenqing.aspx") > 0 || window.location.href.indexOf("adminht/corepage/fanchang/fc_shenqing.aspx") > 0) {
-                                        //销售发货的发货申请
+                                        //销售发货的发货申请新增，或返厂申请新增
                                         newurl = $.UrlUpdateParams(newurl, "ywlx", "bianjicaogao");
                                     }
                                     if (window.location.href.indexOf("adminht/corepage/fwbg/edit_fwbg.aspx") > 0) {
-                                        //销售发货的发货申请
+                                        //服务报告新增
                                         newurl = $.UrlUpdateParams(newurl, "yc_czlx", "xiugai");
                                     }
                                 }

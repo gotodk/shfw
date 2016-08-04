@@ -48,7 +48,8 @@
 																</dd>
                                                                     <dt>发起时间：</dt>
 																<dd><%=((DateTime)(dsr.Tables["数据记录"].Rows[0]["Qaddtime"])).ToString("yyyy-MM-dd hh:mm:ss") %></dd>
-
+                                                                    <dt>结单时间：</dt>
+																<dd><%=dsr.Tables["数据记录"].Rows[0]["Qjiedanshijian"].ToString() %></dd>
                                                                     <dt>附件：</dt>
 																<dd><a target="_blank" href="/st.aspx?idforedit=<%=dsr.Tables["数据记录"].Rows[0]["QID"].ToString() %>&leixing=0&mod=huiqian">点击查看附件</a></dd>
 

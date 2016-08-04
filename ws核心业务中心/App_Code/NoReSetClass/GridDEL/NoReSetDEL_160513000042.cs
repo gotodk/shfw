@@ -105,8 +105,9 @@ public class NoReSetDEL_160513000042
             Hashtable return_ht = new Hashtable();
             ArrayList alsql = new ArrayList();
 
-
-            //删除数据表里的数据 
+            
+            
+            //数据表里的数据 
             string[] ids = ht_forUI["xuanzhongzhi"].ToString().Split(',');
             for (int d = 0; d < ids.Length; d++)
             {
@@ -125,14 +126,14 @@ public class NoReSetDEL_160513000042
             if ((bool)(return_ht["return_float"]))
             {
 
-                return "批量提交申请完成！";
+                return "提交申请完成！";
             }
 
         }
 
 
 
-        return "批量提交申请失败，发生错误";
+        return "提交申请失败，发生错误";
     }
 
 

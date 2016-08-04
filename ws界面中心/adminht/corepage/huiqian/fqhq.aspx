@@ -35,7 +35,9 @@
             }
 
         }
-             jQuery(function ($) {
+        jQuery(function ($) {
+            $("#addbutton1_top").html($("#addbutton1_top").html().replace("保存", "提交"));
+            $("#addbutton1").html($("#addbutton1").html().replace("保存", "提交"));
                  if (getUrlParam("fff") == "1") {
 
              

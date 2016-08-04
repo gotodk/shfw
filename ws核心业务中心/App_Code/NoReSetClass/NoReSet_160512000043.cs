@@ -170,10 +170,13 @@ public class NoReSet_160512000043
                     dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "结单失败，打开页面后，签署意见有变更，请刷新重新审阅！";
                     return dsreturn;
                 }
+                
+                param.Add("@Qzhuangtai", ht_forUI["Qzhuangtai"].ToString());
+                alsql.Add("UPDATE ZZZ_HQ SET  Qzhuangtai=@Qzhuangtai,Qjiedanshijian=getdate()   where QID=@YJ_QID ");
             }
 
-            param.Add("@Qzhuangtai", ht_forUI["Qzhuangtai"].ToString());
-            alsql.Add("UPDATE ZZZ_HQ SET  Qzhuangtai=@Qzhuangtai   where QID=@YJ_QID ");
+            
+
         }
        
 

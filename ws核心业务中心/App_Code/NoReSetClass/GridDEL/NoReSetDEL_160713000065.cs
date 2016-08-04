@@ -127,14 +127,14 @@ public class NoReSetDEL_160713000065
             if ((bool)(return_ht["return_float"]))
             {
 
-                return "批量确认收件完成！";
+                return "确认收件完成！";
             }
 
         }
 
 
 
-        return "批量确认收件失败，发生错误";
+        return "确认收件失败，发生错误";
     }
 
 

@@ -111,22 +111,7 @@
                         </li>
                         <li class="c_bianji_top hidden">&nbsp;&nbsp;</li>
 
-                        <%--                <li class=""><button class="btn btn-white btn-info btn-bold">
-												<i class="ace-icon fa fa-trash-o bigger-120 "></i>
-												删除
-											</button></li> --%>
-                        <%--                <li class=""><button class="btn btn-white btn-info btn-bold">
-												<i class="ace-icon fa fa-recycle bigger-120 "></i>
-												作废
-											</button></li> --%>
-                        <%--           <li class=""><button class="btn btn-white btn-info btn-bold">
-												<i class="ace-icon fa fa-check-circle bigger-120 "></i>
-												审核
-											</button></li>  --%>
-                        <%--     <li class=""><button class="btn btn-white btn-info btn-bold">
-												<i class="ace-icon fa fa-tasks bigger-120 "></i>
-												自定义
-											</button></li>  --%>
+                      
                     </ul>
 
 

@@ -79,14 +79,14 @@ public class NoReSetDEL_160611000057
             if ((bool)(return_ht["return_float"]))
             {
 
-                return "批量提交完成！";
+                return "提交完成！";
             }
 
         }
 
 
 
-        return "批量提交失败，发生错误";
+        return "提交失败，发生错误";
     }
 
 
