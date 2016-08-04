@@ -1,4 +1,11 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="wuc_script.ascx.cs" Inherits="pucu_wuc_script" %>
+                     <%
+     bool onlyshow = false; //仅显示的标记
+     //发现预览标志 
+     if (Request["showinfo"] != null && Request["fff"] != null && Request["fff"].ToString() == "1")
+     {
+         onlyshow = true;
+     }%>
 
     <!-- 附加的body底部本页专属的自定义js脚本 -->
     <script src="/assets/js/jquery.validate.js"></script>
@@ -192,6 +199,10 @@
             });
         })(jQuery);
 
+
+
+
+
     </script>
 
 
@@ -325,7 +336,7 @@
 
            
                 var isedit = getUrlParam("fff");
-                var tiaozhuan = getUrlParam("tiaozhuan");                var ppp_pp = msg.match(/{(\S*)}/);                var newguid_re = "";                if (ppp_pp && ppp_pp.length > 0)                {
+                             var ppp_pp = msg.match(/{(\S*)}/);                var newguid_re = "";                if (ppp_pp && ppp_pp.length > 0)                {
                     msg = msg.replace(ppp_pp[0],"");                    newguid_re=ppp_pp[1];
                 }             
 
@@ -336,19 +347,27 @@
                     callback: function () {
                         setTimeout(function () {
                             try { $(formid1).find("input[type='text'][readonly!='readonly']").eq(0).focus().select().tooltip('hide'); } catch (e) { }
-                            if (newguid_re != "" && tiaozhuan == "1") {
+                            if (newguid_re != "") {
                                
                                 //跳转到编辑
                                  
                                 var newurl = $.UrlUpdateParams(window.location.href, "idforedit", newguid_re);
                                 newurl = $.UrlUpdateParams(newurl, "fff", "1");
+                                newurl = $.UrlUpdateParams(newurl, "showinfo", "1");
 
                                 //对某些特殊结构的非标准化单据提供额外的参数，这个是定制的
-                                if (window.location.href.indexOf("adminht/corepage/xsfh/fc_shenqing.aspx") > 0)
+                                if (isedit != "1")
                                 {
-                                    //销售发货的发货申请
-                                    newurl = $.UrlUpdateParams(newurl, "ywlx", "bianjicaogao");
+                                    if (window.location.href.indexOf("adminht/corepage/xsfh/fc_shenqing.aspx") > 0 || window.location.href.indexOf("adminht/corepage/fanchang/fc_shenqing.aspx") > 0) {
+                                        //销售发货的发货申请
+                                        newurl = $.UrlUpdateParams(newurl, "ywlx", "bianjicaogao");
+                                    }
+                                    if (window.location.href.indexOf("adminht/corepage/fwbg/edit_fwbg.aspx") > 0) {
+                                        //销售发货的发货申请
+                                        newurl = $.UrlUpdateParams(newurl, "yc_czlx", "xiugai");
+                                    }
                                 }
+                                
                                 
 
                                 location.href = newurl;
@@ -410,7 +429,8 @@
 
         jQuery(function ($) {
             var isedit = getUrlParam("fff");
-            var tiaozhuan = getUrlParam("tiaozhuan");
+         
+            var showinfo = getUrlParam("showinfo");
             if (isedit == "1") {
                 $(".c_fanhuishangyiye_top").removeClass("hidden");
             }
@@ -418,14 +438,31 @@
                 $(".c_fanhuishangyiye_top").addClass("hidden");
 
             }
-            if (tiaozhuan == "1") {
-                $(".c_fanhuishangyiye_top").addClass("hidden");
-                $(".c_xinzeng_top").removeClass("hidden");
-            }
-            else {
-                $(".c_xinzeng_top").addClass("hidden");
+            
 
+            //处理showinfo标志
+            if (showinfo == "1") {
+                $(".c_xinzeng_top").removeClass("hidden");
+                $(".c_bianji_top").removeClass("hidden");
             }
+            if (showinfo == "2") {
+                //仅查看
+            }
+             
+            $(document).on('click', "#xinzeng_top", function () {
+                var newurl = delQueStr(window.location.href, "fff");
+                newurl = delQueStr(newurl, "idforedit");
+                newurl = delQueStr(newurl, "showinfo");
+                location.href = newurl;
+
+            });
+            $(document).on('click', "#bianji_top", function () {
+                var newurl = delQueStr(window.location.href, "showinfo");
+                
+                location.href = newurl;
+
+            });
+
             //添加返回代码
             $(document).on('click', "#fanhuishangyiye_top", function () {
                 if (location.href.indexOf("edit_mygzt.aspx") > 0)
@@ -439,13 +476,7 @@
                 
 
             });
-            $(document).on('click', "#xinzeng_top", function () {
-                var newurl = delQueStr(window.location.href, "fff");
-                newurl = delQueStr(newurl, "idforedit");
-                 
-                location.href = newurl;
-
-            });
+            
             //添加提交事件
             $(document).on('click', buttonid1+"_top", function () {
                 if (isedit == "1") {
@@ -497,6 +528,7 @@
         for (int i = 0; i < dsFPZ.Tables["表单配置子表"].Rows.Count; i++)
         {
             string[] ARR_list_static = dsFPZ.Tables["表单配置子表"].Rows[i]["FS_SPPZ_list_static"].ToString().Split(',');
+            string FS_name_temp = dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString();
                                             %>
             <%
         
@@ -504,37 +536,138 @@
         {
             case "输入框":
                                             %>
-            
-            $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>").val($(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>').text());
+
+            <% if (onlyshow)
+        {%>  
+            var sssss_zhi = $(xml).find('数据记录><%=FS_name_temp%>').text();
+            $("#fifsssss_<%=FS_name_temp%>").text(sssss_zhi);
+            <%}
+        else
+        { %>
+            $("#<%=FS_name_temp%>").val($(xml).find('数据记录><%=FS_name_temp%>').text());
+            <%}%>
 
             <%    break;
         case "密码框":
                                                         %>
-            $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>").val($(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>').text());
+                        <% if (onlyshow)
+        {%>  
+            var sssss_zhi = $(xml).find('数据记录><%=FS_name_temp%>').text();
+            $("#fifsssss_<%=FS_name_temp%>").text(sssss_zhi);
+            <%}
+        else
+        { %>
+            $("#<%=FS_name_temp%>").val($(xml).find('数据记录><%=FS_name_temp%>').text());
+            <%}%>
             <%
             break;
 
         case "下拉框":
                                                         %>
-            $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>").val($(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>').text());
+
+
+            <% if (onlyshow)
+        {%>  
+            var sssss_zhi = $(xml).find('数据记录><%=FS_name_temp%>').text();
+            
+            var sssss_zhi_show = $("#<%=FS_name_temp%> option[value='" + sssss_zhi + "']").text();
+            if (sssss_zhi_show != sssss_zhi) {
+                $("#fifsssss_<%=FS_name_temp%>").text(sssss_zhi_show + '[' + sssss_zhi + ']');
+            }
+            else {
+                $("#fifsssss_<%=FS_name_temp%>").text(sssss_zhi_show);
+            }
+
+            
+            <%}
+        else
+        { %>
+            $("#<%=FS_name_temp%>").val($(xml).find('数据记录><%=FS_name_temp%>').text());
+            <%}%>
+
+    
             <%
             break;
 
         case "单选框":
                                                         %>
-            $("input:radio[name='<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>'][value='" + $(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>').text() + "']").prop("checked", true);
+
+
+
+
+             <% if (onlyshow)
+        {%>  
+            var sssss_zhi = $(xml).find('数据记录><%=FS_name_temp%>').text();
+            
+            var sssss_zhi_show = $("input:radio[name='<%=FS_name_temp%>'][value='" + $(xml).find('数据记录><%=FS_name_temp%>').text() + "']").next('span').text();
+            
+            if (sssss_zhi_show != sssss_zhi) {
+                $("#fifsssss_<%=FS_name_temp%>").text(sssss_zhi_show + '[' + sssss_zhi + ']');
+            }
+            else {
+                $("#fifsssss_<%=FS_name_temp%>").text(sssss_zhi_show);
+            }
+
+            
+            <%}
+        else
+        { %>
+            $("input:radio[name='<%=FS_name_temp%>'][value='" + $(xml).find('数据记录><%=FS_name_temp%>').text() + "']").prop("checked", true);
+            <%}%>
+
+
+
+            
             <%
             break;
 
         case "普通多选框":
                                                         %>
-            $("input[name='<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>']").prop("checked", false);
-            $("input[name='<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>']:checkbox").each(function () {
-                if (("," + $(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>').text() + ",").indexOf("," + $(this).val() + ",") >= 0) {
+
+
+
+            <% if (onlyshow)
+        {%>  
+            var sssss_zhi = $(xml).find('数据记录><%=FS_name_temp%>').text();
+            var sssss_zhi_show = "";
+            $("input[name='<%=FS_name_temp%>']:checkbox").each(function () {
+                if (("," + sssss_zhi + ",").indexOf("," + $(this).val() + ",") >= 0) {
+                    sssss_zhi_show = sssss_zhi_show + $(this).next('span').text() + ',';
+                }
+
+            });
+        
+
+
+
+            if (sssss_zhi_show.replace(/,$/g, "") != sssss_zhi) {
+                $("#fifsssss_<%=FS_name_temp%>").text(sssss_zhi_show + '[' + sssss_zhi + ']');
+            }
+            else {
+                $("#fifsssss_<%=FS_name_temp%>").text(sssss_zhi_show);
+            }
+
+            
+            <%}
+        else
+        { %>
+                        $("input[name='<%=FS_name_temp%>']").prop("checked", false);
+            $("input[name='<%=FS_name_temp%>']:checkbox").each(function () {
+                if (("," + $(xml).find('数据记录><%=FS_name_temp%>').text() + ",").indexOf("," + $(this).val() + ",") >= 0) {
                     $(this).prop("checked", true);
                 }
 
             });
+            <%}%>
+
+
+
+
+
+
+
+
+
             <%
             break;
 
@@ -568,7 +701,16 @@
                 }
             if (qu_s_<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %> != "") {
                     $("#yhb_city_Qu_<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>").val(qu_s_<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>);
-                }
+            }
+
+            <% if (onlyshow)
+        {%>  
+            var sssss_zhi = promary_s_<%=FS_name_temp %> + ',' + city_s_<%=FS_name_temp %> + ',' + qu_s_<%=FS_name_temp %>;
+            var sssss_zhi_show = $("#yhb_city_Promary_<%=FS_name_temp %> option[value='" + promary_s_<%=FS_name_temp %> + "']").text() + ',' + $("#yhb_city_City_<%=FS_name_temp %> option[value='" + city_s_<%=FS_name_temp %> + "']").text() + ',' + $("#yhb_city_Qu_<%=FS_name_temp %> option[value='" + qu_s_<%=FS_name_temp %> + "']").text();
+            sssss_zhi_show = sssss_zhi_show.replace("请选择省份", "").replace("请选择城市", "").replace("请选择区县", "");
+            $("#fifsssss_<%=FS_name_temp%>").text(sssss_zhi_show + '[' + sssss_zhi + ']');
+            <% }%>  
+
                 <%
 
 
@@ -576,44 +718,92 @@
 
         case "整数":
                                                         %>
-                $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>").val($(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>').text());
+                <% if (onlyshow)
+        {%>  
+            var sssss_zhi = $(xml).find('数据记录><%=FS_name_temp%>').text();
+            $("#fifsssss_<%=FS_name_temp%>").text(sssss_zhi);
+            <%}
+        else
+        { %>
+            $("#<%=FS_name_temp%>").val($(xml).find('数据记录><%=FS_name_temp%>').text());
+            <%}%>
                 <%
             break;
         case "两位小数":
                                                          %>
-                $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>").val($(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>').text());
+                <% if (onlyshow)
+        {%>  
+            var sssss_zhi = $(xml).find('数据记录><%=FS_name_temp%>').text();
+            $("#fifsssss_<%=FS_name_temp%>").text(sssss_zhi);
+            <%}
+        else
+        { %>
+            $("#<%=FS_name_temp%>").val($(xml).find('数据记录><%=FS_name_temp%>').text());
+            <%}%>
                 <%
             break;
         case "日期框":
                                                         %>
-      
-            var time_zz = new Date($(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>').text()).Format_go("yyyy-MM-dd");
+             var sssss_zhi = $(xml).find('数据记录><%=FS_name_temp%>').text();
+            var time_zz = new Date(sssss_zhi).Format_go("yyyy-MM-dd");
             if (time_zz == "" || time_zz == null || time_zz.indexOf("aN") >= 0) {
                 time_zz = null;
             }
-            $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>").datepicker('setDate', time_zz);
+
+            <% if (onlyshow)
+        {%>  
+            
+            $("#fifsssss_<%=FS_name_temp%>").text(time_zz);
+            <%}
+        else
+        { %>
+            $("#<%=FS_name_temp%>").datepicker('setDate', time_zz);
+            <%}%>
+
+            
 
             <%
             break;
         case "日期区间框":
                                                         %>
-            var time_zz1 = new Date($(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>1').text()).Format_go("yyyy-MM-dd");
-            var time_zz2 = new Date($(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>2').text()).Format_go("yyyy-MM-dd");
+         
+            var time_zz1 = new Date($(xml).find('数据记录><%=FS_name_temp%>1').text()).Format_go("yyyy-MM-dd");
+            var time_zz2 = new Date($(xml).find('数据记录><%=FS_name_temp%>2').text()).Format_go("yyyy-MM-dd");
             if (time_zz1 == "" || time_zz1 == null || time_zz1.indexOf("aN") >= 0) {
                 time_zz1 = null;
             }
             if (time_zz2 == "" || time_zz2 == null || time_zz2.indexOf("aN") >= 0) {
                 time_zz2 = null;
             }
-            $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>1").datepicker('setDate', time_zz1);
-            $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>2").datepicker('setDate', time_zz2);
+
+            <% if (onlyshow)
+        {%>  
+            
+            $("#fifsssss_<%=FS_name_temp%>").text('从 '+time_zz1 + ' 到 ' + time_zz2);
+            <%}
+        else
+        { %>
+            $("#<%=FS_name_temp%>1").datepicker('setDate', time_zz1);
+            $("#<%=FS_name_temp%>2").datepicker('setDate', time_zz2);
+            <%}%>
+
+
+            
  
 
                 <%
             break;
         case "大文本框":
                                                         %>
-                $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>").val($(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>').text());
+                 <% if (onlyshow)
+        {%>  
+            var sssss_zhi = $(xml).find('数据记录><%=FS_name_temp%>').text();
+            $("#fifsssss_<%=FS_name_temp%>").text(sssss_zhi);
+            <%}
+        else
+        { %>
+            $("#<%=FS_name_temp%>").val($(xml).find('数据记录><%=FS_name_temp%>').text());
+            <%}%>
                 <%
             break;
         case "富文本框":
@@ -651,6 +841,11 @@
                 $.extend(postData, { this_extforinfoFSID: $(this).attr('sub_this_extforinfoFSID') });
                 $(this).jqGrid("setGridParam", { search: true, datatype: 'xml' }).trigger("reloadGrid", [{ page: 1 }]);  //重载JQGrid数据
                 $(this).attr("lastsel_yhb", "-999999");
+                <% if (onlyshow)
+        {%>  
+                window.setInterval(function () { $(".ui-pg-table .navtable").hide(); }, 1000);
+                
+                <%}%>
             });
                 <%
                 break;

@@ -65,14 +65,14 @@ public class NoReSet_160423000030
         param.Add("@YYID", ht_forUI["YYID"].ToString());
         param.Add("@shixiaoriqi", ht_forUI["shixiaoriqi"].ToString());
 
-        alsql.Add(" if not exists (select  GLKHID from ZZZ_MYGZT where UAid=@UAid and YYID=@YYID ) begin     INSERT INTO  ZZZ_userinfo_glkh(GLKHID, UAid, YYID, shixiaoriqi ) VALUES(@GLKHID, @UAid, @YYID, @shixiaoriqi)  end");
+        alsql.Add(" if not exists (select  GLKHID from ZZZ_userinfo_glkh where UAid=@UAid and YYID=@YYID ) begin     INSERT INTO  ZZZ_userinfo_glkh(GLKHID, UAid, YYID, shixiaoriqi ) VALUES(@GLKHID, @UAid, @YYID, @shixiaoriqi)  end");
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
 
         if ((bool)(return_ht["return_float"]))
         {
             dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
-            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "新增成功！";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "新增成功！{" + guid + "}";
         }
         else
         {
@@ -118,7 +118,7 @@ public class NoReSet_160423000030
         param.Add("@UAid", ht_forUI["UAid"].ToString());
         param.Add("@YYID", ht_forUI["YYID"].ToString());
         param.Add("@shixiaoriqi", ht_forUI["shixiaoriqi"].ToString());
-        alsql.Add(" if not exists (select  GLKHID from ZZZ_MYGZT where UAid=@UAid and YYID=@YYID ) begin   UPDATE ZZZ_userinfo_glkh SET UAid=@UAid, YYID=@YYID, shixiaoriqi=@shixiaoriqi  where GLKHID=@GLKHID   end ");
+        alsql.Add(" if not exists (select  GLKHID from ZZZ_userinfo_glkh where UAid=@UAid and YYID=@YYID ) begin   UPDATE ZZZ_userinfo_glkh SET UAid=@UAid, YYID=@YYID, shixiaoriqi=@shixiaoriqi  where GLKHID=@GLKHID   end ");
    
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
@@ -130,7 +130,7 @@ public class NoReSet_160423000030
         {
 
             dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
-            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "修改成功！"+ ht_forUI["shixiaoriqi"].ToString();
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "修改成功！{" + ht_forUI["idforedit"].ToString() + "}";
         }
         else
         {

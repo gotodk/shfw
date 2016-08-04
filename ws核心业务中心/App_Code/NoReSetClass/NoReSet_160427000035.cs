@@ -336,7 +336,7 @@ public class NoReSet_160427000035
         if ((bool)(return_ht["return_float"]))
         {
             dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
-            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "新增成功！注意，提交后才能生效！";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "新增成功！注意，提交后才能生效！{" + guid + "}";
         }
         else
         {
@@ -753,11 +753,11 @@ public class NoReSet_160427000035
             dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
             if (ht_forUI["yc_czlx"].ToString() == "shenhe")
             {
-                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = ht_forUI["Gshenpixuanxiang"].ToString()+"--完成！";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = ht_forUI["Gshenpixuanxiang"].ToString()+ "--完成！{" + ht_forUI["idforedit"].ToString() + "}";
             }
             else
             {
-                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "修改成功！";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "修改成功！{" + ht_forUI["idforedit"].ToString() + "}";
             }
                 
         }

@@ -27,6 +27,14 @@
     <uc1:wuc_script runat="server" ID="wuc_script" />
         <!-- 某些字段，在编辑时禁用，不想用新页面的情况使用 -->
     <script type="text/javascript">
+        //新增提交后强制调用的函数
+        function addok_after_msgshow(msg) {
+
+            if (msg.indexOf("新增成功") >= 0) {
+                window.location.href = '/adminht/corepage/huiqian/cyhq_list_s.aspx';
+            }
+
+        }
              jQuery(function ($) {
                  if (getUrlParam("fff") == "1") {
 

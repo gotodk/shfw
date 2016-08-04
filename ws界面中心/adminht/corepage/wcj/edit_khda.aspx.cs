@@ -38,7 +38,7 @@ public partial class wcj_edit_khda : System.Web.UI.Page
             }
             if (i_tt.IndexOf("W") >= 0)
             {
-                Response.Redirect(Request.Url.PathAndQuery.Replace("idforedit=W", "idforedit=") );
+                Response.Redirect(Request.Url.PathAndQuery.Replace("idforedit=W", "idforedit=").Replace("showinfo=2", "showinfo=1"));
                 return;
             }
         }

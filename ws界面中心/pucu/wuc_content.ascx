@@ -44,7 +44,15 @@
 <!-- #dialog-message -->
 
 
-
+ <%
+     string css_str = "";
+     bool onlyshow = false; //仅显示的标记
+     //发现预览标志 
+     if (Request["showinfo"] != null && Request["fff"] != null && Request["fff"].ToString() == "1")
+     {
+         css_str="hidden";
+         onlyshow = true;
+     }%>
 
 
 <div class="row">
@@ -58,18 +66,19 @@
                         <li class="active">
                             <a data-toggle="tab" href="#addadd">
                                 <i class="green ace-icon fa fa-pencil-square-o bigger-120"></i>
+                                <%if (onlyshow) { htPP["title_f"] = htPP["title_f"].ToString().Replace("修改--","查看--").Replace("维护","").Replace("编辑","").Replace("修改",""); } %>
                                 <span id="title_f_id"><% =htPP["title_f"].ToString()%></span>
                             </a>
 
                         </li>
                         <li class="">&nbsp;&nbsp;</li>
-                        <li class="">
+                        <li class="  <%=css_str %>">
                             <button class="btn btn-white btn-info btn-bold" id="addbutton1_top">
                                 <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
                                 保存
                             </button>
                         </li>
-                        <li class="">&nbsp;&nbsp;</li>
+                        <li class="<%=css_str %>">&nbsp;&nbsp;</li>
                         <li class="hidden-480">
                             <button class="btn btn-white btn-info btn-bold printarea_go_dayinanniu" id="dayinzheyiye_top">
                                 <i class="ace-icon fa fa-print grey"></i>
@@ -92,6 +101,15 @@
                             </button>
                         </li>
                         <li class="c_xinzeng_top hidden">&nbsp;&nbsp;</li>
+
+
+                        <li class="c_bianji_top hidden">
+                            <button class="btn btn-white btn-info btn-bold" id="bianji_top">
+                                <i class="ace-icon fa fa-pencil-square-o green"></i>
+                                编辑
+                            </button>
+                        </li>
+                        <li class="c_bianji_top hidden">&nbsp;&nbsp;</li>
 
                         <%--                <li class=""><button class="btn btn-white btn-info btn-bold">
 												<i class="ace-icon fa fa-trash-o bigger-120 "></i>
@@ -142,7 +160,7 @@
                                             {
                                                 case "输入框":
                                         %>
-                                        <div class="form-group">
+                                        <div class="form-group " >
                                             <label class="col-sm-2 control-label no-padding-right" for="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>">
                                                 <%
                                                     if (dsFPZ.Tables["表单配置子表"].Rows[i]["FS_passnull"].ToString() == "1")
@@ -154,7 +172,7 @@
                                                 %>
                                                 <%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_title"] %>：</label>
 
-                                            <div class="col-sm-10">
+                                            <div class="col-sm-10 <%=css_str %>">
 
                                                 <%
                                                     string inputclass_temp = "";
@@ -186,6 +204,13 @@
 
                                                 <div class="ValidErrInfo col-sm-12 no-padding-left"></div>
                                             </div>
+                                            
+                                            <% if(onlyshow) {%>  
+                                            <div class="col-sm-10">
+                                                <div class="col-xs-12 col-sm-7 control-label" style="text-align: left;font-size:14px;border:0px;border-bottom:1px solid #f1f1f1;min-height:30px;color:#000000;" id="fifsssss_<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>">--</div>
+
+                                            </div>
+                                            <%} %>
 
                                         </div>
                                         <%    break;
@@ -203,10 +228,18 @@
                                                 %>
                                                 <%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_title"] %>：</label>
 
-                                            <div class="col-sm-10">
+                                            <div class="col-sm-10  <%=css_str %>">
                                                 <input data-rel="tooltip" type="password" id="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" name="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" placeholder="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_tip_n"] %>" title="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_tip_w"] %>" data-placement="bottom" class="col-xs-12 col-sm-5" value="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_defaultvalue"] %>" />
                                                 <div class="ValidErrInfo col-sm-12 no-padding-left"></div>
                                             </div>
+
+                                            <% if(onlyshow) {%>  
+                                            <div class="col-sm-10">
+                                                <div class="col-xs-12 col-sm-7 control-label" style="text-align: left;font-size:14px;border:0px;border-bottom:1px solid #f1f1f1;min-height:30px;color:#000000;" id="fifsssss_<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>">--</div>
+
+                                            </div>
+                                            <%} %>
+
                                         </div>
                                         <%
                                                 break;
@@ -225,7 +258,7 @@
                                                 %>
                                                 <%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_title"] %>：</label>
 
-                                            <div class="col-sm-10">
+                                            <div class="col-sm-10 <%=css_str %>">
                                                 <select class="col-xs-12 col-sm-5" id="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" name="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>">
                                                     <option value="" selected>请选择</option>
                                                     <%
@@ -256,6 +289,12 @@
                                                 </select>
                                                 <div class="ValidErrInfo col-sm-12 no-padding-left"></div>
                                             </div>
+                                            <% if(onlyshow) {%>  
+                                            <div class="col-sm-10">
+                                                <div class="col-xs-12 col-sm-7 control-label" style="text-align: left;font-size:14px;border:0px;border-bottom:1px solid #f1f1f1;min-height:30px;color:#000000;" id="fifsssss_<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>">--</div>
+
+                                            </div>
+                                            <%} %>
                                         </div>
                                         <%
                                                 break;
@@ -274,7 +313,7 @@
                                                 %>
                                                 <%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_title"] %>：</label>
 
-                                            <div class="col-sm-10">
+                                            <div class="col-sm-10 <%=css_str %>">
 
                                                 <div class="no-padding-left radio col-xs-12 col-sm-10">
 
@@ -307,6 +346,13 @@
                                                 </div>
                                                 <div class="ValidErrInfo col-sm-12 no-padding-left"></div>
                                             </div>
+                                            <% if(onlyshow) {%>  
+                                            <div class="col-sm-10">
+                                                <div class="col-xs-12 col-sm-7 control-label" style="text-align: left;font-size:14px;border:0px;border-bottom:1px solid #f1f1f1;min-height:30px;color:#000000;" id="fifsssss_<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>">--</div>
+
+                                            </div>
+                                            <%} %>
+
                                         </div>
                                         <%
                                                 break;
@@ -325,7 +371,7 @@
                                                 %>
                                                 <%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_title"] %>：</label>
 
-                                            <div class="col-sm-10">
+                                            <div class="col-sm-10 <%=css_str %>">
 
                                                 <div class="no-padding-left checkbox col-xs-12 col-sm-10">
 
@@ -384,6 +430,12 @@
                                                 </div>
                                                 <div class="ValidErrInfo col-sm-12 no-padding-left"></div>
                                             </div>
+                                            <% if(onlyshow) {%>  
+                                            <div class="col-sm-10">
+                                                <div class="col-xs-12 col-sm-7 control-label" style="text-align: left;font-size:14px;border:0px;border-bottom:1px solid #f1f1f1;min-height:30px;color:#000000;" id="fifsssss_<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>">--</div>
+
+                                            </div>
+                                            <%} %>
                                         </div>
                                         <%
                                                 break;
@@ -427,6 +479,7 @@
                                                 </select>
                                                 <div class="ValidErrInfo col-sm-12 no-padding-left"></div>
                                             </div>
+                                             
                                         </div>
                                         <%
                                                 break;
@@ -446,7 +499,7 @@
                                                 %>
                                                 <%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_title"] %>：</label>
 
-                                            <div class="col-sm-10">
+                                            <div class="col-sm-10 <%=css_str %>">
                                                 <div class="yhb_city">
                                                     <select class="yhb_city_p" name="yhb_city_Promary_<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" id="yhb_city_Promary_<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>">
                                                         <option value="0" selected>请选择省份</option>
@@ -461,6 +514,12 @@
                                                 </div>
                                                 <div class="ValidErrInfo col-sm-12 no-padding-left"></div>
                                             </div>
+                                            <% if(onlyshow) {%>  
+                                            <div class="col-sm-10">
+                                                <div class="col-xs-12 col-sm-7 control-label" style="text-align: left;font-size:14px;border:0px;border-bottom:1px solid #f1f1f1;min-height:30px;color:#000000;" id="fifsssss_<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>">--</div>
+
+                                            </div>
+                                            <%} %>
                                         </div>
                                         <%
 
@@ -481,10 +540,16 @@
                                                 %>
                                                 <%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_title"] %>：</label>
 
-                                            <div class="col-sm-10">
+                                            <div class="col-sm-10 <%=css_str %>">
                                                 <input type="text" class="input-mini" id="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" name="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" value="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_defaultvalue"] %>" />
                                                 <div class="ValidErrInfo col-sm-12 no-padding-left"></div>
                                             </div>
+                                            <% if(onlyshow) {%>  
+                                            <div class="col-sm-10">
+                                                <div class="col-xs-12 col-sm-7 control-label" style="text-align: left;font-size:14px;border:0px;border-bottom:1px solid #f1f1f1;min-height:30px;color:#000000;" id="fifsssss_<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>">--</div>
+
+                                            </div>
+                                            <%} %>
                                         </div>
                                         <%
                                                 break;
@@ -502,10 +567,16 @@
                                                 %>
                                                 <%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_title"] %>：</label>
 
-                                            <div class="col-sm-10">
+                                            <div class="col-sm-10 <%=css_str %>">
                                                 <input type="text" class="input-mini" id="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" name="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" value="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_defaultvalue"] %>" />
                                                 <div class="ValidErrInfo col-sm-12 no-padding-left"></div>
                                             </div>
+                                            <% if(onlyshow) {%>  
+                                            <div class="col-sm-10">
+                                                <div class="col-xs-12 col-sm-7 control-label" style="text-align: left;font-size:14px;border:0px;border-bottom:1px solid #f1f1f1;min-height:30px;color:#000000;" id="fifsssss_<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>">--</div>
+
+                                            </div>
+                                            <%} %>
                                         </div>
                                         <%
                                                 break;
@@ -523,7 +594,7 @@
                                                 %>
                                                 <%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_title"] %>：</label>
 
-                                            <div class="col-sm-10">
+                                            <div class="col-sm-10 <%=css_str %>">
                                                 <div class="input-group col-xs-12 col-sm-5">
                                                     <input class="form-control date-picker" id="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" name="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" type="text" />
                                                     <span class="input-group-addon">
@@ -532,6 +603,12 @@
                                                 </div>
                                                 <div class="ValidErrInfo col-sm-12 no-padding-left"></div>
                                             </div>
+                                           <% if(onlyshow) {%>  
+                                            <div class="col-sm-10">
+                                                <div class="col-xs-12 col-sm-7 control-label" style="text-align: left;font-size:14px;border:0px;border-bottom:1px solid #f1f1f1;min-height:30px;color:#000000;" id="fifsssss_<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>">--</div>
+
+                                            </div>
+                                            <%} %>
                                         </div>
                                         <%
                                                 break;
@@ -549,7 +626,7 @@
                                                 %>
                                                 <%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_title"] %>：</label>
 
-                                            <div class="col-sm-10">
+                                            <div class="col-sm-10 <%=css_str %>">
                                                 <div class="input-daterange input-group col-xs-12 col-sm-5">
                                                     <input class="form-control date-picker" id="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>1" name="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>1" type="text" />
                                                     <span class="input-group-addon">
@@ -601,6 +678,14 @@
 
                                                 <div class="ValidErrInfo col-sm-12 no-padding-left"></div>
                                             </div>
+
+                                            <% if(onlyshow) {%>  
+                                            <div class="col-sm-10">
+                                                <div class="col-xs-12 col-sm-7 control-label" style="text-align: left;font-size:14px;border:0px;border-bottom:1px solid #f1f1f1;min-height:30px;color:#000000;" id="fifsssss_<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>">--</div>
+
+                                            </div>
+                                            <%} %>
+
                                         </div>
                                         <%
                                                 break;
@@ -618,11 +703,17 @@
                                                 %>
                                                 <%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_title"] %>：</label>
 
-                                            <div class="col-sm-10">
+                                            <div class="col-sm-10 <%=css_str %>">
                                                 <textarea placeholder="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_tip_n"] %>" class="limited col-xs-12 col-sm-5" id="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" name="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" maxlength="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_maxlength"] %>" rows="5"><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_defaultvalue"] %></textarea>
                                                 <span class="help-button" data-rel="popover" data-trigger="hover" data-placement="left" data-content="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_tip_w"] %>" title="录入要求">?</span>
                                                 <div class="ValidErrInfo col-sm-12 no-padding-left"></div>
                                             </div>
+                                            <% if(onlyshow) {%>  
+                                            <div class="col-sm-10">
+                                                <div class="col-xs-12 col-sm-7 control-label" style="text-align: left;font-size:14px;border:0px;border-bottom:1px solid #f1f1f1;min-height:30px;color:#000000;" id="fifsssss_<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>">--</div>
+
+                                            </div>
+                                            <%} %>
                                         </div>
                                         <%
                                                 break;
@@ -737,7 +828,7 @@
 
                                             <label class="col-sm-2 control-label"></label>
 
-                                            <div class="col-sm-10">
+                                            <div class="col-sm-10  <%=css_str %>">
                                                 <div class="col-xs-12 col-sm-6">
 
 

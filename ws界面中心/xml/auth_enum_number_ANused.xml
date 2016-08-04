@@ -312,6 +312,46 @@
     <ANused>1</ANused>
   </Unumber1>
   <Unumber1>
+    <ANID>E-A4A600B1E98A-A4DD486F-6B1B-439A-8AAD</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>情报管理-客户列表</ANBaseName>
+    <ANBaseNumber>268435456</ANBaseNumber>
+    <ANBaseNumber_p>28</ANBaseNumber_p>
+    <ANextendID>138</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E97A-CC006266-6DBA-4468-AB15</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>数据分析-待保养设备列表</ANBaseName>
+    <ANBaseNumber>33554432</ANBaseNumber>
+    <ANBaseNumber_p>25</ANBaseNumber_p>
+    <ANextendID>166</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E985-F2E6C3C0-6CE7-41D9-A7B8</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>数据分析-工作计划查询</ANBaseName>
+    <ANBaseNumber>134217728</ANBaseNumber>
+    <ANBaseNumber_p>27</ANBaseNumber_p>
+    <ANextendID>163</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E97D-BF15E31E-C6F6-4E0C-B1B5</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>数据分析-客户设备联查</ANBaseName>
+    <ANBaseNumber>67108864</ANBaseNumber>
+    <ANBaseNumber_p>26</ANBaseNumber_p>
+    <ANextendID>165</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
     <ANID>E-A4A600B1E8EB-BCE26264-DF43-401F-AAE9</ANID>
     <ANClass>Unumber1</ANClass>
     <ANClassName>后台菜单权限</ANClassName>

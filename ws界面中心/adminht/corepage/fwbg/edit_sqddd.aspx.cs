@@ -27,6 +27,13 @@ public partial class fwbh_edit_sqddd : System.Web.UI.Page
         //检查权限
         AuthComm.chekcAuth_fromsession("16", UserSession.最终权值_全局独立权限, true);
 
+        //调度单是编辑的特殊用法，发现showinfo，跳转到我的报修申请，避免错误 
+        if (Request["showinfo"] != null)
+        {
+            Response.Redirect("/adminht/corepage/fwbg/list_bxsq_my.aspx");
+            return;
+        }
+
         //表单识别号
         string FID = "160610000055";
         #region 必备的配置代码
