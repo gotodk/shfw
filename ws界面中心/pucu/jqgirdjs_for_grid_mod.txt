@@ -136,6 +136,7 @@
                 {
                     //search form
                     recreateForm: true,
+					width: ($(window).width()*0.9 > 450 ? 450 : $(window).width()*0.9),
                     afterShowSearch: function (e) {
                         var form = $(e[0]);
                         form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
@@ -156,7 +157,7 @@
                 {
                     //view record form
                     recreateForm: true,
-                    width: 600,
+                    width:  ($(window).width()*0.9 > 700 ? 700 : $(window).width()*0.9) ,
                     beforeShowForm: function (e) {
                         var form = $(e[0]);
                         form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')

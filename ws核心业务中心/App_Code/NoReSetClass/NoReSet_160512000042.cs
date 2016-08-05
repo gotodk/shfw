@@ -8,6 +8,8 @@ using System.Data;
 using FMPublicClass;
 using System.Numerics;
 using System.Web.Script.Serialization;
+using System.Net;
+using System.Configuration;
 
 public class NoReSet_160512000042
 {
@@ -74,12 +76,27 @@ public class NoReSet_160512000042
         param.Add("@Qcjr", ht_forUI["yhbsp_session_uer_UAid"].ToString()); 
 
         alsql.Add("INSERT INTO  ZZZ_HQ(QID, Qzhuti, Qneirong, Qfujian, Qjiedanren,Qzhuangtai,Qcjr ) VALUES(@QID, @Qzhuti, @Qneirong, @Qfujian, @Qjiedanren,@Qzhuangtai,@Qcjr)");
- 
+
+        //同时把结单人自动放入审批人。 同时发送提醒
+        param.Add("@YJID", CombGuid.GetMewIdFormSequence("ZZZ_HQ_YJ"));
+        alsql.Add("INSERT INTO  ZZZ_HQ_YJ ( YJID, YJ_QID, YJqianhsuren, YJzhuangtai, YJyijian, YJqsshijian, YJlaiyuan, YJlysj ) VALUES(@YJID, @QID, @Qjiedanren, '待签',null,null, @Qcjr,getdate()   )");
+        alsql.Add("INSERT INTO  auth_znx(touser, msgtitle, msurl) VALUES(@Qjiedanren, '有新的会签需要您的参与，单号[' + @QID + ']', '/adminht/corepage/huiqian/cyhq.aspx?idforedit='+@QID+'&fff=1')");
+
+
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
 
         if ((bool)(return_ht["return_float"]))
         {
+            //强制调用一次微信发送扫描接口，发送微信消息
+            try
+            {
+                WebClient client = new WebClient();
+                string wx_httpurl = ConfigurationManager.AppSettings["wx_httpurl"].ToString();
+                client.DownloadString("http://" + wx_httpurl + "/qyapi_dlhd.aspx?sendmsgf=send");
+            }
+            catch { }
+
             dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
             dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "新增成功！";
         }

@@ -228,6 +228,7 @@ public class bsmain : System.Web.Services.WebService
             I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
             Hashtable return_ht = new Hashtable();
             Hashtable param = new Hashtable();
+
             param.Add("@start", ht_forUI["start"].ToString());
             param.Add("@end", ht_forUI["end"].ToString());
             param.Add("@K_UAID", ht_forUI["qdren"].ToString());
@@ -277,6 +278,63 @@ public class bsmain : System.Web.Services.WebService
                 return "错误err，系统异常！";
             }
         }
+
+
+
+
+        if (ht_forUI["zhiling"].ToString() == "kaoqinfugaidian")
+        {
+            //var data = {"data":[[74.438,39.006,1],[74.932,38.382,1]],"total":5365,"rt_loc_cnt":47764510,"errorno":0,"NearestTime":"2016-08-01 15:20:00","userTime":"2016-08-01 15:20:00"}
+            string revarstr_0 = "var data = {\"data\":[";
+            string revarstr_x = "[0,0,1]";
+            string revarstr_1 = "],\"total\":总量,\"rt_loc_cnt\":47764510,\"errorno\":0,\"NearestTime\":\"2016-08-01 15:20:00\",\"userTime\":\"2016-08-01 15:20:00\"}";
+
+            I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+            Hashtable return_ht = new Hashtable();
+            Hashtable param = new Hashtable();
+
+      
+            return_ht = I_DBL.RunParam_SQL("select Kzuobiao as Kzuobiao, count(Kzuobiao) as cishu  from ZZZ_kaoqin group by Kzuobiao  ", "数据记录", param);
+
+            if ((bool)(return_ht["return_float"]))
+            {
+                DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+
+                if (redb.Rows.Count < 1)
+                {
+                    return "错误err，无签到！";
+                }
+                else
+                {
+                     
+                    for (int i = 0; i < redb.Rows.Count; i++)
+                    {
+
+                        string Kzuobiao = redb.Rows[i]["Kzuobiao"].ToString();
+                        string cishu = redb.Rows[i]["cishu"].ToString();
+
+                        if (Kzuobiao.IndexOf(",") > 0)
+                        {
+                            revarstr_x = revarstr_x + ",[" + Kzuobiao + ","+ cishu + "]";
+                        }
+
+
+
+
+
+                    }
+                   
+                    return revarstr_0 + revarstr_x + revarstr_1.Replace("总量", redb.Rows.Count.ToString());
+                }
+
+            }
+            else
+            {
+                return "错误err，系统异常！";
+            }
+        }
+
+
 
         return "无效指令";
 

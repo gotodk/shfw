@@ -471,7 +471,8 @@
                 }
                 else
                 {
-                    history.back(-1);
+                    location.href = document.referrer;
+                    //history.back(-1);
                 }
                 
 
@@ -1146,7 +1147,7 @@
                     dialog_tanchuang = $("#dialog-message").removeClass('hide').dialog({
                         modal: true,
                         title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='ace-icon fa fa-check'></i> 选择并引入--" + dialog_title + "</h4></div>",
-                        width: '80%',
+                        width: ($(window).width() > 700 ? "70%" : "95%"),
                   
                         buttons: [
                             {
@@ -1288,7 +1289,7 @@
             //resize to fit page size
             $(window).on('resize.jqGrid', function () {
 
-                $(grid_selector).setGridWidth($(window).width() * 0.78);
+                $(grid_selector).setGridWidth(($(window).width() > 700 ? $(window).width() * 0.7 - 30 : $(window).width() * 0.95 - 30));
                 
 
                 var youbianquyu_for_gw = $("#addadd").width();

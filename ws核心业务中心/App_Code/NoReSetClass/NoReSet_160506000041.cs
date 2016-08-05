@@ -33,9 +33,41 @@ public class NoReSet_160506000041
         return ds;
     }
 
+    /// <summary>
+    /// 检查单据状态
+    /// </summary>
+    /// <returns></returns>
+    public string check_zhuangtai(string GID)
+    {
 
-  
- 
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+        Hashtable return_ht = new Hashtable();
+        Hashtable param = new Hashtable();
+        param.Add("@GID", GID);
+
+        return_ht = I_DBL.RunParam_SQL("select top 1 Gzhuangtai from ZZZ_workplan where GID=@GID", "数据记录", param);
+
+        if ((bool)(return_ht["return_float"]))
+        {
+            DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+
+            if (redb.Rows.Count < 1)
+            {
+                return "";
+            }
+            else
+            {
+                return redb.Rows[0]["Gzhuangtai"].ToString();
+            }
+        }
+        else
+        {
+            return "";
+        }
+
+    }
+
+
     /// <summary>
     /// 增加数据
     /// </summary>
@@ -78,10 +110,10 @@ public class NoReSet_160506000041
         param.Add("@Grwleixing", ht_forUI["Grwleixing"].ToString());
         param.Add("@Gneirong", ht_forUI["Gneirong"].ToString());
         param.Add("@Gjieguo", ht_forUI["Gjieguo"].ToString());
-       
+        param.Add("@Gzhuangtai", "草稿");
 
 
-        alsql.Add("INSERT INTO ZZZ_workplan(GID, G_UAID, Gbiaoti, Gtime1, Gtime2, Gsheng, Gchengshi, Gquyu, Gdidian, Gkqleixing, Grwleixing, Gneirong, Gjieguo ) VALUES(@GID, @G_UAID, @Gbiaoti, @Gtime1, @Gtime2, @Gsheng, @Gchengshi, @Gquyu, @Gdidian, @Gkqleixing, @Grwleixing, @Gneirong, @Gjieguo)");
+        alsql.Add("INSERT INTO ZZZ_workplan(GID, G_UAID, Gbiaoti, Gtime1, Gtime2, Gsheng, Gchengshi, Gquyu, Gdidian, Gkqleixing, Grwleixing, Gneirong, Gjieguo,Gzhuangtai ) VALUES(@GID, @G_UAID, @Gbiaoti, @Gtime1, @Gtime2, @Gsheng, @Gchengshi, @Gquyu, @Gdidian, @Gkqleixing, @Grwleixing, @Gneirong, @Gjieguo,@Gzhuangtai)");
 
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
@@ -125,6 +157,15 @@ public class NoReSet_160506000041
             dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "没有明确的修改目标！";
             return dsreturn;
         }
+
+        if (check_zhuangtai(ht_forUI["idforedit"].ToString().Trim()) != "草稿")
+        {
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "保存失败，只有草稿状态才允许编辑。";
+            return dsreturn;
+        }
+
+
         //开始真正的处理，这里只是演示，所以直接在这里写业务逻辑代码了
 
         I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");

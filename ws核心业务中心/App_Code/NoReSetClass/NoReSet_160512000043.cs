@@ -8,6 +8,8 @@ using System.Data;
 using FMPublicClass;
 using System.Numerics;
 using System.Web.Script.Serialization;
+using System.Net;
+using System.Configuration;
 
 public class NoReSet_160512000043
 {
@@ -119,8 +121,6 @@ public class NoReSet_160512000043
         Hashtable param = new Hashtable();
 
 
-    
-
         param.Add("@YJ_QID", ht_forUI["idforedit"].ToString());
 
         param.Add("@YJqianhsuren", ht_forUI["yhbsp_session_uer_UAid"].ToString());
@@ -148,7 +148,9 @@ public class NoReSet_160512000043
                     param.Add("@sub_" + "YJqianhsuren" + "_" + i, YJqianhsuren_arr[i].Trim());
  
                     string INSERTsql = "if not exists(select YJID from ZZZ_HQ_YJ where YJ_QID=@YJ_QID and YJqianhsuren=@sub_" + "YJqianhsuren" + "_" + i + " )   begin   INSERT INTO  ZZZ_HQ_YJ ( YJID, YJ_QID, YJqianhsuren, YJzhuangtai, YJyijian, YJqsshijian, YJlaiyuan, YJlysj ) VALUES(@sub_" + "YJID" + "_" + i + ", @YJ_QID, @sub_" + "YJqianhsuren" + "_" + i + ", '待签',null,null, @YJlaiyuan,getdate()   )  ;    INSERT INTO  auth_znx(touser, msgtitle, msurl) VALUES(@sub_" + "YJqianhsuren" + "_" + i + ", '有新的会签需要您的参与，单号[' + @YJ_QID + ']', '/adminht/corepage/huiqian/cyhq.aspx?idforedit='+@YJ_QID+'&fff=1')    end";
+ 
                     alsql.Add(INSERTsql);
+                   
                 }
                 
             }
@@ -189,6 +191,15 @@ public class NoReSet_160512000043
 
         if ((bool)(return_ht["return_float"]))
         {
+            //强制调用一次微信发送扫描接口，发送微信消息
+            try
+            {
+                WebClient client = new WebClient();
+                string wx_httpurl = ConfigurationManager.AppSettings["wx_httpurl"].ToString();
+                client.DownloadString("http://"+ wx_httpurl + "/qyapi_dlhd.aspx?sendmsgf=send");
+            }
+            catch { }
+         
 
             dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
             dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "保存成功！";
