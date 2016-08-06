@@ -7,3 +7,5 @@
     <link rel="stylesheet" href="/assets/css/ui.jqgrid.css" />
 
     <link rel="stylesheet" href="/assets/css/dropzone.css" />
+
+<link rel="stylesheet" href="/assets/css/colorbox.css" />

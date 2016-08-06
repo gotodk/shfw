@@ -317,7 +317,7 @@ require.register("dropzone/lib/dropzone.js", function (exports, module) {
       dictResponseError: "Server responded with {{statusCode}} code.",
       dictCancelUpload: "取消上传",
       dictCancelUploadConfirmation: "确认要取消此文件的上传吗?",
-      dictRemoveFile: "删除",
+      dictRemoveFile: "移除",
       dictRemoveFileConfirmation: null,
       dictMaxFilesExceeded: "达到最大文件上限,无法上传更多!",
       accept: function(file, done) {

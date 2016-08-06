@@ -733,15 +733,26 @@
                                             case "上传组件":
                                         %>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label no-padding-right" for="beizhu"><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_title"] %>：</label>
+                                            <%
+                                                string chayueURL = "";
+                                                if (Request["idforedit"] != null)
+                                                {
+                                                    chayueURL = dsFPZ.Tables["表单配置子表"].Rows[i]["FS_SPPZ_list_static"].ToString().Replace("[[编号]]",Request["idforedit"].ToString());
+                                                    chayueURL = "<br/><a href='"+chayueURL+"' target='_blank'>查阅文件</a>";
+                                                }
+                                                 %>
+                                            <label class="col-sm-2 control-label no-padding-right" for="beizhu"><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_title"] %>：<%=chayueURL %></label>
 
                                             <div class="col-sm-10">
-                                                <div class="dropzone col-xs-12 col-sm-12" id="dropzone">
+                                                <div class="dropzone col-xs-12 col-sm-12 <%=css_str %>" id="dropzone">
 
                                                     <div class="fallback">
                                                         <input type="file" />
                                                     </div>
 
+                                                </div>
+                                                <div class=" col-xs-12 col-sm-12" id="dropzone_only_for_showinfo">
+ 
                                                 </div>
                                             </div>
                                             <%--隐藏这个图片集合原始guid--%>

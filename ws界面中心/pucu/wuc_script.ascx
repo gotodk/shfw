@@ -9,6 +9,7 @@
 
     <!-- 附加的body底部本页专属的自定义js脚本 -->
     <script src="/assets/js/jquery.validate.js"></script>
+<script src="/assets/js/jquery.colorbox.js"></script>
     <script src="/assets/js/date-time/bootstrap-datepicker.js"></script>
 <script src="/assets/js/date-time/dateRangeUtil.js"></script>
 
@@ -830,7 +831,53 @@
 
             });
 
+            //  dropzone_only_for_showinfo
+            <% if (onlyshow)
+        {%>  
+            var showh_str = "<ul class='ace-thumbnails clearfix'>";
+            $(".dz-preview").each(function (i) {
+                if ($(this).hasClass("dz-file-preview"))
+                {
+                    var t = "/mytutu/wjlxwfyl.jpg";
+                    var t2 = $(this).find("img").eq(0).attr("src");
+                    showh_str = showh_str + "<li><a href='" + t2 + "'  target='_blank'><img width='120' height='120' alt='120x120' src='" + t + "' /></a></li>"
+                }
+                if ($(this).hasClass("dz-image-preview"))
+                {
+                    
+                    var t = $(this).find("img").eq(0).attr("src");
+                    showh_str = showh_str + "<li><a href='" + t + "' data-rel='colorbox'><img width='120' height='120' alt='120x120' src='" + t + "' /></a></li>"
+                }
 
+            });
+            showh_str = showh_str + "</ul>";
+            $("#dropzone_only_for_showinfo").html(showh_str);
+
+            var $overflow = '';
+            var colorbox_params = {
+                rel: 'colorbox',
+                reposition: true,
+                scalePhotos: true,
+                scrolling: false,
+                previous: '<i class="ace-icon fa fa-arrow-left"></i>',
+                next: '<i class="ace-icon fa fa-arrow-right"></i>',
+                close: '&times;',
+                current: '{current} of {total}',
+                maxWidth: '100%',
+                maxHeight: '100%',
+                onOpen: function () {
+                    $overflow = document.body.style.overflow;
+                    document.body.style.overflow = 'hidden';
+                },
+                onClosed: function () {
+                    document.body.style.overflow = $overflow;
+                },
+                onComplete: function () {
+                    $.colorbox.resize();
+                }
+            };
+            $('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+             <%}%>
 
             <%
             break;
@@ -1538,3 +1585,20 @@
     });
 
   </script>
+
+
+
+
+<script type="text/javascript">
+			jQuery(function($) {
+
+
+	
+ 
+	
+	
+	$(document).one('ajaxloadstart.page', function(e) {
+		$('#colorbox, #cboxOverlay').remove();
+   });
+})
+		</script>
