@@ -131,6 +131,9 @@
                      //弹窗特殊条件，隐藏的弹窗的条件(从销售发货单选择零件时才启用)
                    
                      $("#searchopenyhbspgogo_subtcid_lj_LID").attr("teshuwhere", " FC_YYID='" + khbh_str + "' ");
+
+                     //弹窗特殊条件，只从自己的计划中选择
+                     $("#searchopenyhbspgogo_G_jihua_GID").attr("teshuwhere", " G_UAID='<%=UserSession.唯一键%>' ");
  
                  }, 500);
 

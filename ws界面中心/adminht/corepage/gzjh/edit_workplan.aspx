@@ -44,11 +44,27 @@
                      $("#G_UAID").closest(".form-group").hide();
                      $("#xingming").closest(".form-group").hide();
                      $("#Gzhuangtai").closest(".form-group").hide();
+
+                     $("#Gshenheren").closest(".form-group").hide();
+                     $("#Gshenheren_show").closest(".form-group").hide();
+                     $("#Gshenheshijian").closest(".form-group").hide();
+                     $("#Gshenheyijian").closest(".form-group").hide();
+                     $("#G_BID").closest(".form-group").hide();
                  }
                  else {
-                     $("#G_UAID").closest(".form-group").hide();
-                     $("#Gzhuangtai").closest(".form-group").hide();
+                     
+                   
                  }
+
+
+
+                 //如果是从报修申请新建工作计划
+                 if (getUrlParam("lzbx") == "1")
+                 {
+                     $("#G_BID").val(getUrlParam("G_BID"));
+                     $("#G_BID").closest(".form-group").show();
+                 }
+
 
                  var dfx_str_kh = "#show_searchopenyhbspgogo_G_UAID";
                  var oldzhi_kh = $(dfx_str_kh).text();
@@ -156,6 +172,114 @@
         });
         </script>
 
+    
+            <!-- 增加一些特殊处理按钮，例如提交，收货 -->
+    <script type="text/javascript">
+        jQuery(function ($) {
 
+            //调用批量操作的接口
+            function begin_ajax(zdyname, xuanzhongzhi, zheshiyige_FID)
+            {
+                $.ajax({
+                    url: '/pucu/gqzidingyi.aspx?zdyname=' + zdyname + '&xuanzhongzhi=' + xuanzhongzhi + '&zheshiyige_FID=' + zheshiyige_FID,
+                    type: 'post',
+                    data: $('#myform_spanniu').serialize(),
+                    cache: false,
+                    dataType: 'html',
+                    success: function (data) {
+                        //显示调用接口并刷新当前页面
+                        bootbox.alert({
+                            message: data,
+                            callback: function () {
+                                var newurl = window.location.href;
+                                location.href = newurl;
+
+                            }
+                        });
+
+
+                    },
+                    error: function () {
+                        bootbox.alert('操作失败，接口调用失败！');
+                    }
+                });
+            }
+
+
+          
+            function add_anniu_spsp()
+            {
+                //根据现有状态，添加特殊按钮
+                if ($("#fifsssss_FCzhuangtai").text() == "草稿" && getUrlParam("ywlx") == "bianjicaogao") {
+                    var bjm = "tijiaogo";
+                    var bjm_wenben = "提交";
+                    var bjm_tubiao = "fa-check blue";
+
+                    $("#myTab").append("<li class='c_" + bjm + "_top'><button class='btn btn-white btn-info btn-bold' id='" + bjm + "_top'><i class='ace-icon fa " + bjm_tubiao + "'></i>" + bjm_wenben + "</button></li><li class='c_" + bjm + "_top'>&nbsp;&nbsp;</li>");
+                    //给特殊按钮添加事件，调用批量操作的接口
+                    $(document).on('click', "#" + bjm + "_top", function () {
+                        
+                        begin_ajax("tijiaoshenqing", getUrlParam("idforedit"), "160513000042")
+
+                    });
+
+                }
+               
+                //
+                if ($("#fifsssss_Gzhuangtai").text() == "提交" && getUrlParam("caozuo") == "shenhe") {
+                    var bjm = "shenhego";
+                    var bjm_wenben = "审核/驳回";
+                    var bjm_tubiao = "fa-gavel blue";
+
+                    $("#myTab").append("<li class='c_" + bjm + "_top'><button class='btn btn-white btn-info btn-bold' id='" + bjm + "_top'><i class='ace-icon fa " + bjm_tubiao + "'></i>" + bjm_wenben + "</button></li><li class='c_" + bjm + "_top'>&nbsp;&nbsp;</li>");
+                    //给特殊按钮添加事件，调用批量操作的接口
+                    $(document).on('click', "#" + bjm + "_top", function () {
+                        bootbox.dialog({
+                            message: "<form  id='myform_spanniu'>审核意见：<br/><textarea placeholder='请输入' class='limited col-xs-12' id='ddtj_Gshenheyijian' name='ddtj_Gshenheyijian' maxlength='500' rows='5' ></textarea></form><hr/>===========",
+                            title: bjm_wenben,
+                            buttons: {
+                                Cancel: {
+                                    label: "驳回",
+                                    className: "btn-default",
+                                    callback: function () {
+                                        begin_ajax("bohui", getUrlParam("idforedit"), "160506000037");
+                                    }
+                                }
+                                , OK: {
+                                    label: "审核通过",
+                                    className: "btn-primary",
+                                    callback: function () {
+                                        begin_ajax("shenhe", getUrlParam("idforedit"), "160506000037");
+                                    }
+                                }
+                            }
+                        });
+                        //begin_ajax("shenhe", getUrlParam("idforedit"), "160506000037")
+                        //begin_ajax("bohui", getUrlParam("idforedit"), "160506000037")
+
+                    });
+
+
+                     
+
+                }
+
+
+            }
+            
+            if (getUrlParam("showinfo") == "1" || getUrlParam("showinfo") == "2") {
+                //数据加载完成才执行，只执行一次
+                var jiancha_bdjzwc = window.setInterval(function () {
+                    if ($("#editloadinfo").hasClass("hide")) {
+                        clearInterval(jiancha_bdjzwc);
+                        add_anniu_spsp();
+                    }
+
+                }, 1000);
+            }
+            
+
+        });
+        </script>
 </asp:Content>
 

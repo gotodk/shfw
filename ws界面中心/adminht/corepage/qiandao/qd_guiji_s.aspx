@@ -39,8 +39,8 @@
          
                  $("#title_f_id").html("签到轨迹覆盖图");
                  $("#addbutton1_top").hide();
-                 $("#addbutton1").hide();
-                 $("#reloaddb").hide();
+                 $("#addbutton1").css({ visibility: "hidden" });
+                 $("#reloaddb").css({ visibility: "hidden" });
                  $(".no-padding-right").hide();
                  
           

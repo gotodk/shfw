@@ -92,6 +92,16 @@
     </xs:element>
   </xs:schema>
   <Unumber1>
+    <ANID>E-A4A600B1E98E-C32E9217-2EB2-42B0-874D</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>调度申请审核</ANBaseName>
+    <ANBaseNumber>536870912</ANBaseNumber>
+    <ANBaseNumber_p>29</ANBaseNumber_p>
+    <ANextendID>167</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
     <ANID>E-A4A600B1E93A-759802B6-0414-4FBD-865D</ANID>
     <ANClass>Unumber1</ANClass>
     <ANClassName>后台菜单权限</ANClassName>

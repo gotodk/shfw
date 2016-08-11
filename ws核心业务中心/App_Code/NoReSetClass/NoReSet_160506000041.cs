@@ -111,9 +111,10 @@ public class NoReSet_160506000041
         param.Add("@Gneirong", ht_forUI["Gneirong"].ToString());
         param.Add("@Gjieguo", ht_forUI["Gjieguo"].ToString());
         param.Add("@Gzhuangtai", "草稿");
+        param.Add("@G_BID", ht_forUI["G_BID"].ToString());
 
 
-        alsql.Add("INSERT INTO ZZZ_workplan(GID, G_UAID, Gbiaoti, Gtime1, Gtime2, Gsheng, Gchengshi, Gquyu, Gdidian, Gkqleixing, Grwleixing, Gneirong, Gjieguo,Gzhuangtai ) VALUES(@GID, @G_UAID, @Gbiaoti, @Gtime1, @Gtime2, @Gsheng, @Gchengshi, @Gquyu, @Gdidian, @Gkqleixing, @Grwleixing, @Gneirong, @Gjieguo,@Gzhuangtai)");
+        alsql.Add("INSERT INTO ZZZ_workplan(GID, G_UAID, Gbiaoti, Gtime1, Gtime2, Gsheng, Gchengshi, Gquyu, Gdidian, Gkqleixing, Grwleixing, Gneirong, Gjieguo,Gzhuangtai,G_BID ) VALUES(@GID, @G_UAID, @Gbiaoti, @Gtime1, @Gtime2, @Gsheng, @Gchengshi, @Gquyu, @Gdidian, @Gkqleixing, @Grwleixing, @Gneirong, @Gjieguo,@Gzhuangtai,@G_BID)");
 
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);

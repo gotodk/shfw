@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="puc_ditu_guiji.ascx.cs" Inherits="puc_ditu_guiji" %>
    <style type="text/css">
-		 #allmap {width: 100%;height: 400px;overflow: hidden;margin:0;font-family:"微软雅黑";}
+		 #allmap {width: 100%;height: 400px;overflow:visible;margin:0;font-family:"微软雅黑";}
 	</style>
 
 <div class="form-group" >
@@ -9,7 +9,7 @@
                                              <%--     <div class="col-sm-10 col-xs-12" id="dtqy_ttt_load">
                                                       正在定位，请稍后，请确保您的浏览器支持已允许定位权限。
                                                 </div>--%>
-                                                <div class="col-sm-10 col-xs-12" id="dtqy_ttt">
+                                                <div class="col-sm-12 col-xs-12" id="dtqy_ttt">
 
                                                   <div id="allmap"></div> 
                                                 </div>
