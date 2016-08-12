@@ -77,7 +77,8 @@ public class NoReSet_160605000054
         param.Add("@DDoldfzr", "无");
         alsql.Add("INSERT INTO  ZZZ_BXSQ_DD(DDID, DD_BID, DDoldfzr, DDnewfzr, caozuoren) VALUES(@DDID, @BID, @DDoldfzr, @Bfwfzr,@Bsbr)");
 
-       
+        //插入提醒，发往服务负责人
+        alsql.Add("INSERT INTO  auth_znx(touser, msgtitle, msurl) VALUES(@Bfwfzr, '您有一条新的报修申请需要填写工作计划，单号['+@BID+']', '/adminht/corepage/fwbg/list_bxsq_my.aspx')");
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
 

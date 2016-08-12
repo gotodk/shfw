@@ -31,7 +31,7 @@
             </form>
 
     </div>--%>
-        <div class="col-sm-12 PrintArea_D" id="zheshiliebiaoquyu">
+        <div class="col-sm-12 PrintArea_D"   id="zheshiliebiaoquyu">
 
             <%--            <table id="grid-table"></table>
 

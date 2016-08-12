@@ -101,9 +101,10 @@
             <!-- 强制添加列表特殊条件 -->
     <script type="text/javascript">
              jQuery(function ($) {
-                 //
-         var nowloginuser = "<%=UserSession.唯一键%>";
-                 $("#zheshiliebiaoquyu").attr("teshuwhere", " YYID in (select YYID from ZZZ_userinfo_glkh where UAid='" + nowloginuser + "' and shixiaoriqi >= getdate()  UNION  select YYID from ZZZ_KHDA where YYfuwufuzeren='" + nowloginuser + "') ");
+                 
+                 var nowloginuser = "<%=UserSession.唯一键%>";
+                 // 过滤自己的客户。 包括全客户关联设置、客户关联表、客户档案服务负责人
+                 $("#zheshiliebiaoquyu").attr("teshuwhere", " ( ( charindex(','+'" + nowloginuser + "'+',',(select top 1 ','+YSTR+',' from ZZZ_ZFCMJ where YID='tskhgl')) > 0 ) or ( YYID in (select YYID from ZZZ_userinfo_glkh where UAid='" + nowloginuser + "' and shixiaoriqi >= getdate()  UNION  select YYID from ZZZ_KHDA where YYfuwufuzeren='" + nowloginuser + "') ) )");
                 
                 
  

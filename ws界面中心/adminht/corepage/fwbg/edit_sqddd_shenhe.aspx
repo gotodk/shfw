@@ -30,6 +30,7 @@
              jQuery(function ($) {
                  if (getUrlParam("fff") == "1") {
 
+                   
                       
                  }
  
@@ -79,6 +80,10 @@
           
             function add_anniu_spsp()
             {
+                //给报障申请单号增加链接，新窗口打开
+                var urldanhao = $("#fifsssss_BID").text();
+                $("#fifsssss_BID").html("<a href='/adminht/corepage/fwbg/add_bxsq_chayue.aspx?idforedit=" + urldanhao + "&fff=1&showinfo=2' target='_blank'>" + urldanhao + "[点击查看]</a>");
+
                 //根据现有状态，添加特殊按钮
               
                 if ($("#fifsssss_DDzhuangtai").text() == "待审核" && getUrlParam("caozuo") == "shenhe") {
@@ -109,7 +114,8 @@
                                 }
                             }
                         });
-                        
+
+                       
 
                     });
 

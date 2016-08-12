@@ -134,6 +134,16 @@
 
                      //弹窗特殊条件，只从自己的计划中选择
                      $("#searchopenyhbspgogo_G_jihua_GID").attr("teshuwhere", " G_UAID='<%=UserSession.唯一键%>' ");
+
+                     var nowloginuser = "<%=UserSession.唯一键%>";
+                     //弹窗特殊条件，只从自己的客户中选择客户
+                     // 过滤自己的客户。 包括全客户关联设置、客户关联表、客户档案服务负责人、报修申请表的服务负责人
+                     $("#searchopenyhbspgogo_G_YYID").attr("teshuwhere", " ( ( charindex(','+'" + nowloginuser + "'+',',(select top 1 ','+YSTR+',' from ZZZ_ZFCMJ where YID='tskhgl')) > 0 ) or ( YYID in (select YYID from ZZZ_userinfo_glkh where UAid='" + nowloginuser + "' and shixiaoriqi >= getdate()  UNION  select YYID from ZZZ_KHDA where YYfuwufuzeren='" + nowloginuser + "')  )   or (select B_YYID from ZZZ_BXSQ where Bfwfzr='" + nowloginuser + "' and Bzhuangtai='已接收' )   )");
+
+
+                     //弹窗特殊条件，只从自己的报障申请中选择
+                     $("#searchopenyhbspgogo_G_BID").attr("teshuwhere", " Bfwfzr='" + nowloginuser + "' ");
+
  
                  }, 500);
 
