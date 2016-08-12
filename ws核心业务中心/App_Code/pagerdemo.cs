@@ -81,7 +81,7 @@ public class pagerdemo : System.Web.Services.WebService {
             //初始化数据工厂  
             if (HTwhere["GetCustomersDataPage_NAME"] == null || HTwhere["GetCustomersDataPage_NAME"].ToString() == "")
             {
-                HTwhere["GetCustomersDataPage_NAME"] = "GetCustomersDataPage";
+                HTwhere["GetCustomersDataPage_NAME"] = "GetCustomersDataPage2";
             }
             if (HTwhere["this_dblink"] == null || HTwhere["this_dblink"].ToString() == "")
             {
@@ -212,7 +212,7 @@ public class pagerdemo : System.Web.Services.WebService {
             dte.Columns.Add("count_zd", typeof(string));
             dte.Columns.Add("cmd_descript", typeof(string));            
 
-            dte.Rows.Add(new object[] { "GetCustomersDataPage", "", page[0].ToString(), page[1].ToString(), "", "", "", "", "", "", "", "", ""});         
+            dte.Rows.Add(new object[] { "GetCustomersDataPage_offset", "", page[0].ToString(), page[1].ToString(), "", "", "", "", "", "", "", "", ""});         
 
             DataSet ds = new DataSet();
             ds.Tables.Add(dte);

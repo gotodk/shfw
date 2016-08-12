@@ -831,17 +831,17 @@
             }
         },
 
-        _weekdays : '星期一_星期二_星期三_星期四_星期五_星期六_星期日'.split('_'),
+        _weekdays: '星期日_星期一_星期二_星期三_星期四_星期五_星期六'.split('_'),
         weekdays : function (m) {
             return this._weekdays[m.day()];
         },
 
-        _weekdaysShort : '周一_周二_周三_周四_周五_周六_周日'.split('_'),
+        _weekdaysShort: '周日_周一_周二_周三_周四_周五_周六'.split('_'),
         weekdaysShort : function (m) {
             return this._weekdaysShort[m.day()];
         },
 
-        _weekdaysMin : '一_二_三_四_五_六_七'.split('_'),
+        _weekdaysMin: '七_一_二_三_四_五_六'.split('_'),
         weekdaysMin : function (m) {
             return this._weekdaysMin[m.day()];
         },

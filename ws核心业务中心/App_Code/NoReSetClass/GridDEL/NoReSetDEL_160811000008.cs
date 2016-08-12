@@ -71,7 +71,7 @@ public class NoReSetDEL_160811000008
 
                     alsql.Add("UPDATE ZZZ_BXSQ_DD SET  DDzhuangtai='已审核',DDshenheren=@DDshenheren,DDshenheshijian=getdate()  where DDzhuangtai='待审核' and DDID =@DDID_" + d);
 
-                    alsql.Add("UPDATE ZZZ_BXSQ set Bfwfzr = (select top 1 DDnewfzr from ZZZ_BXSQ_DD where  DDID =@DDID_" + d + "),Bzhuangtai='待处理',Bjstime=null,Bwctime=null where BID=(select top 1 DD_BID from ZZZ_BXSQ_DD where DDzhuangtai='待审核' and  DDID =@DDID_" + d + ")");
+                    alsql.Add("UPDATE ZZZ_BXSQ set Bfwfzr = (select top 1 DDnewfzr from ZZZ_BXSQ_DD where  DDID =@DDID_" + d + "),Bzhuangtai='待处理',Bjstime=null,Bwctime=null where BID=(select top 1 DD_BID from ZZZ_BXSQ_DD where  DDID =@DDID_" + d + ")");
                 
 
                 }

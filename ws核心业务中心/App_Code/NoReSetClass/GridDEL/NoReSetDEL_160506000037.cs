@@ -80,7 +80,7 @@ public class NoReSetDEL_160506000037
 
                     alsql.Add("UPDATE ZZZ_workplan SET  Gzhuangtai='审核',Gshenheren=@Gshenheren,Gshenheshijian=getdate(),Gshenheyijian=@Gshenheyijian  where Gzhuangtai='提交' and GID =@GID_" + d);
                     //自动标注报修申请为已接收。
-                    alsql.Add("UPDATE ZZZ_BXSQ SET  Bzhuangtai='已接收',Bjstime=getdate()  where Bzhuangtai='待处理' and BID =(select top 1 G_BID from ZZZ_workplan where Gzhuangtai='提交' and GID =@GID_" + d + ")");
+                    alsql.Add("UPDATE ZZZ_BXSQ SET  Bzhuangtai='已接收',Bjstime=getdate()  where Bzhuangtai='待处理' and BID =(select top 1 G_BID from ZZZ_workplan where GID =@GID_" + d + ")");
                 }
 
             }

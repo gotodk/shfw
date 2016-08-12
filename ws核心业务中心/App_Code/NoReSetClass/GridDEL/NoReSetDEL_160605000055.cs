@@ -126,12 +126,20 @@ public class NoReSetDEL_160605000055
             //删除数据表里的数据 
             string[] ids = ht_forUI["xuanzhongzhi"].ToString().Split(',');
             param.Add("@nowloginuser", ht_forUI["yhbsp_session_uer_UAid"].ToString());
+            if (ht_forUI.Contains("ddtj_Bjieshuyuanyin"))
+            {
+                param.Add("@Bjieshuyuanyin", ht_forUI["ddtj_Bjieshuyuanyin"].ToString());
+            }
+            else
+            {
+                param.Add("@Bjieshuyuanyin", "");
+            }
             for (int d = 0; d < ids.Length; d++)
             {
                 if (ids[d].Trim() != "")
                 {
                     param.Add("@BID_" + d, ids[d]);
-                    alsql.Add("UPDATE ZZZ_BXSQ SET  Bzhuangtai='作废'   where Bzhuangtai='待处理' and Bsbr=@nowloginuser and BID =@BID_" + d);
+                    alsql.Add("UPDATE ZZZ_BXSQ SET  Bzhuangtai='结束' ,Bjieshuyuanyin=@Bjieshuyuanyin,Bjieshuren=@nowloginuser,Bjieshushijian=getdate()  where Bzhuangtai='待处理' and (Bsbr=@nowloginuser or Bfwfzr=@nowloginuser) and BID =@BID_" + d);
                 }
 
             }
@@ -143,14 +151,14 @@ public class NoReSetDEL_160605000055
             if ((bool)(return_ht["return_float"]))
             {
 
-                return "批量作废完成！";
+                return "结束完成！";
             }
 
         }
 
 
 
-        return "批量作废失败，发生错误";
+        return "结束失败，发生错误";
     }
 
 }
