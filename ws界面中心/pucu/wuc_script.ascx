@@ -1091,7 +1091,7 @@
             //select2
             $('.select2').css('width', '220px').select2();
 
-
+        
 
             if ($(".dropzone").length > 0) {
                 //上传控件Dropzone
@@ -1103,6 +1103,14 @@
                         maxFiles: 20,
                         url: '/ajaxdropzoneupload.aspx',
                         addRemoveLinks: true,
+                        createImageThumbnails: true,
+                        //maxThumbnailFilesize: 10,
+                        //thumbnailWidth: 1024,
+                        //thumbnailHeight: 1024,
+                        //accept: function (file, done) {
+                        //    //alert(file.url);
+                        //    return done(file);
+                        //},
                         dictDefaultMessage:
                         '<i class="upload-icon ace-icon fa fa-cloud-upload blue"></i>点击或拖拽文件上传'
                   ,
@@ -1142,6 +1150,14 @@
                             });
 
                         }
+                        , sending: function (xhr, formData) {
+                            if (!(window.File || window.FileReader || window.FileList || window.Blob)) {
+                                alert('不支持的操作');
+                            }
+                            
+                            //alert(readFile(document.querySelector("input[type=file]")));
+                            
+                            }
                     });
 
                 } catch (e) {

@@ -38,7 +38,7 @@
                  if (getUrlParam("fff") != "1") {
 
                      //隐藏状态，并自动带入执行人
-                     $("input[name='Gjieguo']").closest(".form-group").hide();
+                     //$("input[name='Gjieguo']").closest(".form-group").hide();
                      $("#G_UAID").val("<%=UserSession.唯一键%>");
                      $("#xingming").val("隐藏了");
                      $("#G_UAID").closest(".form-group").hide();

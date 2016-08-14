@@ -581,7 +581,7 @@
 
                                             <div class="col-sm-10 <%=css_str %>">
                                                 <div class="input-group col-xs-12 col-sm-5">
-                                                    <input class="form-control date-picker" id="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" name="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" type="text" />
+                                                    <input class="form-control date-picker" id="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" name="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" type="text" style="ime-mode: disabled" />
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-calendar bigger-110"></i>
                                                     </span>
@@ -613,11 +613,11 @@
 
                                             <div class="col-sm-10 <%=css_str %>">
                                                 <div class="input-daterange input-group col-xs-12 col-sm-5">
-                                                    <input class="form-control date-picker" id="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>1" name="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>1" type="text" />
+                                                    <input class="form-control date-picker" id="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>1" name="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>1" type="text" style="ime-mode: disabled" />
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-exchange"></i>
                                                     </span>
-                                                    <input class="form-control date-picker" id="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>2" name="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>2" type="text" />
+                                                    <input class="form-control date-picker" id="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>2" name="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>2" type="text" style="ime-mode: disabled" />
 
 
 
@@ -690,7 +690,7 @@
 
                                             <div class="col-sm-10 <%=css_str %>">
                                                 <textarea placeholder="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_tip_n"] %>" class="limited col-xs-12 col-sm-5" id="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" name="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>" maxlength="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_maxlength"] %>" rows="5"><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_defaultvalue"] %></textarea>
-                                                <span class="help-button" data-rel="popover" data-trigger="hover" data-placement="left" data-content="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_tip_w"] %>" title="录入要求">?</span>
+                                                <span class="help-button hidden-480" data-rel="popover" data-trigger="hover" data-placement="left" data-content="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_tip_w"] %>" title="录入要求">?</span>
                                                 <div class="ValidErrInfo col-sm-12 no-padding-left"></div>
                                             </div>
                                             <% if(onlyshow) {%>  

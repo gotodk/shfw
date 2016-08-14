@@ -200,7 +200,7 @@
 
  
   jQuery("[*[grid_selector_ID]*]").navButtonAdd("[*[pager_selector_ID]*]",{
-   caption:"", 
+   caption:"保存", 
    title : "保存",
    buttonicon:"ace-icon fa fa-floppy-o blue", 
    onClickButton: function(e){ 
@@ -217,9 +217,9 @@ $('[*[grid_selector_ID]*]').attr('lastsel_yhb',"-999999");
    position:"first"
 });
 
-
+ 
  jQuery("[*[grid_selector_ID]*]").navButtonAdd("[*[pager_selector_ID]*]",{
-   caption:"", 
+   caption:"删除", 
    title : "删除",
    buttonicon:"ace-icon fa fa-trash-o red", 
    onClickButton: function(e){ 
@@ -238,9 +238,11 @@ for(var i = 0;i < len ;i ++) {
 });
 
 
+ 
+ 
 
  jQuery("[*[grid_selector_ID]*]").navButtonAdd("[*[pager_selector_ID]*]",{
-   caption:"", 
+   caption:"新增", 
    title : "新增",
    buttonicon:"ace-icon fa fa-plus-circle purple", 
    onClickButton: function(e){ 

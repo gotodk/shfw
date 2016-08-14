@@ -2849,7 +2849,7 @@ public class bssystem : System.Web.Services.WebService
         for (int i = 0; i < ds_DD.Tables["字段配置子表"].Rows.Count; i++)
         {
             DataRow dr = ds_DD.Tables["字段配置子表"].Rows[i];
-            if(dr["DID_hide"].ToString() == "false" && dr["DID_formatter"].ToString() != "自定义")
+            if(dr["DID_hide"].ToString() == "false" && dr["DID_formatter"].ToString() != "自定义" && !dr["DID_showname"].ToString().EndsWith("."))
             {
                 field_str = field_str + " " + dr["DID_name"].ToString() + " as " + dr["DID_showname"].ToString() + ",";
             }

@@ -211,8 +211,8 @@ public class NoReSet_160427000035
             return dsreturn;
         }
 
-        //额外验证，除综合、远程以外，设备必填
-        if (ht_forUI["Gfwlx"].ToString() != "综合" || ht_forUI["Gfwlx"].ToString() != "远程")
+        //额外验证，除综合、远程、巡检以外，设备必填
+        if (ht_forUI["Gfwlx"].ToString() != "综合" && ht_forUI["Gfwlx"].ToString() != "远程" && ht_forUI["Gfwlx"].ToString() != "巡检")
         {
             if(subdt.Rows.Count < 1)
             {
