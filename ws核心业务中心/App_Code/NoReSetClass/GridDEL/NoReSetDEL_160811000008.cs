@@ -63,11 +63,14 @@ public class NoReSetDEL_160811000008
             //删除数据表里的数据 
             string[] ids = ht_forUI["xuanzhongzhi"].ToString().Split(',');
             param.Add("@DDshenheren", ht_forUI["yhbsp_session_uer_UAid"].ToString());
+            
             for (int d = 0; d < ids.Length; d++)
             {
                 if (ids[d].Trim() != "")
                 {
+                    
                     param.Add("@DDID_" + d, ids[d]);
+ 
 
                     alsql.Add("UPDATE ZZZ_BXSQ_DD SET  DDzhuangtai='已审核',DDshenheren=@DDshenheren,DDshenheshijian=getdate()  where DDzhuangtai='待审核' and DDID =@DDID_" + d);
 
@@ -84,7 +87,6 @@ public class NoReSetDEL_160811000008
 
             if ((bool)(return_ht["return_float"]))
             {
-
                 return "审核完成！";
             }
 

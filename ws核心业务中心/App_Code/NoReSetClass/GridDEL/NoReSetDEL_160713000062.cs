@@ -73,6 +73,83 @@ public class NoReSetDEL_160713000062
 
 
 
+    /// <summary>
+    /// 获取子表数据条数
+    /// </summary>
+    /// <param name="parameter_forUI">前台表单传来的参数</param>
+    /// <returns></returns>
+    private int get_tiaoshu(string FCS_FCID)
+    {
+
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+        Hashtable return_ht = new Hashtable();
+        Hashtable param = new Hashtable();
+        param.Add("@FCS_FCID", FCS_FCID);
+
+        return_ht = I_DBL.RunParam_SQL("select count(FCSID) as sl from ZZZ_xiaoshoufahuo_sb where FCS_FCID=@FCS_FCID", "数据记录", param);
+
+        if ((bool)(return_ht["return_float"]))
+        {
+            DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+
+            if (redb.Rows.Count > 0)
+            {
+                return  Convert.ToInt32( redb.Rows[0]["sl"]);
+            }
+            else
+            {
+                return 0;
+            }
+
+        }
+        else
+        {
+            return 0;
+        }
+
+
+
+    }
+
+
+    /// <summary>
+    /// 获取子表存在0数量的数据
+    /// </summary>
+    /// <param name="parameter_forUI">前台表单传来的参数</param>
+    /// <returns></returns>
+    private int get_lingshuliang(string FCS_FCID)
+    {
+
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+        Hashtable return_ht = new Hashtable();
+        Hashtable param = new Hashtable();
+        param.Add("@FCS_FCID", FCS_FCID);
+
+        return_ht = I_DBL.RunParam_SQL("select count(FCSID) as sl from ZZZ_xiaoshoufahuo_sb where FCS_FCID=@FCS_FCID and FCSsl<1", "数据记录", param);
+
+        if ((bool)(return_ht["return_float"]))
+        {
+            DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+
+            if (redb.Rows.Count > 0)
+            {
+                return Convert.ToInt32(redb.Rows[0]["sl"]);
+            }
+            else
+            {
+                return 999;
+            }
+
+        }
+        else
+        {
+            return 999;
+        }
+
+
+
+    }
+
 
     /// <summary>
     /// 自定义按钮处理
@@ -106,14 +183,34 @@ public class NoReSetDEL_160713000062
             ArrayList alsql = new ArrayList();
 
 
+
+            Hashtable hmsg = new Hashtable();
             //更新数据表里的数据 
             string[] ids = ht_forUI["xuanzhongzhi"].ToString().Split(',');
             for (int d = 0; d < ids.Length; d++)
             {
                 if (ids[d].Trim() != "")
                 {
-                    param.Add("@FCID_" + d, ids[d]);
-                    alsql.Add("UPDATE ZZZ_xiaoshoufahuo SET  FCzhuangtai='提交',FCshenqingshijian=getdate()  where FCzhuangtai='草稿' and (select count(FCSID) from ZZZ_xiaoshoufahuo_sb where FCS_FCID=@FCID_" + d + ") >0 and (select sum(FCSsl) as zl from ZZZ_xiaoshoufahuo_sb where FCS_FCID=@FCID_" + d + ") >= (select count(FCSID) from ZZZ_xiaoshoufahuo_sb where FCS_FCID=@FCID_" + d + ") and FCID =@FCID_" + d);
+                    
+
+                    //检查错误
+                    if (get_tiaoshu(ids[d]) == 0)
+                    {
+                        hmsg[ids[d]] = "发货物料子表没有数据，应至少一条数据。";
+                    }
+
+                    //检查错误，销售发货子表中不能有0数量的数据。
+                    if (get_lingshuliang(ids[d]) > 0)
+                    {
+                        hmsg[ids[d]] = "发货物料子表中存在发货数量为零的物料。";
+                    }
+                    if (!hmsg.Contains(ids[d]))
+                    {
+                        param.Add("@FCID_" + d, ids[d]);
+                        alsql.Add("UPDATE ZZZ_xiaoshoufahuo SET  FCzhuangtai='提交',FCshenqingshijian=getdate()  where FCzhuangtai='草稿' and  FCID =@FCID_" + d);
+                    }
+
+                    
                 }
 
             }
@@ -121,11 +218,22 @@ public class NoReSetDEL_160713000062
 
             return_ht = I_DBL.RunParam_SQL(alsql, param);
 
+            if (hmsg.Count > 0)
+            {
+                string errmsg = "";
+                foreach (DictionaryEntry de in hmsg)
+                {
+                    errmsg = errmsg + "单号[" + de.Key.ToString() + "]未处理：" + de.Value.ToString() + "<br/>";
+
+                }
+                return "处理结束，但存在问题：<br/>"+errmsg;
+            }
+          
 
             if ((bool)(return_ht["return_float"]))
             {
-
-                return "提交申请完成！";
+                return "提交完成。";
+                
             }
 
         }

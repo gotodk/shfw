@@ -200,9 +200,9 @@
 
  
   jQuery("[*[grid_selector_ID]*]").navButtonAdd("[*[pager_selector_ID]*]",{
-   caption:"保存", 
+   caption:"", 
    title : "保存",
-   buttonicon:"ace-icon fa fa-floppy-o blue", 
+   buttonicon:"ace-icon fa fa-floppy-o blue  bigger-160", 
    onClickButton: function(e){ 
  
 
@@ -219,9 +219,9 @@ $('[*[grid_selector_ID]*]').attr('lastsel_yhb',"-999999");
 
  
  jQuery("[*[grid_selector_ID]*]").navButtonAdd("[*[pager_selector_ID]*]",{
-   caption:"删除", 
+   caption:"", 
    title : "删除",
-   buttonicon:"ace-icon fa fa-trash-o red", 
+   buttonicon:"ace-icon fa fa-trash-o red  bigger-160", 
    onClickButton: function(e){ 
  
 	
@@ -242,9 +242,9 @@ for(var i = 0;i < len ;i ++) {
  
 
  jQuery("[*[grid_selector_ID]*]").navButtonAdd("[*[pager_selector_ID]*]",{
-   caption:"新增", 
+   caption:"", 
    title : "新增",
-   buttonicon:"ace-icon fa fa-plus-circle purple", 
+   buttonicon:"ace-icon fa fa-plus-circle purple  bigger-160", 
    onClickButton: function(e){ 
            
 
