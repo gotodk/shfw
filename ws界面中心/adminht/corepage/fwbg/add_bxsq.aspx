@@ -29,7 +29,8 @@
     <script type="text/javascript">
              jQuery(function ($) {
                  if (getUrlParam("fff") == "1") {
-
+                     //隐藏编辑按钮
+                     $(".c_bianji_top").hide();
 
                  }
                  else {

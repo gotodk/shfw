@@ -282,6 +282,16 @@
     <ANused>1</ANused>
   </Unumber1>
   <Unumber1>
+    <ANID>E-A4A600B1E997-E10E2090-3189-4455-AA1A</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>技术服务-新增报修申请</ANBaseName>
+    <ANBaseNumber>1073741824</ANBaseNumber>
+    <ANBaseNumber_p>30</ANBaseNumber_p>
+    <ANextendID>90</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
     <ANID>E-A4A600B1E8E0-58D2297B-43DD-45F4-9956</ANID>
     <ANClass>Unumber1</ANClass>
     <ANClassName>后台菜单权限</ANClassName>
@@ -389,6 +399,16 @@
     <ANBaseNumber>1048576</ANBaseNumber>
     <ANBaseNumber_p>20</ANBaseNumber_p>
     <ANextendID>157</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E99C-19047842-3A1B-4407-8A1D</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>销售发货-确认收货</ANBaseName>
+    <ANBaseNumber>2147483648</ANBaseNumber>
+    <ANBaseNumber_p>31</ANBaseNumber_p>
+    <ANextendID>158</ANextendID>
     <ANused>1</ANused>
   </Unumber1>
   <Unumber3>
