@@ -231,16 +231,16 @@
                          if (arr != null) {//如果能匹配成功即arr数组不为空，循环输出结果
                              for (var i = 0; i < arr.length; i++) {
                                  var arr_z = arr[i].split(':');
-                                 if (arr_z[0] == "[错误名称") {
+                                 if (arr_z[0] == "[故障名称") {
                                      //离弹窗最近的特定name的输入框  设备规格
 
-                                     var zj = $(dfx_str_subyzcw).closest("tr").find("input[name='错误名称']");
+                                     var zj = $(dfx_str_subyzcw).closest("tr").find("input[name='故障名称']");
 
                                      zj.val($.trim(arr_z[1]).replace("]", ""));
                                  }
-                                 if (arr_z[0] == "[错误类型") {
+                                 if (arr_z[0] == "[故障类型") {
                                      //离弹窗最近的特定name的输入框  
-                                     var zj = $(dfx_str_subyzcw).closest("tr").find("input[name='错误类型']");
+                                     var zj = $(dfx_str_subyzcw).closest("tr").find("input[name='故障类型']");
                                      zj.val($.trim(arr_z[1]).replace("]", ""));
                                  }
                              }
