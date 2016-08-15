@@ -270,9 +270,9 @@ public class NoReSet_160427000035
         {
             param.Add("@sub_" + "bjid" + "_" + i, CombGuid.GetMewIdFormSequence("ZZZ_FWBG_baojing"));
 
-            param.Add("@sub_" + "bj_EID" + "_" + i, subdt_cw.Rows[i]["错误编号"].ToString());
-            param.Add("@sub_" + "bjmingcheng" + "_" + i, subdt_cw.Rows[i]["错误名称"].ToString());
-            param.Add("@sub_" + "bjleixing" + "_" + i, subdt_cw.Rows[i]["错误类型"].ToString());
+            param.Add("@sub_" + "bj_EID" + "_" + i, subdt_cw.Rows[i]["故障编号"].ToString());
+            param.Add("@sub_" + "bjmingcheng" + "_" + i, subdt_cw.Rows[i]["故障名称"].ToString());
+            param.Add("@sub_" + "bjleixing" + "_" + i, subdt_cw.Rows[i]["故障类型"].ToString());
             param.Add("@sub_" + "bjbeizhu" + "_" + i, subdt_cw.Rows[i]["备注"].ToString());
            
             string INSERTsql = "INSERT INTO ZZZ_FWBG_baojing ( bjid, bj_GID, bj_EID, bjmingcheng, bjleixing, bjbeizhu) VALUES(@sub_" + "bjid" + "_" + i + ", @sub_MainID, @sub_" + "bj_EID" + "_" + i + ", @sub_" + "bjmingcheng" + "_" + i + ", @sub_" + "bjleixing" + "_" + i + ", @sub_" + "bjbeizhu" + "_" + i + " )";
@@ -518,9 +518,9 @@ public class NoReSet_160427000035
                     param.Add("@sub_" + "bjid" + "_" + i, subdt_cw.Rows[i]["隐藏编号"].ToString());
                 }
 
-                param.Add("@sub_" + "bj_EID" + "_" + i, subdt_cw.Rows[i]["错误编号"].ToString());
-                param.Add("@sub_" + "bjmingcheng" + "_" + i, subdt_cw.Rows[i]["错误名称"].ToString());
-                param.Add("@sub_" + "bjleixing" + "_" + i, subdt_cw.Rows[i]["错误类型"].ToString());
+                param.Add("@sub_" + "bj_EID" + "_" + i, subdt_cw.Rows[i]["故障编号"].ToString());
+                param.Add("@sub_" + "bjmingcheng" + "_" + i, subdt_cw.Rows[i]["故障名称"].ToString());
+                param.Add("@sub_" + "bjleixing" + "_" + i, subdt_cw.Rows[i]["故障类型"].ToString());
                 param.Add("@sub_" + "bjbeizhu" + "_" + i, subdt_cw.Rows[i]["备注"].ToString());
 
                 string INSERTsql = "INSERT INTO ZZZ_FWBG_baojing ( bjid, bj_GID, bj_EID, bjmingcheng, bjleixing, bjbeizhu) VALUES(@sub_" + "bjid" + "_" + i + ", @sub_MainID, @sub_" + "bj_EID" + "_" + i + ", @sub_" + "bjmingcheng" + "_" + i + ", @sub_" + "bjleixing" + "_" + i + ", @sub_" + "bjbeizhu" + "_" + i + " )";
