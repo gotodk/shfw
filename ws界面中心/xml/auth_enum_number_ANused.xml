@@ -122,6 +122,16 @@
     <ANused>1</ANused>
   </Unumber1>
   <Unumber1>
+    <ANID>E-A4A600B1E99E-CE7A811F-B27C-4085-960F</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>返厂处理-工厂维修</ANBaseName>
+    <ANBaseNumber>4294967296</ANBaseNumber>
+    <ANBaseNumber_p>32</ANBaseNumber_p>
+    <ANextendID>169</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
     <ANID>E-A4A600B1E942-6D781CFC-01C8-416B-8765</ANID>
     <ANClass>Unumber1</ANClass>
     <ANClassName>后台菜单权限</ANClassName>
@@ -129,6 +139,26 @@
     <ANBaseNumber>16384</ANBaseNumber>
     <ANBaseNumber_p>14</ANBaseNumber_p>
     <ANextendID>134</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E9AB-038F367D-D62A-4D8C-9E42</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>返厂处理-维修存档</ANBaseName>
+    <ANBaseNumber>17179869184</ANBaseNumber>
+    <ANBaseNumber_p>34</ANBaseNumber_p>
+    <ANextendID>171</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E9A6-C95B9F8C-39B0-4220-9B19</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>返厂处理-维修审核</ANBaseName>
+    <ANBaseNumber>8589934592</ANBaseNumber>
+    <ANBaseNumber_p>33</ANBaseNumber_p>
+    <ANextendID>170</ANextendID>
     <ANused>1</ANused>
   </Unumber1>
   <Unumber1>
