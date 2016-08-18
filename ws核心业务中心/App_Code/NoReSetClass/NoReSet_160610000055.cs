@@ -33,6 +33,39 @@ public class NoReSet_160610000055
         return ds;
     }
 
+
+    /// <summary>
+    /// 检查单据状态
+    /// </summary>
+    /// <returns></returns>
+    public string check_bxsqzt(string BID)
+    {
+
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+        Hashtable return_ht = new Hashtable();
+        Hashtable param = new Hashtable();
+        param.Add("@BID", BID);
+        return_ht = I_DBL.RunParam_SQL("select top 1 Bzhuangtai from ZZZ_BXSQ where BID=@BID", "数据记录", param);
+
+        if ((bool)(return_ht["return_float"]))
+        {
+            DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+
+            if (redb.Rows.Count < 1)
+            {
+                return "";
+            }
+            else
+            {
+                return redb.Rows[0]["Bzhuangtai"].ToString();
+            }
+        }
+        else
+        {
+            return "";
+        }
+
+    }
     /// <summary>
     /// 增加数据
     /// </summary>
@@ -62,6 +95,14 @@ public class NoReSet_160610000055
         DataSet dsreturn = initReturnDataSet().Clone();
         dsreturn.Tables["返回值单条"].Rows.Add(new string[] { "err", "初始化" });
         //参数合法性各种验证，这里要根据具体业务逻辑处理
+
+        string bxsqzt = check_bxsqzt(ht_forUI["BID"].ToString());
+        if (bxsqzt == "结束")
+        {
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "保存失败，关联报修申请单已结束，不允许申请调度。";
+            return dsreturn;
+        }
 
         //开始真正的处理，根据业务逻辑操作数据库
         I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");

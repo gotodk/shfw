@@ -355,7 +355,12 @@ public class NoReSet_160713000058
                 if (ht_forUI["shenhe_yincang"].ToString() == "审核通过")
                 {
                     param.Add("@FCshenheren", ht_forUI["yhbsp_session_uer_UAid"].ToString());
-                    alsql.Add("UPDATE ZZZ_xiaoshoufahuo SET  FCzhuangtai='审核',FCshenheren=@FCshenheren,FCshenheshijian=getdate()  where FCzhuangtai='提交' and FCID =@FCID");
+                    param.Add("@FCjisongdizhi", ht_forUI["FCjisongdizhi"].ToString());
+                    param.Add("@FClianxifangshi", ht_forUI["FClianxifangshi"].ToString());
+                    param.Add("@FCfahuobeizhu", ht_forUI["FCfahuobeizhu"].ToString());
+                    param.Add("@FCshoujianren", ht_forUI["FCshoujianren"].ToString());
+
+                    alsql.Add("UPDATE ZZZ_xiaoshoufahuo SET  FCzhuangtai='审核',FCshenheren=@FCshenheren,FCshenheshijian=getdate(),FCjisongdizhi=@FCjisongdizhi, FClianxifangshi=@FClianxifangshi, FCfahuobeizhu=@FCfahuobeizhu, FCshoujianren=@FCshoujianren where FCzhuangtai='提交' and FCID =@FCID");
                 }
                 if (ht_forUI["shenhe_yincang"].ToString() == "驳回")
                 {

@@ -43,6 +43,14 @@
             $("#addbutton1_top").html($("#addbutton1_top").html().replace("保存", "提交"));
             $("#addbutton1").html($("#addbutton1").html().replace("保存", "提交"));
 
+
+            //折叠转发人区域
+            //alert($("label[for='YJqianhsuren']").closest(".form-group").html());
+            //$("label[for='YJqianhsuren']").attr("data-toggle", "collapse");
+            //$("label[for='YJqianhsuren']").attr("data-target", "#xzzfrqy");
+            $("label[for='YJqianhsuren']").next().attr("id", "xzzfrqy");
+            $("label[for='YJqianhsuren']").next().addClass("collapse");
+            $("label[for='YJqianhsuren']").html("转发至：<br/><button type='button' class='btn btn-xs ' data-toggle='collapse' data-target='#xzzfrqy'>展开/隐藏</button>");
             if (getUrlParam("jck") == "1") {
 
          

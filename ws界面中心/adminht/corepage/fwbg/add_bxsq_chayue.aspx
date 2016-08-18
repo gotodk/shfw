@@ -133,7 +133,7 @@
                     //给特殊按钮添加事件，调用批量操作的接口
                     $(document).on('click', "#" + bjm + "_top", function () {
                         bootbox.dialog({
-                            message: "<form  id='myform_spanniu'><div class='form-group' style='margin:0px;line-height:0.5;'>  <label class='hidden' for='ddtj_Bxsfhdh'>销售发货单号：</label>  <div class='input-group '><input class='form-control search-query' id='ddtj_Bxsfhdh' name='ddtj_Bxsfhdh'  type='text' title=''  value=''   /><span class='input-group-btn'><button class='btn  btn-sm  searchopenyhbspgogo hidden' type='button' id='searchopenyhbspgogo_ddtj_Bxsfhdh' title='单号:客户编号' guid='弹窗字段配置主键' onclick='openeditdialog(null, $(this));'></span><span class='ace-icon fa fa-search icon-on-right bigger-110'></span> </button></div>  <div class='col-sm-12 no-padding-left' id='show_searchopenyhbspgogo_ddtj_Bxsfhdh'></div>  </div>      </form><br/>===========",
+                            message: "<form  id='myform_spanniu'><div class='form-group' style='margin:0px;line-height:0.5;'>  <label for='ddtj_Bxsfhdh'>销售发货单号：</label>  <div class='input-group '><input class='form-control search-query' id='ddtj_Bxsfhdh' name='ddtj_Bxsfhdh'  type='text' title=''  value=''   /><span class='input-group-btn'><button class='btn  btn-sm  searchopenyhbspgogo hidden' type='button' id='searchopenyhbspgogo_ddtj_Bxsfhdh' title='单号:客户编号' guid='弹窗字段配置主键' onclick='openeditdialog(null, $(this));'></span><span class='ace-icon fa fa-search icon-on-right bigger-110'></span> </button></div>  <div class='col-sm-12 no-padding-left' id='show_searchopenyhbspgogo_ddtj_Bxsfhdh'></div>  </div>      </form><br/>===========",
                             title: bjm_wenben,
                             buttons: {
                                 Cancel: {
@@ -154,7 +154,7 @@
                         });
 
 
-                        $(".modal-content").css("z-index", 99);
+                       
 
 
 

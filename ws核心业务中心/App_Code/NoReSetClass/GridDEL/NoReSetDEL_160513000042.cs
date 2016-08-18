@@ -47,8 +47,9 @@ public class NoReSetDEL_160513000042
             {
                 param.Add("@FCID_" + d, delids[d]);
 
-                alsql.Add("delete ZZZ_fanchang  where FCID=@FCID_" + d + " and FCzhuangtai='草稿'");
+                
                 alsql.Add("delete ZZZ_fanchang_sb  where FCS_FCID=@FCID_" + d + " and (select FCzhuangtai from ZZZ_fanchang where FCID=@FCID_" + d + " and FCzhuangtai='草稿'  )='草稿'");
+                alsql.Add("delete ZZZ_fanchang  where FCID=@FCID_" + d + " and FCzhuangtai='草稿'");
             }
 
 

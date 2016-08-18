@@ -429,7 +429,7 @@
 
 
                  var lz_bid = getUrlParam("lz_bid");
-                 if (lz_bid != "" && getUrlParam("fff") == "0") {
+                 if (lz_bid != "") {
 
                      //获取带入单据的资料
                  zdy_ajaxdb("");
@@ -441,7 +441,9 @@
                      };
                      $("#G_BID").val($(xml).find('数据记录>BID').text());
                      $("#G_YYID").val($(xml).find('数据记录>B_YYID').text());
+                     $("#Gfwlx").val($(xml).find('数据记录>Bfwlx').text());
                      $("#YYname").val($(xml).find('数据记录>YYname').text());
+                     $("#G_jihua_GID").val($(xml).find('数据记录>G_jihua_GID').text());
                      var Bsbtime_zz_ss = new Date($(xml).find('数据记录>Bsbtime').text()).Format_go("yyyy-MM-dd");
                      $("#Gsbtime").datepicker('setDate', Bsbtime_zz_ss);
 

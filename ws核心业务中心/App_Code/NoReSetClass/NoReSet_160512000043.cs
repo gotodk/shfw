@@ -158,7 +158,7 @@ public class NoReSet_160512000043
 
 
         //更新会签单意见字段
-        alsql.Add("UPDATE ZZZ_HQ_YJ SET  YJzhuangtai='已签', YJyijian=@YJyijian ,YJqsshijian=getdate() where YJqianhsuren=@YJqianhsuren ");
+        alsql.Add("UPDATE ZZZ_HQ_YJ SET  YJzhuangtai='已签', YJyijian=  '[' + CONVERT(varchar(100), GETDATE(), 20) + ']-->：<br/>' + @YJyijian + '<br/>' + YJyijian ,YJqsshijian=getdate() where YJqianhsuren=@YJqianhsuren and YJ_QID=@YJ_QID ");
 
         //更新会签单状态,如果是结单人才更新
         if (ht_forUI.Contains("Qzhuangtai"))

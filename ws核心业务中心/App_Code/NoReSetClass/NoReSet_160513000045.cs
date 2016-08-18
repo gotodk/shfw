@@ -101,11 +101,18 @@ public class NoReSet_160513000045
         param.Add("@FCshenqingren", ht_forUI["yhbsp_session_uer_UAid"].ToString());
         param.Add("@Fhuiqiandanhao", ht_forUI["Fhuiqiandanhao"].ToString());
 
+        param.Add("@FCsbbh", ht_forUI["FCsbbh"].ToString());
+        param.Add("@FCsbmingcheng", ht_forUI["FCsbmingcheng"].ToString());
+        param.Add("@FCsbguige", ht_forUI["FCsbguige"].ToString());
+        param.Add("@FCsbsl", ht_forUI["FCsbsl"].ToString());
+        param.Add("@FCsbbz", ht_forUI["FCsbbz"].ToString());
+
+        
+
+        alsql.Add("INSERT INTO ZZZ_fanchang(FCID,FC_YYID,FCshenqingren,FCshenqingshijian,FCzhuangtai,Fhuiqiandanhao,FCsbbh,FCsbmingcheng,FCsbguige,FCsbsl,FCsbbz) VALUES(@FCID,@FC_YYID,@FCshenqingren,getdate(),'草稿',@Fhuiqiandanhao,@FCsbbh,@FCsbmingcheng,@FCsbguige,@FCsbsl,@FCsbbz)");
 
 
-        alsql.Add("INSERT INTO ZZZ_fanchang(FCID,FC_YYID,FCshenqingren,FCshenqingshijian,FCzhuangtai,Fhuiqiandanhao) VALUES(@FCID,@FC_YYID,@FCshenqingren,getdate(),'草稿',@Fhuiqiandanhao)");
-
-
+        /*
         //遍历子表， 插入 
         string zibiao_gts_id = "grid-table-subtable-160514000780";
         DataTable subdt = jsontodatatable.ToDataTable(ht_forUI[zibiao_gts_id].ToString());
@@ -118,6 +125,14 @@ public class NoReSet_160513000045
         }
 
         param.Add("@sub_" + "MainID", guid); //隶属主表id
+
+        //额外验证一下，子表只允许出现一条信息。
+        if (subdt.Rows.Count != 1)
+        {
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "提交错误,返厂设备列表需要录入一条设备信息！";
+            return dsreturn;
+        }
 
         for (int i = 0; i < subdt.Rows.Count; i++)
         {
@@ -132,6 +147,46 @@ public class NoReSet_160513000045
             string INSERTsql = "INSERT INTO ZZZ_fanchang_sb ( FCSID, FCS_FCID, FCSbh, FCSsl, FCSbz ) VALUES(@sub_" + "FCSID" + "_" + i + ", @sub_MainID, @sub_" + "FCSbh" + "_" + i + ", @sub_" + "FCSsl" + "_" + i + ", @sub_" + "FCSbz" + "_" + i + "  )";
             alsql.Add(INSERTsql);
         }
+        */
+
+
+
+
+
+
+        //遍历子表， 插入 (返厂配件)
+        string zibiao_lj_id = "grid-table-subtable-160818000119";
+        DataTable subdt_lj = jsontodatatable.ToDataTable(ht_forUI[zibiao_lj_id].ToString());
+        //必须验证js脚本获取的数量和c#反序列化获取的数量一致才能继续。防止出错
+        if (ht_forUI[zibiao_lj_id + "_fcjsq"].ToString() != subdt_lj.Rows.Count.ToString())
+        {
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "子表数据量与获取量不相符，系统出现问题。";
+            return dsreturn;
+        }
+
+
+
+        param.Add("@sub_" + "MainID", guid); //隶属主表id
+
+        for (int i = 0; i < subdt_lj.Rows.Count; i++)
+        {
+            param.Add("@sub_" + "FCWID" + "_" + i, CombGuid.GetMewIdFormSequence("ZZZ_fanchang_fcpj"));
+
+            param.Add("@sub_" + "FCWbh" + "_" + i, subdt_lj.Rows[i]["配件物料编码"].ToString());
+            param.Add("@sub_" + "FCWmingcheng" + "_" + i, subdt_lj.Rows[i]["配件物料名称"].ToString());
+            param.Add("@sub_" + "FCWguige" + "_" + i, subdt_lj.Rows[i]["配件物料规格"].ToString());
+            param.Add("@sub_" + "FCWsl" + "_" + i, subdt_lj.Rows[i]["配件数量"].ToString());
+            param.Add("@sub_" + "FCWdj" + "_" + i, subdt_lj.Rows[i]["单价"].ToString());
+            param.Add("@sub_" + "FCWzj" + "_" + i, subdt_lj.Rows[i]["金额"].ToString());
+            param.Add("@sub_" + "FCWbz" + "_" + i, subdt_lj.Rows[i]["备注"].ToString());
+
+            string INSERTsql = "INSERT INTO ZZZ_fanchang_fcpj ( FCWID, FCW_FCID, FCWbh,   FCWmingcheng,  FCWguige, FCWsl,FCWdj,FCWzj,FCWbz ) VALUES(@sub_" + "FCWID" + "_" + i + ", @sub_MainID, @sub_" + "FCWbh" + "_" + i + ", @sub_" + "FCWmingcheng" + "_" + i + ", @sub_" + "FCWguige" + "_" + i + ", @sub_" + "FCWsl" + "_" + i + ", @sub_" + "FCWdj" + "_" + i + " , @sub_" + "FCWzj" + "_" + i + " , @sub_" + "FCWbz" + "_" + i + "  )";
+            alsql.Add(INSERTsql);
+        }
+
+
+
 
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
@@ -199,9 +254,17 @@ public class NoReSet_160513000045
             //只有草稿可以编辑
 
             param.Add("@FC_YYID", ht_forUI["FC_YYID"].ToString());
-            alsql.Add("UPDATE  ZZZ_fanchang SET FC_YYID=@FC_YYID  where FCID =@FCID ");
+
+            param.Add("@FCsbbh", ht_forUI["FCsbbh"].ToString());
+            param.Add("@FCsbmingcheng", ht_forUI["FCsbmingcheng"].ToString());
+            param.Add("@FCsbguige", ht_forUI["FCsbguige"].ToString());
+            param.Add("@FCsbsl", ht_forUI["FCsbsl"].ToString());
+            param.Add("@FCsbbz", ht_forUI["FCsbbz"].ToString());
 
 
+            alsql.Add("UPDATE  ZZZ_fanchang SET FC_YYID=@FC_YYID,FCsbbh=@FCsbbh,FCsbmingcheng=@FCsbmingcheng,FCsbguige=@FCsbguige,FCsbsl=@FCsbsl,FCsbbz=@FCsbbz   where FCID =@FCID ");
+
+            /*
             //遍历子表，先删除，再插入，已有主键的不重新生成。
             string zibiao_gts_id = "grid-table-subtable-160514000780";
             DataTable subdt = jsontodatatable.ToDataTable(ht_forUI[zibiao_gts_id].ToString());
@@ -233,6 +296,47 @@ public class NoReSet_160513000045
                 string INSERTsql = "INSERT INTO ZZZ_fanchang_sb ( FCSID, FCS_FCID, FCSbh, FCSsl, FCSbz ) VALUES(@sub_" + "FCSID" + "_" + i + ", @sub_MainID, @sub_" + "FCSbh" + "_" + i + ", @sub_" + "FCSsl" + "_" + i + ", @sub_" + "FCSbz" + "_" + i + "  )";
                 alsql.Add(INSERTsql);
             }
+            */
+
+
+
+            //遍历子表， 插入 (返厂配件信息)
+            string zibiao_lj_id = "grid-table-subtable-160818000119";
+            DataTable subdt_lj = jsontodatatable.ToDataTable(ht_forUI[zibiao_lj_id].ToString());
+            //必须验证js脚本获取的数量和c#反序列化获取的数量一致才能继续。防止出错
+            if (ht_forUI[zibiao_lj_id + "_fcjsq"].ToString() != subdt_lj.Rows.Count.ToString())
+            {
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "子表数据量与获取量不相符，系统出现问题。";
+                return dsreturn;
+            }
+
+            param.Add("@sub_" + "MainID", ht_forUI["idforedit"].ToString()); //隶属主表id
+            alsql.Add("delete ZZZ_fanchang_fcpj where  FCW_FCID = @sub_" + "MainID");
+            for (int i = 0; i < subdt_lj.Rows.Count; i++)
+            {
+
+                if (subdt_lj.Rows[i]["隐藏编号"].ToString().Trim() == "")
+                {
+                    param.Add("@sub_" + "FCWID" + "_" + i, CombGuid.GetMewIdFormSequence("ZZZ_fanchang_fcpj"));
+                }
+                else
+                {
+                    param.Add("@sub_" + "FCWID" + "_" + i, subdt_lj.Rows[i]["隐藏编号"].ToString());
+                }
+
+                param.Add("@sub_" + "FCWbh" + "_" + i, subdt_lj.Rows[i]["配件物料编码"].ToString());
+                param.Add("@sub_" + "FCWmingcheng" + "_" + i, subdt_lj.Rows[i]["配件物料名称"].ToString());
+                param.Add("@sub_" + "FCWguige" + "_" + i, subdt_lj.Rows[i]["配件物料规格"].ToString());
+                param.Add("@sub_" + "FCWsl" + "_" + i, subdt_lj.Rows[i]["配件数量"].ToString());
+                param.Add("@sub_" + "FCWdj" + "_" + i, subdt_lj.Rows[i]["单价"].ToString());
+                param.Add("@sub_" + "FCWzj" + "_" + i, subdt_lj.Rows[i]["金额"].ToString());
+                param.Add("@sub_" + "FCWbz" + "_" + i, subdt_lj.Rows[i]["备注"].ToString());
+
+                string INSERTsql = "INSERT INTO ZZZ_fanchang_fcpj ( FCWID, FCW_FCID, FCWbh,   FCWmingcheng,  FCWguige, FCWsl,FCWdj,FCWzj,FCWbz ) VALUES(@sub_" + "FCWID" + "_" + i + ", @sub_MainID, @sub_" + "FCWbh" + "_" + i + ", @sub_" + "FCWmingcheng" + "_" + i + ", @sub_" + "FCWguige" + "_" + i + ", @sub_" + "FCWsl" + "_" + i + ", @sub_" + "FCWdj" + "_" + i + " , @sub_" + "FCWzj" + "_" + i + " , @sub_" + "FCWbz" + "_" + i + "  )";
+                alsql.Add(INSERTsql);
+            }
+
 
         }
         if (ht_forUI["ywlx_yincang"].ToString() == "fahuo")

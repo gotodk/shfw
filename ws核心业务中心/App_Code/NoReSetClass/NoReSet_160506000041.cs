@@ -69,6 +69,83 @@ public class NoReSet_160506000041
 
 
     /// <summary>
+    /// 检查单据状态
+    /// </summary>
+    /// <returns></returns>
+    public string check_bxsqzt(string BID)
+    {
+
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+        Hashtable return_ht = new Hashtable();
+        Hashtable param = new Hashtable();
+        param.Add("@BID", BID);
+        return_ht = I_DBL.RunParam_SQL("select top 1 Bzhuangtai from ZZZ_BXSQ where BID=@BID", "数据记录", param);
+
+        if ((bool)(return_ht["return_float"]))
+        {
+            DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+
+            if (redb.Rows.Count < 1)
+            {
+                return "";
+            }
+            else
+            {
+                return redb.Rows[0]["Bzhuangtai"].ToString();
+            }
+        }
+        else
+        {
+            return "";
+        }
+
+    }
+
+
+    /// <summary>
+    /// 检查制单人身份
+    /// </summary>
+    /// <returns></returns>
+    public string check_G_UAID_bumen(string G_UAID)
+    {
+
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+        Hashtable return_ht = new Hashtable();
+        Hashtable param = new Hashtable();
+        param.Add("@G_UAID", G_UAID);
+        return_ht = I_DBL.RunParam_SQL("select top 1 suoshuquyu from ZZZ_userinfo where Uaid=@G_UAID", "数据记录", param);
+
+        if ((bool)(return_ht["return_float"]))
+        {
+            DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+
+            if (redb.Rows.Count < 1)
+            {
+                return "";
+            }
+            else
+            {
+                //122 121 88  120 89
+                if (redb.Rows[0]["suoshuquyu"].ToString() == "122" || redb.Rows[0]["suoshuquyu"].ToString() == "121" || redb.Rows[0]["suoshuquyu"].ToString() == "88" || redb.Rows[0]["suoshuquyu"].ToString() == "120" || redb.Rows[0]["suoshuquyu"].ToString() == "89")
+                {
+                    return "业务员";
+                }
+                else
+                {
+                    return "";
+                }
+                 
+            }
+        }
+        else
+        {
+            return "";
+        }
+
+    }
+
+
+    /// <summary>
     /// 增加数据
     /// </summary>
     /// <param name="parameter_forUI">前台表单传来的参数</param>
@@ -113,6 +190,26 @@ public class NoReSet_160506000041
         param.Add("@Gzhuangtai", "草稿");
         param.Add("@G_BID", ht_forUI["G_BID"].ToString());
 
+        //如果有关联的报修申请，检查状态
+        if (ht_forUI["G_BID"].ToString() != "")
+        {
+            string bxsqzt = check_bxsqzt(ht_forUI["G_BID"].ToString());
+            string ywy = check_G_UAID_bumen(ht_forUI["G_UAID"].ToString());
+            if (bxsqzt == "结束")
+            {
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "保存失败，关联报修申请单已结束，不需要再做计划。";
+                return dsreturn;
+            }
+            if (ywy == "业务员")
+            {
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "保存失败，业务员不需要针对报修申请做计划。";
+                return dsreturn;
+            }
+        }
+        
+       
 
         alsql.Add("INSERT INTO ZZZ_workplan(GID, G_UAID, Gbiaoti, Gtime1, Gtime2, Gsheng, Gchengshi, Gquyu, Gdidian, Gkqleixing, Grwleixing, Gneirong, Gjieguo,Gzhuangtai,G_BID ) VALUES(@GID, @G_UAID, @Gbiaoti, @Gtime1, @Gtime2, @Gsheng, @Gchengshi, @Gquyu, @Gdidian, @Gkqleixing, @Grwleixing, @Gneirong, @Gjieguo,@Gzhuangtai,@G_BID)");
 

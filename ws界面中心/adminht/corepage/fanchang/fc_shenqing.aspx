@@ -93,6 +93,21 @@
                      var khbh_str = $("#FC_YYID").val();
                      $("#searchopenyhbspgogo_subtcid_FCSbh").attr("teshuwhere", "S_YYID='" + khbh_str + "'");
 
+                     //弹窗特殊条件，隐藏的弹窗的条件
+                     var khbh_str = $("#FC_YYID").val();
+                     $("#searchopenyhbspgogo_FCsbbh").attr("teshuwhere", "S_YYID='" + khbh_str + "'");
+
+                     //设备子表处理
+                     $("#gview_grid-table-subtable-160818000119").find("input").attr("readonly", "readonly");
+                     $("#gview_grid-table-subtable-160818000119").find("input[name='配件数量']").removeAttr("readonly");
+                     $("#gview_grid-table-subtable-160818000119").find("input[name='单价']").removeAttr("readonly");
+                     $("#gview_grid-table-subtable-160818000119").find("input[name='备注']").removeAttr("readonly");
+
+                     //自动计算子表金额
+                     var zz_sjsj = $("#gview_grid-table-subtable-160818000119").find("input[name='单价']").val();
+                     var zz_shuliang = $("#gview_grid-table-subtable-160818000119").find("input[name='配件数量']").val();
+                     $("#gview_grid-table-subtable-160818000119").find("input[name='金额']").val((zz_sjsj * zz_shuliang).toFixed(2));
+
                      
                  }, 500);
 
@@ -160,8 +175,71 @@
 
 
 
+            //设备序列号主表弹窗
+                 var dfx_str_sbxlh = "#show_searchopenyhbspgogo_FCsbbh";
+                 var oldzhi_sbxlh = $(dfx_str_sbxlh).text();
+
+                 var jiancha_sbxlh = window.setInterval(function () {
 
 
+
+                     //带入字段
+                     if ($(dfx_str_sbxlh).text() != oldzhi_sbxlh) {
+                         var re = /\[.*?\]/ig;
+                         var arr = $(dfx_str_sbxlh).text().match(re);
+
+                         if (arr != null) {//如果能匹配成功即arr数组不为空，循环输出结果
+                             for (var i = 0; i < arr.length; i++) {
+                                 var arr_z = arr[i].split(':');
+                                 if (arr_z[0] == "[设备名称")
+                                 { $("#FCsbmingcheng").val($.trim(arr_z[1]).replace("]", "")); }
+                                 if (arr_z[0] == "[设备型号")
+                                 { $("#FCsbguige").val($.trim(arr_z[1]).replace("]", "")); }
+                             }
+                         }
+
+                         oldzhi_sbxlh = $(dfx_str_sbxlh).text();
+                     }
+                 }, 500);
+
+
+                 //返厂配件子表弹窗
+                 var dfx_str_subtt_wbh = "#show_searchopenyhbspgogo_subtcid_FCWbh";
+                 var oldzhi_subtt_wbh = $(dfx_str_subtt_wbh).text();
+
+                 var jiancha_subtt_wbh = window.setInterval(function () {
+
+
+
+                     //带入字段
+                     if ($(dfx_str_subtt_wbh).text() != oldzhi_subtt_wbh) {
+                         var re = /\[.*?\]/ig;
+                         var arr = $(dfx_str_subtt_wbh).text().match(re);
+
+                         if (arr != null) {//如果能匹配成功即arr数组不为空，循环输出结果
+                             for (var i = 0; i < arr.length; i++) {
+                                 var arr_z = arr[i].split(':');
+                                 if (arr_z[0] == "[名称") {
+                                     //离弹窗最近的特定name的输入框  设备规格
+
+                                     var zj = $(dfx_str_subtt_wbh).closest("tr").find("input[name='配件物料名称']");
+
+                                     zj.val($.trim(arr_z[1]).replace("]", ""));
+                                 }
+                                 if (arr_z[0] == "[规格") {
+                                     //离弹窗最近的特定name的输入框  
+                                     var zj = $(dfx_str_subtt_wbh).closest("tr").find("input[name='配件物料规格']");
+                                     zj.val($.trim(arr_z[1]).replace("]", ""));
+                                 }
+                             }
+                         }
+
+                         oldzhi_subtt_wbh = $(dfx_str_subtt_wbh).text();
+                     }
+                 }, 500);
+
+
+               //返厂设备子表弹窗
                  var dfx_str_subtt = "#show_searchopenyhbspgogo_subtcid_FCSbh";
                  var oldzhi_subtt = $(dfx_str_subtt).text();
 

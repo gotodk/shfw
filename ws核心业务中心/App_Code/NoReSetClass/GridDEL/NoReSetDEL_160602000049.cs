@@ -47,8 +47,9 @@ public class NoReSetDEL_160602000049
             {
                 param.Add("@rid_" + d, delids[d]);
 
-                alsql.Add("delete ZZZ_C_record  where rid=@rid_" + d + " and rzhuangtai='草稿'");
+                
                 alsql.Add("delete ZZZ_C_record_sub  where rid=@rid_" + d + " and (select rzhuangtai from ZZZ_C_record where rid=@rid_" + d + " and rzhuangtai='草稿'  )='草稿'");
+                alsql.Add("delete ZZZ_C_record  where rid=@rid_" + d + " and rzhuangtai='草稿'");
             }
 
 

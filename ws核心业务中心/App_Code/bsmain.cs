@@ -746,7 +746,7 @@ public class bsmain : System.Web.Services.WebService
         {
             linghangtishi = "没有找到关联单据信息!";
             param.Add("@BID", ht_forUI["idforedit"].ToString());
-            return_ht = I_DBL.RunParam_SQL("select top 1 BID,B_YYID,YYname,Bsbtime,Bzhuangtai from View_ZZZ_BXSQ_ex where BID=@BID", "数据记录", param);
+            return_ht = I_DBL.RunParam_SQL("select top 1 BID,B_YYID,YYname,Bfwlx,Bsbtime,Bzhuangtai,(select top 1 GID from ZZZ_workplan where G_BID=BID order by Gaddtime desc) as G_jihua_GID from View_ZZZ_BXSQ_ex where BID=@BID", "数据记录", param);
         }
         if (ht_forUI["spspsp"].ToString() == "erp_kehudangan")
         {
@@ -761,6 +761,14 @@ public class bsmain : System.Web.Services.WebService
             return_ht = I_DBL.RunParam_SQL("select top 1 * from View_ZZZ_erp_wuliaoxinxi where bianhao=@bianhao", "数据记录", param);
         }
 
+
+        if (ht_forUI["spspsp"].ToString() == "dayin_fwbg")
+        {
+            linghangtishi = "没有找到服务报告编号!";
+            param.Add("@GID", ht_forUI["idforedit"].ToString().Trim());
+            return_ht = I_DBL.RunParam_SQL("select top 1 * from View_ZZZ_FWBG_ex where GID=@GID; select *, CONVERT(varchar(100), sbbaoxiujiezhi, 23) as baoxiu_sss from ZZZ_FWBG_shebei where sb_GID=@GID; select *, CONVERT(varchar(100), ljbaoxiujiezhi, 23) as baoxiu_sss from ZZZ_FWBG_lingjian  where lj_GID=@GID ", "数据记录", param);
+        }
+
         if ((bool)(return_ht["return_float"]))
         {
             DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
@@ -773,8 +781,18 @@ public class bsmain : System.Web.Services.WebService
             }
 
             dsreturn.Tables.Add(redb);
- 
- 
+
+            if (ht_forUI["spspsp"].ToString() == "dayin_fwbg")
+            {
+                DataTable redb1 = ((DataSet)return_ht["return_ds"]).Tables[1].Copy();
+                redb1.TableName = "设备子表";
+                DataTable redb2 = ((DataSet)return_ht["return_ds"]).Tables[2].Copy();
+                redb2.TableName = "零件子表";
+                dsreturn.Tables.Add(redb1);
+                dsreturn.Tables.Add(redb2);
+            }
+              
+
             dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
             dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "";
         }

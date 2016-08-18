@@ -47,8 +47,9 @@ public class NoReSetDEL_160713000062
             {
                 param.Add("@FCID_" + d, delids[d]);
 
+                
+                alsql.Add("delete ZZZ_xiaoshoufahuo_sb  where FCS_FCID=@FCID_" + d + " and (select top 1 FCzhuangtai from ZZZ_xiaoshoufahuo where FCID=@FCID_" + d + " and FCzhuangtai='草稿'  )='草稿'");
                 alsql.Add("delete ZZZ_xiaoshoufahuo  where FCID=@FCID_" + d + " and FCzhuangtai='草稿'");
-                alsql.Add("delete ZZZ_xiaoshoufahuo_sb  where FCS_FCID=@FCID_" + d + " and (select FCzhuangtai from ZZZ_xiaoshoufahuo where FCID=@FCID_" + d + " and FCzhuangtai='草稿'  )='草稿'");
             }
 
 
@@ -95,6 +96,46 @@ public class NoReSetDEL_160713000062
             if (redb.Rows.Count > 0)
             {
                 return  Convert.ToInt32( redb.Rows[0]["sl"]);
+            }
+            else
+            {
+                return 0;
+            }
+
+        }
+        else
+        {
+            return 0;
+        }
+
+
+
+    }
+
+
+
+    /// <summary>
+    /// 获取子表数据条数
+    /// </summary>
+    /// <param name="parameter_forUI">前台表单传来的参数</param>
+    /// <returns></returns>
+    private int get_yewuyuanbumen(string FCshenheren)
+    {
+
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+        Hashtable return_ht = new Hashtable();
+        Hashtable param = new Hashtable();
+        param.Add("@FCshenheren", FCshenheren);
+
+        return_ht = I_DBL.RunParam_SQL("SELECT count(Uaid) FROM ZZZ_userinfo WHERE Uaid=@FCshenheren and suoshuquyu in ('122','121','88','120','89')", "数据记录", param);
+
+        if ((bool)(return_ht["return_float"]))
+        {
+            DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+
+            if (redb.Rows.Count > 0)
+            {
+                return 1;
             }
             else
             {
@@ -187,6 +228,8 @@ public class NoReSetDEL_160713000062
             Hashtable hmsg = new Hashtable();
             //更新数据表里的数据 
             string[] ids = ht_forUI["xuanzhongzhi"].ToString().Split(',');
+            param.Add("@FCshenheren", ht_forUI["yhbsp_session_uer_UAid"].ToString());
+            int ywbmf = get_yewuyuanbumen(ht_forUI["yhbsp_session_uer_UAid"].ToString());
             for (int d = 0; d < ids.Length; d++)
             {
                 if (ids[d].Trim() != "")
@@ -208,6 +251,13 @@ public class NoReSetDEL_160713000062
                     {
                         param.Add("@FCID_" + d, ids[d]);
                         alsql.Add("UPDATE ZZZ_xiaoshoufahuo SET  FCzhuangtai='提交',FCshenqingshijian=getdate()  where FCzhuangtai='草稿' and  FCID =@FCID_" + d);
+                        //提交人是业务人员的，自动审核通过
+                        if(ywbmf == 1)
+                        {
+                            alsql.Add(" UPDATE ZZZ_xiaoshoufahuo SET  FCzhuangtai='审核',FCshenheren=@FCshenheren,FCshenheshijian=getdate()  where FCzhuangtai='提交' and FCID =@FCID_" + d + " ");
+                        }
+                        
+                        
                     }
 
                     
