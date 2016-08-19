@@ -29,7 +29,29 @@
     <script type="text/javascript">
         jQuery(function ($) {
 
-        
+            if (getUrlParam("fff") == "1" && getUrlParam("showinfo") == "") {
+
+                $("#SID").attr("readonly", "readonly");
+                //$('#SID').closest(".form-group").append("<div class='form-group'><label class='col-sm-2 control-label no-padding-right'>特殊操作：</label><div class='col-sm-10 col-xs-12'></div>  <button class='btn btn-xs btn-danger'><i class='ace-icon fa fa-bolt bigger-110'></i>开启修改序列号</button>查看修改记录 </div>");
+                $("<div class='form-group'><label class='col-sm-2 control-label no-padding-right'>特殊操作：</label><div class='col-sm-10 col-xs-12'><button class='btn btn-xs btn-danger' id='tscz_goxiugai'><i class='ace-icon fa fa-bolt bigger-110'></i>开启修改序列号</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button class='btn btn-xs btn-info' id='tscz_showjilu'><i class='ace-icon fa fa-bolt bigger-110'></i>查看修改记录</button></div>   </div>").insertAfter($('#SID').closest(".form-group"));
+
+                $(document).on('click', "#tscz_goxiugai", function () {
+
+                    $("#SID").removeAttr("readonly");
+
+                });
+                $(document).on('click', "#tscz_showjilu", function () {
+
+                    var form = $('<form></form>');
+                    // 设置属性  
+                    form.attr('action', "/adminht/corepage/bas/edit_wfsb_xlhxgjl.aspx");
+                    form.attr('method', 'post');
+                    form.attr('target', '_blank');
+                    // 提交表单  
+                    form.submit();
+
+                });
+            }
 
                 
                  var dfx_str = "#show_searchopenyhbspgogo_S_YYID";

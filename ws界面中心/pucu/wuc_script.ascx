@@ -1132,7 +1132,7 @@
                           
                                 var houzhui = servermsg.substring(servermsg.lastIndexOf("."), servermsg.lastIndexOf(".").length);//后缀名 
                           
-                                if (houzhui != ".jpg" && houzhui != ".bmp" && houzhui != ".gif" && houzhui != ".png")
+                                if (houzhui != ".jpg" && houzhui != ".bmp" && houzhui != ".gif" && houzhui != ".png" && houzhui != ".jpeg")
                                 {
                                     //$(file.previewTemplate).find("img").remove();
                                     file.previewElement.classList.remove("dz-image-preview");
