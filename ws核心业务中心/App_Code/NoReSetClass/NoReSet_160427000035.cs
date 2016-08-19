@@ -417,7 +417,14 @@ public class NoReSet_160427000035
             param.Add("@Gkeshi", ht_forUI["Gkeshi"].ToString());
             param.Add("@Glianxiren", ht_forUI["Glianxiren"].ToString());
 
-            param.Add("@Gsbtime", ht_forUI["Gsbtime"].ToString());
+            if (ht_forUI["Gsbtime"].ToString().Trim() == "")
+            {
+                param.Add("@Gsbtime", DBNull.Value);
+            }
+            else
+            {
+                param.Add("@Gsbtime", ht_forUI["Gsbtime"].ToString());
+            }
 
             param.Add("@Gkehuyaoqiu", ht_forUI["Gkehuyaoqiu"].ToString());
             param.Add("@Gguzhang_a", ht_forUI["Gguzhang_a"].ToString());
