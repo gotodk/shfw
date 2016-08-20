@@ -32,13 +32,46 @@
         function editok_after_msgshow(msg) {
           
             if (msg.indexOf("保存成功") >= 0) {
-                window.location.href = '/adminht/corepage/huiqian/cyhq_list_s.aspx';
+                //window.location.href = '/adminht/corepage/huiqian/cyhq_list_s.aspx';
             }
 
-        }
+        }
 
 
         jQuery(function ($) {
+
+            if (getUrlParam("fff") == "1" && getUrlParam("showinfo") == "1")
+            {
+                $(".c_fanhuishangyiye_top").hide();
+
+                var bjm = "fanhuiliebiao";
+                var bjm_wenben = "返回会签列表";
+                var bjm_tubiao = "ace-icon fa fa-undo red2";
+                $("#myTab").append("<li class='c_" + bjm + "_top'><button class='btn btn-white btn-info btn-bold' id='" + bjm + "_top'><i class='ace-icon fa " + bjm_tubiao + "'></i>" + bjm_wenben + "</button></li><li class='c_" + bjm + "_top'>&nbsp;&nbsp;</li>");
+                //给特殊按钮添加事件，调用批量操作的接口
+                $(document).on('click', "#" + bjm + "_top", function () {
+
+                    window.location.href = '/adminht/corepage/huiqian/cyhq_list_s.aspx';
+
+                });
+            }
+
+            if (getUrlParam("showinfo") == "2" || getUrlParam("showinfo") == "1") {
+                
+
+                $("#fifsssss_YJyijian").closest(".form-group").hide();
+                $("#fifsssss_YJqianhsuren").closest(".form-group").hide();
+                if (getUrlParam("showinfo") == "1")
+                {
+                    $(".c_bianji_top").hide();
+                    $(".c_xinzeng_top").hide();
+                }
+
+               
+
+
+            }
+
 
             $("#addbutton1_top").html($("#addbutton1_top").html().replace("保存", "提交"));
             $("#addbutton1").html($("#addbutton1").html().replace("保存", "提交"));
@@ -59,7 +92,7 @@
                 $("#addbutton1").attr({ "disabled": "disabled" });
                 $("#reloaddb").attr({ "disabled": "disabled" });
             }
-                 if (getUrlParam("fff") == "1") {
+            if (getUrlParam("fff") == "1" && getUrlParam("showinfo") != "2" && getUrlParam("showinfo") != "1") {
                      $("#title_f_id").html("参与会签");
           
                      //不是结单人，不显示是否结单选项
