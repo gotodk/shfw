@@ -79,7 +79,14 @@ public class NoReSet_160425000031
         param.Add("@Sshouming", ht_forUI["Sshouming"].ToString());
         param.Add("@Sxiaoshoujiage", ht_forUI["Sxiaoshoujiage"].ToString());
 
-        alsql.Add("INSERT INTO   ZZZ_WFSB(SID, S_YYID, Skeshi, S_SBID,Smingcheng,Sxinghao, Sbanben, Schuchangriqi, Sanzhuangriqi, Sbaoxiudaoqi,Sbaoyangdaoqi, Schenbenjia,   Sbaoxiuqixian, Sbaoyangzhouqi, Szhuangtai, Scaigouqudao, Sdailishang,   Sshouming, Sxiaoshoujiage ) VALUES(@SID, @S_YYID, @Skeshi, @S_SBID,@Smingcheng,@Sxinghao, @Sbanben, @Schuchangriqi, @Sanzhuangriqi, @Sbaoxiudaoqi,@Sbaoyangdaoqi, @Schenbenjia,   @Sbaoxiuqixian, @Sbaoyangzhouqi, @Szhuangtai, @Scaigouqudao, @Sdailishang,   @Sshouming, @Sxiaoshoujiage)");
+        if (ht_forUI.Contains("allpath_file1"))
+        { param.Add("@Sfujian", ht_forUI["allpath_file1"].ToString()); }
+        else
+        {
+            param.Add("@Sfujian", "");
+        }
+
+        alsql.Add("INSERT INTO   ZZZ_WFSB(SID, S_YYID, Skeshi, S_SBID,Smingcheng,Sxinghao, Sbanben, Schuchangriqi, Sanzhuangriqi, Sbaoxiudaoqi,Sbaoyangdaoqi, Schenbenjia,   Sbaoxiuqixian, Sbaoyangzhouqi, Szhuangtai, Scaigouqudao, Sdailishang,   Sshouming, Sxiaoshoujiage,Sfujian ) VALUES(@SID, @S_YYID, @Skeshi, @S_SBID,@Smingcheng,@Sxinghao, @Sbanben, @Schuchangriqi, @Sanzhuangriqi, @Sbaoxiudaoqi,@Sbaoyangdaoqi, @Schenbenjia,   @Sbaoxiuqixian, @Sbaoyangzhouqi, @Szhuangtai, @Scaigouqudao, @Sdailishang,   @Sshouming, @Sxiaoshoujiage,@Sfujian)");
 
 
 
@@ -193,8 +200,14 @@ public class NoReSet_160425000031
         param.Add("@Sshouming", ht_forUI["Sshouming"].ToString());
         param.Add("@Sxiaoshoujiage", ht_forUI["Sxiaoshoujiage"].ToString());
 
+        if (ht_forUI.Contains("allpath_file1"))
+        { param.Add("@Sfujian", ht_forUI["allpath_file1"].ToString()); }
+        else
+        {
+            param.Add("@Sfujian", "");
+        }
 
-        alsql.Add("UPDATE ZZZ_WFSB SET S_YYID=@S_YYID, Skeshi=@Skeshi, S_SBID=@S_SBID,Smingcheng=@Smingcheng,Sxinghao=@Sxinghao, Sbanben=@Sbanben, Schuchangriqi=@Schuchangriqi, Sanzhuangriqi=@Sanzhuangriqi, Sbaoxiudaoqi=@Sbaoxiudaoqi,Sbaoyangdaoqi=@Sbaoyangdaoqi, Schenbenjia=@Schenbenjia,   Sbaoxiuqixian=@Sbaoxiuqixian, Sbaoyangzhouqi=@Sbaoyangzhouqi, Szhuangtai=@Szhuangtai, Scaigouqudao=@Scaigouqudao, Sdailishang=@Sdailishang,   Sshouming=@Sshouming, Sxiaoshoujiage=@Sxiaoshoujiage  where SID=@SID ");
+        alsql.Add("UPDATE ZZZ_WFSB SET S_YYID=@S_YYID, Skeshi=@Skeshi, S_SBID=@S_SBID,Smingcheng=@Smingcheng,Sxinghao=@Sxinghao, Sbanben=@Sbanben, Schuchangriqi=@Schuchangriqi, Sanzhuangriqi=@Sanzhuangriqi, Sbaoxiudaoqi=@Sbaoxiudaoqi,Sbaoyangdaoqi=@Sbaoyangdaoqi, Schenbenjia=@Schenbenjia,   Sbaoxiuqixian=@Sbaoxiuqixian, Sbaoyangzhouqi=@Sbaoyangzhouqi, Szhuangtai=@Szhuangtai, Scaigouqudao=@Scaigouqudao, Sdailishang=@Sdailishang,   Sshouming=@Sshouming, Sxiaoshoujiage=@Sxiaoshoujiage ,Sfujian=@Sfujian where SID=@SID ");
 
         //记录序列号修改记录
      
@@ -332,6 +345,20 @@ public class NoReSet_160425000031
  
             dsreturn.Tables.Add(redb);
 
+            //如果图片不是空值，把图片也弄个表加进来
+            if (redb.Rows[0]["Sfujian"].ToString() != "")
+            {
+                //Ttupianpath
+                DataTable dttu = new DataTable("图片记录");
+                dttu.Columns.Add("Ttupianpath");
+                string[] arr_tu = redb.Rows[0]["Sfujian"].ToString().Split(',');
+                for (int t = 0; t < arr_tu.Length; t++)
+                {
+                    dttu.Rows.Add(arr_tu[t]);
+                }
+                dsreturn.Tables.Add(dttu.Copy());
+
+            }
 
             dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
             dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "";

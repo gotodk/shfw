@@ -389,6 +389,26 @@ public class bsmain : System.Web.Services.WebService
         }
 
 
+        if (ht_forUI["mod"].ToString().ToLower() == "wfsb")
+        {
+            param.Add("@SID", ht_forUI["idforedit"].ToString());
+
+            return_ht = I_DBL.RunParam_SQL("select top 1 *,Sfujian as tupian from  View_ZZZ_WFSB_list where SID=@SID", "数据记录", param);
+        }
+        if (ht_forUI["mod"].ToString().ToLower() == "sblxbase")
+        {
+            param.Add("@SBID", ht_forUI["idforedit"].ToString());
+
+            return_ht = I_DBL.RunParam_SQL("select top 1 *,SBfujian as tupian from  ZZZ_SBLXBASE where SBID=@SBID", "数据记录", param);
+        }
+        if (ht_forUI["mod"].ToString().ToLower() == "wflj")
+        {
+            param.Add("@LID", ht_forUI["idforedit"].ToString());
+
+            return_ht = I_DBL.RunParam_SQL("select top 1 *,Lfujian as tupian from  ZZZ_WFLJ where LID=@LID", "数据记录", param);
+        }
+
+
         if ((bool)(return_ht["return_float"]))
         {
             DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();

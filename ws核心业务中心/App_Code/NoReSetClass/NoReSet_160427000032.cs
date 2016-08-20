@@ -83,7 +83,14 @@ public class NoReSet_160427000032
         param.Add("@Lbaoxiuqi", ht_forUI["Lbaoxiuqi"].ToString());
         param.Add("@Lzhuangtai", ht_forUI["Lzhuangtai"].ToString());
 
-        alsql.Add("INSERT INTO   ZZZ_WFLJ(LID, Lmingcheng, Lguige, Ldanwei, Lpinyin, Lchengbenjia, Lzuidijia, Lshoujia, Lerpbianhao, Lbaoxiuqi,Lzhuangtai) VALUES(@LID, @Lmingcheng, @Lguige, @Ldanwei, @Lpinyin, @Lchengbenjia, @Lzuidijia, @Lshoujia, @Lerpbianhao, @Lbaoxiuqi,@Lzhuangtai)");
+        if (ht_forUI.Contains("allpath_file1"))
+        { param.Add("@Lfujian", ht_forUI["allpath_file1"].ToString()); }
+        else
+        {
+            param.Add("@Lfujian", "");
+        }
+
+        alsql.Add("INSERT INTO   ZZZ_WFLJ(LID, Lmingcheng, Lguige, Ldanwei, Lpinyin, Lchengbenjia, Lzuidijia, Lshoujia, Lerpbianhao, Lbaoxiuqi,Lzhuangtai,Lfujian) VALUES(@LID, @Lmingcheng, @Lguige, @Ldanwei, @Lpinyin, @Lchengbenjia, @Lzuidijia, @Lshoujia, @Lerpbianhao, @Lbaoxiuqi,@Lzhuangtai,@Lfujian)");
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
 
@@ -147,7 +154,14 @@ public class NoReSet_160427000032
         param.Add("@Lbaoxiuqi", ht_forUI["Lbaoxiuqi"].ToString());
         param.Add("@Lzhuangtai", ht_forUI["Lzhuangtai"].ToString());
 
-        alsql.Add("UPDATE ZZZ_WFLJ SET Lmingcheng=@Lmingcheng, Lguige=@Lguige, Ldanwei=@Ldanwei, Lpinyin=@Lpinyin, Lchengbenjia=@Lchengbenjia, Lzuidijia=@Lzuidijia, Lshoujia=@Lshoujia, Lerpbianhao=@Lerpbianhao, Lbaoxiuqi=@Lbaoxiuqi,Lzhuangtai=@Lzhuangtai  where LID=@LID ");
+        if (ht_forUI.Contains("allpath_file1"))
+        { param.Add("@Lfujian", ht_forUI["allpath_file1"].ToString()); }
+        else
+        {
+            param.Add("@Lfujian", "");
+        }
+
+        alsql.Add("UPDATE ZZZ_WFLJ SET Lmingcheng=@Lmingcheng, Lguige=@Lguige, Ldanwei=@Ldanwei, Lpinyin=@Lpinyin, Lchengbenjia=@Lchengbenjia, Lzuidijia=@Lzuidijia, Lshoujia=@Lshoujia, Lerpbianhao=@Lerpbianhao, Lbaoxiuqi=@Lbaoxiuqi,Lzhuangtai=@Lzhuangtai,Lfujian=@Lfujian  where LID=@LID ");
    
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
@@ -219,6 +233,20 @@ public class NoReSet_160427000032
  
             dsreturn.Tables.Add(redb);
 
+            //如果图片不是空值，把图片也弄个表加进来
+            if (redb.Rows[0]["Lfujian"].ToString() != "")
+            {
+                //Ttupianpath
+                DataTable dttu = new DataTable("图片记录");
+                dttu.Columns.Add("Ttupianpath");
+                string[] arr_tu = redb.Rows[0]["Lfujian"].ToString().Split(',');
+                for (int t = 0; t < arr_tu.Length; t++)
+                {
+                    dttu.Rows.Add(arr_tu[t]);
+                }
+                dsreturn.Tables.Add(dttu.Copy());
+
+            }
 
             dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
             dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "";

@@ -83,9 +83,15 @@ public class NoReSet_160429000036
         param.Add("@SBerpbianma", ht_forUI["SBerpbianma"].ToString());
         param.Add("@SBzhuangtai", ht_forUI["SBzhuangtai"].ToString());
         param.Add("@SBbeizhu", ht_forUI["SBbeizhu"].ToString());
-        
 
-        alsql.Add("INSERT INTO ZZZ_SBLXBASE(SBID, SBmingcheng, SBxinghao, SBdanwei, SBchengbenjia, SBbaoxiuqixian, SBbaoyangzhouqi,  SBchanpinshouming, SBxiaoshoujiage, SBshengchanchang, SBerpbianma, SBzhuangtai, SBbeizhu ) VALUES(@SBID, @SBmingcheng, @SBxinghao, @SBdanwei, @SBchengbenjia, @SBbaoxiuqixian, @SBbaoyangzhouqi,  @SBchanpinshouming, @SBxiaoshoujiage, @SBshengchanchang, @SBerpbianma, @SBzhuangtai, @SBbeizhu)");
+        if (ht_forUI.Contains("allpath_file1"))
+        { param.Add("@SBfujian", ht_forUI["allpath_file1"].ToString()); }
+        else
+        {
+            param.Add("@SBfujian", "");
+        }
+
+        alsql.Add("INSERT INTO ZZZ_SBLXBASE(SBID, SBmingcheng, SBxinghao, SBdanwei, SBchengbenjia, SBbaoxiuqixian, SBbaoyangzhouqi,  SBchanpinshouming, SBxiaoshoujiage, SBshengchanchang, SBerpbianma, SBzhuangtai, SBbeizhu,SBfujian ) VALUES(@SBID, @SBmingcheng, @SBxinghao, @SBdanwei, @SBchengbenjia, @SBbaoxiuqixian, @SBbaoyangzhouqi,  @SBchanpinshouming, @SBxiaoshoujiage, @SBshengchanchang, @SBerpbianma, @SBzhuangtai, @SBbeizhu,@SBfujian)");
 
  
         //遍历子表， 插入 
@@ -176,7 +182,14 @@ public class NoReSet_160429000036
         param.Add("@SBzhuangtai", ht_forUI["SBzhuangtai"].ToString());
         param.Add("@SBbeizhu", ht_forUI["SBbeizhu"].ToString());
 
-        alsql.Add("UPDATE ZZZ_SBLXBASE SET SBmingcheng=@SBmingcheng, SBxinghao=@SBxinghao, SBdanwei=@SBdanwei, SBchengbenjia=@SBchengbenjia, SBbaoxiuqixian=@SBbaoxiuqixian, SBbaoyangzhouqi=@SBbaoyangzhouqi,  SBchanpinshouming=@SBchanpinshouming, SBxiaoshoujiage=@SBxiaoshoujiage, SBshengchanchang=@SBshengchanchang, SBerpbianma=@SBerpbianma, SBzhuangtai=@SBzhuangtai, SBbeizhu=@SBbeizhu  where SBID=@SBID ");
+        if (ht_forUI.Contains("allpath_file1"))
+        { param.Add("@SBfujian", ht_forUI["allpath_file1"].ToString()); }
+        else
+        {
+            param.Add("@SBfujian", "");
+        }
+
+        alsql.Add("UPDATE ZZZ_SBLXBASE SET SBmingcheng=@SBmingcheng, SBxinghao=@SBxinghao, SBdanwei=@SBdanwei, SBchengbenjia=@SBchengbenjia, SBbaoxiuqixian=@SBbaoxiuqixian, SBbaoyangzhouqi=@SBbaoyangzhouqi,  SBchanpinshouming=@SBchanpinshouming, SBxiaoshoujiage=@SBxiaoshoujiage, SBshengchanchang=@SBshengchanchang, SBerpbianma=@SBerpbianma, SBzhuangtai=@SBzhuangtai, SBbeizhu=@SBbeizhu,SBfujian=@SBfujian  where SBID=@SBID ");
 
 
         //遍历子表，先删除，再插入，已有主键的不重新生成。
@@ -279,6 +292,21 @@ public class NoReSet_160429000036
             }
 
             dsreturn.Tables.Add(redb);
+
+            //如果图片不是空值，把图片也弄个表加进来
+            if (redb.Rows[0]["SBfujian"].ToString() != "")
+            {
+                //Ttupianpath
+                DataTable dttu = new DataTable("图片记录");
+                dttu.Columns.Add("Ttupianpath");
+                string[] arr_tu = redb.Rows[0]["SBfujian"].ToString().Split(',');
+                for (int t = 0; t < arr_tu.Length; t++)
+                {
+                    dttu.Rows.Add(arr_tu[t]);
+                }
+                dsreturn.Tables.Add(dttu.Copy());
+
+            }
 
 
             dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";

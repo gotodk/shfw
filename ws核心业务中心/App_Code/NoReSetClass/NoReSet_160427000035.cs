@@ -452,9 +452,8 @@ public class NoReSet_160427000035
 
             alsql.Add("UPDATE ZZZ_FWBG SET Gfwlx=@Gfwlx, Gbylx=@Gbylx, G_BID=@G_BID, G_YYID=@G_YYID, Gkeshi=@Gkeshi, Glianxiren=@Glianxiren, Gsbtime=@Gsbtime, Gkehuyaoqiu=@Gkehuyaoqiu,  Gguzhang_a=@Gguzhang_a, Gguzhang_b=@Gguzhang_b, Gguocheng_a=@Gguocheng_a, Gguocheng_b=@Gguocheng_b, Gjiedan=@Gjiedan, Gzhuangtai=@Gzhuangtai,  Gkaigongtime=@Gkaigongtime, Gwangongtime=@Gwangongtime, Gjishufuwufei=@Gjishufuwufei, Ggongshi=@Ggongshi, Gneibujiesuan=@Gneibujiesuan, Gzongjia=@Gzongjia, Gkehuyijian=@Gkehuyijian, Gbeizhu=@Gbeizhu, Gfujian=@Gfujian where GID=@GID ");
 
-          
 
-
+            
 
 
             //遍历子表， 插入 (设备信息)
@@ -781,6 +780,14 @@ public class NoReSet_160427000035
             //dsreturn.Tables.Add(parameter_forUI.Copy());
             dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
             dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "系统故障，修改失败：" + return_ht["return_errmsg"].ToString();
+
+            string path = HttpContext.Current.Server.MapPath("/");
+            string jianzhistr = "";
+            foreach (object de in alsql)
+            {
+                jianzhistr = jianzhistr + "" + de.ToString() + "" + Environment.NewLine;
+            }
+            StringOP.WriteLog(path, Environment.NewLine + "=====单号：" + ht_forUI["idforedit"].ToString() + Environment.NewLine + "=====" + Environment.NewLine + "所有参数：" + Environment.NewLine + jianzhistr + Environment.NewLine + Environment.NewLine);
         }
 
 
