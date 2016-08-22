@@ -83,13 +83,15 @@
                     $("#myTab").append("<li class='c_" + bjm + "_top'><button class='btn btn-white btn-info btn-bold' id='" + bjm + "_top'><i class='ace-icon fa " + bjm_tubiao + "'></i>" + bjm_wenben + "</button></li><li class='c_" + bjm + "_top'>&nbsp;&nbsp;</li>");
                     //给特殊按钮添加事件，调用批量操作的接口
                     $(document).on('click', "#" + bjm + "_top", function () {
-                        var form = $('<form></form>');
-                        // 设置属性  
-                        form.attr('action', "/adminht/corepage/fanchang/edit_fcwxd_qk.aspx?fff=1&showinfo=1&idforedit=" + getUrlParam("idforedit"));
-                        form.attr('method', 'post');
-                        form.attr('target', '_blank');
-                        // 提交表单  
-                        form.submit();
+
+                        location.href = "/adminht/corepage/fanchang/edit_fcwxd_qk.aspx?fff=1&idforedit=" + getUrlParam("idforedit");
+                        //var form = $('<form></form>');
+                        //// 设置属性  
+                        //form.attr('action', "/adminht/corepage/fanchang/edit_fcwxd_qk.aspx?fff=1&idforedit=" + getUrlParam("idforedit"));
+                        //form.attr('method', 'post');
+                        //form.attr('target', '_blank');
+                        //// 提交表单  
+                        //form.submit();
                       
 
                     });
