@@ -51,7 +51,7 @@ public partial class WUC_cyhq : System.Web.UI.UserControl, ISetForWUC
                 {
                     if (System.IO.File.Exists(Server.MapPath("/uploadfiles/faceup/" + dsr.Tables["Table1"].Rows[i]["YJqianhsuren"] + ".jpg")))
                     {
-                        dsr.Tables["Table1"].Rows[i]["utouxiang"] = "/uploadfiles/faceup/" + UserSession.唯一键 + ".jpg";
+                        dsr.Tables["Table1"].Rows[i]["utouxiang"] = "/uploadfiles/faceup/" + dsr.Tables["Table1"].Rows[i]["YJqianhsuren"] + ".jpg";
                     }
                     else
                     {

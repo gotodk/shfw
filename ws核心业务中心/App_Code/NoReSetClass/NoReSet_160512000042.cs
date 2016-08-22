@@ -77,11 +77,17 @@ public class NoReSet_160512000042
 
         alsql.Add("INSERT INTO  ZZZ_HQ(QID, Qzhuti, Qneirong, Qfujian, Qjiedanren,Qzhuangtai,Qcjr ) VALUES(@QID, @Qzhuti, @Qneirong, @Qfujian, @Qjiedanren,@Qzhuangtai,@Qcjr)");
 
-        //同时把结单人自动放入审批人。 同时发送提醒
+        //同时把发起人自动放入审批人。 同时发送提醒
         param.Add("@YJID", CombGuid.GetMewIdFormSequence("ZZZ_HQ_YJ"));
-        alsql.Add("INSERT INTO  ZZZ_HQ_YJ ( YJID, YJ_QID, YJqianhsuren, YJzhuangtai, YJyijian, YJqsshijian, YJlaiyuan, YJlysj ) VALUES(@YJID, @QID, @Qjiedanren, '待签',null,null, @Qcjr,getdate()   )");
+        alsql.Add("INSERT INTO  ZZZ_HQ_YJ ( YJID, YJ_QID, YJqianhsuren, YJzhuangtai, YJyijian, YJqsshijian, YJlaiyuan, YJlysj ) VALUES(@YJID, @QID, @Qcjr, '待签',null,null, @Qcjr,getdate()   )");
+        alsql.Add("INSERT INTO  auth_znx(touser, msgtitle, msurl) VALUES(@Qcjr, '有新的会签需要您的参与，单号[' + @QID + ']', '/adminht/corepage/huiqian/cyhq.aspx?idforedit='+@QID+'&fff=1')");
+
+        //同时把结单人自动放入审批人。 同时发送提醒
+        param.Add("@YJID2", CombGuid.GetMewIdFormSequence("ZZZ_HQ_YJ"));
+        alsql.Add("INSERT INTO  ZZZ_HQ_YJ ( YJID, YJ_QID, YJqianhsuren, YJzhuangtai, YJyijian, YJqsshijian, YJlaiyuan, YJlysj ) VALUES(@YJID2, @QID, @Qjiedanren, '待签',null,null, @Qcjr,getdate()   )");
         alsql.Add("INSERT INTO  auth_znx(touser, msgtitle, msurl) VALUES(@Qjiedanren, '有新的会签需要您的参与，单号[' + @QID + ']', '/adminht/corepage/huiqian/cyhq.aspx?idforedit='+@QID+'&fff=1')");
 
+       
 
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
