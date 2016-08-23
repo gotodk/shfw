@@ -40,10 +40,10 @@ public partial class ajaxdropzoneupload : System.Web.UI.Page
 
             int fileSizeInBytes = file.ContentLength;
             //判定文件大小是否符合要求(20M,实际限制在前台控制就行了)
-            if (fileSizeInBytes > 10485760*2)
+            if (fileSizeInBytes > 10485760*50)
             {
                 Response.StatusCode = 500;
-                Response.Write("失败：文件过大，上限10M");
+                Response.Write("失败：文件过大，上限500M");
                 return;
             }
 

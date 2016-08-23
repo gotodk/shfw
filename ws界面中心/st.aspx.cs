@@ -61,6 +61,7 @@ public partial class st : System.Web.UI.Page
             try {
                 arr_tupian = ds_DD.Tables["数据记录"].Rows[0]["tupian"].ToString().Split(',');
 
+                /*
                 //如果只有一个文件，直接转到下载链接
                 if (arr_tupian.Length == 1)
                 {
@@ -76,6 +77,7 @@ public partial class st : System.Web.UI.Page
                         
                     return;
                 }
+                */
             }
             catch (Exception ex)
             {
