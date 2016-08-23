@@ -14,7 +14,7 @@ public partial class easjkceshi : System.Web.UI.Page
     {
         //调用执行方法获取数据
      
-        object[] re_dsi = IPC.Call("EAS正式登录调用", new object[] { "user", "wang", "eas", "a28", "l2", 2 });
+        object[] re_dsi = IPC.Call("EAS正式登录调用", new object[] { "user", "wangxiaomin", "eas", "a28", "l2", 2 });
         if (re_dsi[0].ToString() == "ok")
         {
             
@@ -25,9 +25,9 @@ public partial class easjkceshi : System.Web.UI.Page
 
 
             //编造一个xml
-            DataTable dt = new DataTable("eas其他出库单写入");
+            DataTable dt = new DataTable("eas销售出库单写入");
             string xmlstr = File.ReadAllText(Server.MapPath("/xml/easceshi.txt").ToString());
-            object[] re_dsi_22 = IPC.Call("eas其他出库单写入", new object[] { xmlstr });
+            object[] re_dsi_22 = IPC.Call("eas销售出库单写入", new object[] { xmlstr });
             if (re_dsi_22[0].ToString() == "ok")
             {
 

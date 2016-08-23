@@ -1,23 +1,15 @@
 <?xml version="1.0"?>
-<SaleIssueBill>
+<OtherIssueBill>
  
 <billHead>
-<!-- 单据编号-->
+
 <number>12.111.5656.22</number>
-<!-- 创建人-->
-<customer>37.11.0156</customer>
-<!-- 管理单元-->
-<CU>01.02.01</CU>
-<!-- 事务类型-->
-<transactionType>254</transactionType>
-<!-- 业务日期-->
+<CU>01</CU>
+<transactionType>836</transactionType>
 <bizDate>2016-07-21</bizDate>
-<!-- 业务类型-->
-<bizType>210</bizType>
-<!-- 库存组织-->
+<bizType>510</bizType>
 <storageOrgUnit>01.02.05.03</storageOrgUnit>
-<!-- 成本中心-->
-<costCenterOrgUnit>01.02.05.11.02</costCenterOrgUnit>
+<costCenterOrgUnit>01.02.05.11.03</costCenterOrgUnit>
 
 </billHead>
  
@@ -34,4 +26,4 @@
 </entry>
  
 
-</SaleIssueBill> 
+</OtherIssueBill> 
