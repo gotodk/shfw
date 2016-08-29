@@ -129,8 +129,9 @@ public class NoReSet_160817000007
         param.Add("@FCwx_yijian", ht_forUI["FCwx_yijian"].ToString());
         param.Add("@FCwx_cjr", ht_forUI["yhbsp_session_uer_UAid"].ToString());
         param.Add("@FCwx_zt", "草稿");
+        param.Add("@FCwx_zwxfy", ht_forUI["FCwx_zwxfy"].ToString());
 
-        alsql.Add("UPDATE ZZZ_fanchang SET FCwx_txsj = getdate(),FCwx_yijian=@FCwx_yijian,FCwx_cjr=@FCwx_cjr,FCwx_zt=@FCwx_zt where FCID=@FCID and  FCwx_zt in ('未填写','草稿')");
+        alsql.Add("UPDATE ZZZ_fanchang SET FCwx_txsj = getdate(),FCwx_yijian=@FCwx_yijian,FCwx_zwxfy=@FCwx_zwxfy,FCwx_cjr=@FCwx_cjr,FCwx_zt=@FCwx_zt where FCID=@FCID and  FCwx_zt in ('未填写','草稿')");
 
 
         //遍历子表，先删除，再插入，已有主键的不重新生成。

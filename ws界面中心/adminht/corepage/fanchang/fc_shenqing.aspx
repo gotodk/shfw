@@ -108,6 +108,11 @@
                      var zz_shuliang = $("#gview_grid-table-subtable-160818000119").find("input[name='配件数量']").val();
                      $("#gview_grid-table-subtable-160818000119").find("input[name='金额']").val((zz_sjsj * zz_shuliang).toFixed(2));
 
+                     if (getUrlParam("fff") == "1") {
+                         //给会签单号增加超链接
+                         var hqdh = $("#Fhuiqiandanhao").val();
+                         $("label[for='Fhuiqiandanhao']").html("<i class='light-red'>*  </i><a href='/adminht/corepage/huiqian/cyhq.aspx?idforedit=" + hqdh + "&fff=1&jck=1&showinfo=2'  target='_blank'>会签单号</a>");
+                     }
                      
                  }, 500);
 

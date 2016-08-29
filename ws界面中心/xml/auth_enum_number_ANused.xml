@@ -142,6 +142,16 @@
     <ANused>1</ANused>
   </Unumber1>
   <Unumber1>
+    <ANID>E-A4A600B1E9B1-3C6BF0A8-F563-4847-9AC6</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>返厂处理-全部返厂记录</ANBaseName>
+    <ANBaseNumber>34359738368</ANBaseNumber>
+    <ANBaseNumber_p>35</ANBaseNumber_p>
+    <ANextendID>132</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
     <ANID>E-A4A600B1E9AB-038F367D-D62A-4D8C-9E42</ANID>
     <ANClass>Unumber1</ANClass>
     <ANClassName>后台菜单权限</ANClassName>
@@ -189,6 +199,16 @@
     <ANBaseNumber>4096</ANBaseNumber>
     <ANBaseNumber_p>12</ANBaseNumber_p>
     <ANextendID>97</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E9D0-A1EDF9B7-1DBC-446A-89D2</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>基础数据主菜单</ANBaseName>
+    <ANBaseNumber>1099511627776</ANBaseNumber>
+    <ANBaseNumber_p>40</ANBaseNumber_p>
+    <ANextendID>438</ANextendID>
     <ANused>1</ANused>
   </Unumber1>
   <Unumber1>
@@ -302,6 +322,16 @@
     <ANused>1</ANused>
   </Unumber1>
   <Unumber1>
+    <ANID>E-A4A600B1E9CD-BA64B9B4-809F-4FB7-A9D6</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>技术服务管理主菜单</ANBaseName>
+    <ANBaseNumber>549755813888</ANBaseNumber>
+    <ANBaseNumber_p>39</ANBaseNumber_p>
+    <ANextendID>798</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
     <ANID>E-A4A600B1E968-8A12FD89-C7A3-4CE7-A4E6</ANID>
     <ANClass>Unumber1</ANClass>
     <ANClassName>后台菜单权限</ANClassName>
@@ -359,6 +389,16 @@
     <ANBaseNumber>8388608</ANBaseNumber>
     <ANBaseNumber_p>23</ANBaseNumber_p>
     <ANextendID>60</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E9B9-AD855CE6-0CA6-47DA-B4EA</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>情报管理</ANBaseName>
+    <ANBaseNumber>137438953472</ANBaseNumber>
+    <ANBaseNumber_p>37</ANBaseNumber_p>
+    <ANextendID>105</ANextendID>
     <ANused>1</ANused>
   </Unumber1>
   <Unumber1>
@@ -422,6 +462,16 @@
     <ANused>1</ANused>
   </Unumber1>
   <Unumber1>
+    <ANID>E-A4A600B1E9BF-D6B30831-FB00-45B9-AB6A</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>销售发货管理主菜单</ANBaseName>
+    <ANBaseNumber>274877906944</ANBaseNumber>
+    <ANBaseNumber_p>38</ANBaseNumber_p>
+    <ANextendID>156</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
     <ANID>E-A4A600B1E962-92E5A5EE-7D2A-4B36-BAA5</ANID>
     <ANClass>Unumber1</ANClass>
     <ANClassName>后台菜单权限</ANClassName>
@@ -439,6 +489,16 @@
     <ANBaseNumber>2147483648</ANBaseNumber>
     <ANBaseNumber_p>31</ANBaseNumber_p>
     <ANextendID>158</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E9B2-2D7AAE76-5796-4CD7-B19D</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>知识管理</ANBaseName>
+    <ANBaseNumber>68719476736</ANBaseNumber>
+    <ANBaseNumber_p>36</ANBaseNumber_p>
+    <ANextendID>81</ANextendID>
     <ANused>1</ANused>
   </Unumber1>
   <Unumber3>
