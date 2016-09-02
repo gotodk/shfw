@@ -76,7 +76,7 @@ public class NoReSet_160427000034
         alsql.Add("INSERT INTO ZZZ_HTGL(HID, H_YYID, Eleixing, Hqianshuren, Hzongjia, Hqianshuriqi, Hfukuanriqi, Hshouuanjin, Hfukuanzhouqi,   Hshifouzhiqu, Hbeizhu) VALUES(@HID, @H_YYID, @Eleixing, @Hqianshuren, @Hzongjia, @Hqianshuriqi, @Hfukuanriqi, @Hshouuanjin, @Hfukuanzhouqi,   @Hshifouzhiqu, @Hbeizhu)");
 
  
-        //遍历子表， 插入 
+        //遍历子表， 插入(设备信息)
         string zibiao_gts_id = "grid-table-subtable-160427000636";
         DataTable subdt = jsontodatatable.ToDataTable(ht_forUI[zibiao_gts_id].ToString());
         //必须验证js脚本获取的数量和c#反序列化获取的数量一致才能继续。防止出错
@@ -93,16 +93,51 @@ public class NoReSet_160427000034
         {
             param.Add("@sub_" + "id" + "_" + i, CombGuid.GetMewIdFormSequence("ZZZ_HTGL_SB"));
 
-            param.Add("@sub_" + "HSB_SID" + "_" + i, subdt.Rows[i]["设备编号"].ToString());
+            param.Add("@sub_" + "HSB_SID" + "_" + i, subdt.Rows[i]["设备序列号"].ToString());
             param.Add("@sub_" + "HSBbegin" + "_" + i, subdt.Rows[i]["生效日期"].ToString());
             param.Add("@sub_" + "HSBend" + "_" + i, subdt.Rows[i]["失效日期"].ToString());
             param.Add("@sub_" + "HSBjiage" + "_" + i, subdt.Rows[i]["金额"].ToString());
-    
+
+            param.Add("@sub_" + "HSB_SBID" + "_" + i, subdt.Rows[i]["物料编码"].ToString());
+            param.Add("@sub_" + "HSB_SBmingcheng" + "_" + i, subdt.Rows[i]["设备名称"].ToString());
+            param.Add("@sub_" + "HSB_SBxinghao" + "_" + i, subdt.Rows[i]["设备规格"].ToString());
 
 
-            string INSERTsql = "INSERT INTO ZZZ_HTGL_SB ( HSBID, HSB_HID,  HSB_SID,   HSBbegin,  HSBend, HSBjiage  ) VALUES(@sub_" + "id" + "_" + i + ", @sub_MainID, @sub_"+ "HSB_SID" + "_" + i + ", @sub_" + "HSBbegin" + "_" + i + ", @sub_" + "HSBend" + "_" + i + ", @sub_" + "HSBjiage" + "_" + i + "  )";
+
+            string INSERTsql = "INSERT INTO ZZZ_HTGL_SB ( HSBID, HSB_HID,  HSB_SID, HSB_SBID,HSB_SBmingcheng, HSB_SBxinghao, HSBbegin,  HSBend, HSBjiage  ) VALUES(@sub_" + "id" + "_" + i + ", @sub_MainID, @sub_"+ "HSB_SID" + "_" + i + ", @sub_" + "HSB_SBID" + "_" + i + ", @sub_" + "HSB_SBmingcheng" + "_" + i + ", @sub_" + "HSB_SBxinghao" + "_" + i + ", @sub_" + "HSBbegin" + "_" + i + ", @sub_" + "HSBend" + "_" + i + ", @sub_" + "HSBjiage" + "_" + i + "  )";
             alsql.Add(INSERTsql);
         }
+
+
+
+        //遍历子表， 插入 (付款信息)
+        string zibiao_cw_id = "grid-table-subtable-160902000184";
+        DataTable subdt_cw = jsontodatatable.ToDataTable(ht_forUI[zibiao_cw_id].ToString());
+        //必须验证js脚本获取的数量和c#反序列化获取的数量一致才能继续。防止出错
+        if (ht_forUI[zibiao_cw_id + "_fcjsq"].ToString() != subdt_cw.Rows.Count.ToString())
+        {
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "子表数据量与获取量不相符，系统出现问题。";
+            return dsreturn;
+        }
+
+        //param.Add("@sub_" + "MainID_cw", guid); //隶属主表id
+
+        for (int i = 0; i < subdt_cw.Rows.Count; i++)
+        {
+            param.Add("@sub_" + "FKID" + "_" + i, CombGuid.GetMewIdFormSequence("ZZZ_HTGL_FKQK"));
+
+            param.Add("@sub_" + "FK_shuoming" + "_" + i, subdt_cw.Rows[i]["付款说明"].ToString());
+            param.Add("@sub_" + "FK_riqi" + "_" + i, subdt_cw.Rows[i]["付款日期"].ToString());
+            param.Add("@sub_" + "FK_bili" + "_" + i, subdt_cw.Rows[i]["付款比例"].ToString());
+            param.Add("@sub_" + "FK_jine" + "_" + i, subdt_cw.Rows[i]["付款金额"].ToString());
+            param.Add("@sub_" + "FK_beizhu" + "_" + i, subdt_cw.Rows[i]["备注"].ToString());
+
+            string INSERTsql = "INSERT INTO ZZZ_HTGL_FKQK ( FKID, FK_HID, FK_shuoming, FK_riqi, FK_bili, FK_jine, FK_beizhu) VALUES(@sub_" + "FKID" + "_" + i + ", @sub_MainID, @sub_" + "FK_shuoming" + "_" + i + ", @sub_" + "FK_riqi" + "_" + i + ", @sub_" + "FK_bili" + "_" + i + ", @sub_" + "FK_jine" + "_" + i + ", @sub_" + "FK_beizhu" + "_" + i + " )";
+            alsql.Add(INSERTsql);
+        }
+
+
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
 
@@ -167,40 +202,98 @@ public class NoReSet_160427000034
         alsql.Add("UPDATE ZZZ_HTGL SET   H_YYID=@H_YYID, Eleixing=@Eleixing, Hqianshuren=@Hqianshuren, Hzongjia=@Hzongjia, Hqianshuriqi=@Hqianshuriqi, Hfukuanriqi=@Hfukuanriqi, Hshouuanjin=@Hshouuanjin, Hfukuanzhouqi=@Hfukuanzhouqi,   Hshifouzhiqu=@Hshifouzhiqu, Hbeizhu=@Hbeizhu where HID=@HID ");
 
 
-        //遍历子表，先删除，再插入，已有主键的不重新生成。
-        string zibiao_gts_id = "grid-table-subtable-160427000636";
-        DataTable subdt = jsontodatatable.ToDataTable(ht_forUI[zibiao_gts_id].ToString());
-        //必须验证js脚本获取的数量和c#反序列化获取的数量一致才能继续。防止出错
-        if (ht_forUI[zibiao_gts_id + "_fcjsq"].ToString() != subdt.Rows.Count.ToString())
+        //修改合同编号
+        if (ht_forUI["idforedit"].ToString().Trim() != ht_forUI["HID"].ToString().Trim())
         {
-            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
-            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "子表数据量与获取量不相符，系统出现问题。";
-            return dsreturn;
-        }
-        param.Add("@sub_" + "MainID", ht_forUI["idforedit"].ToString()); //隶属主表id
-        alsql.Add("delete ZZZ_HTGL_SB where  HSB_HID = @sub_" + "MainID");
-        for (int i = 0; i < subdt.Rows.Count; i++)
-        {
-            if (subdt.Rows[i]["隐藏编号"].ToString().Trim() == "")
-            {
-                param.Add("@sub_" + "id" + "_" + i,   CombGuid.GetMewIdFormSequence("ZZZ_HTGL_SB"));
-            }
-            else
-            {
-                param.Add("@sub_" + "id" + "_" + i, subdt.Rows[i]["隐藏编号"].ToString());
-            }
+            param.Add("@new_HID", ht_forUI["HID"].ToString());
+            param.Add("@old_HID", ht_forUI["idforedit"].ToString());
+            alsql.Add("update ZZZ_HTGL  set HID=@new_HID where HID=@old_HID");
+            alsql.Add("update ZZZ_HTGL_SB  set HSB_HID=@new_HID where HSB_HID=@old_HID");
+            alsql.Add("update ZZZ_HTGL_FKQK  set FK_HID=@new_HID where FK_HID=@old_HID");
 
-
-            param.Add("@sub_" + "HSB_SID" + "_" + i, subdt.Rows[i]["设备编号"].ToString());
-            param.Add("@sub_" + "HSBbegin" + "_" + i, subdt.Rows[i]["生效日期"].ToString());
-            param.Add("@sub_" + "HSBend" + "_" + i, subdt.Rows[i]["失效日期"].ToString());
-            param.Add("@sub_" + "HSBjiage" + "_" + i, subdt.Rows[i]["金额"].ToString());
-
-
-            string INSERTsql = "INSERT INTO ZZZ_HTGL_SB ( HSBID, HSB_HID,  HSB_SID,   HSBbegin,  HSBend, HSBjiage  ) VALUES(@sub_" + "id" + "_" + i + ", @sub_MainID, @sub_" + "HSB_SID" + "_" + i + ", @sub_" + "HSBbegin" + "_" + i + ", @sub_" + "HSBend" + "_" + i + ", @sub_" + "HSBjiage" + "_" + i + "  )";
-            alsql.Add(INSERTsql);
         }
 
+
+        //未修改合同编号时，才保存子表
+        if (ht_forUI["idforedit"].ToString().Trim() == ht_forUI["HID"].ToString().Trim())
+        {
+
+            //遍历子表，先删除，再插入，已有主键的不重新生成。
+            string zibiao_gts_id = "grid-table-subtable-160427000636";
+            DataTable subdt = jsontodatatable.ToDataTable(ht_forUI[zibiao_gts_id].ToString());
+            //必须验证js脚本获取的数量和c#反序列化获取的数量一致才能继续。防止出错
+            if (ht_forUI[zibiao_gts_id + "_fcjsq"].ToString() != subdt.Rows.Count.ToString())
+            {
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "子表数据量与获取量不相符，系统出现问题。";
+                return dsreturn;
+            }
+            param.Add("@sub_" + "MainID", ht_forUI["idforedit"].ToString()); //隶属主表id
+            alsql.Add("delete ZZZ_HTGL_SB where  HSB_HID = @sub_" + "MainID");
+            for (int i = 0; i < subdt.Rows.Count; i++)
+            {
+                if (subdt.Rows[i]["隐藏编号"].ToString().Trim() == "")
+                {
+                    param.Add("@sub_" + "id" + "_" + i, CombGuid.GetMewIdFormSequence("ZZZ_HTGL_SB"));
+                }
+                else
+                {
+                    param.Add("@sub_" + "id" + "_" + i, subdt.Rows[i]["隐藏编号"].ToString());
+                }
+
+
+                param.Add("@sub_" + "HSB_SID" + "_" + i, subdt.Rows[i]["设备序列号"].ToString());
+                param.Add("@sub_" + "HSBbegin" + "_" + i, subdt.Rows[i]["生效日期"].ToString());
+                param.Add("@sub_" + "HSBend" + "_" + i, subdt.Rows[i]["失效日期"].ToString());
+                param.Add("@sub_" + "HSBjiage" + "_" + i, subdt.Rows[i]["金额"].ToString());
+
+                param.Add("@sub_" + "HSB_SBID" + "_" + i, subdt.Rows[i]["物料编码"].ToString());
+                param.Add("@sub_" + "HSB_SBmingcheng" + "_" + i, subdt.Rows[i]["设备名称"].ToString());
+                param.Add("@sub_" + "HSB_SBxinghao" + "_" + i, subdt.Rows[i]["设备规格"].ToString());
+
+
+                string INSERTsql = "INSERT INTO ZZZ_HTGL_SB ( HSBID, HSB_HID,  HSB_SID, HSB_SBID,HSB_SBmingcheng, HSB_SBxinghao,  HSBbegin,  HSBend, HSBjiage  ) VALUES(@sub_" + "id" + "_" + i + ", @sub_MainID, @sub_" + "HSB_SID" + "_" + i + ", @sub_" + "HSB_SBID" + "_" + i + ", @sub_" + "HSB_SBmingcheng" + "_" + i + ", @sub_" + "HSB_SBxinghao" + "_" + i + ", @sub_" + "HSBbegin" + "_" + i + ", @sub_" + "HSBend" + "_" + i + ", @sub_" + "HSBjiage" + "_" + i + "  )";
+                alsql.Add(INSERTsql);
+            }
+
+
+
+            //遍历子表， 插入 (付款信息)
+            string zibiao_cw_id = "grid-table-subtable-160902000184";
+            DataTable subdt_cw = jsontodatatable.ToDataTable(ht_forUI[zibiao_cw_id].ToString());
+            //必须验证js脚本获取的数量和c#反序列化获取的数量一致才能继续。防止出错
+            if (ht_forUI[zibiao_cw_id + "_fcjsq"].ToString() != subdt_cw.Rows.Count.ToString())
+            {
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "子表数据量与获取量不相符，系统出现问题。";
+                return dsreturn;
+            }
+
+            //param.Add("@sub_" + "MainID_cw", guid); //隶属主表id
+            alsql.Add("delete ZZZ_HTGL_FKQK where  FK_HID = @sub_" + "MainID");
+            for (int i = 0; i < subdt_cw.Rows.Count; i++)
+            {
+            
+                if (subdt_cw.Rows[i]["隐藏编号"].ToString().Trim() == "")
+                {
+                    param.Add("@sub_" + "FKID" + "_" + i, CombGuid.GetMewIdFormSequence("ZZZ_HTGL_FKQK"));
+                }
+                else
+                {
+                    param.Add("@sub_" + "FKID" + "_" + i, subdt_cw.Rows[i]["隐藏编号"].ToString());
+                }
+                param.Add("@sub_" + "FK_shuoming" + "_" + i, subdt_cw.Rows[i]["付款说明"].ToString());
+                param.Add("@sub_" + "FK_riqi" + "_" + i, subdt_cw.Rows[i]["付款日期"].ToString());
+                param.Add("@sub_" + "FK_bili" + "_" + i, subdt_cw.Rows[i]["付款比例"].ToString());
+                param.Add("@sub_" + "FK_jine" + "_" + i, subdt_cw.Rows[i]["付款金额"].ToString());
+                param.Add("@sub_" + "FK_beizhu" + "_" + i, subdt_cw.Rows[i]["备注"].ToString());
+
+                string INSERTsql = "INSERT INTO ZZZ_HTGL_FKQK ( FKID, FK_HID, FK_shuoming, FK_riqi, FK_bili, FK_jine, FK_beizhu) VALUES(@sub_" + "FKID" + "_" + i + ", @sub_MainID, @sub_" + "FK_shuoming" + "_" + i + ", @sub_" + "FK_riqi" + "_" + i + ", @sub_" + "FK_bili" + "_" + i + ", @sub_" + "FK_jine" + "_" + i + ", @sub_" + "FK_beizhu" + "_" + i + " )";
+                alsql.Add(INSERTsql);
+            }
+
+
+        }
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
 
@@ -211,7 +304,7 @@ public class NoReSet_160427000034
         {
 
             dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
-            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "修改成功！{" + ht_forUI["idforedit"].ToString() + "}";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "修改成功！{" + ht_forUI["HID"].ToString() + "}";
         }
         else
         {

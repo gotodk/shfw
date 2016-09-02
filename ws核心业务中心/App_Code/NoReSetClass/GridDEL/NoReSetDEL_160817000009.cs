@@ -266,10 +266,7 @@ public class NoReSetDEL_160817000009
                 if (ids[d].Trim() != "")
                 {
                     param.Add("@FCID_" + d, ids[d]);
-                    if (ht_forUI["ddtj_FCwx_sfcd"].ToString() == "是")
-                    {
-
-                    }
+                   
                     alsql.Add("UPDATE ZZZ_fanchang SET  FCwx_sfcd=@FCwx_sfcd,FCwx_zzcl=@FCwx_zzcl,FCwx_hqd=@FCwx_hqd where FCwx_zt='审核' and (FCwx_sfcd is null or FCwx_sfcd= '' or FCwx_sfcd= '否') and FCID =@FCID_" + d);
                 }
 
@@ -292,6 +289,71 @@ public class NoReSetDEL_160817000009
         return "维修单存档失败，发生错误";
     }
 
+
+
+
+    /// <summary>
+    /// 自定义按钮处理
+    /// </summary>
+    /// <param name="parameter_forUI">前台表单传来的参数</param>
+    /// <returns></returns>
+    public string NRS_ZDY_rcjy(DataTable parameter_forUI)
+    {
+        //接收转换参数
+        Hashtable ht_forUI = new Hashtable();
+        for (int i = 0; i < parameter_forUI.Rows.Count; i++)
+        {
+            ht_forUI[parameter_forUI.Rows[i]["参数名"].ToString()] = parameter_forUI.Rows[i]["参数值"].ToString();
+        }
+
+
+        //存在有效目标才删除
+        if (ht_forUI.Contains("zdyname") && ht_forUI["xuanzhongzhi"].ToString() != "")
+        {
+            if (ht_forUI["xuanzhongzhi"].ToString().Trim() == "")
+            {
+                return "未选中任何要操作的数据。";
+            }
+            //开始真正的处理，这里只是演示，所以直接在这里写业务逻辑代码了
+
+            I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+
+            Hashtable param = new Hashtable();
+
+            Hashtable return_ht = new Hashtable();
+            ArrayList alsql = new ArrayList();
+
+
+            //删除数据表里的数据 
+            string[] ids = ht_forUI["xuanzhongzhi"].ToString().Split(',');
+            param.Add("@FCwx_jianyanjieguo", ht_forUI["ddtj_FCwx_jianyanjieguo"].ToString());
+            for (int d = 0; d < ids.Length; d++)
+            {
+                if (ids[d].Trim() != "")
+                {
+                    param.Add("@FCID_" + d, ids[d]);
+                  
+                    alsql.Add("UPDATE ZZZ_fanchang SET  FCwx_jyzt='已检验',FCwx_jianyanjieguo=@FCwx_jianyanjieguo  where FCwx_jyzt='未检验'  and FCID =@FCID_" + d);
+                }
+
+            }
+
+
+            return_ht = I_DBL.RunParam_SQL(alsql, param);
+
+
+            if ((bool)(return_ht["return_float"]))
+            {
+
+                return "返厂检验结果录入完成！";
+            }
+
+        }
+
+
+
+        return "返厂检验结果录入失败，发生错误";
+    }
 
 
 }
