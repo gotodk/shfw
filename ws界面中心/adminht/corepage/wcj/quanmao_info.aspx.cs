@@ -37,7 +37,7 @@ public partial class quanmao_info : System.Web.UI.Page
     {
         //调用执行方法获取数据
          
-        object[] re_dsi = IPC.Call("获取客户全貌", new object[] { "找客户", key.Trim(), "","" });
+        object[] re_dsi = IPC.Call("获取客户全貌", new object[] { "找客户", key.Trim(), UserSession.唯一键,"" });
         if (re_dsi[0].ToString() == "ok")
         {
 

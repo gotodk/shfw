@@ -649,8 +649,9 @@ public class bsmain : System.Web.Services.WebService
         if (sp == "找客户")
         {
             param.Add("@key", str);
-
-            sql = "SELECT   TOP (50) YYID_uuuu, uucjlx, YYID, YYname, YYaddtime, YYname + '('+uucjlx+')'as Lshowname FROM      View_ZZZ_KHDA_wcj_hb where YYname like '%'+@key+'%' or YYID_uuuu like '%'+@key+'%' ORDER BY YYaddtime desc";
+            string nowloginuser = a;
+            string ziji = " and ( ( charindex(','+'" + nowloginuser + "'+',',(select top 1 ','+YSTR+',' from ZZZ_ZFCMJ where YID='tskhgl')) > 0 ) or (uucjlx='未成交') or ( YYID in (select YYID from ZZZ_userinfo_glkh where UAid='" + nowloginuser + "' and shixiaoriqi >= getdate()  UNION  select YYID from ZZZ_KHDA where YYfuwufuzeren='" + nowloginuser + "') ) )";
+            sql = "SELECT   TOP (100) YYID_uuuu, uucjlx, YYID, YYname, YYaddtime, YYname + '('+uucjlx+')'as Lshowname FROM      View_ZZZ_KHDA_wcj_hb where (YYname like '%'+@key+'%' or YYID_uuuu like '%'+@key+'%') "+ ziji + " ORDER BY YYaddtime desc";
 
 
         }

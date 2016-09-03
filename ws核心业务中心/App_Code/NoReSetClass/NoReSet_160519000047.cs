@@ -58,18 +58,33 @@ public class NoReSet_160519000047
         Hashtable param = new Hashtable();
         //以可排序guid方式生成
         
+        if(ht_forUI["dananleixing"].ToString() == "未成交")
+        {
+            string guid = CombGuid.GetMewIdFormSequence("ZZZ_KHLXR_wcj");
+            param.Add("@KID", guid);
+            param.Add("@K_YYID", ht_forUI["K_YYID"].ToString());
+            param.Add("@KKS", ht_forUI["KKS"].ToString());
+            param.Add("@Klianiren", ht_forUI["Klianiren"].ToString());
+            param.Add("@Kzhicheng", ht_forUI["Kzhicheng"].ToString());
+            param.Add("@Kxingbie", ht_forUI["Kxingbie"].ToString());
+            param.Add("@Kdianhua", ht_forUI["Kdianhua"].ToString());
+            param.Add("@Kbeizhu", ht_forUI["Kbeizhu"].ToString());
+            alsql.Add("INSERT INTO   ZZZ_KHLXR_wcj(KID, K_YYID, KKS, Klianiren, Kzhicheng, Kxingbie, Kdianhua, Kbeizhu ) VALUES(@KID, @K_YYID, @KKS, @Klianiren, @Kzhicheng, @Kxingbie, @Kdianhua, @Kbeizhu)");
+        }
 
-        string guid = CombGuid.GetMewIdFormSequence("ZZZ_KHLXR_wcj");
-        param.Add("@KID", guid);
-        param.Add("@K_YYID", ht_forUI["K_YYID"].ToString());
-        param.Add("@KKS", ht_forUI["KKS"].ToString());
-        param.Add("@Klianiren", ht_forUI["Klianiren"].ToString());
-        param.Add("@Kzhicheng", ht_forUI["Kzhicheng"].ToString());
-        param.Add("@Kxingbie", ht_forUI["Kxingbie"].ToString());
-        param.Add("@Kdianhua", ht_forUI["Kdianhua"].ToString());
-        param.Add("@Kbeizhu", ht_forUI["Kbeizhu"].ToString());
-        alsql.Add("INSERT INTO   ZZZ_KHLXR_wcj(KID, K_YYID, KKS, Klianiren, Kzhicheng, Kxingbie, Kdianhua, Kbeizhu ) VALUES(@KID, @K_YYID, @KKS, @Klianiren, @Kzhicheng, @Kxingbie, @Kdianhua, @Kbeizhu)");
- 
+        if (ht_forUI["dananleixing"].ToString() == "成交")
+        {
+            string guid = CombGuid.GetMewIdFormSequence("ZZZ_KHLXR");
+            param.Add("@KID", guid);
+            param.Add("@K_YYID", ht_forUI["K_YYID"].ToString());
+            param.Add("@KKS", ht_forUI["KKS"].ToString());
+            param.Add("@Klianiren", ht_forUI["Klianiren"].ToString());
+            param.Add("@Kzhicheng", ht_forUI["Kzhicheng"].ToString());
+            param.Add("@Kxingbie", ht_forUI["Kxingbie"].ToString());
+            param.Add("@Kdianhua", ht_forUI["Kdianhua"].ToString());
+            param.Add("@Kbeizhu", ht_forUI["Kbeizhu"].ToString());
+            alsql.Add("INSERT INTO   ZZZ_KHLXR(KID, K_YYID, KKS, Klianiren, Kzhicheng, Kxingbie, Kdianhua, Kbeizhu ) VALUES(@KID, @K_YYID, @KKS, @Klianiren, @Kzhicheng, @Kxingbie, @Kdianhua, @Kbeizhu)");
+        }
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
 

@@ -27,7 +27,15 @@
     <uc1:wuc_script runat="server" ID="wuc_script" />
         <!-- 选择产品编号后，自动带入一些数据 -->
     <script type="text/javascript">
-             jQuery(function ($) {
+        jQuery(function ($) {
+
+
+
+                var nowloginuser = "<%=UserSession.唯一键%>";
+            // 过滤自己的客户。 包括全客户关联设置、客户关联表、客户档案服务负责人
+            $("#searchopenyhbspgogo_QB_YYID").attr("teshuwhere", " ( ( charindex(','+'" + nowloginuser + "'+',',(select top 1 ','+YSTR+',' from ZZZ_ZFCMJ where YID='tskhgl')) > 0 ) or (uucjlx='未成交') or ( YYID in (select YYID from ZZZ_userinfo_glkh where UAid='" + nowloginuser + "' and shixiaoriqi >= getdate()  UNION  select YYID from ZZZ_KHDA where YYfuwufuzeren='" + nowloginuser + "') ) )");
+
+
                 
                  var dfx_str = "#show_searchopenyhbspgogo_QB_YYID";
                  var oldzhi = $(dfx_str).text();

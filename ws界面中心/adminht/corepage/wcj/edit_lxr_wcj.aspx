@@ -29,7 +29,34 @@
     <script type="text/javascript">
              jQuery(function ($) {
                 
-              
+                    var nowloginuser = "<%=UserSession.唯一键%>";
+            // 过滤自己的客户。 包括全客户关联设置、客户关联表、客户档案服务负责人
+                 $("#searchopenyhbspgogo_K_YYID").attr("teshuwhere", " ( ( charindex(','+'" + nowloginuser + "'+',',(select top 1 ','+YSTR+',' from ZZZ_ZFCMJ where YID='tskhgl')) > 0 ) or (uucjlx='未成交') or ( YYID in (select YYID from ZZZ_userinfo_glkh where UAid='" + nowloginuser + "' and shixiaoriqi >= getdate()  UNION  select YYID from ZZZ_KHDA where YYfuwufuzeren='" + nowloginuser + "') ) )");
+
+
+                
+                 var dfx_str = "#show_searchopenyhbspgogo_K_YYID";
+                 var oldzhi = $(dfx_str).text();
+                 var jiancha_cpbh = window.setInterval(function () {
+             
+                     if ($(dfx_str).text() != oldzhi)
+                     {
+                         var re =/\[.*?\]/ig;
+                         var arr = $(dfx_str).text().match(re);
+                 
+                         if (arr != null) {//如果能匹配成功即arr数组不为空，循环输出结果
+                             for (var i = 0; i < arr.length; i++) {
+                                 var arr_z = arr[i].split(':');
+                                 if (arr_z[0] == "[客户名称")
+                                 { $("#kehumingcheng").val($.trim(arr_z[1]).replace("]", "")); }
+                                 if (arr_z[0] == "[档案类型")
+                                 { $("#dananleixing").val($.trim(arr_z[1]).replace("]", "")); }
+                             }
+                         }
+                         
+                         oldzhi = $(dfx_str).text();
+                     }
+                 }, 500); 
  
         });
         </script>
