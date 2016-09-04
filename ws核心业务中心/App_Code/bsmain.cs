@@ -790,6 +790,12 @@ public class bsmain : System.Web.Services.WebService
             return_ht = I_DBL.RunParam_SQL("select top 1 * from View_ZZZ_FWBG_ex where GID=@GID; select *, CONVERT(varchar(100), sbbaoxiujiezhi, 23) as baoxiu_sss from ZZZ_FWBG_shebei where sb_GID=@GID; select *, CONVERT(varchar(100), ljbaoxiujiezhi, 23) as baoxiu_sss from ZZZ_FWBG_lingjian  where lj_GID=@GID ", "数据记录", param);
         }
 
+        if (ht_forUI["spspsp"].ToString() == "gerenziliao")
+        {
+            linghangtishi = "没有找到个人资料!";
+            return_ht = I_DBL.RunParam_SQL("select top 1 * from view_ZZZ_userinfo_ex where UAid=@UAid ", "数据记录", param);
+        }
+
         if ((bool)(return_ht["return_float"]))
         {
             DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();

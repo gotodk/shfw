@@ -91,6 +91,34 @@
                  }, 500);
 
  
+
+
+                 //获取默认个人库存信息
+                 zdy_ajaxdb("");
+                 function callback_zdy_ajaxdb(xml) {
+                     //解析xml并显示在界面上
+                     if ($(xml).find('返回值单条>执行结果').text() != "ok") {
+                         bootbox.alert("查找数据失败!" + $(xml).find('返回值单条>提示文本').text());
+                         return false;
+                     };
+                     $("#YYssbumen").val($(xml).find('数据记录>suoshuquyu').text());
+                     $("#YYssbumen_name").val($(xml).find('数据记录>suoshuquyu_show').text());
+             
+                 };
+                 function zdy_ajaxdb(cs) {
+                     $.ajax({
+                         type: "POST",
+                         url: url1 + "?guid=" + randomnumber(),
+                         dataType: "xml",
+                         data: "ajaxrun=info&jkname=" + encodeURIComponent("获取某些个人资料") + "&idforedit=<%=UserSession.唯一键%>&spspsp=gerenziliao",
+                         success: callback_zdy_ajaxdb, //请求成功
+                         error: errorForAjax//请求出错 
+                         //complete: complete//请求完成
+                     });
+
+                 };
+
+
         });
         </script>
 </asp:Content>

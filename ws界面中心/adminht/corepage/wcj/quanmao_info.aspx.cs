@@ -92,7 +92,7 @@ public partial class quanmao_info : System.Web.UI.Page
             //这个就是得到远程方法真正的返回值，不同类型的，自行进行强制转换即可。
             dsinfo = (DataSet)re_dsi[1];
 
-            if (dsinfo.Tables["数据记录"].Rows.Count > 0)
+            if (dsinfo != null && dsinfo.Tables.Contains("数据记录")&& dsinfo.Tables["数据记录"].Rows.Count > 0)
             {
                 //对数据集进行二次处理 Table2是情报列表， Table1是联系人列表, 数据记录 是档案主表
 
