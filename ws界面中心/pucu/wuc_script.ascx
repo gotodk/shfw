@@ -59,7 +59,7 @@
         //ajax系统错误统一提示
         function errorForAjax(XMLHttpRequest, textStatus, errorThrown) {
             // 通常情况下textStatus和errorThown只有其中一个有值 
-            bootbox.alert("抱歉，系统出现问题!");
+            bootbox.alert("抱歉，系统出现问题!<br/>" + "textStatus:" + textStatus + "<br/>XMLHttpRequest.readyState:" + XMLHttpRequest.readyState + "<br/>XMLHttpRequest.status:" + XMLHttpRequest.status);
         };
         //ajax统一guid生成
         function randomnumber() {
