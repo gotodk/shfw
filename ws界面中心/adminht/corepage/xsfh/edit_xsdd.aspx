@@ -30,6 +30,15 @@
              jQuery(function ($) {
                 
 
+
+                 if (getUrlParam("fff") != "1") {
+
+                     $("#HID").val("临时自动生成");
+                     $("#HID").attr("readonly", "readonly");
+           
+
+                 }
+
             
 
                  //隐藏子表弹窗共享字段

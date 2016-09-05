@@ -60,6 +60,10 @@ public class NoReSet_160427000034
         //string guid = CombGuid.GetNewCombGuid("D"); 
         //以两位年+两位月+两位日+6位序列顺序号方式生成
         string guid = ht_forUI["HID"].ToString();
+        if (guid == "临时自动生成")
+        {
+            guid = "T"+CombGuid.GetMewIdFormSequence("ZZZ_HTGL");
+        }
         param.Add("@HID", guid);
         param.Add("@H_YYID", ht_forUI["H_YYID"].ToString());
         param.Add("@Eleixing", ht_forUI["Eleixing"].ToString());

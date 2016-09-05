@@ -202,6 +202,16 @@
     <ANused>1</ANused>
   </Unumber1>
   <Unumber1>
+    <ANID>E-A4A600B1E9F7-9C6005DA-4282-4FC9-AF23</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>工作计划-部门工作计划</ANBaseName>
+    <ANBaseNumber>35184372088832</ANBaseNumber>
+    <ANBaseNumber_p>45</ANBaseNumber_p>
+    <ANextendID>93</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
     <ANID>E-A4A600B1E947-72082D9D-DC31-4542-B7AF</ANID>
     <ANClass>Unumber1</ANClass>
     <ANClassName>后台菜单权限</ANClassName>
@@ -362,6 +372,16 @@
     <ANused>1</ANused>
   </Unumber1>
   <Unumber1>
+    <ANID>E-A4A600B1E9EE-D811F8EE-C764-49D6-B2F9</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>技术服务-我的服务报告</ANBaseName>
+    <ANBaseNumber>17592186044416</ANBaseNumber>
+    <ANBaseNumber_p>44</ANBaseNumber_p>
+    <ANextendID>85</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
     <ANID>E-A4A600B1E997-E10E2090-3189-4455-AA1A</ANID>
     <ANClass>Unumber1</ANClass>
     <ANClassName>后台菜单权限</ANClassName>
@@ -379,6 +399,16 @@
     <ANBaseNumber>1</ANBaseNumber>
     <ANBaseNumber_p>0</ANBaseNumber_p>
     <ANextendID>28</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1E9FD-1EE8808F-C1CE-40EC-8765</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>考勤管理-轨迹浏览</ANBaseName>
+    <ANBaseNumber>70368744177664</ANBaseNumber>
+    <ANBaseNumber_p>46</ANBaseNumber_p>
+    <ANextendID>89</ANextendID>
     <ANused>1</ANused>
   </Unumber1>
   <Unumber1>
@@ -519,6 +549,16 @@
     <ANBaseNumber>2147483648</ANBaseNumber>
     <ANBaseNumber_p>31</ANBaseNumber_p>
     <ANextendID>158</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1EA06-E29F7152-16AE-4F5C-8190</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>销售发货-销售订单</ANBaseName>
+    <ANBaseNumber>140737488355328</ANBaseNumber>
+    <ANBaseNumber_p>47</ANBaseNumber_p>
+    <ANextendID>173</ANextendID>
     <ANused>1</ANused>
   </Unumber1>
   <Unumber1>
