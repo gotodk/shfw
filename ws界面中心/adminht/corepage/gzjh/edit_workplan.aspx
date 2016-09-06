@@ -29,8 +29,13 @@
         <!-- 选择产品编号后，自动带入一些数据 -->
     <script type="text/javascript">
              jQuery(function ($) {
-                
-               
+                 
+                 if (getUrlParam("fff") == "1" && (getUrlParam("showinfo") == "1" || getUrlParam("showinfo") == "2")) {
+                     $(".c_bianji_top").hide();
+                     if ($("#fifsssss_Gzhuangtai").val() == "草稿") {
+                         $(".c_bianji_top").show();
+                     }
+                 }
 
 
                  //隐藏子表弹窗共享字段
