@@ -32,6 +32,7 @@
                 
                  function bianjicaogao()
                  {
+
                      $("#FCshenqingren").closest(".form-group").hide();
                      $("#FCshenqingren_name").closest(".form-group").hide();
                      $("#FCshenqingshijian").closest(".form-group").hide();
@@ -52,6 +53,7 @@
                      $("#FCqurenshoujianren_name").closest(".form-group").hide();
                      $("#FCzhuangtai").closest(".form-group").hide();
                      $("input[name='shenhe_yincang']").closest(".form-group").hide();
+                     $("input[name='FC_erp_danbie']").closest(".form-group").hide();
                      $("hr").hide();
                  }
 
