@@ -462,6 +462,16 @@
     <ANused>1</ANused>
   </Unumber1>
   <Unumber1>
+    <ANID>E-A4A600B1EA10-AF7A83F2-0BEF-45D8-A324</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>情报管理-情报列表</ANBaseName>
+    <ANBaseNumber>562949953421312</ANBaseNumber>
+    <ANBaseNumber_p>49</ANBaseNumber_p>
+    <ANextendID>137</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
     <ANID>E-A4A600B1E97A-CC006266-6DBA-4468-AB15</ANID>
     <ANClass>Unumber1</ANClass>
     <ANClassName>后台菜单权限</ANClassName>
@@ -492,6 +502,16 @@
     <ANused>1</ANused>
   </Unumber1>
   <Unumber1>
+    <ANID>E-A4A600B1EA0A-8B1D6EB4-79CA-4197-9A0E</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>数据分析-全部销售发货明细</ANBaseName>
+    <ANBaseNumber>281474976710656</ANBaseNumber>
+    <ANBaseNumber_p>48</ANBaseNumber_p>
+    <ANextendID>174</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
     <ANID>E-A4A600B1E9DF-D40CF33D-5E3F-4173-B681</ANID>
     <ANClass>Unumber1</ANClass>
     <ANClassName>后台菜单权限</ANClassName>
@@ -512,6 +532,16 @@
     <ANused>1</ANused>
   </Unumber1>
   <Unumber1>
+    <ANID>E-A4A600B1E962-92E5A5EE-7D2A-4B36-BAA5</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>销售发货-部门发货记录</ANBaseName>
+    <ANBaseNumber>1048576</ANBaseNumber>
+    <ANBaseNumber_p>20</ANBaseNumber_p>
+    <ANextendID>157</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
     <ANID>E-A4A600B1E959-70CDF6C2-9A05-43CB-AF99</ANID>
     <ANClass>Unumber1</ANClass>
     <ANClassName>后台菜单权限</ANClassName>
@@ -529,16 +559,6 @@
     <ANBaseNumber>274877906944</ANBaseNumber>
     <ANBaseNumber_p>38</ANBaseNumber_p>
     <ANextendID>156</ANextendID>
-    <ANused>1</ANused>
-  </Unumber1>
-  <Unumber1>
-    <ANID>E-A4A600B1E962-92E5A5EE-7D2A-4B36-BAA5</ANID>
-    <ANClass>Unumber1</ANClass>
-    <ANClassName>后台菜单权限</ANClassName>
-    <ANBaseName>销售发货-全部发货记录</ANBaseName>
-    <ANBaseNumber>1048576</ANBaseNumber>
-    <ANBaseNumber_p>20</ANBaseNumber_p>
-    <ANextendID>157</ANextendID>
     <ANused>1</ANused>
   </Unumber1>
   <Unumber1>
