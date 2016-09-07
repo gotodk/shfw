@@ -98,7 +98,16 @@
          }
      </script>
 
-
+            <!-- 强制添加列表特殊条件 -->
+    <script type="text/javascript">
+             jQuery(function ($) {
+                 //
+        
+                 $("#zheshiliebiaoquyu").attr('teshuwhere', "( FCshenqingren in (select UAid from ZZZ_userinfo where suoshuquyu=(select top 1 suoshuquyu from ZZZ_userinfo where Uaid='<%=UserSession.唯一键%>' and lingdao='是') )  or  FCshenheren in (select UAid from ZZZ_userinfo where suoshuquyu=(select top 1 suoshuquyu from ZZZ_userinfo where Uaid='<%=UserSession.唯一键%>' and lingdao='是') ) )");
+                
+ 
+        });
+        </script>
          
 </asp:Content>
 
