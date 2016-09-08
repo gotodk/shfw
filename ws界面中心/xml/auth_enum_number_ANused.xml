@@ -512,6 +512,16 @@
     <ANused>1</ANused>
   </Unumber1>
   <Unumber1>
+    <ANID>E-A4A600B1EA14-F1C61908-C46B-4319-907E</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>数据分析-销售订单列表</ANBaseName>
+    <ANBaseNumber>1125899906842624</ANBaseNumber>
+    <ANBaseNumber_p>50</ANBaseNumber_p>
+    <ANextendID>176</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
     <ANID>E-A4A600B1E9DF-D40CF33D-5E3F-4173-B681</ANID>
     <ANClass>Unumber1</ANClass>
     <ANClassName>后台菜单权限</ANClassName>
@@ -539,6 +549,16 @@
     <ANBaseNumber>1048576</ANBaseNumber>
     <ANBaseNumber_p>20</ANBaseNumber_p>
     <ANextendID>157</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1EA19-DCA8CC50-95D1-45C4-B9E7</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>销售发货-部门销售订单</ANBaseName>
+    <ANBaseNumber>2251799813685248</ANBaseNumber>
+    <ANBaseNumber_p>51</ANBaseNumber_p>
+    <ANextendID>175</ANextendID>
     <ANused>1</ANused>
   </Unumber1>
   <Unumber1>

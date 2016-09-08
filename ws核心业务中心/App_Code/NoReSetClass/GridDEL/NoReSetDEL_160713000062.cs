@@ -75,6 +75,74 @@ public class NoReSetDEL_160713000062
 
 
     /// <summary>
+    /// 检查单据状态
+    /// </summary>
+    /// <returns></returns>
+    private string check_zhuangtai(string FCID)
+    {
+
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+        Hashtable return_ht = new Hashtable();
+        Hashtable param = new Hashtable();
+        param.Add("@FCID", FCID);
+
+        return_ht = I_DBL.RunParam_SQL("select top 1 FCzhuangtai from ZZZ_xiaoshoufahuo where FCID=@FCID", "数据记录", param);
+
+        if ((bool)(return_ht["return_float"]))
+        {
+            DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+
+            if (redb.Rows.Count < 1)
+            {
+                return "";
+            }
+            else
+            {
+                return redb.Rows[0]["FCzhuangtai"].ToString();
+            }
+        }
+        else
+        {
+            return "";
+        }
+
+    }
+
+    /// <summary>
+    /// 获取销售发货子表数据
+    /// </summary>
+    /// <param name="parameter_forUI">前台表单传来的参数</param>
+    /// <returns></returns>
+    private DataTable get_fhzb(string FCID)
+    {
+
+
+        //参数合法性各种验证，这里省略
+
+        //开始真正的处理，这里只是演示，所以直接在这里写业务逻辑代码了
+
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+        Hashtable return_ht = new Hashtable();
+        Hashtable param = new Hashtable();
+        param.Add("@FCID", FCID);
+
+        return_ht = I_DBL.RunParam_SQL("select * from ZZZ_xiaoshoufahuo_sb   where FCS_FCID=@FCID ", "数据记录", param);
+
+        if ((bool)(return_ht["return_float"]))
+        {
+            DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+            return redb;
+        }
+        else
+        {
+            return null;
+        }
+
+
+        return null;
+    }
+
+    /// <summary>
     /// 获取子表数据条数
     /// </summary>
     /// <param name="parameter_forUI">前台表单传来的参数</param>
@@ -133,7 +201,7 @@ public class NoReSetDEL_160713000062
         {
             DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
 
-            if (redb.Rows.Count > 0)
+            if (redb.Rows.Count > 0 && redb.Rows[0][0].ToString() == "1")
             {
                 return 1;
             }
@@ -232,7 +300,9 @@ public class NoReSetDEL_160713000062
             int ywbmf = get_yewuyuanbumen(ht_forUI["yhbsp_session_uer_UAid"].ToString());
             for (int d = 0; d < ids.Length; d++)
             {
-                if (ids[d].Trim() != "")
+
+             
+                if (ids[d].Trim() != "" && check_zhuangtai(ids[d]) == "草稿")
                 {
                     
 
@@ -250,11 +320,43 @@ public class NoReSetDEL_160713000062
                     if (!hmsg.Contains(ids[d]))
                     {
                         param.Add("@FCID_" + d, ids[d]);
+
+                        //验证状态是否符合审批条件
+
                         alsql.Add("UPDATE ZZZ_xiaoshoufahuo SET  FCzhuangtai='提交',FCshenqingshijian=getdate()  where FCzhuangtai='草稿' and  FCID =@FCID_" + d);
                         //提交人是业务人员的，自动审核通过
                         if(ywbmf == 1)
                         {
                             alsql.Add(" UPDATE ZZZ_xiaoshoufahuo SET  FCzhuangtai='审核',FCshenheren=@FCshenheren,FCshenheshijian=getdate()  where FCzhuangtai='提交' and FCID =@FCID_" + d + " ");
+                            //并且拆分子表
+                            //审核后，取出设备类型的子表，分析拆分成数量1
+                            DataTable dtz = get_fhzb(param["@FCID_" + d].ToString());
+                            //如果是设备，并且数量大于1，进行拆分处理
+                            for (int p = 0; p < dtz.Rows.Count; p++)
+                            {
+
+                                string FCSID = dtz.Rows[p]["FCSID"].ToString();
+                                string FCS_FCID = dtz.Rows[p]["FCS_FCID"].ToString();
+                                string FCSbh = dtz.Rows[p]["FCSbh"].ToString();
+                                string FClb = dtz.Rows[p]["FClb"].ToString();
+                                double FCSsl = Convert.ToDouble(dtz.Rows[p]["FCSsl"]);
+                                string FCbxqx = dtz.Rows[p]["FCbxqx"].ToString();
+                                double FCdanjia = Convert.ToDouble(dtz.Rows[p]["FCdanjia"]);
+                                double FCjine = Convert.ToDouble(dtz.Rows[p]["FCjine"]);
+                                string FCSbz = dtz.Rows[p]["FCSbz"].ToString();
+                                string FCbeuserd = dtz.Rows[p]["FCbeuserd"].ToString();
+                                if (FClb == "设备" && FCSsl > 1)
+                                {
+                                    //更新这个数据，把数量变成1，把金额改成单价
+                                    alsql.Add("UPDATE ZZZ_xiaoshoufahuo_sb SET  FCSsl=1, FCjine=FCdanjia where FCSID ='" + FCSID + "'");
+
+                                    //循环原数量-1次，插入拆分后的数据。从修改后的单号提取插入即可。
+                                    for (int c = 1; c < FCSsl; c++)
+                                    {
+                                        alsql.Add("Insert Into ZZZ_xiaoshoufahuo_sb(FCSID, FCS_FCID, FCSbh, FClb, FCSsl, FCbxqx, FCdanjia, FCjine, FCSbz, FCbeuserd) select FCSID+'-" + c.ToString() + "' as FCSID, FCS_FCID, FCSbh, FClb, FCSsl, FCbxqx, FCdanjia, FCjine, FCSbz, FCbeuserd from ZZZ_xiaoshoufahuo_sb   where FCSID='" + FCSID + "'");
+                                    }
+                                }
+                            }
                         }
                         
                         
@@ -265,7 +367,7 @@ public class NoReSetDEL_160713000062
 
             }
 
-
+            alsql.Add("select ''");
             return_ht = I_DBL.RunParam_SQL(alsql, param);
 
             if (hmsg.Count > 0)
@@ -278,12 +380,16 @@ public class NoReSetDEL_160713000062
                 }
                 return "处理结束，但存在问题：<br/>"+errmsg;
             }
-          
+
 
             if ((bool)(return_ht["return_float"]))
             {
-                return "提交完成。";
-                
+                return "提交完成，若申请人是业务员，则已经自动审核通过。";
+
+            }
+            else
+            {
+                return return_ht["return_errmsg"].ToString();
             }
 
         }

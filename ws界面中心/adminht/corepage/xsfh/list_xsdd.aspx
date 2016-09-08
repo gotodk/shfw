@@ -68,14 +68,7 @@
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="sp_script" runat="Server">
     <uc1:wuc_script_onlygrid runat="server" ID="wuc_script_onlygrid" />
-        <script type="text/javascript">
-            jQuery(function ($) {
-                window.setInterval(function () {
-                    $("#clon_del_grid-table").hide();
-                    $("#del_grid-table").hide();
-                }, 500);
-                   });
-        </script>
+    
      <!-- **********自定义新增脚本******** -->
      <script type="text/javascript">
          var dialog_tanchuang_zdy = null;
@@ -103,7 +96,7 @@
              });
          }
      </script>
-                <!-- 强制添加列表特殊条件 -->
+<%--                <!-- 强制添加列表特殊条件 -->
     <script type="text/javascript">
              jQuery(function ($) {
                  //
@@ -115,6 +108,6 @@
  
         });
 
-        </script>
+        </script>--%>
 </asp:Content>
 

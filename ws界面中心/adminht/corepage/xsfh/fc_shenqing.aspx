@@ -29,6 +29,8 @@
         <!-- 选择产品编号后，自动带入一些数据 -->
     <script type="text/javascript">
              jQuery(function ($) {
+
+                 
                 
                  function bianjicaogao()
                  {
@@ -59,6 +61,7 @@
 
                  //发货处理
                  function fahuo() {
+                     
                      $("#searchopenyhbspgogo_FC_YYID").hide();
 
                 
@@ -82,6 +85,13 @@
                  //把业务类型参数放到隐藏控件里面
                  //
                  window.setInterval(function () {
+
+                     
+                     if (getUrlParam("ywlx") != "fahuo" && getUrlParam("ywlx") != "chakan")
+                     {
+                         $('#grid-table-subtable-160713000991').jqGrid('hideCol', "设备档案序列号");
+                     }
+                  
                      $("#ywlx_yincang").val(getUrlParam("ywlx"));
 
 
@@ -94,7 +104,12 @@
 
                      //物料类型弄成只读的
                      $("#gview_grid-table-subtable-160713000991").find("input").attr("readonly", "readonly");
-                     $("#gview_grid-table-subtable-160713000991").find("input[name='发货数量']").removeAttr("readonly");
+                     //$("#gview_grid-table-subtable-160713000991").find("input[name='发货数量']").removeAttr("readonly");
+                     if ($("#gview_grid-table-subtable-160713000991").find("input[name='物料类别']").val() == "设备")
+                     {
+                         $("#gview_grid-table-subtable-160713000991").find("input[name='设备档案序列号']").removeAttr("readonly");
+                     }
+              
 
                      $("#gview_grid-table-subtable-160713000991").find("input[name='单价']").removeAttr("readonly");
                      //$("#gview_grid-table-subtable-160713000991").find("input[name='金额']").removeAttr("readonly");

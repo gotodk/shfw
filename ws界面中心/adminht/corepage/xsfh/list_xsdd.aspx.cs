@@ -23,7 +23,7 @@ public partial class xsfh_list_xsdd : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         //列表识别号
-        string FID = "160903000012";
+        string FID = "160907000013";
         #region 必备的配置代码
         //获取表单配置
         dsFPZ = CallIPCPB.Get_FormsListDB(FID);

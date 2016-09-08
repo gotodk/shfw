@@ -34,6 +34,39 @@ public class NoReSet_160713000058
     }
 
 
+    /// <summary>
+    /// 获取销售发货子表数据
+    /// </summary>
+    /// <param name="parameter_forUI">前台表单传来的参数</param>
+    /// <returns></returns>
+    private DataTable get_fhzb(string FCID)
+    {
+
+
+        //参数合法性各种验证，这里省略
+
+        //开始真正的处理，这里只是演示，所以直接在这里写业务逻辑代码了
+
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+        Hashtable return_ht = new Hashtable();
+        Hashtable param = new Hashtable();
+        param.Add("@FCID", FCID);
+
+        return_ht = I_DBL.RunParam_SQL("select * from ZZZ_xiaoshoufahuo_sb   where FCS_FCID=@FCID ", "数据记录", param);
+
+        if ((bool)(return_ht["return_float"]))
+        {
+            DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+            return redb;
+        }
+        else
+        {
+            return null;
+        }
+
+
+        return null;
+    }
 
     /// <summary>
     /// 检查单据状态
@@ -258,6 +291,9 @@ public class NoReSet_160713000058
             }
 
         }
+
+        string tishimsg_sbda = "";
+        string tishimsg_fxdd = "";
         if (ht_forUI["ywlx_yincang"].ToString() == "fahuo")
         {
             if (check_zhuangtai(ht_forUI["idforedit"].ToString().Trim()) != "审核")
@@ -285,6 +321,8 @@ public class NoReSet_160713000058
 
             param.Add("@FCfahuobeizhu", ht_forUI["FCfahuobeizhu"].ToString());
 
+            param.Add("@FCglxsdd", ht_forUI["FCglxsdd"].ToString());
+
             alsql.Add("UPDATE  ZZZ_xiaoshoufahuo SET FCwuliudan=@FCwuliudan,FCwuliugongsi=@FCwuliugongsi,FCfahuoren=@FCfahuoren,FCfahuoshijian=getdate(),FCjisongdizhi=@FCjisongdizhi,FClianxifangshi=@FClianxifangshi,FCshoujianren=@FCshoujianren,FCzhuangtai='在途',FCfahuobeizhu=@FCfahuobeizhu  where FCID =@FCID ");
             //同步在联系人中增加一条联系人，重名的不插入
             string KID = CombGuid.GetMewIdFormSequence("ZZZ_KHLXR");
@@ -298,7 +336,7 @@ public class NoReSet_160713000058
 
 
 
-
+           
             //遍历零配件子表，也反写零件价格。 并且在设备档案表零件子表中插入一条信息
             //遍历子表， 准备反写 (零件信息)
             string zibiao_lj_id = "grid-table-subtable-160713000991";
@@ -325,9 +363,34 @@ public class NoReSet_160713000058
                     param.Add("@sub_" + "FCbxqx" + "_" + i, subdt_lj.Rows[i]["保修期限"].ToString());
                     param.Add("@sub_" + "FCdanjia" + "_" + i, subdt_lj.Rows[i]["单价"].ToString());
                     param.Add("@sub_" + "FCjine" + "_" + i, subdt_lj.Rows[i]["金额"].ToString());
+                    param.Add("@sub_" + "FCscsbxlh" + "_" + i, subdt_lj.Rows[i]["设备档案序列号"].ToString());
 
-                    string upupsql = "update ZZZ_xiaoshoufahuo_sb set FCbxqx=@sub_" + "FCbxqx" + "_" + i + " ,FCdanjia=@sub_" + "FCdanjia" + "_" + i + " ,FCjine=@sub_" + "FCjine" + "_" + i + " where FCSID=@sub_" + "FCSID" + "_" + i;
+                    param.Add("@sub_" + "FCSbh" + "_" + i, subdt_lj.Rows[i]["物料编码"].ToString());
+                    param.Add("@sub_" + "FClb" + "_" + i, subdt_lj.Rows[i]["物料类别"].ToString());
+
+                    param.Add("@sub_" + "Smingcheng" + "_" + i, subdt_lj.Rows[i]["物料名称"].ToString());
+                    param.Add("@sub_" + "Sxinghao" + "_" + i, subdt_lj.Rows[i]["规格型号"].ToString());
+
+                    string upupsql = "update ZZZ_xiaoshoufahuo_sb set FCbxqx=@sub_" + "FCbxqx" + "_" + i + " ,FCdanjia=@sub_" + "FCdanjia" + "_" + i + " ,FCjine=@sub_" + "FCjine" + "_" + i + " ,FCscsbxlh=@sub_" + "FCscsbxlh" + "_" + i + " where FCSID=@sub_" + "FCSID" + "_" + i;
                     alsql.Add(upupsql);
+
+                    //反写销售订单已发货数量
+                    string ddly = ht_forUI["FCglxsdd"].ToString().Trim();
+                    if (ddly != "" && ddly != "--" && ddly != "未关联") {
+                        //
+                        string fanxiesql = "update ZZZ_xiaoshoudingdan_sb set FCyfhsl=FCyfhsl+1 where FCS_FCID=@FCglxsdd  and FCSbh=@sub_" + "FCSbh" + "_" + i + " and FClb=@sub_" + "FClb" + "_" + i + "";
+                        alsql.Add(fanxiesql);
+                        tishimsg_fxdd = "并且反写了销售订单中的已发货数量。";
+                    }
+
+                    //同时根据序列号生成设备档案
+                    if (subdt_lj.Rows[i]["设备档案序列号"].ToString().Trim() != "" && subdt_lj.Rows[i]["物料类别"].ToString().Trim() == "设备")
+                    {
+                        //
+                        string xlhsql = "INSERT INTO ZZZ_WFSB (SID,S_YYID,Skeshi,S_SBID,Smingcheng,Sxinghao,Schuchangriqi,Sbaoxiuqixian) VALUES (@sub_" + "FCscsbxlh" + "_" + i + ", @K_YYID, @KKS,@sub_" + "FCSbh" + "_" + i + ", @sub_" + "Smingcheng" + "_" + i + ", @sub_" + "Sxinghao" + "_" + i + ", getdate(),@sub_" + "FCbxqx" + "_" + i + ")";
+                        alsql.Add(xlhsql);
+                        tishimsg_sbda = "并且依据填写的序列号同时生成了设备档案。";
+                    }
  
 
                 }
@@ -339,7 +402,7 @@ public class NoReSet_160713000058
 
 
 
-
+        string tishimsg = "";
         if (ht_forUI["ywlx_yincang"].ToString() == "shenhe")
         {
             if (check_zhuangtai(ht_forUI["idforedit"].ToString().Trim()) != "提交")
@@ -361,6 +424,36 @@ public class NoReSet_160713000058
                     param.Add("@FCshoujianren", ht_forUI["FCshoujianren"].ToString());
 
                     alsql.Add("UPDATE ZZZ_xiaoshoufahuo SET  FCzhuangtai='审核',FCshenheren=@FCshenheren,FCshenheshijian=getdate(),FCjisongdizhi=@FCjisongdizhi, FClianxifangshi=@FClianxifangshi, FCfahuobeizhu=@FCfahuobeizhu, FCshoujianren=@FCshoujianren where FCzhuangtai='提交' and FCID =@FCID");
+
+                    //审核后，取出设备类型的子表，分析拆分成数量1
+                    DataTable dtz = get_fhzb(ht_forUI["idforedit"].ToString());
+                    //如果是设备，并且数量大于1，进行拆分处理
+                    for (int p = 0; p < dtz.Rows.Count; p++)
+                    {
+                        
+                        string FCSID = dtz.Rows[p]["FCSID"].ToString();
+                        string FCS_FCID = dtz.Rows[p]["FCS_FCID"].ToString();
+                        string FCSbh = dtz.Rows[p]["FCSbh"].ToString();
+                        string FClb = dtz.Rows[p]["FClb"].ToString();
+                        double FCSsl =  Convert.ToDouble(dtz.Rows[p]["FCSsl"]);
+                        string FCbxqx = dtz.Rows[p]["FCbxqx"].ToString();
+                        double FCdanjia = Convert.ToDouble(dtz.Rows[p]["FCdanjia"]);
+                        double FCjine = Convert.ToDouble(dtz.Rows[p]["FCjine"]);
+                        string FCSbz = dtz.Rows[p]["FCSbz"].ToString();
+                        string FCbeuserd = dtz.Rows[p]["FCbeuserd"].ToString();
+                        if (FClb == "设备" && FCSsl > 1)
+                        {
+                            //更新这个数据，把数量变成1，把金额改成单价
+                            alsql.Add("UPDATE ZZZ_xiaoshoufahuo_sb SET  FCSsl=1, FCjine=FCdanjia where FCSID ='" + FCSID + "'");
+
+                            //循环原数量-1次，插入拆分后的数据。从修改后的单号提取插入即可。
+                            for (int c = 1; c < FCSsl; c++)
+                            {
+                                alsql.Add("Insert Into ZZZ_xiaoshoufahuo_sb(FCSID, FCS_FCID, FCSbh, FClb, FCSsl, FCbxqx, FCdanjia, FCjine, FCSbz, FCbeuserd) select FCSID+'-" + c.ToString()+ "' as FCSID, FCS_FCID, FCSbh, FClb, FCSsl, FCbxqx, FCdanjia, FCjine, FCSbz, FCbeuserd from ZZZ_xiaoshoufahuo_sb   where FCSID='" + FCSID + "'");
+                            }
+                            tishimsg = "并且发货数量大于1的物料子表已被自动拆分。";
+                        }
+                    }
                 }
                 if (ht_forUI["shenhe_yincang"].ToString() == "驳回")
                 {
@@ -387,7 +480,7 @@ public class NoReSet_160713000058
         {
 
             dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
-            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "修改成功！{" + ht_forUI["idforedit"].ToString() + "}";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "修改成功！"+ tishimsg + tishimsg_sbda + "{" + ht_forUI["idforedit"].ToString() + "}";
         }
         else
         {

@@ -25,7 +25,7 @@ public partial class xsfh_edit_xsdd : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         //表单识别号
-        string FID = "160427000034";
+        string FID = "160907000008";
         #region 必备的配置代码
         //获取表单配置
         dsFPZ = CallIPCPB.Get_FormInfoDB(FID);

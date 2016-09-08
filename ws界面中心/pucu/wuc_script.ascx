@@ -800,7 +800,7 @@
                  <% if (onlyshow)
         {%>  
             var sssss_zhi = $(xml).find('数据记录><%=FS_name_temp%>').text();
-            $("#fifsssss_<%=FS_name_temp%>").text(sssss_zhi);
+            $("#fifsssss_<%=FS_name_temp%>").html(sssss_zhi);
             <%}
         else
         { %>
