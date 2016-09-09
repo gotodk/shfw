@@ -82,6 +82,11 @@
 
                     var table = this;
                     setTimeout(function () {
+					$(".tubiaojianju").closest("td").width(50);
+					$(".ui-separator").css({"margin-left": "5px", "margin-right": "5px" });
+				 
+					$(".tubiaojianju").css({"margin-left": "5px", "margin-right": "0px" });
+					$(".navanbj").css({"margin-top": "4px","margin-left": "0px", "margin-right": "0px" });
                         updatePagerIcons(table);
                         enableTooltips(table);
                     }, 0);
@@ -198,30 +203,13 @@
 
 			[*[FS_D_setGroupHeaders]*]
 
- 
-  jQuery("[*[grid_selector_ID]*]").navButtonAdd("[*[pager_selector_ID]*]",{
-   caption:"", 
-   title : "保存",
-   buttonicon:"ace-icon fa fa-floppy-o blue  bigger-160", 
-   onClickButton: function(e){ 
- 
 
-			var savejieguo =$('[*[grid_selector_ID]*]').jqGrid('saveRow', $('[*[grid_selector_ID]*]').attr('lastsel_yhb'));		 
+
 			
-			 	 if($('[*[grid_selector_ID]*]').attr('lastsel_yhb') == "-999999" || savejieguo)
-				{
-$('[*[grid_selector_ID]*]').attr('lastsel_yhb',"-999999");
-}
-					  
-   }, 
-   position:"first"
-});
-
- 
  jQuery("[*[grid_selector_ID]*]").navButtonAdd("[*[pager_selector_ID]*]",{
-   caption:"", 
+   caption:"<span class='navanbj'>删除</span>", 
    title : "删除",
-   buttonicon:"ace-icon fa fa-trash-o red  bigger-160", 
+   buttonicon:"ace-icon fa fa-trash-o red  bigger-160 tubiaojianju", 
    onClickButton: function(e){ 
  
 	
@@ -238,13 +226,39 @@ for(var i = 0;i < len ;i ++) {
 });
 
 
+ jQuery("[*[grid_selector_ID]*]").navSeparatorAdd("[*[pager_selector_ID]*]",{position:"first",sepclass:"xxxxxxxxxx",sepcontent:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"} ); 
+ jQuery("[*[grid_selector_ID]*]").navSeparatorAdd("[*[pager_selector_ID]*]",{position:"first"} ); 
  
+  jQuery("[*[grid_selector_ID]*]").navButtonAdd("[*[pager_selector_ID]*]",{
+   caption:"<span class='navanbj'>保存</span>", 
+   title : "保存",
+   buttonicon:"ace-icon fa fa-floppy-o blue  bigger-160 tubiaojianju", 
+   onClickButton: function(e){ 
+ 
+
+			var savejieguo =$('[*[grid_selector_ID]*]').jqGrid('saveRow', $('[*[grid_selector_ID]*]').attr('lastsel_yhb'));		 
+			
+			 	 if($('[*[grid_selector_ID]*]').attr('lastsel_yhb') == "-999999" || savejieguo)
+				{
+$('[*[grid_selector_ID]*]').attr('lastsel_yhb',"-999999");
+}
+					  
+   }, 
+   position:"first"
+});
+
+
+
+
+
+
+ jQuery("[*[grid_selector_ID]*]").navSeparatorAdd("[*[pager_selector_ID]*]",{position:"first"} ); 
  
 
  jQuery("[*[grid_selector_ID]*]").navButtonAdd("[*[pager_selector_ID]*]",{
-   caption:"", 
+   caption:"<span class='navanbj'>新增</span>", 
    title : "新增",
-   buttonicon:"ace-icon fa fa-plus-circle purple  bigger-160", 
+   buttonicon:"ace-icon fa fa-plus-circle purple  bigger-160 tubiaojianju", 
    onClickButton: function(e){ 
            
 
