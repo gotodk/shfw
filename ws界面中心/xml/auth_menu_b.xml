@@ -286,7 +286,7 @@
     <m_tip />
     <m_tag />
     <m_ico />
-    <m_show>不隐藏</m_show>
+    <m_show>隐藏</m_show>
     <m_url_formenu_g>/adminht/corepage/xsfh/edit_xsdd.aspx</m_url_formenu_g>
     <SortNameTree>│├销售订单</SortNameTree>
     <SortMoveUp>0</SortMoveUp>
@@ -303,7 +303,7 @@
     <m_tip />
     <m_tag />
     <m_ico />
-    <m_show>不隐藏</m_show>
+    <m_show>隐藏</m_show>
     <m_url_formenu_g>/adminht/corepage/xsfh/list_allxsdd.aspx?bm=bm</m_url_formenu_g>
     <SortNameTree>│├部门销售订单</SortNameTree>
     <SortMoveUp>1</SortMoveUp>
