@@ -103,8 +103,9 @@
                  $("#searchopenyhbspgogo_subtcid_FCSbh").attr("teshuwhere", " lb like (select  case when suoshuquyu = '129' then '%零件%' else '%%' end  from ZZZ_userinfo where UAid='" + nowloginuser + "') ");
 
                      //物料类型弄成只读的
-                     $("#gview_grid-table-subtable-160713000991").find("input").attr("readonly", "readonly");
-                     //$("#gview_grid-table-subtable-160713000991").find("input[name='发货数量']").removeAttr("readonly");
+                 $("#gview_grid-table-subtable-160713000991").find("input").attr("readonly", "readonly");
+                   
+                     $("#gview_grid-table-subtable-160713000991").find("input[name='发货数量']").removeAttr("readonly");
                      if ($("#gview_grid-table-subtable-160713000991").find("input[name='物料类别']").val() == "设备")
                      {
                          $("#gview_grid-table-subtable-160713000991").find("input[name='设备档案序列号']").removeAttr("readonly");
@@ -115,7 +116,7 @@
                      //$("#gview_grid-table-subtable-160713000991").find("input[name='金额']").removeAttr("readonly");
                      $("#gview_grid-table-subtable-160713000991").find("input[name='备注']").removeAttr("readonly");
                      if (getUrlParam("ywlx") == "fahuo") {
-
+                         $("#gview_grid-table-subtable-160713000991").find("input[name='发货数量']").attr("readonly", "readonly");
                          $("#gview_grid-table-subtable-160713000991").find("input[name='保修期限']").removeAttr("readonly");
                      }
 
