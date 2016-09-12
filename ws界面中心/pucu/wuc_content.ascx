@@ -704,7 +704,7 @@
                                                 break;
                                             case "分组线":
                                         %>
-                                        <hr />
+                                        <hr id="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString() %>" />
                                         <%
                                                 break;
                                             case "富文本框":

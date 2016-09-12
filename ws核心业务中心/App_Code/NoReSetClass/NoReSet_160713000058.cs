@@ -403,9 +403,10 @@ public class NoReSet_160713000058
 
 
         string tishimsg = "";
-        if (ht_forUI["ywlx_yincang"].ToString() == "shenhe")
+        string djzt = check_zhuangtai(ht_forUI["idforedit"].ToString().Trim());
+        if (ht_forUI["ywlx_yincang"].ToString() == "shenhe" && (!ht_forUI.Contains("shenhe_yincang") || ht_forUI["shenhe_yincang"].ToString() != "关闭"))
         {
-            if (check_zhuangtai(ht_forUI["idforedit"].ToString().Trim()) != "提交")
+            if (djzt != "提交")
             {
                 dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
                 dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "保存失败，只有提交状态才允许进行审核或驳回。";
@@ -468,10 +469,19 @@ public class NoReSet_160713000058
             }
            
         }
+        if (ht_forUI["ywlx_yincang"].ToString() == "shenhe" && ht_forUI.Contains("shenhe_yincang") && ht_forUI["shenhe_yincang"].ToString() == "关闭")
+        {
+            if (djzt != "提交" && djzt != "审核")
+            {
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+                dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "保存失败，只有提交状态或审核状态才允许关闭。";
+                return dsreturn;
+            }
+            alsql.Add("UPDATE ZZZ_xiaoshoufahuo SET  FCzhuangtai='关闭'  where FCzhuangtai in ('提交','审核') and FCID =@FCID");
+        }
 
 
-
-        return_ht = I_DBL.RunParam_SQL(alsql, param);
+            return_ht = I_DBL.RunParam_SQL(alsql, param);
 
 
 

@@ -108,5 +108,21 @@
         });
 
         </script>
+                    <!-- 强制添加列表特殊条件 -->
+    <script type="text/javascript">
+             jQuery(function ($) {
+                 //
+                 var nowloginuser = "<%=UserSession.唯一键%>";
+                 if (getUrlParam("bm") == "bm")
+                 {
+                     //部门
+                     $("#zheshiliebiaoquyu").attr('teshuwhere', " K_UAID in (select UAid from ZZZ_userinfo where suoshuquyu=(select top 1 suoshuquyu from ZZZ_userinfo where Uaid='" + nowloginuser + "') )   ");
+                 }
+                 
+
+ 
+        });
+
+        </script>
 </asp:Content>
 
