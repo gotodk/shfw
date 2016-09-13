@@ -349,6 +349,19 @@ public class NoReSet_160427000035
         {
             dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
             dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "系统故障，保存失败：" + return_ht["return_errmsg"].ToString();
+
+            string path = HttpContext.Current.Server.MapPath("/");
+            string canshuzhi = "";
+            foreach (DictionaryEntry de in param)
+            {
+                canshuzhi = canshuzhi + "" + de.Key.ToString() + ":" + de.Value.ToString() + "" + Environment.NewLine;
+            }
+            string jianzhistr = "";
+            foreach (object de in alsql)
+            {
+                jianzhistr = jianzhistr + "" + de.ToString() + "" + Environment.NewLine;
+            }
+            StringOP.WriteLog(path, Environment.NewLine + "=====新增单号：" + ht_forUI["idforedit"].ToString() + Environment.NewLine + "=====" + canshuzhi + Environment.NewLine + "=====" + Environment.NewLine + "所有参数：" + Environment.NewLine + jianzhistr + Environment.NewLine + Environment.NewLine);
         }
         return dsreturn;
     }
