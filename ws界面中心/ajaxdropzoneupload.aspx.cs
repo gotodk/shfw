@@ -57,7 +57,7 @@ public partial class ajaxdropzoneupload : System.Web.UI.Page
                 return;
             }
             fileExtension = fileExtension.ToLower();
-            string leixing = "[.jpg][.bmp][.jpeg][.gif][.png][.rar][.zip][.txt][.docx][.doc][.xls][.xlsx][.pdf][.vsdx][.vsd]";
+            string leixing = "[.jpg][.bmp][.jpeg][.gif][.png][.rar][.zip][.txt][.docx][.doc][.xls][.xlsx][.pdf][.vsdx][.vsd][.mp4]";
             if (leixing.IndexOf("[" + fileExtension + "]") < 0)
             {
                 Response.StatusCode = 500;

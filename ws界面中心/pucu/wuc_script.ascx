@@ -1104,6 +1104,7 @@
                         url: '/ajaxdropzoneupload.aspx',
                         addRemoveLinks: true,
                         createImageThumbnails: true,
+                        acceptedFiles: "image/*,.rar,.zip,.txt,.docx,.doc,.xls,.xlsx,.pdf,.vsdx,.vsd,.mp4",
                         //maxThumbnailFilesize: 10,
                         //thumbnailWidth: 1024,
                         //thumbnailHeight: 1024,

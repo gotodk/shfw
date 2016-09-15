@@ -25,7 +25,28 @@ public partial class st : System.Web.UI.Page
     {
         bool fileOK = false;
         String fileExtension = System.IO.Path.GetExtension(Server.MapPath(p)).ToLower();
-        String[] allowedExtensions = { ".gif", ".png", ".bmp", ".jpg" };
+        String[] allowedExtensions = { ".gif", ".png", ".bmp", ".jpg", ".jpeg" };
+        for (int i = 0; i < allowedExtensions.Length; i++)
+        {
+            if (fileExtension == allowedExtensions[i])
+            {
+                fileOK = true;
+            }
+        }
+
+        return fileOK;
+    }
+
+    /// <summary>
+    /// 检查是否支持在线播放的视频
+    /// </summary>
+    /// <param name="p"></param>
+    /// <returns></returns>
+    public bool Checkshipin(string p)
+    {
+        bool fileOK = false;
+        String fileExtension = System.IO.Path.GetExtension(Server.MapPath(p)).ToLower();
+        String[] allowedExtensions = { ".mp4"};
         for (int i = 0; i < allowedExtensions.Length; i++)
         {
             if (fileExtension == allowedExtensions[i])
@@ -59,7 +80,7 @@ public partial class st : System.Web.UI.Page
         {
             ds_DD = (DataSet)(re_dsi[1]);
             try {
-                arr_tupian = ds_DD.Tables["数据记录"].Rows[0]["tupian"].ToString().Split(',');
+                arr_tupian = ds_DD.Tables["数据记录"].Rows[0]["tupian"].ToString().Split(new Char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
                 /*
                 //如果只有一个文件，直接转到下载链接
