@@ -232,6 +232,26 @@
     <ANused>1</ANused>
   </Unumber1>
   <Unumber1>
+    <ANID>E-A4A600B1EA32-14C7F77B-1C6B-483C-BEA9</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>基础数据-导入配件物料表</ANBaseName>
+    <ANBaseNumber>36028797018963968</ANBaseNumber>
+    <ANBaseNumber_p>55</ANBaseNumber_p>
+    <ANextendID>181</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1EA37-E247AE1A-8095-42A5-BB58</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>基础数据-导入设备物料表</ANBaseName>
+    <ANBaseNumber>72057594037927936</ANBaseNumber>
+    <ANBaseNumber_p>56</ANBaseNumber_p>
+    <ANextendID>180</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
     <ANID>E-A4A600B1E9D0-A1EDF9B7-1DBC-446A-89D2</ANID>
     <ANClass>Unumber1</ANClass>
     <ANClassName>后台菜单权限</ANClassName>
@@ -539,6 +559,16 @@
     <ANBaseNumber>9007199254740992</ANBaseNumber>
     <ANBaseNumber_p>53</ANBaseNumber_p>
     <ANextendID>177</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1EA3E-8F816212-B656-43FA-9A42</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>数据分析-未签到统计</ANBaseName>
+    <ANBaseNumber>144115188075855872</ANBaseNumber>
+    <ANBaseNumber_p>57</ANBaseNumber_p>
+    <ANextendID>182</ANextendID>
     <ANused>1</ANused>
   </Unumber1>
   <Unumber1>

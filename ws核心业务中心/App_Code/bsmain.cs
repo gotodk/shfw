@@ -1149,4 +1149,117 @@ public class bsmain : System.Web.Services.WebService
     }
 
 
+
+
+
+    #region  导入
+    /// <summary>
+    /// 通过电子表格导入数据
+    /// </summary>
+    /// <param name="DRDT">将电子表格转化后的DataTable数据</param>
+    /// <param name="UAID">操作人</param>
+    /// <param name="spsp">标记是导入的什么</param>
+    /// <returns></returns>
+    [WebMethod(MessageName = "通过电子表格导入数据", Description = "通过电子表格导入数据")]
+    public DataSet pubdaoru(DataTable DRDT, string UAID,string spsp)
+    {
+
+        //初始化返回值
+        DataSet dsreturn = initReturnDataSet().Clone();
+        dsreturn.Tables["返回值单条"].Rows.Add(new string[] { "err", "初始化" });
+
+        //参数合法性各种验证，这里省略
+        if (DRDT == null || DRDT.Rows.Count < 1)
+        {
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "没有要导入的数据！";
+            return dsreturn;
+        }
+
+
+        //开始真正的处理，这里只是演示，所以直接在这里写业务逻辑代码了
+
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+
+        Hashtable param = new Hashtable();
+        ArrayList alsql = new ArrayList();
+
+        if(spsp== "设备物料表导入")
+        {
+        
+            for (int i = 0; i < DRDT.Rows.Count; i++)
+            {
+                //以可排序guid方式生成
+               // SBID, SBmingcheng, SBxinghao, SBdanwei, SBchengbenjia, SBbaoxiuqixian, SBbaoyangzhouqi,  SBchanpinshouming, SBxiaoshoujiage, SBshengchanchang, SBerpbianma, SBzhuangtai, SBbeizhu
+                param.Add("@SBID" + "_" + i, DRDT.Rows[i]["设备编号"].ToString());
+                param.Add("@SBmingcheng" + "_" + i, DRDT.Rows[i]["设备名称"].ToString());
+                param.Add("@SBxinghao" + "_" + i, DRDT.Rows[i]["设备型号"].ToString());
+                param.Add("@SBdanwei" + "_" + i, DRDT.Rows[i]["单位"].ToString());
+                param.Add("@SBchengbenjia" + "_" + i, DRDT.Rows[i]["成本价"].ToString());
+                param.Add("@SBbaoxiuqixian" + "_" + i, DRDT.Rows[i]["保修期限"].ToString());
+                param.Add("@SBbaoyangzhouqi" + "_" + i, DRDT.Rows[i]["保养周期"].ToString());
+                param.Add("@SBchanpinshouming" + "_" + i, DRDT.Rows[i]["产品说明"].ToString());
+                param.Add("@SBxiaoshoujiage" + "_" + i, DRDT.Rows[i]["销售价格"].ToString());
+                param.Add("@SBshengchanchang" + "_" + i, DRDT.Rows[i]["生产厂家"].ToString());
+                param.Add("@SBerpbianma" + "_" + i, DRDT.Rows[i]["ERP编号"].ToString());
+                param.Add("@SBzhuangtai" + "_" + i, DRDT.Rows[i]["设备状态"].ToString());
+                param.Add("@SBbeizhu" + "_" + i, DRDT.Rows[i]["备注"].ToString());
+
+
+                alsql.Add("INSERT INTO ZZZ_SBLXBASE(SBID, SBmingcheng, SBxinghao, SBdanwei, SBchengbenjia, SBbaoxiuqixian, SBbaoyangzhouqi,  SBchanpinshouming, SBxiaoshoujiage, SBshengchanchang, SBerpbianma, SBzhuangtai, SBbeizhu) VALUES(@SBID" + "_" + i + ", @SBmingcheng" + "_" + i + ", @SBxinghao" + "_" + i + ", @SBdanwei" + "_" + i + ", @SBchengbenjia" + "_" + i + ", @SBbaoxiuqixian" + "_" + i + ", @SBbaoyangzhouqi" + "_" + i + ", @SBchanpinshouming" + "_" + i + ", @SBxiaoshoujiage" + "_" + i + ",   @SBshengchanchang" + "_" + i + ", @SBerpbianma" + "_" + i + ", @SBzhuangtai" + "_" + i + ", @SBbeizhu" + "_" + i + " )");
+            }
+        }
+        if (spsp == "配件物料表导入")
+        {
+
+            for (int i = 0; i < DRDT.Rows.Count; i++)
+            {
+                //以可排序guid方式生成
+                //配件编码,配件名称,规格型号,单位,拼音,erp编号,成本价,最低价,零售价,保修期限,状态
+                //LID, Lmingcheng, Lguige, Ldanwei, Lpinyin, Lerpbianhao, Lchengbenjia, Lzuidijia, Lshoujia, Lbaoxiuqi,Lzhuangtai
+                param.Add("@LID" + "_" + i, DRDT.Rows[i]["配件编码"].ToString());
+                param.Add("@Lmingcheng" + "_" + i, DRDT.Rows[i]["配件名称"].ToString());
+                param.Add("@Lguige" + "_" + i, DRDT.Rows[i]["规格型号"].ToString());
+                param.Add("@Ldanwei" + "_" + i, DRDT.Rows[i]["单位"].ToString());
+                param.Add("@Lpinyin" + "_" + i, DRDT.Rows[i]["拼音"].ToString());
+                param.Add("@Lerpbianhao" + "_" + i, DRDT.Rows[i]["erp编号"].ToString());
+                param.Add("@Lchengbenjia" + "_" + i, DRDT.Rows[i]["成本价"].ToString());
+                param.Add("@Lzuidijia" + "_" + i, DRDT.Rows[i]["最低价"].ToString());
+                param.Add("@Lshoujia" + "_" + i, DRDT.Rows[i]["零售价"].ToString());
+                param.Add("@Lbaoxiuqi" + "_" + i, DRDT.Rows[i]["保修期限"].ToString());
+                param.Add("@Lzhuangtai" + "_" + i, DRDT.Rows[i]["状态"].ToString());
+          
+
+
+                alsql.Add("INSERT INTO ZZZ_WFLJ(LID, Lmingcheng, Lguige, Ldanwei, Lpinyin, Lerpbianhao, Lchengbenjia, Lzuidijia, Lshoujia, Lbaoxiuqi,Lzhuangtai) VALUES(@LID" + "_" + i + ", @Lmingcheng" + "_" + i + ", @Lguige" + "_" + i + ", @Ldanwei" + "_" + i + ", @Lpinyin" + "_" + i + ", @Lerpbianhao" + "_" + i + ", @Lchengbenjia" + "_" + i + ", @Lzuidijia" + "_" + i + ", @Lshoujia" + "_" + i + ",   @Lbaoxiuqi" + "_" + i + ", @Lzhuangtai" + "_" + i + " )");
+            }
+        }
+
+
+
+        Hashtable return_ht = new Hashtable();
+        return_ht = I_DBL.RunParam_SQL(alsql, param);
+
+        if ((bool)(return_ht["return_float"]))
+        {
+
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "成功导入" + DRDT.Rows.Count.ToString() + "条数据！";
+        }
+        else
+        {
+            //其实要记录日志，而不是输出，这里只是演示
+            //StringOP.WriteLog(Server.MapPath("/") + "//", "导入失败：" + return_ht["return_errmsg"].ToString());
+            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "err";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "发生意外，导入失败！" + return_ht["return_errmsg"].ToString();
+        }
+
+
+
+
+
+        return dsreturn;
+    }
+    #endregion
+
 }
