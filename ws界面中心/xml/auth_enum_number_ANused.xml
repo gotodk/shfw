@@ -252,6 +252,16 @@
     <ANused>1</ANused>
   </Unumber1>
   <Unumber1>
+    <ANID>E-A4A600B1EA40-D1B9974C-14AD-4AA3-B964</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>基础数据-全局公告维护</ANBaseName>
+    <ANBaseNumber>288230376151711744</ANBaseNumber>
+    <ANBaseNumber_p>58</ANBaseNumber_p>
+    <ANextendID>183</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
     <ANID>E-A4A600B1E9D0-A1EDF9B7-1DBC-446A-89D2</ANID>
     <ANClass>Unumber1</ANClass>
     <ANClassName>后台菜单权限</ANClassName>

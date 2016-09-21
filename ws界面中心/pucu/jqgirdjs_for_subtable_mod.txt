@@ -71,6 +71,7 @@
                     bootbox.alert(status + "--" + error);
 
                 },
+				footerrow:[*[needsum]*],
                 loadComplete: function (data) {
 
                     if ($(data).text() == "") {
@@ -79,6 +80,8 @@
                     if ($(data).find('错误>错误提示').text() != "") {
                         bootbox.alert($(data).find('错误>错误提示').text());
                     }
+
+					[*[footerData_js]*]
 
                     var table = this;
                     setTimeout(function () {
@@ -235,7 +238,7 @@ for(var i = 0;i < len ;i ++) {
    buttonicon:"ace-icon fa fa-floppy-o blue  bigger-160 tubiaojianju", 
    onClickButton: function(e){ 
  
-
+             [*[footerData_js]*]
 			var savejieguo =$('[*[grid_selector_ID]*]').jqGrid('saveRow', $('[*[grid_selector_ID]*]').attr('lastsel_yhb'));		 
 			
 			 	 if($('[*[grid_selector_ID]*]').attr('lastsel_yhb') == "-999999" || savejieguo)

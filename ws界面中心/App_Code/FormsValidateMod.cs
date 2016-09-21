@@ -44,6 +44,18 @@ _xxxxxxxxxxxx: ['']
 }
             });
 
+            //添加提交事件(编辑器)
+            $(document).on('click', buttonid1+'_top', function () {
+                if ($('#[[控件名]]').text().trim() != '') {
+                    $('#[[控件名]]_html').val(encMe($('#[[控件名]]').html(), 'mima'));
+                    $('#[[控件名]]_text').val(encMe($('#[[控件名]]').text(), 'mima'));
+    }
+                else {
+                    $('#[[控件名]]_html').val('');
+                    $('#[[控件名]]_text').val('');
+}
+            });
+
             $('#[[控件名]]').ace_wysiwyg(); 
 
 ";

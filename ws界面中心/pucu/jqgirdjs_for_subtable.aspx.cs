@@ -51,9 +51,12 @@ public partial class jqgirdjs_for_subtable : System.Web.UI.Page
  
  
             rehtml = rehtml.Replace("[*[FS_title]*]", ds_DD.Tables["字段配置主表"].Rows[0]["FS_title"].ToString());
-       
 
 
+            //定义合计需要的变量，准备替换
+            bool needsum = false;//是否需要合计
+            bool beshowhejistr = false; //是否已找到适合显示合计两个字的列
+            List<String> alop = new List<String>();//存储配置
             //列配置
             string c_str = "";
             //特殊处理第一列
@@ -82,7 +85,13 @@ public partial class jqgirdjs_for_subtable : System.Web.UI.Page
 
                 string DID_name = dr["DID_name"].ToString();
                 string DID_showname = dr["DID_showname"].ToString();
-         
+
+                if (dr["DID_hide"].ToString() == "false" && !beshowhejistr)
+                {
+                    alop.Add("'" + DID_showname + "':'合计：'");
+                    beshowhejistr = true;
+                }
+
 
                 switch (dr["DID_formatter"].ToString())
                     {
@@ -149,11 +158,19 @@ public partial class jqgirdjs_for_subtable : System.Web.UI.Page
                         case "整数":
                     
                         c_str = c_str + " { name: '" + dr["DID_showname"].ToString() + "', xmlmap: '" + dr["DID_name"].ToString() + "', index: '" + dr["DID_name"].ToString() + "', width: " + dr["DID_width"].ToString() + ", fixed: " + dr["DID_fixed"].ToString() + ", sortable: false,hidden: " + dr["DID_hide"].ToString() + ",frozen:" + dr["DID_frozen"].ToString() + " , formatter: 'integer' ,editable:"+ DID_edit_editable + ",edittype: 'custom', editoptions: { custom_element: subtab_spinner_elem, custom_value: subtab_spinner_value},editrules: {required: " + DID_edit_required + ",integer:true } }, " + Environment.NewLine;
-                            break;
+
+                        alop.Add("'" + dr["DID_showname"].ToString() + "':$(this).getCol('" + dr["DID_showname"].ToString() + "',false,'sum')");
+                        needsum = true;
+
+                        break;
                         case "小数":
           
                         c_str = c_str + " { name: '" + dr["DID_showname"].ToString() + "', xmlmap: '" + dr["DID_name"].ToString() + "', index: '" + dr["DID_name"].ToString() + "', width: " + dr["DID_width"].ToString() + ", fixed: " + dr["DID_fixed"].ToString() + ", sortable: false,hidden: " + dr["DID_hide"].ToString() + ",frozen:" + dr["DID_frozen"].ToString() + " , formatter: 'number' ,editable:" + DID_edit_editable + " ,editrules: {required: " + DID_edit_required + ",custom:true, custom_func:ck_erweixiaoshu } }, " + Environment.NewLine;
-                            break;
+
+                        alop.Add("'" + dr["DID_showname"].ToString() + "':$(this).getCol('" + dr["DID_showname"].ToString() + "',false,'sum')");
+                        needsum = true;
+
+                        break;
                         case "日期时间":
              
                         c_str = c_str + " { name: '" + dr["DID_showname"].ToString() + "', xmlmap: '" + dr["DID_name"].ToString() + "', index: '" + dr["DID_name"].ToString() + "', width: " + dr["DID_width"].ToString() + ", fixed: " + dr["DID_fixed"].ToString() + ", sortable: false,hidden: " + dr["DID_hide"].ToString() + ",frozen:" + dr["DID_frozen"].ToString() + " , formatter: 'date', formatoptions: { srcformat: 'Y-m-d H:i:s', newformat: 'Y-m-d H:i:s' },editable:" + DID_edit_editable + ",editrules: {required: " + DID_edit_required + "}  }, " + Environment.NewLine;
@@ -180,6 +197,17 @@ public partial class jqgirdjs_for_subtable : System.Web.UI.Page
 
             rehtml = rehtml.Replace("[*[SubDialog]*]", c_str.TrimEnd(','));
 
+            if (needsum)
+            {
+
+                string js = "$(this).footerData('set',{ " + string.Join(",", alop.ToArray()) + " });";
+                rehtml = rehtml.Replace("[*[needsum]*]", "true").Replace("[*[footerData_js]*]", js);
+
+            }
+            else
+            {
+                rehtml = rehtml.Replace("[*[needsum]*]", "false").Replace("[*[footerData_js]*]", " ");
+            }
 
 
             //替换表格id

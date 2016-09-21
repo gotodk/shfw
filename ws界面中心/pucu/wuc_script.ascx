@@ -806,11 +806,22 @@
         { %>
             $("#<%=FS_name_temp%>").val($(xml).find('数据记录><%=FS_name_temp%>').text());
             <%}%>
-                <%
+            <%
             break;
         case "富文本框":
                                                         %>
-                $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>").html($(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>').text());
+
+             <% if (onlyshow)
+        {%>  
+            var sssss_zhi = $(xml).find('数据记录><%=FS_name_temp%>').text();
+            $("#fifsssss_<%=FS_name_temp%>").html(sssss_zhi);
+            <%}
+        else
+        { %>
+            $("#<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>").html($(xml).find('数据记录><%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"].ToString()%>').text());
+            <%}%>
+
+                
             <%
             break;
         case "上传组件":

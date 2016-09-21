@@ -721,12 +721,20 @@
                                                 %>
                                                 <%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_title"] %>：</label>
 
-                                            <div class="col-sm-10">
+                                            <div class="col-sm-10 <%=css_str %>">
                                                 <div class="wysiwyg-editor" id="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>"></div>
                                                 <input name="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>_html" type="hidden" id="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>_html">
                                                 <input name="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>_text" type="hidden" id="<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>_text">
                                                 <div class="ValidErrInfo col-sm-12 no-padding-left"></div>
                                             </div>
+
+                                             <% if(onlyshow) {%>  
+                                            <div class="col-sm-10">
+                                                <div class="col-xs-12 col-sm-12" id="fifsssss_<%=dsFPZ.Tables["表单配置子表"].Rows[i]["FS_name"] %>"></div>
+
+                                            </div>
+                                            <%} %>
+
                                         </div>
                                         <%
                                                 break;
