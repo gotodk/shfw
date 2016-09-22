@@ -223,6 +223,7 @@ for(var i = 0;i < len ;i ++) {
 						  
 }
  var savejieguo =$('[*[grid_selector_ID]*]').jqGrid('saveRow', $('[*[grid_selector_ID]*]').attr('lastsel_yhb'));
+ [*[footerData_js]*]
 		 $('[*[grid_selector_ID]*]').attr('lastsel_yhb',"-999999");				  
    }, 
    position:"first"
@@ -238,9 +239,9 @@ for(var i = 0;i < len ;i ++) {
    buttonicon:"ace-icon fa fa-floppy-o blue  bigger-160 tubiaojianju", 
    onClickButton: function(e){ 
  
-             [*[footerData_js]*]
+             
 			var savejieguo =$('[*[grid_selector_ID]*]').jqGrid('saveRow', $('[*[grid_selector_ID]*]').attr('lastsel_yhb'));		 
-			
+			[*[footerData_js]*]
 			 	 if($('[*[grid_selector_ID]*]').attr('lastsel_yhb') == "-999999" || savejieguo)
 				{
 $('[*[grid_selector_ID]*]').attr('lastsel_yhb',"-999999");
