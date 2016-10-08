@@ -1049,7 +1049,7 @@
                 highlight: function (e) {
                     $(e).closest('.form-group').addClass('has-error');
                     var wz = $(e).closest('.form-group').offset().top;
-                    $('html,body').scrollTop(wz);
+                    $('html,body').scrollTop(wz-100);
                 },
 
                 success: function (e) {
