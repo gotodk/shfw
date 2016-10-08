@@ -1048,6 +1048,8 @@
 
                 highlight: function (e) {
                     $(e).closest('.form-group').addClass('has-error');
+                    var wz = $(e).closest('.form-group').offset().top;
+                    $('html,body').scrollTop(wz);
                 },
 
                 success: function (e) {
@@ -1059,11 +1061,13 @@
                     element.closest('.form-group').find(".help-block").remove();
 
                     error.appendTo(element.closest('.form-group').find(".ValidErrInfo"));
+                 
                 },
 
                 submitHandler: function (form) {
                 },
                 invalidHandler: function (form) {
+               
                 }
             });
         });
