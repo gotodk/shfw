@@ -284,17 +284,57 @@ public class bsmain : System.Web.Services.WebService
 
         if (ht_forUI["zhiling"].ToString() == "kaoqinfugaidian")
         {
-            //var data = {"data":[[74.438,39.006,1],[74.932,38.382,1]],"total":5365,"rt_loc_cnt":47764510,"errorno":0,"NearestTime":"2016-08-01 15:20:00","userTime":"2016-08-01 15:20:00"}
-            string revarstr_0 = "var data = {\"data\":[";
-            string revarstr_x = "[0,0,1]";
-            string revarstr_1 = "],\"total\":总量,\"rt_loc_cnt\":47764510,\"errorno\":0,\"NearestTime\":\"2016-08-01 15:20:00\",\"userTime\":\"2016-08-01 15:20:00\"}";
+    
+            string revarstr_0 = "var data_info = [";
+            string revarstr_x = "十全大补丸";
+            string revarstr_1 = "];";
 
             I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
             Hashtable return_ht = new Hashtable();
             Hashtable param = new Hashtable();
 
-      
-            return_ht = I_DBL.RunParam_SQL("select Kzuobiao as Kzuobiao, count(Kzuobiao) as cishu  from ZZZ_kaoqin group by Kzuobiao  ", "数据记录", param);
+            string wherestr = "";
+            if (!ht_forUI.Contains("suoshuquyu_show"))
+            {
+                param.Add("@suoshuquyu_show", "售后管理部");
+                wherestr = wherestr + " and suoshuquyu_show=@suoshuquyu_show ";
+
+                
+          
+            }
+            else
+            {
+                if (ht_forUI["suoshuquyu_show"].ToString() != "")
+                {
+                    param.Add("@suoshuquyu_show", ht_forUI["suoshuquyu_show"].ToString());
+                    wherestr = wherestr + " and suoshuquyu_show=@suoshuquyu_show ";
+                }
+            }
+            if (ht_forUI.Contains("xingming") && ht_forUI["xingming"].ToString() != "")
+            {
+                param.Add("@xingming", "%"+ht_forUI["xingming"].ToString()+"%");
+                wherestr = wherestr + " and xingming like @xingming ";
+            }
+            if (ht_forUI.Contains("Ktime1") && ht_forUI["Ktime1"].ToString() != "" && ht_forUI.Contains("Ktime2") && ht_forUI["Ktime2"].ToString() != "")
+            {
+                param.Add("@Ktime1", ht_forUI["Ktime1"].ToString());
+                param.Add("@Ktime2", ht_forUI["Ktime2"].ToString());
+                wherestr = wherestr + " and (Ktime>=@Ktime1 and Ktime<=@Ktime2 ) ";
+            }
+            if (!ht_forUI.Contains("guolshuju"))
+            {
+
+                wherestr = wherestr + " and Ktime in (select max(Ktime) from View_ZZZ_kaoqin_ex group by K_UAID) ";
+            }
+            else
+            {
+                if (ht_forUI["guolshuju"].ToString() == "z")
+                {
+                    wherestr = wherestr + " and Ktime in (select max(Ktime) from View_ZZZ_kaoqin_ex group by K_UAID) ";
+                }
+            }
+
+            return_ht = I_DBL.RunParam_SQL("select *  from View_ZZZ_kaoqin_ex where 1=1    " + wherestr, "数据记录", param);
 
             if ((bool)(return_ht["return_float"]))
             {
@@ -302,7 +342,8 @@ public class bsmain : System.Web.Services.WebService
 
                 if (redb.Rows.Count < 1)
                 {
-                    return "错误err，无签到！";
+                    //return "错误err，无签到！";
+                    return revarstr_0 + revarstr_x.Replace("十全大补丸,", "").Replace("十全大补丸", "") + revarstr_1;
                 }
                 else
                 {
@@ -311,11 +352,13 @@ public class bsmain : System.Web.Services.WebService
                     {
 
                         string Kzuobiao = redb.Rows[i]["Kzuobiao"].ToString();
-                        string cishu = redb.Rows[i]["cishu"].ToString();
+          
 
                         if (Kzuobiao.IndexOf(",") > 0)
                         {
-                            revarstr_x = revarstr_x + ",[" + Kzuobiao + ","+ cishu + "]";
+                            string xiaoximsg = "姓名："+ redb.Rows[i]["xingming"].ToString() + " (" + redb.Rows[i]["K_UAID"].ToString() + ")<br/>城市：" + redb.Rows[i]["Kshi"].ToString() + "<br/>时间：" + redb.Rows[i]["Ktime"].ToString() + "";
+                         
+                            revarstr_x = revarstr_x + ",[" + Kzuobiao + ",\""+ xiaoximsg + "\"]";
                         }
 
 
@@ -324,7 +367,7 @@ public class bsmain : System.Web.Services.WebService
 
                     }
                    
-                    return revarstr_0 + revarstr_x + revarstr_1.Replace("总量", redb.Rows.Count.ToString());
+                    return revarstr_0 + revarstr_x.Replace("十全大补丸,", "").Replace("十全大补丸", "") + revarstr_1;
                 }
 
             }

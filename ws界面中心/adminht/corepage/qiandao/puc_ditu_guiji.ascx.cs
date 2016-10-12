@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FMPublicClass;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -31,5 +32,9 @@ public partial class puc_ditu_guiji : System.Web.UI.UserControl, ISetForWUC
         }
     }
 
-
+     
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        
+    }
 }
