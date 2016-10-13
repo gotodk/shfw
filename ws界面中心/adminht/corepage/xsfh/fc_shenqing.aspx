@@ -191,6 +191,32 @@
 
 
 
+
+                 var dfx_str_dls = "#show_searchopenyhbspgogo_Fdailishang";
+                 var oldzhi_dls = $(dfx_str_dls).text();
+
+                 var jiancha_dls = window.setInterval(function () {
+
+
+
+                     //带入字段
+                     if ($(dfx_str_dls).text() != oldzhi_dls) {
+                         var re = /\[.*?\]/ig;
+                         var arr = $(dfx_str_dls).text().match(re);
+
+                         if (arr != null) {//如果能匹配成功即arr数组不为空，循环输出结果
+                             for (var i = 0; i < arr.length; i++) {
+                                 var arr_z = arr[i].split(':');
+                                 if (arr_z[0] == "[客户名称")
+                                 { $("#Fdailishang_name").val($.trim(arr_z[1]).replace("]", "")); }
+
+                             }
+                         }
+
+                         oldzhi_dls = $(dfx_str_dls).text();
+                     }
+                 }, 500);
+
     
 
                  var dfx_str_subtt = "#show_searchopenyhbspgogo_subtcid_FCSbh";

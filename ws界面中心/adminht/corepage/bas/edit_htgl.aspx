@@ -33,6 +33,8 @@
 
                  //隐藏子表弹窗共享字段
                  $("#yincang_sblb").closest(".form-group").hide();
+                 $("#Hfukuanriqi").closest(".form-group").hide();
+                 $("#Hfukuanzhouqi").closest(".form-group").hide();
 
                  if (getUrlParam("fff") == "1" && getUrlParam("showinfo") == "") {
 

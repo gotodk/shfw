@@ -39,6 +39,13 @@
                  window.setInterval(function () {
                      $(".ui-pg-table .navtable").hide();
                      $("#gview_grid-table-subtable-160923000244").find("input").attr("readonly", "readonly");
+                     $("#gview_grid-table-subtable-160923000244").find("input[name='设备档案序列号']").removeAttr("readonly");
+                     $("#gview_grid-table-subtable-160923000244").find("input[name='单价']").removeAttr("readonly");
+
+                     //自动计算子表金额
+                     var zz_sjsj = $("#gview_grid-table-subtable-160923000244").find("input[name='单价']").val();
+                     var zz_shuliang = $("#gview_grid-table-subtable-160923000244").find("input[name='发货数量']").val();
+                     $("#gview_grid-table-subtable-160923000244").find("input[name='金额']").val((zz_sjsj * zz_shuliang).toFixed(2));
                  }, 500);
                  $("#addbutton1").html($("#addbutton1").html().replace("保存", "确认生成"));
                  $("#addbutton1_top").html($("#addbutton1_top").html().replace("保存", "确认生成"));

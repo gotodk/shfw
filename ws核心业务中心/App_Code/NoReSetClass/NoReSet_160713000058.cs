@@ -141,7 +141,10 @@ public class NoReSet_160713000058
         param.Add("@FClianxifangshi", ht_forUI["FClianxifangshi"].ToString());
         param.Add("@FCshoujianren", ht_forUI["FCshoujianren"].ToString());
 
-        alsql.Add("INSERT INTO ZZZ_xiaoshoufahuo(FCID,FC_YYID,FCsmaz,FCbumen,FC_erp_danbie,FCbeizhu,FCshenqingren,FCshenqingshijian,FCzhuangtai,FCjisongdizhi,FClianxifangshi,FCshoujianren) VALUES(@FCID,@FC_YYID,@FCsmaz,@FCbumen,@FC_erp_danbie,@FCbeizhu,@FCshenqingren,getdate(),'草稿',@FCjisongdizhi,@FClianxifangshi,@FCshoujianren)");
+        param.Add("@Fdailishang", ht_forUI["Fdailishang"].ToString());
+        param.Add("@Fdailishang_name", ht_forUI["Fdailishang_name"].ToString());
+
+        alsql.Add("INSERT INTO ZZZ_xiaoshoufahuo(FCID,FC_YYID,FCsmaz,FCbumen,FC_erp_danbie,FCbeizhu,FCshenqingren,FCshenqingshijian,FCzhuangtai,FCjisongdizhi,FClianxifangshi,FCshoujianren,Fdailishang,Fdailishang_name) VALUES(@FCID,@FC_YYID,@FCsmaz,@FCbumen,@FC_erp_danbie,@FCbeizhu,@FCshenqingren,getdate(),'草稿',@FCjisongdizhi,@FClianxifangshi,@FCshoujianren,@Fdailishang,@Fdailishang_name)");
 
 
         //遍历子表， 插入 
@@ -250,7 +253,10 @@ public class NoReSet_160713000058
             param.Add("@FClianxifangshi", ht_forUI["FClianxifangshi"].ToString());
             param.Add("@FCshoujianren", ht_forUI["FCshoujianren"].ToString());
 
-            alsql.Add("UPDATE  ZZZ_xiaoshoufahuo SET FC_YYID=@FC_YYID,FCsmaz=@FCsmaz,FCbumen=@FCbumen,FC_erp_danbie=@FC_erp_danbie,FCbeizhu=@FCbeizhu,FCjisongdizhi=@FCjisongdizhi,FClianxifangshi=@FClianxifangshi,FCshoujianren=@FCshoujianren  where FCID =@FCID ");
+            param.Add("@Fdailishang", ht_forUI["Fdailishang"].ToString());
+            param.Add("@Fdailishang_name", ht_forUI["Fdailishang_name"].ToString());
+
+            alsql.Add("UPDATE  ZZZ_xiaoshoufahuo SET FC_YYID=@FC_YYID,FCsmaz=@FCsmaz,FCbumen=@FCbumen,FC_erp_danbie=@FC_erp_danbie,FCbeizhu=@FCbeizhu,FCjisongdizhi=@FCjisongdizhi,FClianxifangshi=@FClianxifangshi,FCshoujianren=@FCshoujianren,Fdailishang=@Fdailishang,Fdailishang_name=@Fdailishang_name  where FCID =@FCID ");
 
 
             //遍历子表，先删除，再插入，已有主键的不重新生成。
@@ -328,6 +334,7 @@ public class NoReSet_160713000058
             string KID = CombGuid.GetMewIdFormSequence("ZZZ_KHLXR");
             param.Add("@KID", KID);
             param.Add("@K_YYID", ht_forUI["FC_YYID"].ToString());
+            param.Add("@Fdailishang_name", ht_forUI["Fdailishang_name"].ToString());
             param.Add("@KKS", ht_forUI["FCbumen"].ToString());
             alsql.Add("if not exists(select top 1 KID from ZZZ_KHLXR where Klianiren=@FCshoujianren) begin insert into ZZZ_KHLXR (KID,K_YYID,KKS,Klianiren,Kzhicheng,Kxingbie,Kdianhua,Kbeizhu) values(@KID,@K_YYID,@KKS,@FCshoujianren,'','男',@FClianxifangshi,@FCjisongdizhi) end ");
 
@@ -364,6 +371,8 @@ public class NoReSet_160713000058
                     param.Add("@sub_" + "FCdanjia" + "_" + i, subdt_lj.Rows[i]["单价"].ToString());
                     param.Add("@sub_" + "FCjine" + "_" + i, subdt_lj.Rows[i]["金额"].ToString());
                     param.Add("@sub_" + "FCscsbxlh" + "_" + i, subdt_lj.Rows[i]["设备档案序列号"].ToString());
+ 
+               
 
                     param.Add("@sub_" + "FCSbh" + "_" + i, subdt_lj.Rows[i]["物料编码"].ToString());
                     param.Add("@sub_" + "FClb" + "_" + i, subdt_lj.Rows[i]["物料类别"].ToString());
@@ -387,7 +396,7 @@ public class NoReSet_160713000058
                     if (subdt_lj.Rows[i]["设备档案序列号"].ToString().Trim() != "" && subdt_lj.Rows[i]["物料类别"].ToString().Trim() == "设备")
                     {
                         //
-                        string xlhsql = "INSERT INTO ZZZ_WFSB (SID,S_YYID,Skeshi,S_SBID,Smingcheng,Sxinghao,Schuchangriqi,Sbaoxiuqixian) VALUES (@sub_" + "FCscsbxlh" + "_" + i + ", @K_YYID, @KKS,@sub_" + "FCSbh" + "_" + i + ", @sub_" + "Smingcheng" + "_" + i + ", @sub_" + "Sxinghao" + "_" + i + ", getdate(),@sub_" + "FCbxqx" + "_" + i + ")";
+                        string xlhsql = "INSERT INTO ZZZ_WFSB (SID,S_YYID,Skeshi,S_SBID,Smingcheng,Sxinghao,Schuchangriqi,Sbaoxiuqixian,Sdailishang) VALUES (@sub_" + "FCscsbxlh" + "_" + i + ", @K_YYID, @KKS,@sub_" + "FCSbh" + "_" + i + ", @sub_" + "Smingcheng" + "_" + i + ", @sub_" + "Sxinghao" + "_" + i + ", getdate(),@sub_" + "FCbxqx" + "_" + i + ",@Fdailishang_name)";
                         alsql.Add(xlhsql);
                         tishimsg_sbda = "并且依据填写的序列号同时生成了设备档案。";
                     }
