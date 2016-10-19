@@ -1013,27 +1013,43 @@ public class bsmain : System.Web.Services.WebService
 
             Hashtable return_ht = new Hashtable();
 
-            return_ht = I_DBL.RunParam_SQL("select 返修设备种类_累积, 返修设备种类_本月, 返修设备种类_上月, 服务报告金额_本年, 服务报告金额_上月,   今日实际出勤人数, 今日应出勤人数 from View_yibiaopan_shu_1", "数据记录", param);
+            return_ht = I_DBL.RunParam_SQL("select * from View_yibiaopan_shu_1", "数据记录", param);
 
 
             if ((bool)(return_ht["return_float"]))
             {
                 DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
 
-                int shijieren = Convert.ToInt32(redb.Rows[0]["今日实际出勤人数"].ToString());
-                int yingren = Convert.ToInt32(redb.Rows[0]["今日应出勤人数"].ToString());
-                double bili = 0;
-                if (yingren == 0)
-                {
-                    bili = 0;
-                }
-                else
-                {
-                    bili = shijieren / yingren;
-                }
-                string qdl = bili.ToString("f1");
-                string qdly = shijieren + "/" + yingren;
-                string restr =  "返修设备种类_累积:"+ redb.Rows[0]["返修设备种类_累积"].ToString() + ",返修设备种类_本月:" + redb.Rows[0]["返修设备种类_本月"].ToString() + ",返修设备种类_上月:" + redb.Rows[0]["返修设备种类_上月"].ToString() + ",服务报告金额_本年:" + redb.Rows[0]["服务报告金额_本年"].ToString() + ",服务报告金额_上月:" + redb.Rows[0]["服务报告金额_上月"].ToString() + ",签到率:"+ qdl + ",签到率来源:"+ qdly + "";
+                string qd_sh_s = redb.Rows[0]["今日实际出勤人数"].ToString().PadLeft(2, '0');
+                string qd_sh_a = redb.Rows[0]["今日应出勤人数"].ToString().PadLeft(2, '0');
+                string qd_hd_s = redb.Rows[0]["今日实际出勤人数_华东"].ToString().PadLeft(2, '0');
+                string qd_hd_a = redb.Rows[0]["今日应出勤人数_华东"].ToString().PadLeft(2, '0');
+                string qd_hb_s = redb.Rows[0]["今日实际出勤人数_华北"].ToString().PadLeft(2, '0');
+                string qd_hb_a = redb.Rows[0]["今日应出勤人数_华北"].ToString().PadLeft(2, '0');
+                string qd_hz_s = redb.Rows[0]["今日实际出勤人数_华中"].ToString().PadLeft(2, '0');
+                string qd_hz_a = redb.Rows[0]["今日应出勤人数_华中"].ToString().PadLeft(2, '0');
+                string qd_hn_s = redb.Rows[0]["今日实际出勤人数_华南"].ToString().PadLeft(2, '0');
+                string qd_hn_a = redb.Rows[0]["今日应出勤人数_华南"].ToString().PadLeft(2, '0');
+                string qd_xn_s = redb.Rows[0]["今日实际出勤人数_西南"].ToString().PadLeft(2, '0');
+                string qd_xn_a = redb.Rows[0]["今日应出勤人数_西南"].ToString().PadLeft(2, '0');
+                //double bili = 0;
+                //if (yingren == 0)
+                //{
+                //    bili = 0;
+                //}
+                //else
+                //{
+                //    bili = shijieren / yingren;
+                //}
+                //string qdl = bili.ToString("f1");
+                string qd_sh = "售后：" + qd_sh_s + "/" + qd_sh_a;
+                string qd_hd = "华东：" + qd_hd_s + "/" + qd_hd_a;
+                string qd_hb = "华北：" + qd_hb_s + "/" + qd_hb_a;
+                string qd_hz = "华中：" + qd_hz_s + "/" + qd_hz_a;
+                string qd_hn = "华南：" + qd_hn_s + "/" + qd_hn_a;
+                string qd_xn = "西南：" + qd_xn_s + "/" + qd_xn_a;
+
+                string restr =  "返修设备种类_累积:"+ redb.Rows[0]["返修设备种类_累积"].ToString() + ",返修设备种类_本月:" + redb.Rows[0]["返修设备种类_本月"].ToString() + ",返修设备种类_上月:" + redb.Rows[0]["返修设备种类_上月"].ToString() + ",服务报告金额_本年:" + redb.Rows[0]["服务报告金额_本年"].ToString() + ",服务报告金额_上月:" + redb.Rows[0]["服务报告金额_上月"].ToString() + ",签到率_售后:"+ qd_sh + ",签到率_华东:" + qd_hd + ",签到率_华北:" + qd_hb + ",签到率_华中:" + qd_hz + ",签到率_华南:" + qd_hn + ",签到率_西南:" + qd_xn + "";
                 return restr;
             }
             else

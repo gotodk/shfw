@@ -102,10 +102,11 @@
 
 										 
 
-										<div class="infobox infobox-blue2">
+										<div class="infobox infobox-blue2" style="padding:0px; background:url(/mytutu/qdl.jpg) no-repeat center center;">
                                             
+                                           <div class="infobox-data row-xs-12"><div class="col-sm-6 col-xs-6 text-center" id="qd_sh">售后:--/--</div><div class="col-sm-6 col-xs-6 text-center" id="qd_hd">华东:--/--</div><div class="col-sm-6 col-xs-6 text-center"  id="qd_hb">华北:--/--</div><div class="col-sm-6 col-xs-6 text-center" id="qd_hz">华中:--/--</div><div class="col-sm-6 col-xs-6 text-center" id="qd_hn">华南:--/--</div><div class="col-sm-6 col-xs-6 text-center" id="qd_xn">西南:--/--</div></div>
 
-											<div class="infobox-progress">
+											<%--<div class="infobox-progress">
 												<!-- #section:pages/dashboard.infobox.easypiechart -->
                                                 
 												<div class="easy-pie-chart percentage"  id="zysj_danbeng_签到率" data-percent="0.00" data-size="46">
@@ -116,13 +117,13 @@
 											</div>
 
 											<div class="infobox-data">
-												<span class="infobox-text"><a href="/adminht/corepage/qiandao/list_qd.aspx">签到率<span id="zysj_danbeng_签到率来源">--/--</span></a></span>
+												<span class="infobox-text"><a href="/adminht/corepage/qiandao/list_qd.aspx?bm=all">签到率<span id="zysj_danbeng_签到率来源">--/--</span></a></span>
 
 												<div class="infobox-content">
 													<span class="bigger-110">~</span>
-													仅限售后工程师
+													 售后、销售
 												</div>
-											</div> 
+											</div> --%>
 
 										 
 										</div>

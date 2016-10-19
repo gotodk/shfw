@@ -26,8 +26,72 @@
        <!-- 附加的body底部本页专属的自定义js脚本 -->
     <uc1:wuc_script runat="server" ID="wuc_script" />
         <!-- 选择产品编号后，自动带入一些数据 -->
+ 
     <script type="text/javascript">
         jQuery(function ($) {
+            var $overflow_lj = '';
+
+          
+
+            window.setInterval(function () {
+
+                //把弹窗中的特殊链接处理成悬浮图片
+                $("a[href*='xianshitupian.aspx']").each(function (index, domEle) {
+                    //alert($(this).attr("href"));
+                    //index就是索引值
+                    //domEle 表示获取遍历每一个dom对象
+
+                    $(this).attr("data-rel", "colorbox");
+                    $(this).attr("class", "cboxElement");
+                    var oldhref = $(this).attr("href");
+                    var bianhao = $(this).text();
+                    var c_fujian = $(this).parents("tr").find("td[aria-describedby='grid-table_附件']").text().split(',')[0];
+                    var newhref = c_fujian;
+                    $(this).attr("href", newhref);
+
+                    var c_beizhu = $(this).parents("tr").find("td[aria-describedby='grid-table_备注']").html();
+                    var newbeizhu = "备注：" + c_beizhu;
+                   
+          
+ 
+
+                    var colorbox_params_lj = {
+                        rel: 'colorbox',
+                        reposition: true,
+                        scalePhotos: true,
+                        scrolling: false,
+                      
+                        previous: '<i class="ace-icon fa fa-arrow-left"></i>',
+                        next: '<i class="ace-icon fa fa-arrow-right"></i>',
+                        close: '&times;',
+                        current: '{current} of {total}',
+                        maxWidth: "80%",
+                        maxHeight: "80%",
+                        html: "<img src=\"" + c_fujian + "\"  style=\"border:0px;\" /><br/><div >" + newbeizhu + "</div>",
+                        onOpen: function () {
+                            $overflow_lj = document.body.style.overflow;
+                            document.body.style.overflow = 'hidden';
+                        },
+                        onClosed: function () {
+                            document.body.style.overflow = $overflow_lj;
+                        },
+                        onComplete: function () {
+                            $.colorbox.resize();
+                        }
+                    };
+                    $(this).colorbox(colorbox_params_lj);
+               
+                });
+
+                
+
+
+
+
+
+            }, 500);
+
+
 
             if (getUrlParam("fff") == "1" && getUrlParam("showinfo") == "") {
 

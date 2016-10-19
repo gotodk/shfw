@@ -186,11 +186,31 @@
 				                var fengetemp = data.split(',');
 				                $.each(fengetemp, function (n, value) {
 				                    var ft = value.split(':');
-				                    if (ft[0] == "签到率")
+				                    if (ft[0].indexOf("签到率") >= 0)
 				                    {
-				                        $("#zysj_danbeng_" + ft[0]).attr("data-percent", ft[1]);
-				                        $("#zysj_danbeng_" + ft[0]).html("<span class='percent'>" + ft[1] + "</span>%");
-				                        shuaxin_easy_pie_chart();
+				                        if (ft[0].indexOf("售后") >= 0)
+				                        {
+				                            $("#qd_sh").html(ft[1]);
+				                        }
+				                        if (ft[0].indexOf("华东") >= 0) {
+				                            $("#qd_hd").html(ft[1]);
+				                        }
+				                        if (ft[0].indexOf("华北") >= 0) {
+				                            $("#qd_hb").html(ft[1]);
+				                        }
+				                        if (ft[0].indexOf("华中") >= 0) {
+				                            $("#qd_hz").html(ft[1]);
+				                        }
+				                        if (ft[0].indexOf("华南") >= 0) {
+				                            $("#qd_hn").html(ft[1]);
+				                        }
+				                        if (ft[0].indexOf("西南") >= 0) {
+				                            $("#qd_xn").html(ft[1]);
+				                        }
+				                        
+				                        //$("#zysj_danbeng_" + ft[0]).attr("data-percent", ft[1]);
+				                        //$("#zysj_danbeng_" + ft[0]).html("<span class='percent'>" + ft[1] + "</span>%");
+				                        //shuaxin_easy_pie_chart();
 				                    }
 				                    else
 				                    {
