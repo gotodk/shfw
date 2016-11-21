@@ -28,7 +28,30 @@
          <!-- 某些字段，在编辑时禁用，不想用新页面的情况使用 -->
  
     <script type="text/javascript">
+        function editok_after_msgshow()
+        {
+            //location.href = location.href;
+        }
+
+
         jQuery(function ($) {
+
+            //增加禁止加载数据配置
+            $("#shiwuleixing").attr("noreload", "yes");
+            $("#songhuokehu").attr("noreload", "yes");
+            $("#yewuleixing").attr("noreload", "yes");
+            $("#bumen").attr("noreload", "yes");
+            $("#kucunzuzhi").attr("noreload", "yes");
+            $("#fukuanfangshi").attr("noreload", "yes");
+            $("#chengbenzhongxin").attr("noreload", "yes");
+            $("#baoguanren").attr("noreload", "yes");
+            $("#xiaoshoufangshi").attr("noreload", "yes");
+            $("#zhidanren").attr("noreload", "yes");
+            $("#xiaoshouzuzhi").attr("noreload", "yes");
+            $("#bibie").attr("noreload", "yes");
+            $("#huilv").attr("noreload", "yes");
+            $("#kongzhidanyuan").attr("noreload", "yes");
+            
 
             if (getUrlParam("showinfo") == "1")
             {
@@ -37,7 +60,9 @@
             }
 
                  window.setInterval(function () {
-                     $(".ui-pg-table .navtable").hide();
+                     //$(".ui-pg-table .navtable").hide();
+                     $("td[data-original-title='新增']").hide();
+                     $("td[data-original-title='删除']").hide();
                      $("#gview_grid-table-subtable-160923000244").find("input").attr("readonly", "readonly");
                      $("#gview_grid-table-subtable-160923000244").find("input[name='设备档案序列号']").removeAttr("readonly");
                      $("#gview_grid-table-subtable-160923000244").find("input[name='单价']").removeAttr("readonly");

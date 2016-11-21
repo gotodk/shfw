@@ -546,7 +546,16 @@
             <%}
         else
         { %>
-            $("#<%=FS_name_temp%>").val($(xml).find('数据记录><%=FS_name_temp%>').text());
+            
+            if($("#<%=FS_name_temp%>").attr("noreload") == "yes")
+            {
+                ;
+            }
+            else
+            {
+                $("#<%=FS_name_temp%>").val($(xml).find('数据记录><%=FS_name_temp%>').text());
+            }
+            
             <%}%>
 
             <%    break;
