@@ -52,6 +52,7 @@
             $("#huilv").attr("noreload", "yes");
             $("#kongzhidanyuan").attr("noreload", "yes");
             
+            $("#zhidanren").val("<%=UserSession.唯一键%>");
 
             if (getUrlParam("showinfo") == "1")
             {

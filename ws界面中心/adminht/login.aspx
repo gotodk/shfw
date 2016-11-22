@@ -198,8 +198,8 @@
  
          //ajax系统错误统一提示
          function errorForAjax(XMLHttpRequest, textStatus, errorThrown) {
- 
              // 通常情况下textStatus和errorThown只有其中一个有值 
+             alert("ajaxrun=backlogin&jkname=后台管理登录验证&" + $(formid1).serialize());
              $("#errmsg").show(150);
              $("#errmsg").html("<strong><i class='ace-icon fa fa-times'></i></strong>抱歉，系统出现问题!");
     
@@ -246,6 +246,7 @@
                     
 
                     $("#__VIEWSTATE").attr("disabled", false);//启用视图
+             
                     if (msg == "ok")
                     {
                         window.top.location.href = "<%=homeurl%>";
