@@ -217,6 +217,13 @@ public class NoReSet_160923000060
         ArrayList alsql = new ArrayList();
         Hashtable param = new Hashtable();
 
+        //更新主表的一些信息
+        string FCID = ht_forUI["idforedit"].ToString();
+        string FC_erp_danbie = ht_forUI["FC_erp_danbie"].ToString();
+        string FC_erp_danhao = dsre.Tables[1].Rows[0]["本地单号"].ToString();
+        string sqlm = "update ZZZ_xiaoshoufahuo set  FC_erp_danbie='"+ FC_erp_danbie + "', FC_erp_danhao='"+ FC_erp_danhao + "' where FCID='" + FCID + "'";
+        alsql.Add(sqlm);
+
         //循环返回的子表数据，更新序列号
         for (int i = 0; i < dsre.Tables[2].Rows.Count; i++)
         {
