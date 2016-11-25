@@ -31,12 +31,14 @@
         jQuery(function ($) {
             var $overflow_lj = '';
 
-            $("#searchopenyhbspgogo_S_YYID").hide();
-            $("#S_YYID").after("<input type='hidden' name='old_S_YYID' id='old_S_YYID' value='' ></input>");
+            if (getUrlParam("fff") == "1") {
+                $("#searchopenyhbspgogo_S_YYID").hide();
+                $("#S_YYID").after("<input type='hidden' name='old_S_YYID' id='old_S_YYID' value='' ></input>");
 
-            var sssss = window.setInterval(function () {
-            $("#old_S_YYID").val($("#S_YYID").val());
-            }, 500);
+                var sssss = window.setInterval(function () {
+                    $("#old_S_YYID").val($("#S_YYID").val());
+                }, 500);
+            }
 
             window.setInterval(function () {
 
