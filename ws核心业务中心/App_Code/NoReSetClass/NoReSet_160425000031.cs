@@ -224,6 +224,19 @@ public class NoReSet_160425000031
             
         }
 
+        //记录客户修改
+        if (ht_forUI["old_S_YYID"].ToString().Trim() != ht_forUI["S_YYID"].ToString().Trim())
+        {
+            string guidhh = CombGuid.GetMewIdFormSequence("ZZZ_WFSB_xlh_his");
+            param.Add("@SID_0", ht_forUI["SID"].ToString().Trim());
+            param.Add("@id_0", guidhh);
+            param.Add("@xgr", ht_forUI["yhbsp_session_uer_UAid"].ToString());
+            param.Add("@xgmsg", "客户从"+ ht_forUI["old_S_YYID"].ToString() + "变更为"+ ht_forUI["S_YYID"].ToString());
+            alsql.Add("INSERT INTO ZZZ_WFSB_xlh_his (id,old_SID,new_SID,xgr,xgmsg) VALUES (@id_0,@SID_0,@SID_0,@xgr,@xgmsg) ");
+ 
+
+        }
+
         //未修改序列号时，才保存子表
         if (ht_forUI["idforedit"].ToString().Trim() == ht_forUI["SID"].ToString().Trim())
         {

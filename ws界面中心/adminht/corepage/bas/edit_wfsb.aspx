@@ -31,7 +31,12 @@
         jQuery(function ($) {
             var $overflow_lj = '';
 
-          
+            $("#searchopenyhbspgogo_S_YYID").hide();
+            $("#S_YYID").after("<input type='hidden' name='old_S_YYID' id='old_S_YYID' value='' ></input>");
+
+            var sssss = window.setInterval(function () {
+            $("#old_S_YYID").val($("#S_YYID").val());
+            }, 500);
 
             window.setInterval(function () {
 
@@ -100,8 +105,9 @@
                 $("<div class='form-group'><label class='col-sm-2 control-label no-padding-right'>特殊操作：</label><div class='col-sm-10 col-xs-12'><button class='btn btn-xs btn-danger' id='tscz_goxiugai'><i class='ace-icon fa fa-bolt bigger-110'></i>开启修改序列号</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button class='btn btn-xs btn-info' id='tscz_showjilu'><i class='ace-icon fa fa-bolt bigger-110'></i>查看修改记录</button></div>   </div>").insertAfter($('#SID').closest(".form-group"));
 
                 $(document).on('click', "#tscz_goxiugai", function () {
-
+                    clearInterval(sssss);
                     $("#SID").removeAttr("readonly");
+                    $("#searchopenyhbspgogo_S_YYID").show();
 
                 });
                 $(document).on('click', "#tscz_showjilu", function () {
