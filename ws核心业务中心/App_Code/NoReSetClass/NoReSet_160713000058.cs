@@ -102,6 +102,63 @@ public class NoReSet_160713000058
  
     }
 
+    /// <summary>
+    /// 根据销售发货单号，生成一个报修申请
+    /// </summary>
+    /// <param name="FCID"></param>
+    /// <returns></returns>
+    public string smaz_go(string FCID)
+    {
+        I_Dblink I_DBL = (new DBFactory()).DbLinkSqlMain("");
+        Hashtable return_ht = new Hashtable();
+        Hashtable param = new Hashtable();
+        param.Add("@FCID", FCID);
+
+        return_ht = I_DBL.RunParam_SQL("select  FCID,FC_YYID,FCsmaz,FCzhuangtai,FClianxifangshi,FCshoujianren,FCshenqingren, (select top 1 YYfuwufuzeren from ZZZ_KHDA where YYID=FC_YYID) as ss_fwfzr from ZZZ_xiaoshoufahuo where FCID=@FCID and FCsmaz='是' and FCzhuangtai='在途' ", "数据记录", param);
+
+        if ((bool)(return_ht["return_float"]))
+        {
+            DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+
+            if (redb.Rows.Count < 1)
+            {
+                return "";
+            }
+            else
+            {
+                NoReSet_160605000054 nrs = new NoReSet_160605000054();
+       
+                //放入参数
+                DataTable parameter_forUI = new DataTable();
+                parameter_forUI.TableName = "参数集合";
+                parameter_forUI.Columns.Add("参数名");
+                parameter_forUI.Columns.Add("参数值");
+                parameter_forUI.Columns.Add("参数类型");//实际没用，调试看数据方便用的
+ 
+                parameter_forUI.Rows.Add(new string[] { "B_YYID", redb.Rows[0]["FC_YYID"].ToString(), "FormString" });
+                parameter_forUI.Rows.Add(new string[] { "Blianxiren", redb.Rows[0]["FCshoujianren"].ToString(), "FormString" });
+                parameter_forUI.Rows.Add(new string[] { "Bdianhua", redb.Rows[0]["FClianxifangshi"].ToString(), "FormString" });
+                parameter_forUI.Rows.Add(new string[] { "Bfwlx", "安装", "FormString" });
+                parameter_forUI.Rows.Add(new string[] { "Bmiaoshu", "这是由销售发货单自动生成的上门安装报修申请", "FormString" });
+                parameter_forUI.Rows.Add(new string[] { "yhbsp_session_uer_UAid", redb.Rows[0]["FCshenqingren"].ToString(), "FormString" });
+                parameter_forUI.Rows.Add(new string[] { "Bfwfzr", redb.Rows[0]["ss_fwfzr"].ToString(), "FormString" });
+ 
+
+                DataSet dsre = nrs.NRS_ADD(parameter_forUI);
+                if (dsre.Tables["返回值单条"].Rows[0]["执行结果"].ToString() == "ok")
+                { return "，并且同时生成了安装类型的一个报修申请。"; }
+                else
+                {
+                    return "，自动生成报修申请失败了。";
+                }
+            }
+        }
+        else
+        {
+            return "";
+        }
+        
+    }
 
     /// <summary>
     /// 增加数据
@@ -193,6 +250,9 @@ public class NoReSet_160713000058
         }
         return dsreturn;
     }
+
+
+
 
     /// <summary>
     /// 编辑数据
@@ -497,9 +557,17 @@ public class NoReSet_160713000058
 
         if ((bool)(return_ht["return_float"]))
         {
+            string msg0001 = "";
+            if (ht_forUI["ywlx_yincang"].ToString() == "fahuo")
+            {
+                //如果是上门安装类型，自动生成一个报修申请
+                msg0001 = smaz_go(ht_forUI["idforedit"].ToString().Trim());
+            }
 
-            dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
-            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "修改成功！"+ tishimsg + tishimsg_sbda + "{" + ht_forUI["idforedit"].ToString() + "}";
+                dsreturn.Tables["返回值单条"].Rows[0]["执行结果"] = "ok";
+            dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "修改成功！"+ tishimsg + tishimsg_sbda + msg0001 + "{" + ht_forUI["idforedit"].ToString() + "}";
+
+            
         }
         else
         {
