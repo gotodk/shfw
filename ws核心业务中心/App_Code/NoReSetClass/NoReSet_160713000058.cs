@@ -114,11 +114,12 @@ public class NoReSet_160713000058
         Hashtable param = new Hashtable();
         param.Add("@FCID", FCID);
 
-        return_ht = I_DBL.RunParam_SQL("select  FCID,FC_YYID,FCsmaz,FCzhuangtai,FClianxifangshi,FCshoujianren,FCshenqingren, (select top 1 YYfuwufuzeren from ZZZ_KHDA where YYID=FC_YYID) as ss_fwfzr from ZZZ_xiaoshoufahuo where FCID=@FCID and FCsmaz='是' and FCzhuangtai='在途' ", "数据记录", param);
+        return_ht = I_DBL.RunParam_SQL("select  FCID,FC_YYID,FCsmaz,FCzhuangtai,FClianxifangshi,FCshoujianren,FCshenqingren, (select top 1 YYfuwufuzeren from ZZZ_KHDA where YYID=FC_YYID) as ss_fwfzr from ZZZ_xiaoshoufahuo where FCID=@FCID and FCsmaz='是' and FCzhuangtai='在途' ; select FCSID,FCS_FCID,FCSbh,FClb,mingcheng,xinghao from View_ZZZ_xiaoshoufahuo_sb_ex where FCS_FCID=@FCID and FClb='设备'; ", "数据记录", param);
 
         if ((bool)(return_ht["return_float"]))
         {
             DataTable redb = ((DataSet)return_ht["return_ds"]).Tables["数据记录"].Copy();
+            DataTable redb_other = ((DataSet)return_ht["return_ds"]).Tables[1].Copy();
 
             if (redb.Rows.Count < 1)
             {
@@ -139,7 +140,14 @@ public class NoReSet_160713000058
                 parameter_forUI.Rows.Add(new string[] { "Blianxiren", redb.Rows[0]["FCshoujianren"].ToString(), "FormString" });
                 parameter_forUI.Rows.Add(new string[] { "Bdianhua", redb.Rows[0]["FClianxifangshi"].ToString(), "FormString" });
                 parameter_forUI.Rows.Add(new string[] { "Bfwlx", "安装", "FormString" });
-                parameter_forUI.Rows.Add(new string[] { "Bmiaoshu", "这是由销售发货单自动生成的上门安装报修申请", "FormString" });
+
+                string sb_str = "";
+                for (int p = 0; p < redb_other.Rows.Count; p++)
+                {
+                    sb_str = sb_str + redb_other.Rows[p]["FCSbh"].ToString() + "，" + redb_other.Rows[p]["mingcheng"].ToString() + "，" + redb_other.Rows[p]["xinghao"].ToString() + "---";
+                }
+
+                parameter_forUI.Rows.Add(new string[] { "Bmiaoshu", "此单自动生成，安装设备包括：" + sb_str, "FormString" });
                 parameter_forUI.Rows.Add(new string[] { "yhbsp_session_uer_UAid", redb.Rows[0]["FCshenqingren"].ToString(), "FormString" });
                 parameter_forUI.Rows.Add(new string[] { "Bfwfzr", redb.Rows[0]["ss_fwfzr"].ToString(), "FormString" });
  

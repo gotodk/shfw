@@ -106,6 +106,13 @@
         
                  $("#zheshiliebiaoquyu").attr('teshuwhere', "FC_YYID in (select ZZZ_userinfo_glkh.YYID from ZZZ_userinfo_glkh where ZZZ_userinfo_glkh.UAid='<%=UserSession.唯一键%>' )");
                 
+                 setInterval(function () {
+                     $("a:contains('查物流')").each(function () {
+                         var newzhi = $(this).closest("tr").find("td[aria-describedby='grid-table_物流单号']").text();
+                         $(this).attr('href', "http://m.kuaidi100.com/result.jsp?nu=" + newzhi);
+                     });
+                 }, 1000);// 
+
  
         });
 

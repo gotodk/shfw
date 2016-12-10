@@ -105,6 +105,15 @@
                  //
         
                  $("#zheshiliebiaoquyu").attr('teshuwhere', "FCshenqingren='<%=UserSession.唯一键%>'");
+
+                 setInterval(function () {
+                     $("a:contains('查物流')").each(function () {
+                         var newzhi = $(this).closest("tr").find("td[aria-describedby='grid-table_物流单号']").text();
+                         $(this).attr('href', "http://m.kuaidi100.com/result.jsp?nu=" + newzhi);
+                     });
+                 }, 1000);// 
+               
+                
                 
  
         });
