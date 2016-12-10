@@ -243,6 +243,11 @@
                                      var zj = $(dfx_str_subyzcw).closest("tr").find("input[name='故障类型']");
                                      zj.val($.trim(arr_z[1]).replace("]", ""));
                                  }
+                                 if (arr_z[0] == "[标准工时") {
+                                     //离弹窗最近的特定name的输入框  
+                                     var zj = $(dfx_str_subyzcw).closest("tr").find("input[name='标准工时']");
+                                     zj.val($.trim(arr_z[1]).replace("]", ""));
+                                 }
                              }
                          }
 
