@@ -411,6 +411,17 @@ public class NoReSet_160713000058
             param.Add("@KID", KID);
             param.Add("@K_YYID", ht_forUI["FC_YYID"].ToString());
             param.Add("@Fdailishang_name", ht_forUI["Fdailishang_name"].ToString());
+            if (ht_forUI["Fdailishang_name"].ToString() == "")
+            {
+                param.Add("@Scaigouqudao", "直销");
+            }
+            else
+            {
+                param.Add("@Scaigouqudao", "分销");
+            }
+        
+
+
             param.Add("@KKS", ht_forUI["FCbumen"].ToString());
             alsql.Add("if not exists(select top 1 KID from ZZZ_KHLXR where Klianiren=@FCshoujianren) begin insert into ZZZ_KHLXR (KID,K_YYID,KKS,Klianiren,Kzhicheng,Kxingbie,Kdianhua,Kbeizhu) values(@KID,@K_YYID,@KKS,@FCshoujianren,'','男',@FClianxifangshi,@FCjisongdizhi) end ");
 
@@ -472,7 +483,7 @@ public class NoReSet_160713000058
                     if (subdt_lj.Rows[i]["设备档案序列号"].ToString().Trim() != "" && subdt_lj.Rows[i]["物料类别"].ToString().Trim() == "设备")
                     {
                         //
-                        string xlhsql = "INSERT INTO ZZZ_WFSB (SID,S_YYID,Skeshi,S_SBID,Smingcheng,Sxinghao,Schuchangriqi,Sbaoxiuqixian,Sdailishang) VALUES (@sub_" + "FCscsbxlh" + "_" + i + ", @K_YYID, @KKS,@sub_" + "FCSbh" + "_" + i + ", @sub_" + "Smingcheng" + "_" + i + ", @sub_" + "Sxinghao" + "_" + i + ", getdate(),@sub_" + "FCbxqx" + "_" + i + ",@Fdailishang_name)";
+                        string xlhsql = "INSERT INTO ZZZ_WFSB (SID,S_YYID,Skeshi,S_SBID,Smingcheng,Sxinghao,Schuchangriqi,Sbaoxiuqixian,Sdailishang,Scaigouqudao) VALUES (@sub_" + "FCscsbxlh" + "_" + i + ", @K_YYID, @KKS,@sub_" + "FCSbh" + "_" + i + ", @sub_" + "Smingcheng" + "_" + i + ", @sub_" + "Sxinghao" + "_" + i + ", getdate(),@sub_" + "FCbxqx" + "_" + i + ",@Fdailishang_name,@Scaigouqudao)";
                         alsql.Add(xlhsql);
                         tishimsg_sbda = "并且依据填写的序列号同时生成了设备档案。";
                     }
