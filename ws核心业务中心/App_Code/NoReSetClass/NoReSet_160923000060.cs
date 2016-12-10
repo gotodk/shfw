@@ -149,6 +149,7 @@ public class NoReSet_160923000060
         dsmain.Tables.Add(dbEntry);
 
         dsmain.Tables["dbHead"].Rows.Add(new string[]{ "", "", "", "", "", "", "", "", "", "", "", "", "", "" });
+        dsmain.Tables["dbHead"].Rows[0]["操作类型"] = "0";
         dsmain.Tables["dbHead"].Rows[0]["本地单号"] = ht_forUI["idforedit"].ToString();
         dsmain.Tables["dbHead"].Rows[0]["事务类型"] = ht_forUI["shiwuleixing"].ToString();
         dsmain.Tables["dbHead"].Rows[0]["成本中心"] = ht_forUI["chengbenzhongxin"].ToString();
@@ -163,7 +164,9 @@ public class NoReSet_160923000060
         dsmain.Tables["dbHead"].Rows[0]["库存组织"] = ht_forUI["kucunzuzhi"].ToString();
         dsmain.Tables["dbHead"].Rows[0]["控制单元"] = ht_forUI["kongzhidanyuan"].ToString();
         dsmain.Tables["dbHead"].Rows[0]["业务类型"] = ht_forUI["yewuleixing"].ToString();
- 
+
+        
+
         string zibiao_gts_id = "grid-table-subtable-160923000244";
         DataTable subdt = jsontodatatable.ToDataTable(ht_forUI[zibiao_gts_id].ToString());
         //必须验证js脚本获取的数量和c#反序列化获取的数量一致才能继续。防止出错

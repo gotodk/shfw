@@ -217,6 +217,8 @@ public class NoReSet_160713000058
 
         param.Add("@sub_" + "MainID", guid); //隶属主表id
 
+        Double zje = 0.00;
+
         for (int i = 0; i < subdt.Rows.Count; i++)
         {
             param.Add("@sub_" + "FCSID" + "_" + i, CombGuid.GetMewIdFormSequence("ZZZ_xiaoshoufahuo_sb"));
@@ -228,13 +230,16 @@ public class NoReSet_160713000058
             param.Add("@sub_" + "FCdanjia" + "_" + i, subdt.Rows[i]["单价"].ToString());
             param.Add("@sub_" + "FCjine" + "_" + i, subdt.Rows[i]["金额"].ToString());
             param.Add("@sub_" + "FCSbz" + "_" + i, subdt.Rows[i]["备注"].ToString());
-       
 
+            zje = zje + Convert.ToDouble(subdt.Rows[i]["金额"].ToString());
 
             string INSERTsql = "INSERT INTO ZZZ_xiaoshoufahuo_sb ( FCSID, FCS_FCID, FCSbh,FClb, FCSsl,FCbxqx,FCdanjia,FCjine, FCSbz ) VALUES(@sub_" + "FCSID" + "_" + i + ", @sub_MainID, @sub_" + "FCSbh" + "_" + i + ",@sub_" + "FClb" + "_" + i + ", @sub_" + "FCSsl" + "_" + i + " , @sub_" + "FCbxqx" + "_" + i + "  , @sub_" + "FCdanjia" + "_" + i + "  , @sub_" + "FCjine" + "_" + i + " , @sub_" + "FCSbz" + "_" + i + "  )";
             alsql.Add(INSERTsql);
         }
 
+        //更新总金额
+        string upsql = "UPDATE  ZZZ_xiaoshoufahuo SET FCzje=(select isnull(sum(FCjine),0) from ZZZ_xiaoshoufahuo_sb where FCS_FCID=@FCID) where  FCID=@FCID ";
+        alsql.Add(upsql);
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
 
@@ -355,6 +360,9 @@ public class NoReSet_160713000058
                 string INSERTsql = "INSERT INTO ZZZ_xiaoshoufahuo_sb ( FCSID, FCS_FCID, FCSbh,FClb, FCSsl,FCbxqx,FCdanjia,FCjine, FCSbz ) VALUES(@sub_" + "FCSID" + "_" + i + ", @sub_MainID, @sub_" + "FCSbh" + "_" + i + ",@sub_" + "FClb" + "_" + i + ", @sub_" + "FCSsl" + "_" + i + " , @sub_" + "FCbxqx" + "_" + i + "  , @sub_" + "FCdanjia" + "_" + i + "  , @sub_" + "FCjine" + "_" + i + " , @sub_" + "FCSbz" + "_" + i + "  )";
                 alsql.Add(INSERTsql);
             }
+            //更新总金额
+            string upsql = "UPDATE  ZZZ_xiaoshoufahuo SET FCzje=(select isnull(sum(FCjine),0) from ZZZ_xiaoshoufahuo_sb where FCS_FCID=@FCID) where  FCID=@FCID ";
+            alsql.Add(upsql);
 
         }
 
@@ -546,7 +554,7 @@ public class NoReSet_160713000058
                 dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "保存失败，只有提交状态或审核状态才允许关闭。";
                 return dsreturn;
             }
-            alsql.Add("UPDATE ZZZ_xiaoshoufahuo SET  FCzhuangtai='关闭'  where FCzhuangtai in ('提交','审核') and FCID =@FCID");
+            alsql.Add("UPDATE ZZZ_xiaoshoufahuo SET  FCzhuangtai='关闭'  where FCzhuangtai in ('提交','审核') and Len(FC_erp_danhao) < 5 and FCID =@FCID");
         }
 
 
