@@ -77,7 +77,12 @@ public class NoReSet_160921000058
  
 
         alsql.Add("INSERT INTO ZZZ_gonggao(GID, Gtitle, Gneirong, Glaiyuan, Gaddren, Gzt) VALUES(@GID, @Gtitle, @Gneirong, @Glaiyuan, @Gaddren, @Gzt)");
- 
+
+        if (ht_forUI["Gzt"].ToString() == "显示")
+        {
+            alsql.Add("INSERT INTO  auth_znx(touser, msgtitle, msurl)  select  UAid as touser, '有新的公告发布' as msgtitle, '/adminht/corepage/bas/list_ss_gonggao.aspx' as  msurl  from ZZZ_userinfo where zhuangtai='在职' ");
+        }
+      
 
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
