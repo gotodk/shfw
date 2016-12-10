@@ -63,9 +63,10 @@ public class NoReSet_160427000033
         param.Add("@Emingcheng", ht_forUI["Emingcheng"].ToString());
         param.Add("@Eleixing", ht_forUI["Eleixing"].ToString());
         param.Add("@Epinyin", ht_forUI["Epinyin"].ToString());
-        param.Add("@Ebeizhu", ht_forUI["Ebeizhu"].ToString()); 
+        param.Add("@Ebeizhu", ht_forUI["Ebeizhu"].ToString());
+        param.Add("@Ebzgs", ht_forUI["Ebzgs"].ToString());
 
-        alsql.Add("INSERT INTO   ZZZ_YZCW(EID, Emingcheng, Eleixing, Epinyin, Ebeizhu) VALUES(@EID, @Emingcheng, @Eleixing, @Epinyin, @Ebeizhu)");
+        alsql.Add("INSERT INTO   ZZZ_YZCW(EID, Emingcheng, Eleixing, Epinyin, Ebeizhu,Ebzgs) VALUES(@EID, @Emingcheng, @Eleixing, @Epinyin, @Ebeizhu,@Ebzgs)");
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
 
@@ -120,9 +121,9 @@ public class NoReSet_160427000033
         param.Add("@Eleixing", ht_forUI["Eleixing"].ToString());
         param.Add("@Epinyin", ht_forUI["Epinyin"].ToString());
         param.Add("@Ebeizhu", ht_forUI["Ebeizhu"].ToString());
+        param.Add("@Ebzgs", ht_forUI["Ebzgs"].ToString());
 
-
-        alsql.Add("UPDATE ZZZ_YZCW SET   Emingcheng=@Emingcheng, Eleixing=@Eleixing, Epinyin=@Epinyin, Ebeizhu=@Ebeizhu  where EID=@EID ");
+        alsql.Add("UPDATE ZZZ_YZCW SET   Emingcheng=@Emingcheng, Eleixing=@Eleixing, Epinyin=@Epinyin, Ebeizhu=@Ebeizhu,Ebzgs=@Ebzgs  where EID=@EID ");
    
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);

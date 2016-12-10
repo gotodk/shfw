@@ -281,8 +281,9 @@ public class NoReSet_160427000035
             param.Add("@sub_" + "bjmingcheng" + "_" + i, subdt_cw.Rows[i]["故障名称"].ToString());
             param.Add("@sub_" + "bjleixing" + "_" + i, subdt_cw.Rows[i]["故障类型"].ToString());
             param.Add("@sub_" + "bjbeizhu" + "_" + i, subdt_cw.Rows[i]["备注"].ToString());
-           
-            string INSERTsql = "INSERT INTO ZZZ_FWBG_baojing ( bjid, bj_GID, bj_EID, bjmingcheng, bjleixing, bjbeizhu) VALUES(@sub_" + "bjid" + "_" + i + ", @sub_MainID, @sub_" + "bj_EID" + "_" + i + ", @sub_" + "bjmingcheng" + "_" + i + ", @sub_" + "bjleixing" + "_" + i + ", @sub_" + "bjbeizhu" + "_" + i + " )";
+            param.Add("@sub_" + "bjbzgs" + "_" + i, subdt_cw.Rows[i]["标准工时"].ToString());
+
+            string INSERTsql = "INSERT INTO ZZZ_FWBG_baojing ( bjid, bj_GID, bj_EID, bjmingcheng, bjleixing, bjbeizhu,bjbzgs) VALUES(@sub_" + "bjid" + "_" + i + ", @sub_MainID, @sub_" + "bj_EID" + "_" + i + ", @sub_" + "bjmingcheng" + "_" + i + ", @sub_" + "bjleixing" + "_" + i + ", @sub_" + "bjbeizhu" + "_" + i + ", @sub_" + "bjbzgs" + "_" + i + " )";
             alsql.Add(INSERTsql);
         }
 
@@ -548,8 +549,9 @@ public class NoReSet_160427000035
                 param.Add("@sub_" + "bjmingcheng" + "_" + i, subdt_cw.Rows[i]["故障名称"].ToString());
                 param.Add("@sub_" + "bjleixing" + "_" + i, subdt_cw.Rows[i]["故障类型"].ToString());
                 param.Add("@sub_" + "bjbeizhu" + "_" + i, subdt_cw.Rows[i]["备注"].ToString());
+                param.Add("@sub_" + "bjbzgs" + "_" + i, subdt_cw.Rows[i]["标准工时"].ToString());
 
-                string INSERTsql = "INSERT INTO ZZZ_FWBG_baojing ( bjid, bj_GID, bj_EID, bjmingcheng, bjleixing, bjbeizhu) VALUES(@sub_" + "bjid" + "_" + i + ", @sub_MainID, @sub_" + "bj_EID" + "_" + i + ", @sub_" + "bjmingcheng" + "_" + i + ", @sub_" + "bjleixing" + "_" + i + ", @sub_" + "bjbeizhu" + "_" + i + " )";
+                string INSERTsql = "INSERT INTO ZZZ_FWBG_baojing ( bjid, bj_GID, bj_EID, bjmingcheng, bjleixing, bjbeizhu,bjbzgs) VALUES(@sub_" + "bjid" + "_" + i + ", @sub_MainID, @sub_" + "bj_EID" + "_" + i + ", @sub_" + "bjmingcheng" + "_" + i + ", @sub_" + "bjleixing" + "_" + i + ", @sub_" + "bjbeizhu" + "_" + i + ", @sub_" + "bjbzgs" + "_" + i + " )";
                 alsql.Add(INSERTsql);
             }
 
