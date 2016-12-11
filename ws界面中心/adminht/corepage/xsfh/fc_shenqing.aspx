@@ -360,9 +360,10 @@
 
 
             //添加同步按钮
-            $("#reloaddb").after("<button class='btn btn-white btn-info btn-bold' id='eastongbu'><i class='ace-icon fa fa-undo red2'></i>尝试同步EAS批号</button>");
+            $("#reloaddb").after("<button class='btn  btn pull-right ' id='eastongbu'><i class='ace-icon fa fa-undo red2'></i>尝试同步EAS批号</button>--");
 
             $(document).on('click', "#eastongbu", function () {
+ 
 
                 zdy_ajaxdb("");
 
@@ -372,11 +373,15 @@
             function callback_zdy_ajaxdb(html) {
                 var ss = new Array()
                 ss = html.split("|");
-                bootbox.alert(html);
-                for (var i = 0; i < ss.length; i++) {
-                     
-                    $("#gbox_grid-table-subtable-160713000991").setCell(i, '设备档案序列号', ss[i]);
+                
+                var ids = $('#grid-table-subtable-160713000991').getDataIDs();//返回数据表的ID数组["66","39"..]  
+                var len = ids.length;
+                bootbox.alert("尝试同步获取到的序列号：" + html);
+                for (var i = 0; i < len; i++) {
+                 
+                    $('#grid-table-subtable-160713000991').setCell(ids[i], '设备档案序列号', ss[i]);
                 }
+
             };
             function zdy_ajaxdb(cs) {
                 $.ajax({
