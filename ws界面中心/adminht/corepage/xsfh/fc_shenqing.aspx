@@ -353,5 +353,45 @@
         });
         </script>
 
+
+    <!-- eas批号同步按钮 -->
+    <script type="text/javascript">
+        jQuery(function ($) {
+
+
+            //添加同步按钮
+            $("#reloaddb").after("<button class='btn btn-white btn-info btn-bold' id='eastongbu'><i class='ace-icon fa fa-undo red2'></i>尝试同步EAS批号</button>");
+
+            $(document).on('click', "#eastongbu", function () {
+
+                zdy_ajaxdb("");
+
+            });
+
+            
+            function callback_zdy_ajaxdb(html) {
+                var ss = new Array()
+                ss = html.split("|");
+                bootbox.alert(html);
+                for (var i = 0; i < ss.length; i++) {
+                     
+                    $("#gbox_grid-table-subtable-160713000991").setCell(i, '设备档案序列号', ss[i]);
+                }
+            };
+            function zdy_ajaxdb(cs) {
+                $.ajax({
+                    type: "POST",
+                    url: "/adminht/corepage/xsfh/sceas_c_ajax.aspx?guid=" + randomnumber(),
+                    dataType: "html",
+                    data: "dhdh=" + getUrlParam("idforedit"),
+                    success: callback_zdy_ajaxdb, //请求成功
+                    error: errorForAjax//请求出错 
+                    //complete: complete//请求完成
+                });
+
+            };
+
+                 });
+        </script>
 </asp:Content>
 

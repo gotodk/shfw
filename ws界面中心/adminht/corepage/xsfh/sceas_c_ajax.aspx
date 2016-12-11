@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="sceas_c_ajax.aspx.cs" Inherits="sceas_c_ajax" %>
