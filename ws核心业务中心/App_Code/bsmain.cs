@@ -1068,7 +1068,7 @@ public class bsmain : System.Web.Services.WebService
 
             Hashtable return_ht = new Hashtable();
 
-            return_ht = I_DBL.RunParam_SQL("select 大区, 发货总金额, 服务报告数量 from View_yibiaopan_liebiao ORDER BY 大区", "数据记录", param);
+            return_ht = I_DBL.RunParam_SQL("select 大区, convert(decimal(10,2),发货总金额/10000) as 发货总金额, 服务报告数量 from View_yibiaopan_liebiao ORDER BY 大区", "数据记录", param);
 
 
             if ((bool)(return_ht["return_float"]))
@@ -1078,7 +1078,7 @@ public class bsmain : System.Web.Services.WebService
                 string shuju = "";
                 for (int i = 0; i < redb.Rows.Count; i++)
                 {
-                    shuju = shuju + "" + redb.Rows[i]["发货总金额"].ToString() + ",";
+                    shuju = shuju + "" + redb.Rows[i]["发货总金额"].ToString() + "万,";
                     shuju = shuju + "" + redb.Rows[i]["服务报告数量"].ToString() + ",";
                 }
                 shuju = shuju.TrimEnd(',');
@@ -1099,7 +1099,7 @@ public class bsmain : System.Web.Services.WebService
 
             Hashtable return_ht = new Hashtable();
 
-            return_ht = I_DBL.RunParam_SQL("select 大区, 发货总金额, 服务报告数量 from View_yibiaopan_liebiao_002 ORDER BY 大区", "数据记录", param);
+            return_ht = I_DBL.RunParam_SQL("select 大区,  convert(decimal(10,2),发货总金额/10000) as 发货总金额, 服务报告数量 from View_yibiaopan_liebiao_002 ORDER BY 大区", "数据记录", param);
 
 
             if ((bool)(return_ht["return_float"]))
@@ -1109,7 +1109,7 @@ public class bsmain : System.Web.Services.WebService
                 string shuju = "";
                 for (int i = 0; i < redb.Rows.Count; i++)
                 {
-                    shuju = shuju + "" + redb.Rows[i]["发货总金额"].ToString() + ",";
+                    shuju = shuju + "" + redb.Rows[i]["发货总金额"].ToString() + "万,";
                     shuju = shuju + "" + redb.Rows[i]["服务报告数量"].ToString() + ",";
                 }
                 shuju = shuju.TrimEnd(',');

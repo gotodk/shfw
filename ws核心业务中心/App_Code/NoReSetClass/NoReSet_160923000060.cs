@@ -123,6 +123,7 @@ public class NoReSet_160923000060
         DataSet dsmain = new DataSet();
         DataTable dbHead = new DataTable();
         dbHead.TableName = "dbHead";
+        dbHead.Columns.Add("操作类型", typeof(string));
         dbHead.Columns.Add("本地单号", typeof(string));
         dbHead.Columns.Add("事务类型", typeof(string));
         dbHead.Columns.Add("成本中心", typeof(string));
@@ -148,7 +149,7 @@ public class NoReSet_160923000060
         dbEntry.Columns.Add("子表主键", typeof(string));
         dsmain.Tables.Add(dbEntry);
 
-        dsmain.Tables["dbHead"].Rows.Add(new string[]{ "", "", "", "", "", "", "", "", "", "", "", "", "", "" });
+        dsmain.Tables["dbHead"].Rows.Add(new string[]{ "","", "", "", "", "", "", "", "", "", "", "", "", "", "" });
         dsmain.Tables["dbHead"].Rows[0]["操作类型"] = "0";
         dsmain.Tables["dbHead"].Rows[0]["本地单号"] = ht_forUI["idforedit"].ToString();
         dsmain.Tables["dbHead"].Rows[0]["事务类型"] = ht_forUI["shiwuleixing"].ToString();
