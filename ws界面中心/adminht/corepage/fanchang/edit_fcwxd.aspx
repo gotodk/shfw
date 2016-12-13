@@ -195,7 +195,7 @@
 
                 if ($("#fifsssss_FCwx_jyzt").text() == "未检验" && getUrlParam("caozuo") == "jianyan") {
                     var bjm = "rcjygo";
-                    var bjm_wenben = "入长检验";
+                    var bjm_wenben = "入厂检验";
                     var bjm_tubiao = "fa-check blue";
 
                     $("#myTab").append("<li class='c_" + bjm + "_top'><button class='btn btn-white btn-info btn-bold' id='" + bjm + "_top'><i class='ace-icon fa " + bjm_tubiao + "'></i>" + bjm_wenben + "</button></li><li class='c_" + bjm + "_top'>&nbsp;&nbsp;</li>");
