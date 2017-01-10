@@ -573,7 +573,7 @@ public class NoReSet_160713000058
                 dsreturn.Tables["返回值单条"].Rows[0]["提示文本"] = "保存失败，只有提交状态或审核状态才允许关闭。";
                 return dsreturn;
             }
-            alsql.Add("UPDATE ZZZ_xiaoshoufahuo SET  FCzhuangtai='关闭'  where FCzhuangtai in ('提交','审核') and Len(FC_erp_danhao) < 5 and FCID =@FCID");
+            alsql.Add("UPDATE ZZZ_xiaoshoufahuo SET  FCzhuangtai='关闭'  where FCzhuangtai in ('提交','审核') and isnull(Len(FC_erp_danhao),0) < 5 and FCID =@FCID");
         }
 
 
