@@ -114,10 +114,17 @@
                      $("#gview_grid-table-subtable-160427000666").find("input[name='金额']").val((zz_sjsj * zz_shuliang).toFixed(2));
 
                      //自动计算报告总金额
+                     var aa_gsje = $("#grid-table-subtable-160427000665").getCol("工时金额", false, "sum");
                      var aa_zbje = $("#grid-table-subtable-160427000666").getCol("金额", false, "sum");
-                     //var aa_Gjishufuwufei = $("#Gjishufuwufei").val();
-                     //var aa_zj = aa_zbje*1 + aa_Gjishufuwufei*1;
-                     //$("#Gzongjia").val(aa_zj.toFixed(2));
+                     $("#Gjishufuwufei").val(aa_gsje.toFixed(2));
+                     $("#Ggongshi").val(aa_zbje.toFixed(2));
+
+                     var aa_tt1 = $("#Gxcpjzfy").val();
+                     var aa_tt2 = $("#Gquyufy").val();
+
+                     var aa_zongjia = aa_gsje * 1 + aa_zbje * 1 + aa_tt1 * 1 + aa_tt2*1;
+                      
+                     $("#Gzongjia").val(aa_zongjia.toFixed(2));
 
                      //弹窗特殊条件，隐藏的弹窗的条件
                      var khbh_str = $("#G_YYID").val();
