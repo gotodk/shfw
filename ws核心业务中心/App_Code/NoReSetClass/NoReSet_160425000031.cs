@@ -79,6 +79,8 @@ public class NoReSet_160425000031
         param.Add("@Sshouming", ht_forUI["Sshouming"].ToString());
         param.Add("@Sxiaoshoujiage", ht_forUI["Sxiaoshoujiage"].ToString());
 
+        param.Add("@Ssfby", ht_forUI["Ssfby"].ToString());
+
         if (ht_forUI.Contains("allpath_file1"))
         { param.Add("@Sfujian", ht_forUI["allpath_file1"].ToString()); }
         else
@@ -86,7 +88,7 @@ public class NoReSet_160425000031
             param.Add("@Sfujian", "");
         }
 
-        alsql.Add("INSERT INTO   ZZZ_WFSB(SID, S_YYID, Skeshi, S_SBID,Smingcheng,Sxinghao, Sbanben, Schuchangriqi, Sanzhuangriqi, Sbaoxiudaoqi,Sbaoyangdaoqi, Schenbenjia,   Sbaoxiuqixian, Sbaoyangzhouqi, Szhuangtai, Scaigouqudao, Sdailishang,   Sshouming, Sxiaoshoujiage,Sfujian ) VALUES(@SID, @S_YYID, @Skeshi, @S_SBID,@Smingcheng,@Sxinghao, @Sbanben, @Schuchangriqi, @Sanzhuangriqi, @Sbaoxiudaoqi,@Sbaoyangdaoqi, @Schenbenjia,   @Sbaoxiuqixian, @Sbaoyangzhouqi, @Szhuangtai, @Scaigouqudao, @Sdailishang,   @Sshouming, @Sxiaoshoujiage,@Sfujian)");
+        alsql.Add("INSERT INTO   ZZZ_WFSB(SID, S_YYID, Skeshi, S_SBID,Smingcheng,Sxinghao, Sbanben, Schuchangriqi, Sanzhuangriqi, Sbaoxiudaoqi,Sbaoyangdaoqi, Schenbenjia,   Sbaoxiuqixian, Sbaoyangzhouqi, Szhuangtai, Scaigouqudao, Sdailishang,   Sshouming, Sxiaoshoujiage,Sfujian,Ssfby ) VALUES(@SID, @S_YYID, @Skeshi, @S_SBID,@Smingcheng,@Sxinghao, @Sbanben, @Schuchangriqi, @Sanzhuangriqi, @Sbaoxiudaoqi,@Sbaoyangdaoqi, @Schenbenjia,   @Sbaoxiuqixian, @Sbaoyangzhouqi, @Szhuangtai, @Scaigouqudao, @Sdailishang,   @Sshouming, @Sxiaoshoujiage,@Sfujian,@Ssfby)");
 
 
 
@@ -200,6 +202,8 @@ public class NoReSet_160425000031
         param.Add("@Sshouming", ht_forUI["Sshouming"].ToString());
         param.Add("@Sxiaoshoujiage", ht_forUI["Sxiaoshoujiage"].ToString());
 
+        param.Add("@Ssfby", ht_forUI["Ssfby"].ToString());
+
         if (ht_forUI.Contains("allpath_file1"))
         { param.Add("@Sfujian", ht_forUI["allpath_file1"].ToString()); }
         else
@@ -207,7 +211,7 @@ public class NoReSet_160425000031
             param.Add("@Sfujian", "");
         }
 
-        alsql.Add("UPDATE ZZZ_WFSB SET S_YYID=@S_YYID, Skeshi=@Skeshi, S_SBID=@S_SBID,Smingcheng=@Smingcheng,Sxinghao=@Sxinghao, Sbanben=@Sbanben, Schuchangriqi=@Schuchangriqi, Sanzhuangriqi=@Sanzhuangriqi, Sbaoxiudaoqi=@Sbaoxiudaoqi,Sbaoyangdaoqi=@Sbaoyangdaoqi, Schenbenjia=@Schenbenjia,   Sbaoxiuqixian=@Sbaoxiuqixian, Sbaoyangzhouqi=@Sbaoyangzhouqi, Szhuangtai=@Szhuangtai, Scaigouqudao=@Scaigouqudao, Sdailishang=@Sdailishang,   Sshouming=@Sshouming, Sxiaoshoujiage=@Sxiaoshoujiage ,Sfujian=@Sfujian where SID=@SID ");
+        alsql.Add("UPDATE ZZZ_WFSB SET S_YYID=@S_YYID, Skeshi=@Skeshi, S_SBID=@S_SBID,Smingcheng=@Smingcheng,Sxinghao=@Sxinghao, Sbanben=@Sbanben, Schuchangriqi=@Schuchangriqi, Sanzhuangriqi=@Sanzhuangriqi, Sbaoxiudaoqi=@Sbaoxiudaoqi,Sbaoyangdaoqi=@Sbaoyangdaoqi, Schenbenjia=@Schenbenjia,   Sbaoxiuqixian=@Sbaoxiuqixian, Sbaoyangzhouqi=@Sbaoyangzhouqi, Szhuangtai=@Szhuangtai, Scaigouqudao=@Scaigouqudao, Sdailishang=@Sdailishang,   Sshouming=@Sshouming, Sxiaoshoujiage=@Sxiaoshoujiage ,Sfujian=@Sfujian,Ssfby=@Ssfby where SID=@SID ");
 
         //记录序列号修改记录
      
