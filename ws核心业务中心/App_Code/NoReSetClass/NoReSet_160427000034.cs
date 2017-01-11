@@ -77,7 +77,10 @@ public class NoReSet_160427000034
         param.Add("@Hshifouzhiqu", ht_forUI["Hshifouzhiqu"].ToString());
         param.Add("@Hbeizhu", ht_forUI["Hbeizhu"].ToString());
 
-        alsql.Add("INSERT INTO ZZZ_HTGL(HID, H_YYID, Eleixing, Hqianshuren, Hzongjia, Hqianshuriqi, Hfukuanriqi, Hshouuanjin, Hfukuanzhouqi,   Hshifouzhiqu, Hbeizhu) VALUES(@HID, @H_YYID, @Eleixing, @Hqianshuren, @Hzongjia, @Hqianshuriqi, @Hfukuanriqi, @Hshouuanjin, @Hfukuanzhouqi,   @Hshifouzhiqu, @Hbeizhu)");
+        param.Add("@Hdailishang", ht_forUI["Hdailishang"].ToString());
+  
+
+        alsql.Add("INSERT INTO ZZZ_HTGL(HID, H_YYID, Eleixing, Hqianshuren, Hzongjia, Hqianshuriqi, Hfukuanriqi, Hshouuanjin, Hfukuanzhouqi,   Hshifouzhiqu, Hbeizhu,Hdailishang) VALUES(@HID, @H_YYID, @Eleixing, @Hqianshuren, @Hzongjia, @Hqianshuriqi, @Hfukuanriqi, @Hshouuanjin, @Hfukuanzhouqi,   @Hshifouzhiqu, @Hbeizhu,@Hdailishang)");
 
  
         //遍历子表， 插入(设备信息)
@@ -203,7 +206,9 @@ public class NoReSet_160427000034
         param.Add("@Hshifouzhiqu", ht_forUI["Hshifouzhiqu"].ToString());
         param.Add("@Hbeizhu", ht_forUI["Hbeizhu"].ToString());
 
-        alsql.Add("UPDATE ZZZ_HTGL SET   H_YYID=@H_YYID, Eleixing=@Eleixing, Hqianshuren=@Hqianshuren, Hzongjia=@Hzongjia, Hqianshuriqi=@Hqianshuriqi, Hfukuanriqi=@Hfukuanriqi, Hshouuanjin=@Hshouuanjin, Hfukuanzhouqi=@Hfukuanzhouqi,   Hshifouzhiqu=@Hshifouzhiqu, Hbeizhu=@Hbeizhu where HID=@HID ");
+        param.Add("@Hdailishang", ht_forUI["Hdailishang"].ToString());
+
+        alsql.Add("UPDATE ZZZ_HTGL SET   H_YYID=@H_YYID, Eleixing=@Eleixing, Hqianshuren=@Hqianshuren, Hzongjia=@Hzongjia, Hqianshuriqi=@Hqianshuriqi, Hfukuanriqi=@Hfukuanriqi, Hshouuanjin=@Hshouuanjin, Hfukuanzhouqi=@Hfukuanzhouqi,   Hshifouzhiqu=@Hshifouzhiqu, Hbeizhu=@Hbeizhu,Hdailishang=@Hdailishang where HID=@HID ");
 
 
         //修改合同编号

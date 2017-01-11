@@ -103,6 +103,30 @@
 
 
 
+                 var dfx_str_khdl = "#show_searchopenyhbspgogo_Hdailishang";
+                 var oldzhi_khdl = $(dfx_str_khdl).text();
+
+                 var jiancha_khdl = window.setInterval(function () {
+
+                     //带入字段
+                     if ($(dfx_str_khdl).text() != oldzhi_khdl) {
+                         var re = /\[.*?\]/ig;
+                         var arr = $(dfx_str_khdl).text().match(re);
+
+                         if (arr != null) {//如果能匹配成功即arr数组不为空，循环输出结果
+                             for (var i = 0; i < arr.length; i++) {
+                                 var arr_z = arr[i].split(':');
+                                 if (arr_z[0] == "[客户名称")
+                                 { $("#dailishangname").val($.trim(arr_z[1]).replace("]", "")); }
+
+                             }
+                         }
+
+                         oldzhi_khdl = $(dfx_str_khdl).text();
+                     }
+                 }, 500);
+
+
 
 
                  //设备序列号子表弹窗

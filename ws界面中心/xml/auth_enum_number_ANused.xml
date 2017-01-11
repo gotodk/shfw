@@ -602,16 +602,6 @@
     <ANused>1</ANused>
   </Unumber1>
   <Unumber1>
-    <ANID>E-A4A600B1EA44-1A206303-F1EF-4FBD-910F</ANID>
-    <ANClass>Unumber1</ANClass>
-    <ANClassName>后台菜单权限</ANClassName>
-    <ANBaseName>物料查询</ANBaseName>
-    <ANBaseNumber>576460752303423488</ANBaseNumber>
-    <ANBaseNumber_p>59</ANBaseNumber_p>
-    <ANextendID>185</ANextendID>
-    <ANused>1</ANused>
-  </Unumber1>
-  <Unumber1>
     <ANID>E-A4A600B1E8EB-BCE26264-DF43-401F-AAE9</ANID>
     <ANClass>Unumber1</ANClass>
     <ANClassName>后台菜单权限</ANClassName>
@@ -689,6 +679,16 @@
     <ANBaseNumber>68719476736</ANBaseNumber>
     <ANBaseNumber_p>36</ANBaseNumber_p>
     <ANextendID>81</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
+    <ANID>E-A4A600B1EA44-1A206303-F1EF-4FBD-910F</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>自助查询</ANBaseName>
+    <ANBaseNumber>576460752303423488</ANBaseNumber>
+    <ANBaseNumber_p>59</ANBaseNumber_p>
+    <ANextendID>185</ANextendID>
     <ANused>1</ANused>
   </Unumber1>
   <Unumber3>

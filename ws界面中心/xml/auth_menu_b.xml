@@ -66,7 +66,7 @@
   <菜单表>
     <ID>3178</ID>
     <SortID>185</SortID>
-    <SortName>物料查询</SortName>
+    <SortName>自助查询</SortName>
     <SortParentID>0</SortParentID>
     <SortParentPath>,</SortParentPath>
     <SortOrder>3</SortOrder>
@@ -76,7 +76,7 @@
     <m_ico>fa-search</m_ico>
     <m_show>不隐藏</m_show>
     <m_url_formenu_g />
-    <SortNameTree>├物料查询</SortNameTree>
+    <SortNameTree>├自助查询</SortNameTree>
     <SortMoveUp>2</SortMoveUp>
     <SortMoveDown>-16</SortMoveDown>
   </菜单表>
