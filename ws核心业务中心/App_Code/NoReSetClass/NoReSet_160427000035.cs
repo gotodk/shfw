@@ -191,6 +191,10 @@ public class NoReSet_160427000035
 
         param.Add("@Gjishufuwufei", ht_forUI["Gjishufuwufei"].ToString());
         param.Add("@Ggongshi", ht_forUI["Ggongshi"].ToString());
+
+        param.Add("@Gxcpjzfy", ht_forUI["Gxcpjzfy"].ToString());
+        param.Add("@Gquyufy", ht_forUI["Gquyufy"].ToString());
+
         param.Add("@Gneibujiesuan", ht_forUI["Gneibujiesuan"].ToString());
         param.Add("@Gzongjia", ht_forUI["Gzongjia"].ToString());
         param.Add("@Gkehuyijian", ht_forUI["Gkehuyijian"].ToString());
@@ -203,7 +207,7 @@ public class NoReSet_160427000035
             param.Add("@Gfujian", "");
         }
 
-        alsql.Add("INSERT INTO ZZZ_FWBG(GID, Gfwlx, Gtianxieren, Gbylx, G_BID, G_YYID, Gkeshi, Glianxiren, Gsbtime, Gkehuyaoqiu,  Gguzhang_a, Gguzhang_b, Gguocheng_a, Gguocheng_b, Gjiedan, Gzhuangtai,  Gkaigongtime, Gwangongtime, Gjishufuwufei, Ggongshi, Gneibujiesuan, Gzongjia, Gkehuyijian, Gbeizhu, Gfujian) VALUES(@GID, @Gfwlx, @Gtianxieren, @Gbylx, @G_BID, @G_YYID, @Gkeshi, @Glianxiren, @Gsbtime, @Gkehuyaoqiu,  @Gguzhang_a, @Gguzhang_b, @Gguocheng_a, @Gguocheng_b, @Gjiedan, @Gzhuangtai,  @Gkaigongtime, @Gwangongtime, @Gjishufuwufei, @Ggongshi, @Gneibujiesuan, @Gzongjia, @Gkehuyijian, @Gbeizhu, @Gfujian )");
+        alsql.Add("INSERT INTO ZZZ_FWBG(GID, Gfwlx, Gtianxieren, Gbylx, G_BID, G_YYID, Gkeshi, Glianxiren, Gsbtime, Gkehuyaoqiu,  Gguzhang_a, Gguzhang_b, Gguocheng_a, Gguocheng_b, Gjiedan, Gzhuangtai,  Gkaigongtime, Gwangongtime, Gjishufuwufei, Ggongshi,Gxcpjzfy,Gquyufy, Gneibujiesuan, Gzongjia, Gkehuyijian, Gbeizhu, Gfujian) VALUES(@GID, @Gfwlx, @Gtianxieren, @Gbylx, @G_BID, @G_YYID, @Gkeshi, @Glianxiren, @Gsbtime, @Gkehuyaoqiu,  @Gguzhang_a, @Gguzhang_b, @Gguocheng_a, @Gguocheng_b, @Gjiedan, @Gzhuangtai,  @Gkaigongtime, @Gwangongtime, @Gjishufuwufei, @Ggongshi,@Gxcpjzfy,@Gquyufy, @Gneibujiesuan, @Gzongjia, @Gkehuyijian, @Gbeizhu, @Gfujian )");
 
  
       
@@ -283,7 +287,10 @@ public class NoReSet_160427000035
             param.Add("@sub_" + "bjbeizhu" + "_" + i, subdt_cw.Rows[i]["备注"].ToString());
             param.Add("@sub_" + "bjbzgs" + "_" + i, subdt_cw.Rows[i]["标准工时"].ToString());
 
-            string INSERTsql = "INSERT INTO ZZZ_FWBG_baojing ( bjid, bj_GID, bj_EID, bjmingcheng, bjleixing, bjbeizhu,bjbzgs) VALUES(@sub_" + "bjid" + "_" + i + ", @sub_MainID, @sub_" + "bj_EID" + "_" + i + ", @sub_" + "bjmingcheng" + "_" + i + ", @sub_" + "bjleixing" + "_" + i + ", @sub_" + "bjbeizhu" + "_" + i + ", @sub_" + "bjbzgs" + "_" + i + " )";
+            param.Add("@sub_" + "bjbzgs_dj" + "_" + i, subdt_cw.Rows[i]["标准工时单价"].ToString());
+            param.Add("@sub_" + "bjbzgsje" + "_" + i, subdt_cw.Rows[i]["工时金额"].ToString());
+
+            string INSERTsql = "INSERT INTO ZZZ_FWBG_baojing ( bjid, bj_GID, bj_EID, bjmingcheng, bjleixing, bjbeizhu,bjbzgs,bjbzgs_dj,bjbzgsje) VALUES(@sub_" + "bjid" + "_" + i + ", @sub_MainID, @sub_" + "bj_EID" + "_" + i + ", @sub_" + "bjmingcheng" + "_" + i + ", @sub_" + "bjleixing" + "_" + i + ", @sub_" + "bjbeizhu" + "_" + i + ", @sub_" + "bjbzgs" + "_" + i + ", @sub_" + "bjbzgs_dj" + "_" + i + ", @sub_" + "bjbzgsje" + "_" + i + " )";
             alsql.Add(INSERTsql);
         }
 
@@ -452,6 +459,10 @@ public class NoReSet_160427000035
 
             param.Add("@Gjishufuwufei", ht_forUI["Gjishufuwufei"].ToString());
             param.Add("@Ggongshi", ht_forUI["Ggongshi"].ToString());
+
+            param.Add("@Gxcpjzfy", ht_forUI["Gxcpjzfy"].ToString());
+            param.Add("@Gquyufy", ht_forUI["Gquyufy"].ToString());
+
             param.Add("@Gneibujiesuan", ht_forUI["Gneibujiesuan"].ToString());
             param.Add("@Gzongjia", ht_forUI["Gzongjia"].ToString());
             param.Add("@Gkehuyijian", ht_forUI["Gkehuyijian"].ToString());
@@ -464,7 +475,7 @@ public class NoReSet_160427000035
                 param.Add("@Gfujian", "");
             }
 
-            alsql.Add("UPDATE ZZZ_FWBG SET Gfwlx=@Gfwlx, Gbylx=@Gbylx, G_BID=@G_BID, G_YYID=@G_YYID, Gkeshi=@Gkeshi, Glianxiren=@Glianxiren, Gsbtime=@Gsbtime, Gkehuyaoqiu=@Gkehuyaoqiu,  Gguzhang_a=@Gguzhang_a, Gguzhang_b=@Gguzhang_b, Gguocheng_a=@Gguocheng_a, Gguocheng_b=@Gguocheng_b, Gjiedan=@Gjiedan, Gzhuangtai=@Gzhuangtai,  Gkaigongtime=@Gkaigongtime, Gwangongtime=@Gwangongtime, Gjishufuwufei=@Gjishufuwufei, Ggongshi=@Ggongshi, Gneibujiesuan=@Gneibujiesuan, Gzongjia=@Gzongjia, Gkehuyijian=@Gkehuyijian, Gbeizhu=@Gbeizhu, Gfujian=@Gfujian where GID=@GID ");
+            alsql.Add("UPDATE ZZZ_FWBG SET Gfwlx=@Gfwlx, Gbylx=@Gbylx, G_BID=@G_BID, G_YYID=@G_YYID, Gkeshi=@Gkeshi, Glianxiren=@Glianxiren, Gsbtime=@Gsbtime, Gkehuyaoqiu=@Gkehuyaoqiu,  Gguzhang_a=@Gguzhang_a, Gguzhang_b=@Gguzhang_b, Gguocheng_a=@Gguocheng_a, Gguocheng_b=@Gguocheng_b, Gjiedan=@Gjiedan, Gzhuangtai=@Gzhuangtai,  Gkaigongtime=@Gkaigongtime, Gwangongtime=@Gwangongtime, Gjishufuwufei=@Gjishufuwufei, Ggongshi=@Ggongshi,Gxcpjzfy=@Gxcpjzfy,Gquyufy=@Gquyufy, Gneibujiesuan=@Gneibujiesuan, Gzongjia=@Gzongjia, Gkehuyijian=@Gkehuyijian, Gbeizhu=@Gbeizhu, Gfujian=@Gfujian where GID=@GID ");
 
 
             
@@ -551,7 +562,10 @@ public class NoReSet_160427000035
                 param.Add("@sub_" + "bjbeizhu" + "_" + i, subdt_cw.Rows[i]["备注"].ToString());
                 param.Add("@sub_" + "bjbzgs" + "_" + i, subdt_cw.Rows[i]["标准工时"].ToString());
 
-                string INSERTsql = "INSERT INTO ZZZ_FWBG_baojing ( bjid, bj_GID, bj_EID, bjmingcheng, bjleixing, bjbeizhu,bjbzgs) VALUES(@sub_" + "bjid" + "_" + i + ", @sub_MainID, @sub_" + "bj_EID" + "_" + i + ", @sub_" + "bjmingcheng" + "_" + i + ", @sub_" + "bjleixing" + "_" + i + ", @sub_" + "bjbeizhu" + "_" + i + ", @sub_" + "bjbzgs" + "_" + i + " )";
+                param.Add("@sub_" + "bjbzgs_dj" + "_" + i, subdt_cw.Rows[i]["标准工时单价"].ToString());
+                param.Add("@sub_" + "bjbzgsje" + "_" + i, subdt_cw.Rows[i]["工时金额"].ToString());
+
+                string INSERTsql = "INSERT INTO ZZZ_FWBG_baojing ( bjid, bj_GID, bj_EID, bjmingcheng, bjleixing, bjbeizhu,bjbzgs,bjbzgs_dj,bjbzgsje) VALUES(@sub_" + "bjid" + "_" + i + ", @sub_MainID, @sub_" + "bj_EID" + "_" + i + ", @sub_" + "bjmingcheng" + "_" + i + ", @sub_" + "bjleixing" + "_" + i + ", @sub_" + "bjbeizhu" + "_" + i + ", @sub_" + "bjbzgs" + "_" + i + ", @sub_" + "bjbzgs_dj" + "_" + i + ", @sub_" + "bjbzgsje" + "_" + i + " )";
                 alsql.Add(INSERTsql);
             }
 
