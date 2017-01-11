@@ -115,9 +115,9 @@
 
                      //自动计算报告总金额
                      var aa_zbje = $("#grid-table-subtable-160427000666").getCol("金额", false, "sum");
-                     var aa_Gjishufuwufei = $("#Gjishufuwufei").val();
-                     var aa_zj = aa_zbje*1 + aa_Gjishufuwufei*1;
-                     $("#Gzongjia").val(aa_zj.toFixed(2));
+                     //var aa_Gjishufuwufei = $("#Gjishufuwufei").val();
+                     //var aa_zj = aa_zbje*1 + aa_Gjishufuwufei*1;
+                     //$("#Gzongjia").val(aa_zj.toFixed(2));
 
                      //弹窗特殊条件，隐藏的弹窗的条件
                      var khbh_str = $("#G_YYID").val();
@@ -246,6 +246,16 @@
                                  if (arr_z[0] == "[标准工时") {
                                      //离弹窗最近的特定name的输入框  
                                      var zj = $(dfx_str_subyzcw).closest("tr").find("input[name='标准工时']");
+                                     zj.val($.trim(arr_z[1]).replace("]", ""));
+                                 }
+                                 if (arr_z[0] == "[标准工时单价") {
+                                     //离弹窗最近的特定name的输入框  
+                                     var zj = $(dfx_str_subyzcw).closest("tr").find("input[name='标准工时单价']");
+                                     zj.val($.trim(arr_z[1]).replace("]", ""));
+                                 }
+                                 if (arr_z[0] == "[标准工时金额") {
+                                     //离弹窗最近的特定name的输入框  
+                                     var zj = $(dfx_str_subyzcw).closest("tr").find("input[name='工时金额']");
                                      zj.val($.trim(arr_z[1]).replace("]", ""));
                                  }
                              }
