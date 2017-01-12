@@ -98,7 +98,21 @@
          }
      </script>
 
+                <!-- 强制添加列表特殊条件 -->
+    <script type="text/javascript">
+             jQuery(function ($) {
+                 //
+                 if (getUrlParam("cha") == "1") {
+                     $("#zheshiliebiaoquyu").attr('teshuwhere', "FCsbbh='" + getUrlParam("SID") + "'");
+                 }
+                 else {
 
+                 }
+                 
+ 
+        });
+
+        </script>
          
 </asp:Content>
 
