@@ -84,6 +84,8 @@ public class NoReSet_160429000036
         param.Add("@SBzhuangtai", ht_forUI["SBzhuangtai"].ToString());
         param.Add("@SBbeizhu", ht_forUI["SBbeizhu"].ToString());
 
+        param.Add("@u", ht_forUI["yhbsp_session_uer_UAid"].ToString());
+
         if (ht_forUI.Contains("allpath_file1"))
         { param.Add("@SBfujian", ht_forUI["allpath_file1"].ToString()); }
         else
@@ -91,7 +93,7 @@ public class NoReSet_160429000036
             param.Add("@SBfujian", "");
         }
 
-        alsql.Add("INSERT INTO ZZZ_SBLXBASE(SBID, SBmingcheng, SBxinghao, SBdanwei, SBchengbenjia, SBbaoxiuqixian, SBbaoyangzhouqi,  SBchanpinshouming, SBxiaoshoujiage, SBshengchanchang, SBerpbianma, SBzhuangtai, SBbeizhu,SBfujian ) VALUES(@SBID, @SBmingcheng, @SBxinghao, @SBdanwei, @SBchengbenjia, @SBbaoxiuqixian, @SBbaoyangzhouqi,  @SBchanpinshouming, @SBxiaoshoujiage, @SBshengchanchang, @SBerpbianma, @SBzhuangtai, @SBbeizhu,@SBfujian)");
+        alsql.Add("INSERT INTO ZZZ_SBLXBASE(SBID, SBmingcheng, SBxinghao, SBdanwei, SBchengbenjia, SBbaoxiuqixian, SBbaoyangzhouqi,  SBchanpinshouming, SBxiaoshoujiage, SBshengchanchang, SBerpbianma, SBzhuangtai, SBbeizhu,SBfujian ,SBupuser,SBuptime ) VALUES(@SBID, @SBmingcheng, @SBxinghao, @SBdanwei, @SBchengbenjia, @SBbaoxiuqixian, @SBbaoyangzhouqi,  @SBchanpinshouming, @SBxiaoshoujiage, @SBshengchanchang, @SBerpbianma, @SBzhuangtai, @SBbeizhu,@SBfujian,(select top 1 xingming from ZZZ_userinfo where UAid=@u),getdate())");
 
  
         //遍历子表， 插入 
@@ -117,7 +119,7 @@ public class NoReSet_160429000036
     
 
 
-            string INSERTsql = "INSERT INTO ZZZ_SBLXBASE_BB ( BBBID, BBB_SBID,  BBBbanben,   BBBshuoming ) VALUES(@sub_" + "id" + "_" + i + ", @sub_MainID, @sub_"+ "BBBbanben" + "_" + i + ", @sub_" + "BBBshuoming" + "_" + i + "    )";
+            string INSERTsql = "INSERT INTO ZZZ_SBLXBASE_BB ( BBBID, BBB_SBID,  BBBbanben,   BBBshuoming) VALUES(@sub_" + "id" + "_" + i + ", @sub_MainID, @sub_"+ "BBBbanben" + "_" + i + ", @sub_" + "BBBshuoming" + "_" + i + "    )";
             alsql.Add(INSERTsql);
         }
 
@@ -182,6 +184,8 @@ public class NoReSet_160429000036
         param.Add("@SBzhuangtai", ht_forUI["SBzhuangtai"].ToString());
         param.Add("@SBbeizhu", ht_forUI["SBbeizhu"].ToString());
 
+        param.Add("@u", ht_forUI["yhbsp_session_uer_UAid"].ToString());
+
         if (ht_forUI.Contains("allpath_file1"))
         { param.Add("@SBfujian", ht_forUI["allpath_file1"].ToString()); }
         else
@@ -189,7 +193,7 @@ public class NoReSet_160429000036
             param.Add("@SBfujian", "");
         }
 
-        alsql.Add("UPDATE ZZZ_SBLXBASE SET SBmingcheng=@SBmingcheng, SBxinghao=@SBxinghao, SBdanwei=@SBdanwei, SBchengbenjia=@SBchengbenjia, SBbaoxiuqixian=@SBbaoxiuqixian, SBbaoyangzhouqi=@SBbaoyangzhouqi,  SBchanpinshouming=@SBchanpinshouming, SBxiaoshoujiage=@SBxiaoshoujiage, SBshengchanchang=@SBshengchanchang, SBerpbianma=@SBerpbianma, SBzhuangtai=@SBzhuangtai, SBbeizhu=@SBbeizhu,SBfujian=@SBfujian  where SBID=@SBID ");
+        alsql.Add("UPDATE ZZZ_SBLXBASE SET SBmingcheng=@SBmingcheng, SBxinghao=@SBxinghao, SBdanwei=@SBdanwei, SBchengbenjia=@SBchengbenjia, SBbaoxiuqixian=@SBbaoxiuqixian, SBbaoyangzhouqi=@SBbaoyangzhouqi,  SBchanpinshouming=@SBchanpinshouming, SBxiaoshoujiage=@SBxiaoshoujiage, SBshengchanchang=@SBshengchanchang, SBerpbianma=@SBerpbianma, SBzhuangtai=@SBzhuangtai, SBbeizhu=@SBbeizhu,SBfujian=@SBfujian ,SBupuser=(select top 1 xingming from ZZZ_userinfo where UAid=@u),SBuptime=getdate() where SBID=@SBID ");
 
 
         //遍历子表，先删除，再插入，已有主键的不重新生成。

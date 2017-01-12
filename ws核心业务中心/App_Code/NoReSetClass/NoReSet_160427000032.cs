@@ -83,6 +83,8 @@ public class NoReSet_160427000032
         param.Add("@Lbaoxiuqi", ht_forUI["Lbaoxiuqi"].ToString());
         param.Add("@Lzhuangtai", ht_forUI["Lzhuangtai"].ToString());
 
+        param.Add("@u", ht_forUI["yhbsp_session_uer_UAid"].ToString());
+
         if (ht_forUI.Contains("allpath_file1"))
         { param.Add("@Lfujian", ht_forUI["allpath_file1"].ToString()); }
         else
@@ -90,7 +92,7 @@ public class NoReSet_160427000032
             param.Add("@Lfujian", "");
         }
 
-        alsql.Add("INSERT INTO   ZZZ_WFLJ(LID, Lmingcheng, Lguige, Ldanwei, Lpinyin, Lchengbenjia, Lzuidijia, Lshoujia, Lerpbianhao, Lbaoxiuqi,Lzhuangtai,Lfujian) VALUES(@LID, @Lmingcheng, @Lguige, @Ldanwei, @Lpinyin, @Lchengbenjia, @Lzuidijia, @Lshoujia, @Lerpbianhao, @Lbaoxiuqi,@Lzhuangtai,@Lfujian)");
+        alsql.Add("INSERT INTO   ZZZ_WFLJ(LID, Lmingcheng, Lguige, Ldanwei, Lpinyin, Lchengbenjia, Lzuidijia, Lshoujia, Lerpbianhao, Lbaoxiuqi,Lzhuangtai,Lfujian,Lupuser,Luptime) VALUES(@LID, @Lmingcheng, @Lguige, @Ldanwei, @Lpinyin, @Lchengbenjia, @Lzuidijia, @Lshoujia, @Lerpbianhao, @Lbaoxiuqi,@Lzhuangtai,@Lfujian,(select top 1 xingming from ZZZ_userinfo where UAid=@u),getdate())");
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
 
@@ -154,6 +156,8 @@ public class NoReSet_160427000032
         param.Add("@Lbaoxiuqi", ht_forUI["Lbaoxiuqi"].ToString());
         param.Add("@Lzhuangtai", ht_forUI["Lzhuangtai"].ToString());
 
+        param.Add("@u", ht_forUI["yhbsp_session_uer_UAid"].ToString());
+
         if (ht_forUI.Contains("allpath_file1"))
         { param.Add("@Lfujian", ht_forUI["allpath_file1"].ToString()); }
         else
@@ -161,7 +165,7 @@ public class NoReSet_160427000032
             param.Add("@Lfujian", "");
         }
 
-        alsql.Add("UPDATE ZZZ_WFLJ SET Lmingcheng=@Lmingcheng, Lguige=@Lguige, Ldanwei=@Ldanwei, Lpinyin=@Lpinyin, Lchengbenjia=@Lchengbenjia, Lzuidijia=@Lzuidijia, Lshoujia=@Lshoujia, Lerpbianhao=@Lerpbianhao, Lbaoxiuqi=@Lbaoxiuqi,Lzhuangtai=@Lzhuangtai,Lfujian=@Lfujian  where LID=@LID ");
+        alsql.Add("UPDATE ZZZ_WFLJ SET Lmingcheng=@Lmingcheng, Lguige=@Lguige, Ldanwei=@Ldanwei, Lpinyin=@Lpinyin, Lchengbenjia=@Lchengbenjia, Lzuidijia=@Lzuidijia, Lshoujia=@Lshoujia, Lerpbianhao=@Lerpbianhao, Lbaoxiuqi=@Lbaoxiuqi,Lzhuangtai=@Lzhuangtai,Lfujian=@Lfujian ,Lupuser=(select top 1 xingming from ZZZ_userinfo where UAid=@u),Luptime=getdate() where LID=@LID ");
    
 
         return_ht = I_DBL.RunParam_SQL(alsql, param);
