@@ -382,6 +382,16 @@
     <ANused>1</ANused>
   </Unumber1>
   <Unumber1>
+    <ANID>E-A4A600B1EA4D-92374AD8-8574-4A2E-B929</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>技术服务管理-存档服务报告</ANBaseName>
+    <ANBaseNumber>1152921504606846976</ANBaseNumber>
+    <ANBaseNumber_p>60</ANBaseNumber_p>
+    <ANextendID>191</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
     <ANID>E-A4A600B1E9CD-BA64B9B4-809F-4FB7-A9D6</ANID>
     <ANClass>Unumber1</ANClass>
     <ANClassName>后台菜单权限</ANClassName>
