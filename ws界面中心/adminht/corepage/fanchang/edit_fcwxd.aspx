@@ -202,7 +202,7 @@
                     //给特殊按钮添加事件，调用批量操作的接口
                     $(document).on('click', "#" + bjm + "_top", function () {
                         bootbox.dialog({
-                            message: "<form  id='myform_spanniu'>入长检验结果：<br/><textarea placeholder='请输入' class='limited col-xs-12' id='ddtj_FCwx_jianyanjieguo' name='ddtj_FCwx_jianyanjieguo' maxlength='500' rows='5' ></textarea></form><hr/>===========",
+                            message: "<form  id='myform_spanniu'>入厂检验结果：<br/><textarea placeholder='请输入' class='limited col-xs-12' id='ddtj_FCwx_jianyanjieguo' name='ddtj_FCwx_jianyanjieguo' maxlength='500' rows='5' ></textarea></form><hr/>===========",
                             title: bjm_wenben,
                             buttons: {
                                 Cancel: {
