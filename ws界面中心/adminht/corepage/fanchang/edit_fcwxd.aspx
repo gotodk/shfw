@@ -124,7 +124,7 @@
                     //给特殊按钮添加事件，调用批量操作的接口
                     $(document).on('click', "#" + bjm + "_top", function () {
                         bootbox.dialog({
-                            message: "点击按钮选择审核结果：<form  id='myform_spanniu'></form>",
+                            message: "点击按钮选择审核结果：<form  id='myform_spanniu'><input class='hidden' id='shenherenid' name='shenherenid'  type='text' title=''  value='<%=UserSession.唯一键%>'   /></form>",
                             title: bjm_wenben,
                             buttons: {
                                 Cancel: {

@@ -128,14 +128,16 @@ public class NoReSetDEL_160817000009
 
             //删除数据表里的数据 
             string[] ids = ht_forUI["xuanzhongzhi"].ToString().Split(',');
- 
+
+            param.Add("@FCwx_shren", ht_forUI["shenherenid"].ToString());
+          
             for (int d = 0; d < ids.Length; d++)
             {
                 if (ids[d].Trim() != "")
                 {
                     
                     param.Add("@FCID_" + d, ids[d]);
-                    alsql.Add("UPDATE ZZZ_fanchang SET  FCwx_zt='审核',FCwx_shsj=getdate()  where FCwx_zt='提交' and FCID =@FCID_" + d);
+                    alsql.Add("UPDATE ZZZ_fanchang SET  FCwx_zt='审核',FCwx_shsj=getdate(),FCwx_shren=@FCwx_shren+'('+(select top 1 isnull(xingming,'')  from ZZZ_userinfo where UAid=@FCwx_shren )+')'   where FCwx_zt='提交' and FCID =@FCID_" + d);
  
                 
 
@@ -196,12 +198,15 @@ public class NoReSetDEL_160817000009
 
             //删除数据表里的数据 
             string[] ids = ht_forUI["xuanzhongzhi"].ToString().Split(',');
+
+            param.Add("@shenherenid", ht_forUI["shenherenid"].ToString());
+
             for (int d = 0; d < ids.Length; d++)
             {
                 if (ids[d].Trim() != "")
                 {
                     param.Add("@FCID_" + d, ids[d]);
-                    alsql.Add("UPDATE ZZZ_fanchang SET  FCwx_zt='草稿',FCwx_shsj=getdate()  where FCwx_zt='提交' and FCID =@FCID_" + d);
+                    alsql.Add("UPDATE ZZZ_fanchang SET  FCwx_zt='草稿',FCwx_shsj=getdate(),FCwx_shsj=getdate(),FCwx_shren=@FCwx_shren+'('+(select top 1 isnull(xingming,'')  from ZZZ_userinfo where UAid=@FCwx_shren )+')'  where FCwx_zt='提交' and FCID =@FCID_" + d);
                 }
 
             }

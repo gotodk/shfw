@@ -236,6 +236,11 @@
                                      var zj = $(dfx_str_subtt_wbh).closest("tr").find("input[name='配件物料规格']");
                                      zj.val($.trim(arr_z[1]).replace("]", ""));
                                  }
+                                 if (arr_z[0] == "[售价") {
+                                     //离弹窗最近的特定name的输入框  
+                                     var zj = $(dfx_str_subtt_wbh).closest("tr").find("input[name='单价']");
+                                     zj.val($.trim(arr_z[1]).replace("]", ""));
+                                 }
                              }
                          }
 
