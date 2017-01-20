@@ -542,6 +542,16 @@
     <ANused>1</ANused>
   </Unumber1>
   <Unumber1>
+    <ANID>E-A4A600B1EA55-FFFCF7E2-2EED-4F62-85E2</ANID>
+    <ANClass>Unumber1</ANClass>
+    <ANClassName>后台菜单权限</ANClassName>
+    <ANBaseName>数据分析-客户设备利润分析表</ANBaseName>
+    <ANBaseNumber>2305843009213693952</ANBaseNumber>
+    <ANBaseNumber_p>61</ANBaseNumber_p>
+    <ANextendID>193</ANextendID>
+    <ANused>1</ANused>
+  </Unumber1>
+  <Unumber1>
     <ANID>E-A4A600B1E97D-BF15E31E-C6F6-4E0C-B1B5</ANID>
     <ANClass>Unumber1</ANClass>
     <ANClassName>后台菜单权限</ANClassName>
