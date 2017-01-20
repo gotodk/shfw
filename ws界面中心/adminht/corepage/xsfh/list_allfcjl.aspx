@@ -102,8 +102,40 @@
     <script type="text/javascript">
              jQuery(function ($) {
                  //
-        
-                 $("#zheshiliebiaoquyu").attr('teshuwhere', "( FCshenqingren in (select UAid from ZZZ_userinfo where suoshuquyu=(select top 1 suoshuquyu from ZZZ_userinfo where Uaid='<%=UserSession.唯一键%>' and lingdao='是') )  or  FCshenheren in (select UAid from ZZZ_userinfo where suoshuquyu=(select top 1 suoshuquyu from ZZZ_userinfo where Uaid='<%=UserSession.唯一键%>' and lingdao='是') ) )");
+         $("#zheshiliebiaoquyu").attr('teshuwhere', " ( FCshenqingren in (select UAid from ZZZ_userinfo where suoshuquyu=(select top 1 suoshuquyu from ZZZ_userinfo where Uaid='<%=UserSession.唯一键%>' and lingdao='是') )  or  FCshenheren in (select UAid from ZZZ_userinfo where suoshuquyu=(select top 1 suoshuquyu from ZZZ_userinfo where Uaid='<%=UserSession.唯一键%>' and lingdao='是') ) ) "  );
+
+                 $('#MybtnSearch').before("<label>物料编码：</label><input class='form-control search-query' type='text' id='wttt_FCSbh' name='wttt_FCSbh'>");
+                 $('#MybtnSearch').before("<label>序列号：</label><input class='form-control search-query' type='text' id='wttt_FCscsbxlh' name='wttt_FCscsbxlh'>");
+
+
+                 setInterval(function () {
+
+                     var sqls = "";
+
+                     if ($("#wttt_FCSbh").val() != "" && $("#wttt_FCscsbxlh").val() == "") {
+                         sqls = " ( FCID in (select distinct FCID from ZZZ_xiaoshoufahuo left join ZZZ_xiaoshoufahuo_sb on ZZZ_xiaoshoufahuo.FCID=ZZZ_xiaoshoufahuo_sb.FCS_FCID where 1=1 and FCSbh like '%" + $("#wttt_FCSbh").val() + "%') ) ";
+
+                     }
+                     if ($("#wttt_FCSbh").val() == "" && $("#wttt_FCscsbxlh").val() != "") {
+                         sqls = " ( FCID in (select distinct FCID from ZZZ_xiaoshoufahuo left join ZZZ_xiaoshoufahuo_sb on ZZZ_xiaoshoufahuo.FCID=ZZZ_xiaoshoufahuo_sb.FCS_FCID where 1=1 and FCscsbxlh like '%" + $("#wttt_FCscsbxlh").val() + "%') ) ";
+
+                     }
+                     if ($("#wttt_FCSbh").val() != "" && $("#wttt_FCscsbxlh").val() != "") {
+                         sqls = " ( FCID in (select distinct FCID from ZZZ_xiaoshoufahuo left join ZZZ_xiaoshoufahuo_sb on ZZZ_xiaoshoufahuo.FCID=ZZZ_xiaoshoufahuo_sb.FCS_FCID where 1=1 and FCSbh like '%" + $("#wttt_FCSbh").val() + "%' and FCscsbxlh like '%" + $("#wttt_FCscsbxlh").val() + "%') ) ";
+
+                     }
+                     if ($("#wttt_FCSbh").val() == "" && $("#wttt_FCscsbxlh").val() == "") {
+                         sqls =" (1=1) ";
+
+                     }
+                 
+                     $("#zheshiliebiaoquyu").attr('teshuwhere', " ( FCshenqingren in (select UAid from ZZZ_userinfo where suoshuquyu=(select top 1 suoshuquyu from ZZZ_userinfo where Uaid='<%=UserSession.唯一键%>' and lingdao='是') )  or  FCshenheren in (select UAid from ZZZ_userinfo where suoshuquyu=(select top 1 suoshuquyu from ZZZ_userinfo where Uaid='<%=UserSession.唯一键%>' and lingdao='是') ) ) " + " and  " + sqls);
+
+                 }, 500);// 
+
+
+
+                 
                 
  
         });
