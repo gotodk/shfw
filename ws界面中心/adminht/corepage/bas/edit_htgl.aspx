@@ -68,7 +68,7 @@
                      var zz_zongjia = $("#Hzongjia").val();
                      $("#gview_grid-table-subtable-160902000184").find("input[name='付款金额']").val((zz_zongjia*(zz_bili * 1 / 100)).toFixed(2));
                      var skjeheji = $("#grid-table-subtable-160902000184").getCol("付款金额", false, "sum") * 1;
-                     $("#Hshouuanjin").val(skjeheji);
+                     
                  }, 500);
 
                  var dfx_str_kh = "#show_searchopenyhbspgogo_H_YYID";
