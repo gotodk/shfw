@@ -60,6 +60,7 @@
                 
 
                 $("#fifsssss_YJyijian").closest(".form-group").hide();
+                $("#dropzone").closest(".form-group").hide();
                 $("#fifsssss_YJqianhsuren").closest(".form-group").hide();
                 if (getUrlParam("showinfo") == "1")
                 {
@@ -105,7 +106,8 @@
 
                      window.setTimeout(function () {
 
-                          $("#YJyijian").closest(".form-group").hide();
+                         $("#YJyijian").closest(".form-group").hide();
+                         $("#dropzone").closest(".form-group").hide();
                      $("#YJyijian").val("自动隐藏");
                      $("input[name='h_qsr']").each(function () {
                         
@@ -113,6 +115,7 @@
                          {
                              $("#YJyijian").val("");
                              $("#YJyijian").closest(".form-group").show();
+                             $("#dropzone").closest(".form-group").show();
                          }
                      });
 

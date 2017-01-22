@@ -51,7 +51,7 @@
                                                                     <dt>结单时间：</dt>
 																<dd><%=dsr.Tables["数据记录"].Rows[0]["Qjiedanshijian"].ToString() %></dd>
                                                                     <dt>附件：</dt>
-																<dd><a target="_blank" href="/st.aspx?idforedit=<%=dsr.Tables["数据记录"].Rows[0]["QID"].ToString() %>&leixing=0&mod=huiqian">点击查看附件</a></dd>
+																<dd><a target="_blank" class="red" href="/st.aspx?idforedit=<%=dsr.Tables["数据记录"].Rows[0]["QID"].ToString() %>&leixing=0&mod=huiqian">点击查看附件</a></dd>
 
 															</dl>
 <%-- <div class="input-group"> 
@@ -120,10 +120,10 @@
 													<div class="dialogs "> 
 													 
                                                         <%
-                                                            string ymtime = "";
-                                                            for (int i = 0; i < dsr.Tables["Table1"].Rows.Count; i++)
-                                                            {
-                                                                ymtime = ymtime + dsr.Tables["Table1"].Rows[i]["YJqsshijian"].ToString() + ",";
+    string ymtime = "";
+    for (int i = 0; i < dsr.Tables["Table1"].Rows.Count; i++)
+    {
+        ymtime = ymtime + dsr.Tables["Table1"].Rows[i]["YJqsshijian"].ToString() + ",";
                                                                 %>
 														<div class="itemdiv dialogdiv">
 															<div class="user">
@@ -155,6 +155,10 @@
 																</div>
 																<div class="text"><%=dsr.Tables["Table1"].Rows[i]["YJyijian"].ToString() %></div>
                                                                 <div class="text">该会签人由<span class="blue"><%=dsr.Tables["Table1"].Rows[i]["YJlaiyuan_name"].ToString() %>[<%=dsr.Tables["Table1"].Rows[i]["YJlaiyuan_bumen"].ToString() %>]</span>在<%=dsr.Tables["Table1"].Rows[i]["YJlysj"].ToString() %>分配，意见签署时间：<%=dsr.Tables["Table1"].Rows[i]["YJqsshijian"].ToString() %></div>
+                                                                <%if (dsr.Tables["Table1"].Rows[i]["YJfujian"].ToString().Trim() != "") { %>
+                                                                <div class="text"><a class="red" href="/st.aspx?idforedit=<%=dsr.Tables["Table1"].Rows[i]["YJID"].ToString() %>&leixing=0&mod=huiqianyijian" target="_blank">此意见含有附件，点击查看</a></div>
+                                                                <%} %>
+                                                                
 																<div class="tools">
 																	<%--<a href="#" class="btn btn-minier btn-info">
 																		<i class="icon-only ace-icon fa fa-share"></i>

@@ -126,6 +126,13 @@ public class NoReSet_160512000043
         param.Add("@YJqianhsuren", ht_forUI["yhbsp_session_uer_UAid"].ToString());
         param.Add("@YJyijian", ht_forUI["YJyijian"].ToString());
 
+        if (ht_forUI.Contains("allpath_file1"))
+        { param.Add("@YJfujian", ht_forUI["allpath_file1"].ToString()); }
+        else
+        {
+            param.Add("@YJfujian", "");
+        }
+
         param.Add("@YJlaiyuan", ht_forUI["yhbsp_session_uer_UAid"].ToString());
         string YJqianhsuren = "";
         if (ht_forUI.Contains("YJqianhsuren"))
@@ -158,7 +165,7 @@ public class NoReSet_160512000043
 
 
         //更新会签单意见字段
-        alsql.Add("UPDATE ZZZ_HQ_YJ SET  YJzhuangtai='已签', YJyijian=  '[' + CONVERT(varchar(100), GETDATE(), 20) + ']-->：<br/>' + @YJyijian + '<br/>' + isnull(YJyijian,'') ,YJqsshijian=getdate() where YJqianhsuren=@YJqianhsuren and YJ_QID=@YJ_QID ");
+        alsql.Add("UPDATE ZZZ_HQ_YJ SET  YJzhuangtai='已签', YJyijian=  '[' + CONVERT(varchar(100), GETDATE(), 20) + ']-->：<br/>' + @YJyijian + '<br/>' + isnull(YJyijian,'') ,YJfujian=@YJfujian,YJqsshijian=getdate() where YJqianhsuren=@YJqianhsuren and YJ_QID=@YJ_QID ");
 
         //更新会签单状态,如果是结单人才更新
         if (ht_forUI.Contains("Qzhuangtai"))

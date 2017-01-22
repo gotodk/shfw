@@ -424,6 +424,14 @@ public class bsmain : System.Web.Services.WebService
             return_ht = I_DBL.RunParam_SQL("select top 1 *,Qfujian as tupian from  ZZZ_HQ where QID=@QID", "数据记录", param);
         }
 
+
+        if (ht_forUI["mod"].ToString().ToLower() == "huiqianyijian")
+        {
+            param.Add("@YJID", ht_forUI["idforedit"].ToString());
+
+            return_ht = I_DBL.RunParam_SQL("select top 1 *,YJfujian as tupian from  ZZZ_HQ_YJ where YJID=@YJID", "数据记录", param);
+        }
+
         if (ht_forUI["mod"].ToString().ToLower() == "fwbg")
         {
             param.Add("@GID", ht_forUI["idforedit"].ToString());
