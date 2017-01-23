@@ -15,6 +15,11 @@ public partial class quanmao_info : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!IsPostBack)
+        {
+            Ktime1.Text = DateTime.Now.AddMonths(-1).ToString("yyyy-MM-dd");
+            Ktime2.Text = DateTime.Now.ToString("yyyy-MM-dd");
+        }
 
         if (Request["idforedit"] == null || Request["idforedit"].ToString().Trim() == "")
         {
@@ -84,11 +89,12 @@ public partial class quanmao_info : System.Web.UI.Page
     private void getinfo(string id)
     {
         //调用执行方法获取数据
-
-        object[] re_dsi = IPC.Call("获取客户全貌", new object[] { "找详情", id, "", "" });
+        string tbtime = Ktime1.Text + "|" + Ktime2.Text;
+       
+        object[] re_dsi = IPC.Call("获取客户全貌", new object[] { "找详情", id, "", tbtime });
         if (re_dsi[0].ToString() == "ok")
         {
-
+         
             //这个就是得到远程方法真正的返回值，不同类型的，自行进行强制转换即可。
             dsinfo = (DataSet)re_dsi[1];
 
@@ -140,10 +146,16 @@ public partial class quanmao_info : System.Web.UI.Page
 
     protected void kaishizhao_Click(object sender, EventArgs e)
     {
+        
         getlistkh(idorname.Text);
     }
 
     protected void ssjg_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        getinfo(ssjg.SelectedValue);
+    }
+
+    protected void bbguolv_Click(object sender, EventArgs e)
     {
         getinfo(ssjg.SelectedValue);
     }

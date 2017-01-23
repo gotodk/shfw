@@ -65,7 +65,7 @@
 										</div>
 
 
-            </form>
+
 
 
 
@@ -125,6 +125,31 @@
 
 
 
+
+
+
+            <div class="form-inline well well-sm " >
+            
+                      <label>情报日期：</label>
+
+                <div class="input-daterange input-group">
+                
+                     <asp:TextBox ID="Ktime1" runat="server"  class="form-control date-picker" ></asp:TextBox> 
+                    <span class="input-group-addon">
+                        <i class="fa fa-exchange"></i>
+                    </span>
+                    <asp:TextBox ID="Ktime2" runat="server"  class="form-control date-picker" ></asp:TextBox> 
+                    
+                </div>
+             
+                
+
+                   <asp:Button ID="bbguolv" runat="server" CssClass="btn btn-default btn-sm"  Text="过滤" OnClick="bbguolv_Click"  />
+																		
+																 
+ 
+             
+
         <div class="widget-box">
             <div class="widget-header widget-header-flat">
                 <h4 class="widget-title smaller">最近情报</h4>
@@ -136,8 +161,7 @@
             <div class="widget-body">
                 <div class="widget-main" style="word-wrap: break-word; word-break: normal;">
 
-                    <dl>
-
+                 
        <asp:Repeater ID="Rqingbao" runat="server"> 
 <HeaderTemplate><!--头--> 
           
@@ -174,7 +198,7 @@
             </div>
         </div>
 
- 
+   </form>
         </div>
         <div class="col-xs-0 col-sm-1 hidden-xs"></div>
 
@@ -194,11 +218,29 @@
     </div>
     <!-- /.row -->
 
-
+              
 </asp:Content>
 <asp:Content ID="Content7" ContentPlaceHolderID="sp_script" runat="Server">
     <!-- 附加的body底部本页专属的自定义js脚本 -->
+
+    <script src="/assets/js/date-time/bootstrap-datepicker.js"></script>
+    <script src="/assets/js/jquery.inputlimiter.1.3.1.js"></script>
+    <script src="/assets/js/jquery.maskedinput.js"></script>
+
+     <!-- 默认查询当天的数据 -->
+    <script type="text/javascript">
+             jQuery(function ($) {
+                 //
+                 //datepicker plugin初始化
+                 $('.date-picker').datepicker({ autoclose: true, })
+                 $('.date-picker').mask('9999-99-99');                 //var now = new Date();
+                 //now.setDate(now.getDate() - 30);
+                 //$("#sp_pagecontent_Ktime1").datepicker('setDate', now);;
+                 //$("#sp_pagecontent_Ktime2").datepicker('setDate', new Date());;
  
+        });
+
+        </script>
 </asp:Content>
 
 

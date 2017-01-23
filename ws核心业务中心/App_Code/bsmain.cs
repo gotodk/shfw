@@ -723,10 +723,11 @@ public class bsmain : System.Web.Services.WebService
 
             param.Add("@QB_YYID", str.Replace("W","").Replace("C", ""));
 
-          
 
+            string ktime1 = b.Split('|')[0];
+            string ktime2 = b.Split('|')[1];
 
-            sql = "SELECT   TOP (1) *,'' as lianxirenstr FROM      View_ZZZ_KHDA_wcj_hb where YYID_uuuu=@YYID_uuuu; SELECT  * FROM "+ lxrb + " where K_YYID =  @QB_YYID; select top 50 * from   View_ZZZ_KHDA_QB_list where QBleibie=@QBleibie and QB_YYID=@QB_YYID ";
+            sql = "SELECT   TOP (1) *,'' as lianxirenstr FROM      View_ZZZ_KHDA_wcj_hb where YYID_uuuu=@YYID_uuuu; SELECT  * FROM "+ lxrb + " where K_YYID =  @QB_YYID; select top 200 * from   View_ZZZ_KHDA_QB_list where QBleibie=@QBleibie and QB_YYID=@QB_YYID and  QBtime>='"+ ktime1 + " 00:00:01' and QBtime<='" + ktime2 + " 23:59:59' ";
 
 
         }
