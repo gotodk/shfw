@@ -90,7 +90,9 @@ public class NoReSet_160422000029
 
         param.Add("@YYbeizhu", ht_forUI["YYbeizhu"].ToString());
 
-        alsql.Add("INSERT INTO  ZZZ_KHDA(YYID, YYname, yhb_city_Promary_diquxian, yhb_city_City_diquxian, yhb_city_Qu_diquxian, YYdizhi,     YYdianhua, YYchuanzhen, YYkaipiao, YYerp, YYquyudaima, YYzuobiao,  YYbeizhu,YYssbumen,YYfuwufuzeren) VALUES(@YYID, @YYname, @yhb_city_Promary_diquxian, @yhb_city_City_diquxian, @yhb_city_Qu_diquxian, @YYdizhi,     @YYdianhua, @YYchuanzhen, @YYkaipiao, @YYerp, @YYquyudaima, @YYzuobiao , @YYbeizhu,@YYssbumen,@YYfuwufuzeren)");
+        param.Add("@YYadduser", ht_forUI["yhbsp_session_uer_UAid"].ToString());
+
+        alsql.Add("INSERT INTO  ZZZ_KHDA(YYID, YYname, yhb_city_Promary_diquxian, yhb_city_City_diquxian, yhb_city_Qu_diquxian, YYdizhi,     YYdianhua, YYchuanzhen, YYkaipiao, YYerp, YYquyudaima, YYzuobiao,  YYbeizhu,YYssbumen,YYfuwufuzeren,YYadduser) VALUES(@YYID, @YYname, @yhb_city_Promary_diquxian, @yhb_city_City_diquxian, @yhb_city_Qu_diquxian, @YYdizhi,     @YYdianhua, @YYchuanzhen, @YYkaipiao, @YYerp, @YYquyudaima, @YYzuobiao , @YYbeizhu,@YYssbumen,@YYfuwufuzeren,@YYadduser)");
 
 
         //遍历子表， 插入 
@@ -188,8 +190,9 @@ public class NoReSet_160422000029
         param.Add("@YYfuwufuzeren", ht_forUI["YYfuwufuzeren"].ToString());
 
         param.Add("@YYbeizhu", ht_forUI["YYbeizhu"].ToString());
+        param.Add("@YYadduser", ht_forUI["yhbsp_session_uer_UAid"].ToString());
 
-        alsql.Add("UPDATE ZZZ_KHDA SET YYname=@YYname, yhb_city_Promary_diquxian=@yhb_city_Promary_diquxian, yhb_city_City_diquxian=@yhb_city_City_diquxian, yhb_city_Qu_diquxian=@yhb_city_Qu_diquxian, YYdizhi=@YYdizhi,     YYdianhua=@YYdianhua, YYchuanzhen=@YYchuanzhen, YYkaipiao=@YYkaipiao, YYerp=@YYerp, YYquyudaima=@YYquyudaima, YYzuobiao=@YYzuobiao,  YYbeizhu=@YYbeizhu, YYssbumen=@YYssbumen,YYfuwufuzeren=@YYfuwufuzeren where YYID=@YYID ");
+        alsql.Add("UPDATE ZZZ_KHDA SET YYname=@YYname, yhb_city_Promary_diquxian=@yhb_city_Promary_diquxian, yhb_city_City_diquxian=@yhb_city_City_diquxian, yhb_city_Qu_diquxian=@yhb_city_Qu_diquxian, YYdizhi=@YYdizhi,     YYdianhua=@YYdianhua, YYchuanzhen=@YYchuanzhen, YYkaipiao=@YYkaipiao, YYerp=@YYerp, YYquyudaima=@YYquyudaima, YYzuobiao=@YYzuobiao,  YYbeizhu=@YYbeizhu, YYssbumen=@YYssbumen,YYfuwufuzeren=@YYfuwufuzeren,YYadduser=@YYadduser,YYaddtime=getdate() where YYID=@YYID ");
 
 
 

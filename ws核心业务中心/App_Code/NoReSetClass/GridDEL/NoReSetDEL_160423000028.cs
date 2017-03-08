@@ -82,7 +82,7 @@ public class NoReSetDEL_160423000028
                 {
                     showinfo = showinfo + ""+ redb.Rows[i]["xingming"].ToString() + "(" + redb.Rows[i]["Uaid"].ToString() + "),";
                 }
-                showinfo = "选中的来源员工为：<br/><span id='zhuanyilaiyuan'>" + showinfo + "</span><br/>将上述来源员工的客户转移至新员工<input   type='text' id='zhuanyimubiao' name='zhuanyimubiao' placeholder='请输入工号'   value='' />账号上。 <br/><span class='red'>来源员工名下客户将被清空，请谨慎操作，主要用于员工离职的批量客户转移！</span> <br/><br/><button class='btn btn-danger btn-block' id='zhuanyi_gogo' onclick='alert(\"此功能尚未实现，开发中……\")'>确认转移</button>";
+                showinfo = "选中的来源员工为：<br/><span id='zhuanyilaiyuan'>" + showinfo + "</span><br/><hr/><button class='btn btn-danger btn-block' id='zhuanyi_gogo_dh' onclick='alert(\"此功能尚未实现，开发中……\")'>直接将选中的两个员工所辖客户进行调换</button><br/><hr/>将上述来源员工的客户转移至新员工<input   type='text' id='zhuanyimubiao' name='zhuanyimubiao' placeholder='请输入工号'   value='' />账号上。 <br/><span class='red'>来源员工名下客户将被清空，请谨慎操作，主要用于员工离职的批量客户转移！</span> <br/><br/><button class='btn btn-danger btn-block' id='zhuanyi_gogo' onclick='alert(\"此功能尚未实现，开发中……\")'>确认转移</button><br/> ";
                 return  showinfo;
             }
             else

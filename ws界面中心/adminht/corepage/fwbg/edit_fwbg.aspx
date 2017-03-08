@@ -87,7 +87,7 @@
                      //设置子表输入框只读
                   
                      $("#gview_grid-table-subtable-160427000664").find("input").attr("readonly", "readonly");
-                     $("#gview_grid-table-subtable-160427000664").find("input[name='保修截止日期']").removeAttr("readonly");
+                     //$("#gview_grid-table-subtable-160427000664").find("input[name='保修截止日期']").removeAttr("readonly");
                      $("#gview_grid-table-subtable-160427000664").find("input[name='运转时间']").removeAttr("readonly");
                      $("#gview_grid-table-subtable-160427000664").find("input[name='备注']").removeAttr("readonly");
 
@@ -203,9 +203,9 @@
                                     if (time_zz == "" || time_zz == null || time_zz.indexOf("aN") >= 0) {
                                       time_zz = null;
                                      }
-                                     zj.datepicker('setDate', time_zz);
+                                     //zj.datepicker('setDate', time_zz);
 
-                                     //zj.val($.trim(arr_z[1]).replace("]", ""));
+                                    zj.val(time_zz);
                                  }
                                  
                              }
