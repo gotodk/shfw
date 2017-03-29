@@ -114,8 +114,8 @@
                      $("#gview_grid-table-subtable-160427000666").find("input[name='金额']").val((zz_sjsj * zz_shuliang).toFixed(2));
 
                      //自动计算报告总金额
-                     var aa_gsje = $("#grid-table-subtable-160427000665").getCol("工时金额", false, "sum");
-                     var aa_zbje = $("#grid-table-subtable-160427000666").getCol("金额", false, "sum");
+                     var aa_gsje = parseFloat($("#grid-table-subtable-160427000665").getCol("工时金额", false, "sum"));
+                     var aa_zbje = parseFloat($("#grid-table-subtable-160427000666").getCol("金额", false, "sum"));
                      $("#Gjishufuwufei").val(aa_gsje.toFixed(2));
                      $("#Ggongshi").val(aa_zbje.toFixed(2));
 
@@ -330,8 +330,9 @@
                                      //根据规则填入保修截止日期
                                      var val_Gbylx = $('input[name="Gbylx"]:checked ').val();
                                      if (val_Gbylx == "保内") {
-
-                                         var bxjzrq = $("#grid-table-subtable-160427000664").jqGrid("getRowData", $("#grid-table-subtable-160427000664").getGridParam('selarrrow')[0]).保修截止日期;
+                                     
+                                         //var bxjzrq = $("#grid-table-subtable-160427000664").jqGrid("getRowData", $("#grid-table-subtable-160427000664").getGridParam('selarrrow')[0]).保修截止日期;
+                                         var bxjzrq = $.trim($("td[aria-describedby='grid-table-subtable-160427000664_保修截止日期']").text());
                                          //alert(JSON.stringify(bxjzrq));
                                          var zj = $(dfx_str_subljbh).closest("tr").find("input[name='保修截止日期']");
                                          zj.val(bxjzrq);
