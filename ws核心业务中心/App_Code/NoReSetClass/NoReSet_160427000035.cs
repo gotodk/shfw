@@ -251,7 +251,21 @@ public class NoReSet_160427000035
             param.Add("@sub_" + "sb_SID" + "_" + i, subdt.Rows[i]["设备序列号"].ToString());
             param.Add("@sub_" + "sbmingcheng" + "_" + i, subdt.Rows[i]["设备名称"].ToString());
             param.Add("@sub_" + "sbguige" + "_" + i, subdt.Rows[i]["设备规格"].ToString());
-            param.Add("@sub_" + "sbbaoxiujiezhi" + "_" + i, subdt.Rows[i]["保修截止日期"].ToString());
+
+
+            if (ht_forUI["Gfwlx"].ToString() == "安装")
+            {
+                //重新计算保修截止日期 
+                DateTime dt_whrq = Convert.ToDateTime(ht_forUI["Gwangongtime"].ToString());
+                int bxqx = Convert.ToInt32(subdt.Rows[i]["保修期限"]);
+                DateTime dt_newtime = dt_whrq.AddDays(bxqx);
+                param.Add("@sub_" + "sbbaoxiujiezhi" + "_" + i, dt_newtime.ToString("yyyy-MM-dd"));
+            }
+            else
+            {
+                param.Add("@sub_" + "sbbaoxiuqixian" + "_" + i, subdt.Rows[i]["保修截止日期"].ToString());
+            }
+
             param.Add("@sub_" + "sbbaoxiuqixian" + "_" + i, subdt.Rows[i]["保修期限"].ToString());
             param.Add("@sub_" + "sberpbianhao" + "_" + i, subdt.Rows[i]["ERP编号"].ToString());
             param.Add("@sub_" + "sbyzsj" + "_" + i, subdt.Rows[i]["运转时间"].ToString());
@@ -259,6 +273,12 @@ public class NoReSet_160427000035
 
             string INSERTsql = "INSERT INTO ZZZ_FWBG_shebei (sbid, sb_GID, sb_SID, sbmingcheng, sbguige, sbbaoxiujiezhi,sbbaoxiuqixian,sberpbianhao, sbyzsj, sbbeizhu) VALUES(@sub_" + "sbid" + "_" + i + ", @sub_MainID, @sub_"+ "sb_SID" + "_" + i + ", @sub_" + "sbmingcheng" + "_" + i + ", @sub_" + "sbguige" + "_" + i + ", @sub_" + "sbbaoxiujiezhi" + "_" + i + ", @sub_" + "sbbaoxiuqixian" + "_" + i + ", @sub_" + "sberpbianhao" + "_" + i + ", @sub_" + "sbyzsj" + "_" + i + ", @sub_" + "sbbeizhu" + "_" + i + "  )";
             alsql.Add(INSERTsql);
+
+            //反写序列号表安装日期，安装类型
+            if (ht_forUI["Gfwlx"].ToString() == "安装")
+            {
+                alsql.Add("UPDATE ZZZ_WFSB SET Sanzhuangriqi=@Gwangongtime,Sbaoxiudaoqi=@sub_" + "sbbaoxiuqixian" + "_" + i + ", Sbaoyangdaoqi=@sub_" + "sbbaoxiuqixian" + "_" + i + " where SID = @sub_" + "sb_SID" + "_" + i + "");
+            }
         }
 
 
@@ -518,7 +538,24 @@ public class NoReSet_160427000035
                 param.Add("@sub_" + "sb_SID" + "_" + i, subdt.Rows[i]["设备序列号"].ToString());
                 param.Add("@sub_" + "sbmingcheng" + "_" + i, subdt.Rows[i]["设备名称"].ToString());
                 param.Add("@sub_" + "sbguige" + "_" + i, subdt.Rows[i]["设备规格"].ToString());
-                param.Add("@sub_" + "sbbaoxiujiezhi" + "_" + i, subdt.Rows[i]["保修截止日期"].ToString());
+
+                if (ht_forUI["Gfwlx"].ToString() == "安装")
+                {
+                    //重新计算保修截止日期 
+                    DateTime dt_whrq = Convert.ToDateTime(ht_forUI["Gwangongtime"].ToString());
+                    int bxqx = Convert.ToInt32(subdt.Rows[i]["保修期限"]);
+                    DateTime dt_newtime = dt_whrq.AddDays(bxqx);
+                    param.Add("@sub_" + "sbbaoxiujiezhi" + "_" + i, dt_newtime.ToString("yyyy-MM-dd"));
+                }
+                else
+                {
+                    param.Add("@sub_" + "sbbaoxiuqixian" + "_" + i, subdt.Rows[i]["保修截止日期"].ToString());
+                }
+       
+
+               
+
+
                 param.Add("@sub_" + "sbbaoxiuqixian" + "_" + i, subdt.Rows[i]["保修期限"].ToString());
                 param.Add("@sub_" + "sberpbianhao" + "_" + i, subdt.Rows[i]["ERP编号"].ToString());
                 param.Add("@sub_" + "sbyzsj" + "_" + i, subdt.Rows[i]["运转时间"].ToString());
@@ -526,6 +563,12 @@ public class NoReSet_160427000035
 
                 string INSERTsql = "INSERT INTO ZZZ_FWBG_shebei (sbid, sb_GID, sb_SID, sbmingcheng, sbguige,sbbaoxiujiezhi,sbbaoxiuqixian, sberpbianhao, sbyzsj, sbbeizhu) VALUES(@sub_" + "sbid" + "_" + i + ", @sub_MainID, @sub_" + "sb_SID" + "_" + i + ", @sub_" + "sbmingcheng" + "_" + i + ", @sub_" + "sbguige" + "_" + i + ", @sub_" + "sbbaoxiujiezhi" + "_" + i + ", @sub_" + "sbbaoxiuqixian" + "_" + i + ", @sub_" + "sberpbianhao" + "_" + i + ", @sub_" + "sbyzsj" + "_" + i + ", @sub_" + "sbbeizhu" + "_" + i + "  )";
                 alsql.Add(INSERTsql);
+
+                //反写序列号表安装日期，安装类型
+                if (ht_forUI["Gfwlx"].ToString() == "安装")
+                {
+                    alsql.Add("UPDATE ZZZ_WFSB SET Sanzhuangriqi=@Gwangongtime,Sbaoxiudaoqi=@sub_" + "sbbaoxiuqixian" + "_" + i + ", Sbaoyangdaoqi=@sub_" + "sbbaoxiuqixian" + "_" + i + " where SID = @sub_" + "sb_SID" + "_" + i + "");
+                }
             }
 
 
@@ -772,8 +815,7 @@ public class NoReSet_160427000035
             {
                 //如果结单，并且审核通过了，反写报修申请单状态
                 alsql.Add("UPDATE ZZZ_BXSQ SET Bzhuangtai='已结单',Bwctime=getdate() where BID=(select  G_BID from ZZZ_FWBG where GID=@GID and Gjiedan='是') ");
-                //如果结单，并且审核通过了，反写序列号表安装日期
-                alsql.Add("UPDATE ZZZ_WFSB SET Sanzhuangriqi=getdate() where SID in (select  sb_SID from ZZZ_FWBG_shebei where sb_GID=@GID ) and (select Gjiedan from ZZZ_FWBG where GID=@GID) = '是' ");
+         
 
                 //如果结单，并且审核通过了，减少个人库存
                 ClassKuCun CKC = new ClassKuCun();
