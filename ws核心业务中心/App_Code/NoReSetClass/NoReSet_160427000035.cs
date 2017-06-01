@@ -263,7 +263,7 @@ public class NoReSet_160427000035
             }
             else
             {
-                param.Add("@sub_" + "sbbaoxiuqixian" + "_" + i, subdt.Rows[i]["保修截止日期"].ToString());
+                param.Add("@sub_" + "sbbaoxiujiezhi" + "_" + i, subdt.Rows[i]["保修截止日期"].ToString());
             }
 
             param.Add("@sub_" + "sbbaoxiuqixian" + "_" + i, subdt.Rows[i]["保修期限"].ToString());
@@ -432,6 +432,7 @@ public class NoReSet_160427000035
         if (ht_forUI["yc_czlx"].ToString() == "xiugai")
         {
 
+
             //验证状态，只有保存或驳回状态的才允许修改。
             string zt = get_zhuangtai(ht_forUI["idforedit"].ToString());
             if (zt != "保存" && zt != "驳回")
@@ -541,6 +542,8 @@ public class NoReSet_160427000035
 
                 if (ht_forUI["Gfwlx"].ToString() == "安装")
                 {
+
+
                     //重新计算保修截止日期 
                     DateTime dt_whrq = Convert.ToDateTime(ht_forUI["Gwangongtime"].ToString());
                     int bxqx = Convert.ToInt32(subdt.Rows[i]["保修期限"]);
@@ -549,20 +552,28 @@ public class NoReSet_160427000035
                 }
                 else
                 {
-                    param.Add("@sub_" + "sbbaoxiuqixian" + "_" + i, subdt.Rows[i]["保修截止日期"].ToString());
+
+                    param.Add("@sub_" + "sbbaoxiujiezhi" + "_" + i, subdt.Rows[i]["保修截止日期"].ToString());
                 }
        
 
-               
-
+        
+ 
 
                 param.Add("@sub_" + "sbbaoxiuqixian" + "_" + i, subdt.Rows[i]["保修期限"].ToString());
                 param.Add("@sub_" + "sberpbianhao" + "_" + i, subdt.Rows[i]["ERP编号"].ToString());
                 param.Add("@sub_" + "sbyzsj" + "_" + i, subdt.Rows[i]["运转时间"].ToString());
                 param.Add("@sub_" + "sbbeizhu" + "_" + i, subdt.Rows[i]["备注"].ToString());
 
+
+
+
+
+
                 string INSERTsql = "INSERT INTO ZZZ_FWBG_shebei (sbid, sb_GID, sb_SID, sbmingcheng, sbguige,sbbaoxiujiezhi,sbbaoxiuqixian, sberpbianhao, sbyzsj, sbbeizhu) VALUES(@sub_" + "sbid" + "_" + i + ", @sub_MainID, @sub_" + "sb_SID" + "_" + i + ", @sub_" + "sbmingcheng" + "_" + i + ", @sub_" + "sbguige" + "_" + i + ", @sub_" + "sbbaoxiujiezhi" + "_" + i + ", @sub_" + "sbbaoxiuqixian" + "_" + i + ", @sub_" + "sberpbianhao" + "_" + i + ", @sub_" + "sbyzsj" + "_" + i + ", @sub_" + "sbbeizhu" + "_" + i + "  )";
                 alsql.Add(INSERTsql);
+
+
 
                 //反写序列号表安装日期，安装类型
                 if (ht_forUI["Gfwlx"].ToString() == "安装")
@@ -571,7 +582,7 @@ public class NoReSet_160427000035
                 }
             }
 
-
+ 
 
 
             //遍历子表， 插入 (预制错误信息)
